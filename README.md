@@ -1,3 +1,21 @@
+### Installing the dependencies:
+
+in the root folder, run
+
+```
+yarn
+```
+
+#### Running the project:
+
+If you run the following command in the root folder, both the `front` app and the `api` will be started in dev mode:
+
+```
+yarn dev
+```
+
+Or if you want to run only one app, you can run the same command in the corresponding app folder.
+
 ### Apps and Packages
 
 - `front`: a [Next.js](https://nextjs.org/) app
