@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "next": "^13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "ui": "workspace:*"
+    "ui": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -20,9 +20,9 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "eslint": "7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "tailwind-config": "workspace:*",
-    "tsconfig": "workspace:*",
+    "eslint-config-custom": "*",
+    "tailwind-config": "*",
+    "tsconfig": "*",
     "typescript": "^4.5.3"
   }
 }
