@@ -1,7 +1,8 @@
 ### Apps and Packages
 
-- `app`: a [Next.js](https://nextjs.org/) app
+- `front`: a [Next.js](https://nextjs.org/) app
 - `api`: Express
+
 - `ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
