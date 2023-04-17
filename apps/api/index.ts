@@ -1,12 +1,11 @@
-import express, { Request, Response } from 'express'
-const app = express()
+import { App, Router } from './app'
+import 'dotenv/config'
+import userRoutes from './user/userRouter'
 
-const port = 8000
+const port = process.env.PORT ?? 8000
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
-})
+const routes: Router[] = [{ path: '/user', router: userRoutes }]
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const app = new App(port.toString(), routes, 'Cowork API')
+
+app.start()

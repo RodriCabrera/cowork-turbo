@@ -7,5 +7,7 @@
       "node_modules"
     ],
     "compilerOptions": {
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
     }
   }
