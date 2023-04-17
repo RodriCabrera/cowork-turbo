@@ -1,0 +1,11 @@
+{
+    "extends": "tsconfig/express.json",
+    "include": [
+      "**/*.ts",
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+    "compilerOptions": {
+    }
+  }
