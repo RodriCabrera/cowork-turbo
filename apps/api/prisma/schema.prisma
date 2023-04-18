@@ -6,6 +6,82 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum Role {
+  EMPLEADO
+  ADMIN
+}
+
+model User {
+  id          String   @id @unique @default(cuid())
+  firstName   String?
+  lastName    String?
+  mail        String
+  password    String?
+  rol         Role     @default(EMPLEADO)
+  company     Company  @relation(fields: [companyId], references: [id])
+  companyId   String
+  isValidated Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  Review      Review[]
+}
+
+// TODO add admin relation
+model Company {
+  id        String @id @unique @default(cuid())
+  name      String
+  employees User[]
+  creditos  Int    @default(0)
+  email     String
+}
+
+model Address {
+  id         String   @id @unique @default(cuid())
+  country    String
+  city       String
+  streetName String
+  number     String
+  floor      String?
+  apartment  String?
+  postalCode String?
+  Cowork     Cowork[]
+}
+
+model Cowork {
+  id        String   @id @unique @default(cuid())
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  email     String?
+  phone     String?
+  rating    Float    @default(0.0)
+  Space     Space[]
+  Review    Review[]
+}
+
+// TODO: model availability & shape schema for spaces
+model Space {
+  id       String   @id @unique @default(cuid())
+  cowork   Cowork   @relation(fields: [coworkId], references: [id])
+  coworkId String
+  capacity Int
+  price    Float
+  // availability
+  // shape
+  Review   Review[]
+}
+
+model Review {
+  id       String  @id @unique @default(cuid())
+  Cowork   Cowork  @relation(fields: [coworkId], references: [id])
+  coworkId String
+  Space    Space   @relation(fields: [spaceId], references: [id])
+  spaceId  String
+  Author   User    @relation(fields: [authorId], references: [id])
+  authorId String
+  rating   Float
+  comment  String?
 }

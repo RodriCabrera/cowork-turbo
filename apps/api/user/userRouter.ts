@@ -9,4 +9,10 @@ userRoutes.get('/', async (_req, res: Response) => {
   return res.send(response)
 })
 
+userRoutes.post('/', async (req, res) => {
+  const controller = new UserController()
+  const response = await controller.postUser()
+  return res.send(response)
+})
+
 export default userRoutes
