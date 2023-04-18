@@ -6,17 +6,85 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Prueba": {
+			"Role": {
+				"type": "string",
+				"enum": [
+					"EMPLEADO",
+					"ADMIN"
+				],
+				"description": "Enums"
+			},
+			"User": {
 				"properties": {
-					"mensaje": {
+					"isActive": {
+						"type": "boolean"
+					},
+					"isValidated": {
+						"type": "boolean"
+					},
+					"companyId": {
+						"type": "string"
+					},
+					"rol": {
+						"$ref": "#/components/schemas/Role"
+					},
+					"password": {
+						"type": "string",
+						"nullable": true
+					},
+					"mail": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string",
+						"nullable": true
+					},
+					"firstName": {
+						"type": "string",
+						"nullable": true
+					},
+					"id": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"mensaje"
+					"isActive",
+					"isValidated",
+					"companyId",
+					"rol",
+					"password",
+					"mail",
+					"lastName",
+					"firstName",
+					"id"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Model User"
+			},
+			"Company": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"creditos": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"creditos",
+					"name",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Company"
 			}
 		},
 		"securitySchemes": {}
@@ -35,14 +103,17 @@
 	"paths": {
 		"/user": {
 			"get": {
-				"operationId": "GetUser",
+				"operationId": "GetUsers",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Prueba"
+									"items": {
+										"$ref": "#/components/schemas/User"
+									},
+									"type": "array"
 								}
 							}
 						}
@@ -50,6 +121,102 @@
 				},
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/user/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/company": {
+			"get": {
+				"operationId": "GetCompanies",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Company"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/company/{id}": {
+			"get": {
+				"operationId": "GetCompany",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Company"
+										},
+										{
+											"properties": {
+												"employees": {
+													"items": {
+														"$ref": "#/components/schemas/User"
+													},
+													"type": "array"
+												}
+											},
+											"required": [
+												"employees"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},

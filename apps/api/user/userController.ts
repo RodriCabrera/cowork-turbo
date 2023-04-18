@@ -1,22 +1,16 @@
-import { Get, Post, Route } from 'tsoa'
-
-interface Prueba {
-  mensaje: string
-}
+import { Get, Path, Route } from 'tsoa'
+import UserService from './userService'
+import { User } from '@prisma/client'
 
 @Route('user')
 export default class UserController {
   @Get('/')
-  async getUser(): Promise<Prueba> {
-    return {
-      mensaje: 'olis'
-    }
+  async getUsers(): Promise<User[]> {
+    return UserService.fetchAll()
   }
 
-  @Post('/')
-  async postUser(): Promise<Prueba> {
-    return {
-      mensaje: 'creado'
-    }
+  @Get('/{id}')
+  async getUser(@Path() id: string): Promise<User> {
+    return UserService.fetchById(id)
   }
 }

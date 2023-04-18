@@ -1,17 +1,17 @@
-import { Router, Response } from 'express'
+import { Router, Response, Request } from 'express'
 import UserController from './userController'
 
 const userRoutes = Router()
 
 userRoutes.get('/', async (_req, res: Response) => {
   const controller = new UserController()
-  const response = await controller.getUser()
+  const response = await controller.getUsers()
   return res.send(response)
 })
 
-userRoutes.post('/', async (req, res) => {
+userRoutes.get('/:id', async (req: Request, res: Response) => {
   const controller = new UserController()
-  const response = await controller.postUser()
+  const response = await controller.getUser(req.params.id)
   return res.send(response)
 })
 
