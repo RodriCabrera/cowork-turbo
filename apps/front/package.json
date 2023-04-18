@@ -22,7 +22,6 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "types": "*",
-    "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "tailwind-config": "*",
     "tsconfig": "*",

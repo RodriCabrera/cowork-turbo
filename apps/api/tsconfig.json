@@ -1,13 +1,5 @@
 {
-    "extends": "tsconfig/express.json",
-    "include": [
-      "**/*.ts",
-    ],
-    "exclude": [
-      "node_modules"
-    ],
-    "compilerOptions": {
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true
-    }
-  }
+  "extends": "tsconfig/express.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
