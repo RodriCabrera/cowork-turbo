@@ -8,9 +8,7 @@ const navigation = [
   { name: 'Contacto', href: '#', current: false }
 ]
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
+const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
 export default function NavBar() {
   return (
