@@ -8,7 +8,7 @@ export default function Web() {
   console.log(something)
 
   return (
-    <div className="bg-diarpu">
+    <div>
       <NavBar />
       <h1 className="px-2 py-4 text-4xl md:text-5xl">Web</h1>
       <Button />
