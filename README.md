@@ -102,7 +102,7 @@ COW-456/api/fix
 Example:
 
 ```
-fix(api): return the correct user list
+fix: return the correct user list
 
 Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the database.
 ```
