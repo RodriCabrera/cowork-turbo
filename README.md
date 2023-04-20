@@ -88,7 +88,7 @@ COW-456/api/fix
 
 ### Format of the commit message:
 
-```bash
+```
 <type>(workspace): <subject>
 <BLANK LINE>
 <body/OPTIONAL>
@@ -96,7 +96,7 @@ COW-456/api/fix
 
 Example:
 
-```bash
+```
 fix(api): return the correct user list
 
 Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the database.
