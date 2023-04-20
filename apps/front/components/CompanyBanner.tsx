@@ -1,12 +1,16 @@
+import Image from 'next/image'
+
 export const CompanyBanner = () => {
   return (
     <div>
       <section className="container mx-2  items-center pb-12 md:px-4 lg:flex">
         <div>
-          <img
+          <Image
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA9IYkfamEco4c6HGZwxQ3CB8nGSvrid9wCQ&usqp=CAU"
             className="mx-10 mt-6 h-80 w-80 rounded-2xl sm:w-10/12 lg:w-full"
             alt="office-image"
+            width={300}
+            height={300}
           />
         </div>
         <div className="mx-20 flex-1 space-y-4 sm:text-center lg:text-left">
