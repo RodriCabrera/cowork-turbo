@@ -5,12 +5,16 @@
 in the root folder, run
 
 ```
-yarn
+$ yarn
 ```
 
 If you want to install any other dependency, you should target an specific workspace (in our case, an app or package):
 ```
-yarn workspace <workspace> add <package>
+$ yarn workspace <workspace> add <package>
+
+# for example:
+$ yarn workspace front add axios
+
 ```
 [See turbo docs](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages)
 
@@ -22,14 +26,15 @@ yarn workspace <workspace> add <package>
 If you run the following command in the root folder, both the `front` app and the `api` will be started in dev mode:
 
 ```
-yarn dev
+$ yarn dev
 ```
 
 If you want to just run (in dev) a specific app, you can do:
 ```
-yarn workspace <workspace> dev
+$ yarn workspace <workspace> dev
 
-yarn workspace front dev
+# for example:
+$ yarn workspace front dev
 ```
 &nbsp;
 
