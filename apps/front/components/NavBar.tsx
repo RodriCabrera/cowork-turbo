@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Cowork App', href: '#', current: false },
@@ -30,14 +31,18 @@ export default function NavBar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                  <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://banner2.cleanpng.com/20180612/iix/kisspng-insurgency-logo-new-world-interactive-desktop-wall-5b1f5cf11a5c64.051287471528782065108.jpg"
                     alt="Your Company"
+                    width={300}
+                    height={300}
                   />
-                  <img
+                  <Image
+                    height={300}
+                    width={300}
                     className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://banner2.cleanpng.com/20180612/iix/kisspng-insurgency-logo-new-world-interactive-desktop-wall-5b1f5cf11a5c64.051287471528782065108.jpg"
                     alt="Your Company"
                   />
                 </div>
