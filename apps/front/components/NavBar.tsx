@@ -6,8 +6,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Quienes Somos', href: '#', current: false },
-  { name: 'Contacto', href: '#', current: false }
+  { name: 'Quienes Somos', href: 'about', current: false },
+  { name: 'Contacto', href: 'contact', current: false }
 ]
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
