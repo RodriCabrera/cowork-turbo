@@ -1,7 +1,7 @@
 import Item from '@/components/Item'
 import { Button } from 'ui'
 import { TestInterface } from 'types'
-import NavBar from './NavBar'
+import NavBar from '../components/NavBar'
 
 export default function Web() {
   const something: TestInterface = { test: 'as' }
