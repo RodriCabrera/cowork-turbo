@@ -14,6 +14,9 @@ yarn workspace <workspace> add <package>
 ```
 [See turbo docs](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages)
 
+&nbsp;
+
+
 #### Running the project:
 
 If you run the following command in the root folder, both the `front` app and the `api` will be started in dev mode:
@@ -28,6 +31,7 @@ yarn workspace <workspace> dev
 
 yarn workspace front dev
 ```
+&nbsp;
 
 ### Apps and Packages
 
@@ -41,6 +45,9 @@ yarn workspace front dev
 - `types`: in order to avoid repeated declarations of the same type, we created this package with some interfaces to be reused throughout the project.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+&nbsp;
+
 
 ### Branching and commiting naming conventions
 
@@ -75,6 +82,7 @@ COW-456/api/fix/users-endpoint
 # or without title
 COW-456/api/fix
 ```
+&nbsp;
 
 #### Commit convention:
 
@@ -97,6 +105,7 @@ Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the
 ### Message Subject and Body:
 
 Both the subject and body of the commit should use the imperative, present tense: "change" not "changed" nor "changes".
+&nbsp;
 
 ### Utilities
 
