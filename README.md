@@ -32,15 +32,71 @@ yarn workspace front dev
 ### Apps and Packages
 
 - `front`: a [Next.js](https://nextjs.org/) app
-- `api`: Express
+- `api`: Express api, that uses Prisma.
 
 - `ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
-- 'tailwind-config': with the objective of having a unified design across the UIs.
-- 'types': in order to avoid repeated declarations of the same type, we created this package with some interfaces to be reused throughout the project.
+- `tailwind-config`: with the objective of having a unified design across the UIs.
+- `types`: in order to avoid repeated declarations of the same type, we created this package with some interfaces to be reused throughout the project.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Branching and commiting naming conventions
+
+Both the branches and the commits will include the type of the task being worked on. The following is a list of the proposed types:
+
+### Branch/commit types:
+
+- `feat` for a new feature.
+- `fix` for a bug fix.
+- `refactor` for refactoring code, e.g. renaming a variable, no change for the user.
+- `style` for UI styling changes, css, styled components, etc.
+- `test` for adding missing tests, refactoring tests.
+- `docs` for changes to the documentation.
+- `chore` for "backstage" work, some type of task not included in the previous types.
+
+### Branching convention:
+
+```
+taskId/{app, package or root}/type/title(optional)
+```
+- **everything in lowercase.**
+- The `taskId` is based on the Jira board. For this specific project, all the tasks will start with COW-###, followed by a number.
+- The `{app or package or root}`, this could be called `workspace`. It's the app or package that's being worked on. Could be for example, `api`, `front`, `ui`, `types`, etc. Or if some Turbo base config is being targeted, it could be `root`.
+- The `<type>` values will be the same used for the commits and branches. 
+- The branch `title` is optional, and will be basically some keywords to distinguish the branch.
+
+Example:
+```
+# with title
+COW-456/api/fix/users-endpoint
+
+# or without title
+COW-456/api/fix
+```
+
+#### Commit convention:
+
+### Format of the commit message:
+
+```bash
+<type>(workspace): <subject>
+<BLANK LINE>
+<body/OPTIONAL>
+```
+
+Example:
+
+```bash
+fix(api): return the correct user list
+
+Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the database.
+```
+
+### Message Subject and Body:
+
+Both the subject and body of the commit should use the imperative, present tense: "change" not "changed" nor "changes".
 
 ### Utilities
 
