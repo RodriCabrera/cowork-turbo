@@ -94,7 +94,7 @@ COW-456/api/fix
 ### Format of the commit message:
 
 ```
-<type>(workspace): <subject>
+<type>: <subject>
 <BLANK LINE>
 <body/OPTIONAL>
 ```
