@@ -8,7 +8,7 @@ export default function Web() {
   return (
     <div>
       <NavBar />
-<CompanyBanner/>
+      <CompanyBanner />
     </div>
   )
 }
