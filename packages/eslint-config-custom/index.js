@@ -25,6 +25,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'dot-notation': 'off',
     'no-undef': 'off',
-    'multiline-ternary': 'off'
+    'multiline-ternary': 'off',
+    'no-console': 'warn'
   }
 }

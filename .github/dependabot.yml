@@ -1,0 +1,30 @@
+version: 2
+
+updates:
+  - package-ecosystem: 'yarn'
+    directory: '/apps/front'
+    schedule:
+      interval: 'weekly'
+    target-branch: 'develop'
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: 'yarn'
+    directory: '/apps/api'
+    schedule:
+      interval: 'weekly'
+    target-branch: 'develop'
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: 'yarn'
+    directory: '/packages/types'
+    schedule:
+      interval: 'daily'
+    target-branch: 'develop'
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: 'yarn'
+    directory: '/packages/eslint-config-custom'
+    schedule:
+      interval: 'daily'
+    target-branch: 'develop'
+    open-pull-requests-limit: 5
