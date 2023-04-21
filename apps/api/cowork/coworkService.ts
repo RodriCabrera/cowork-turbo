@@ -6,13 +6,23 @@ export default class CoworkService {
   static async createCowork(
     basicData: Pick<Cowork, 'email' | 'phone'>,
     address: Omit<Address, 'id'>
-  ): Promise<Cowork> {}
+  ): Promise<Cowork> {
+    return
+  }
 
-  static async fetchAll(): Promise<Cowork[]> {}
+  static async fetchAll(): Promise<Cowork[]> {
+    return []
+  }
 
-  static async fetchById(id: string): Promise<Cowork> {}
+  static async fetchById(id: string): Promise<Cowork> {
+    return
+  }
 
-  static async edit(id: string, data: Partial<Cowork>): Promise<Cowork> {}
+  static async edit(id: string, data: Partial<Cowork>): Promise<Cowork> {
+    return
+  }
 
-  static async delete(id: string): Promise<boolean> {}
+  static async delete(id: string): Promise<boolean> {
+    return false
+  }
 }

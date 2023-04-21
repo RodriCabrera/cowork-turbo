@@ -85,12 +85,128 @@
 				],
 				"type": "object",
 				"description": "Model Company"
+			},
+			"Cowork": {
+				"properties": {
+					"rating": {
+						"type": "number",
+						"format": "double"
+					},
+					"phone": {
+						"type": "string",
+						"nullable": true
+					},
+					"email": {
+						"type": "string",
+						"nullable": true
+					},
+					"addressId": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"rating",
+					"phone",
+					"email",
+					"addressId",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Cowork"
+			},
+			"Partial_Cowork_": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"addressId": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"nullable": true
+					},
+					"phone": {
+						"type": "string",
+						"nullable": true
+					},
+					"rating": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"Pick_Cowork.email-or-phone_": {
+				"properties": {
+					"email": {
+						"type": "string",
+						"nullable": true
+					},
+					"phone": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"email",
+					"phone"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Pick_Address.Exclude_keyofAddress.id__": {
+				"properties": {
+					"number": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"streetName": {
+						"type": "string"
+					},
+					"floor": {
+						"type": "string",
+						"nullable": true
+					},
+					"apartment": {
+						"type": "string",
+						"nullable": true
+					},
+					"postalCode": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"required": [
+					"number",
+					"country",
+					"city",
+					"streetName",
+					"floor",
+					"apartment",
+					"postalCode"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_Address.id_": {
+				"$ref": "#/components/schemas/Pick_Address.Exclude_keyofAddress.id__",
+				"description": "Construct a type with the properties of T except for those in type K."
 			}
 		},
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "api",
+		"title": "Cowork API",
 		"version": "1.0.0",
 		"license": {
 			"name": "MIT"
@@ -169,6 +285,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Companies"
+				],
 				"security": [],
 				"parameters": []
 			}
@@ -206,6 +325,175 @@
 						}
 					}
 				},
+				"tags": [
+					"Companies"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/cowork": {
+			"get": {
+				"operationId": "GetCoworks",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Cowork"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"basicData": {
+										"$ref": "#/components/schemas/Pick_Cowork.email-or-phone_"
+									},
+									"address": {
+										"$ref": "#/components/schemas/Omit_Address.id_"
+									}
+								},
+								"required": [
+									"basicData",
+									"address"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/cowork/{id}": {
+			"get": {
+				"operationId": "GetOne",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "Edit",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_Cowork_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
 				"security": [],
 				"parameters": [
 					{
