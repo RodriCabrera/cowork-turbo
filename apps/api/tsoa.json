@@ -3,7 +3,6 @@
     "noImplicitAdditionalProperties": "throw-on-extras",
     "spec": {
       "outputDirectory": "public",
-      "specVersion": 3,
-      "name": "Cowork API"
+      "specVersion": 3
     }
 }

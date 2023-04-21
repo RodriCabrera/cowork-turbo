@@ -34,11 +34,8 @@ export class App {
       swaggerUi.serve,
       swaggerUi.setup(undefined, {
         swaggerOptions: {
-          url: '/swagger.json',
-          name: this.name
-        },
-        customCss: '.swagger-ui .topbar { display: none }',
-        customSiteTitle: this.name
+          url: '/swagger.json'
+        }
       })
     )
   }
