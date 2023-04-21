@@ -1,14 +1,14 @@
 version: 2
 
 updates:
-  - package-ecosystem: 'yarn'
+  - package-ecosystem: 'npm'
     directory: '/apps/front'
     schedule:
       interval: 'weekly'
     target-branch: 'develop'
     open-pull-requests-limit: 5
 
-  - package-ecosystem: 'yarn'
+  - package-ecosystem: 'npm'
     directory: '/apps/api'
     schedule:
       interval: 'weekly'
