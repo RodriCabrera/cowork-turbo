@@ -58,7 +58,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 Both the branches and the commits will include the type of the task being worked on. The following is a list of the proposed types:
 
-### Branch/commit types:
+#### Branch/commit types:
 
 - `feat` for a new feature.
 - `fix` for a bug fix.
@@ -68,7 +68,7 @@ Both the branches and the commits will include the type of the task being worked
 - `docs` for changes to the documentation.
 - `chore` for "backstage" work, some type of task not included in the previous types.
 
-### Branching convention:
+#### Branching convention:
 
 ```
 taskId/{app, package or root}/type/title(optional)
@@ -80,6 +80,7 @@ taskId/{app, package or root}/type/title(optional)
 - The branch `title` is optional, and will be basically some keywords to distinguish the branch.
 
 Example:
+
 ```
 # with title
 COW-456/api/fix/users-endpoint
@@ -91,7 +92,7 @@ COW-456/api/fix
 
 #### Commit convention:
 
-### Format of the commit message:
+Format of the commit message:
 
 ```
 <type>: <subject>
@@ -107,7 +108,7 @@ fix: return the correct user list
 Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the database.
 ```
 
-### Message Subject and Body:
+#### Message Subject and Body:
 
 Both the subject and body of the commit should use the imperative, present tense: "change" not "changed" nor "changes".
 &nbsp;
