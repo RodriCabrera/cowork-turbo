@@ -11,6 +11,13 @@ datasource db {
   relationMode = "prisma"
 }
 
+model SuperAdmin {
+  id    String  @id @unique @default(cuid())
+  name  String?
+  mail  String  @unique
+  token String?
+}
+
 enum Role {
   EMPLEADO
   ADMIN
@@ -20,7 +27,7 @@ model User {
   id          String   @id @unique @default(cuid())
   firstName   String?
   lastName    String?
-  mail        String
+  mail        String   @unique
   password    String?
   rol         Role     @default(EMPLEADO)
   company     Company  @relation(fields: [companyId], references: [id])
