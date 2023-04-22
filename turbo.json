@@ -12,6 +12,9 @@
     "dev": {
       "cache": false
     },
-    "test": {}
+    "test": {},
+    "test:watch": {
+      "cache": false
+    }
   }
 }
