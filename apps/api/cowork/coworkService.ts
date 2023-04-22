@@ -7,22 +7,22 @@ export default class CoworkService {
     basicData: Pick<Cowork, 'email' | 'phone'>,
     address: Omit<Address, 'id'>
   ): Promise<Cowork> {
-    return
+    throw new Error('Service not implemented')
   }
 
   static async fetchAll(): Promise<Cowork[]> {
-    return []
+    throw new Error('Service not implemented')
   }
 
   static async fetchById(id: string): Promise<Cowork> {
-    return
+    throw new Error('Service not implemented')
   }
 
   static async edit(id: string, data: Partial<Cowork>): Promise<Cowork> {
-    return
+    throw new Error('Service not implemented')
   }
 
   static async delete(id: string): Promise<boolean> {
-    return false
+    throw new Error('Service not implemented')
   }
 }

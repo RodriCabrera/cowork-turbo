@@ -1,4 +1,3 @@
-import { Request, Response } from 'express'
 import { Tags, Route, Get, Path, Put, Post, Delete, Body, BodyProp } from 'tsoa'
 import CoworkService from './coworkService'
 import { Cowork, Address } from '@prisma/client'
