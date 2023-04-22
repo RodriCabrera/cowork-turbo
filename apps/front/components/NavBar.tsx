@@ -12,7 +12,7 @@ const navigation = [
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-export default function NavBar() {
+export function NavBar() {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

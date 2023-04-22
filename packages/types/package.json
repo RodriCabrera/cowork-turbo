@@ -13,6 +13,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "eslint-config-custom": "*",
-    "tsconfig": "*"
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
   }
 }
