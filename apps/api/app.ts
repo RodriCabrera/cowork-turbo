@@ -1,4 +1,5 @@
 import express from 'express'
+import MailService from './mail/mailService'
 
 // Desacoplar
 import swaggerUi from 'swagger-ui-express'
@@ -41,6 +42,8 @@ export class App {
         customSiteTitle: this.name
       })
     )
+    const mail = MailService.getInstance()
+    mail.createConnection()
   }
 
   start() {
