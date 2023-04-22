@@ -20,7 +20,7 @@ export default class SuperAdminService {
         }
       })
       // TODO: Send email with user data & token as JWT
-      return true
+      return !!superAdmin.token
     } catch (err) {
       return false
     } finally {
