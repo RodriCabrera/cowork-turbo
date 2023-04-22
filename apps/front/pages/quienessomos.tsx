@@ -3,7 +3,7 @@
 import React from 'react'
 
 const QuienesSomos = () => {
-  return <div>QuienesSomos</div>
+  return <div>QSomos</div>
 }
 
 export default QuienesSomos

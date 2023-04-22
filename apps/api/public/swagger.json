@@ -90,7 +90,7 @@
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "api",
+		"title": "Cowork API",
 		"version": "1.0.0",
 		"license": {
 			"name": "MIT"
