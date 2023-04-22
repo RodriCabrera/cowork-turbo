@@ -13,6 +13,9 @@
       "cache": false
     },
     "test": {},
+    "test:cov": {
+      "cache": false
+    },
     "test:watch": {
       "cache": false
     }

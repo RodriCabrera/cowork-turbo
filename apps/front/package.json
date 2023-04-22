@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage --coverageReporters=text-summary "
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",

@@ -11,6 +11,15 @@ const config = {
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
+  coverageThreshold: {
+    global: {
+      branches: 20,
+      functions: 20,
+      lines: 20,
+      statements: 20
+    }
+  },
+  collectCoverageFrom: ['./pages/*'],
   testEnvironment: 'jest-environment-jsdom'
 }
 
