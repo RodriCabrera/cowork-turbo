@@ -8,6 +8,12 @@ module.exports = {
         hostname: 'banner2.cleanpng.com',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+        port: '',
+        pathname: '/**'
       }
     ]
   }

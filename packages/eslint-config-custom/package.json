@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "eslint-config-next": "13.0.0",
+    "eslint-config-next": "13.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-turbo": "latest"
   },
@@ -13,11 +13,11 @@
     "@typescript-eslint/parser": "^5.57.1",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-n": "15.0.0",
-    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-n": "15.7.0",
+    "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-tailwindcss": "^3.11.0",
-    "typescript": "^4.7.4"
+    "typescript": "^5.0.4"
   },
   "publishConfig": {
     "access": "public"
