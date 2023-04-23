@@ -5,7 +5,8 @@ export const SuperadminLogin = () => {
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    return enteredEmail
+    fetch('http://localhost:8000/superadmin/login', { method: 'POST', body: JSON.stringify({ email: enteredEmail }) })
+      .then(res => res.status === 200 ? alert('email sent') : alert('error'))
   }
 
   const emailInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
