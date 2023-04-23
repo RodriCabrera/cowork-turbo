@@ -17,11 +17,11 @@ export const SuperadminLogin = () => {
     card: 'w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0 ',
     formContainer: 'space-y-4 p-6 sm:p-8 md:space-y-6',
     form: 'space-y-4 md:space-y-6',
-    label: 'mb-2 block text-xl font-semibold',
+    label: 'mb-2 block text-xl ',
     input:
       'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm',
     signInButton:
-      'w-full rounded-lg bg-green-400/75 px-5 py-2.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4'
+      'w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black focus:outline-none focus:ring-4'
   }
 
   return (
