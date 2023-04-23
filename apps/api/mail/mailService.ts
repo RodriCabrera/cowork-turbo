@@ -15,28 +15,24 @@ export default class MailService {
     return this.instance
   }
 
-  // TODO use real host
   async createConnection() {
-    //    const account = await nodemailer.createTestAccount()
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS
       }
-      // ...account.smtp,
-      // auth: {
-      //   user: account.user,
-      //   pass: account.pass
-      // }
     })
     console.log('Connected to test SMTP')
   }
 
   async sendMail(options: MailInterface) {
-    return this.transporter.sendMail({
+    const sent = await this.transporter.sendMail({
       ...options
     })
+    if (Object.hasOwn(sent, 'accepted') && sent.accepted instanceof Array) {
+      return sent.accepted.length === 0
+    }
   }
 
   async getTransporter() {
