@@ -17,13 +17,18 @@ export default class MailService {
 
   // TODO use real host
   async createConnection() {
-    const account = await nodemailer.createTestAccount()
+    //    const account = await nodemailer.createTestAccount()
     this.transporter = nodemailer.createTransport({
-      ...account.smtp,
+      service: 'gmail',
       auth: {
-        user: account.user,
-        pass: account.pass
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
       }
+      // ...account.smtp,
+      // auth: {
+      //   user: account.user,
+      //   pass: account.pass
+      // }
     })
     console.log('Connected to test SMTP')
   }

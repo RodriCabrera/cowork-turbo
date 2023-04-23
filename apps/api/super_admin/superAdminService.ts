@@ -29,7 +29,7 @@ export default class SuperAdminService {
         'keyboardcat'
       )
       const mailService = MailService.getInstance()
-      await mailService.sendMail({
+      const res = await mailService.sendMail({
         from: 'noreply@localhost.com',
         to: superAdmin.mail,
         subject: 'Login to your account',
@@ -37,6 +37,7 @@ export default class SuperAdminService {
           <a href="http://localhost:3000/api/superadmin?token=${userJWT}">Login</a>
         `
       })
+      console.log(res)
       return true
     } catch (err) {
       return false
