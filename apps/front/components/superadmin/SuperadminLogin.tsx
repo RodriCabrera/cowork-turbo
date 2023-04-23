@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 
-const SuperadminLogin = () => {
+export const SuperadminLogin = () => {
   const [enteredEmail, setEnteredEmail] = useState('')
 
-  const formSubmitHandler = (event: { preventDefault: () => void }) => {
+  const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(enteredEmail)
   }
 
-  const emailInputHandler = (event: {
-    target: { value: React.SetStateAction<string> }
-  }) => {
+  const emailInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredEmail(event.target.value)
   }
 
@@ -58,5 +56,3 @@ const SuperadminLogin = () => {
     </div>
   )
 }
-
-export default SuperadminLogin
