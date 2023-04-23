@@ -28,7 +28,7 @@ const SuperadminLogin = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2  block text-lg font-medium text-gray-900 dark:text-white"
+                    className="mb-2  block text-xl font-semibold text-gray-900 dark:text-white"
                   >
                     Email
                   </label>
@@ -46,7 +46,7 @@ const SuperadminLogin = () => {
                 <div className="flex items-center justify-between"></div>
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-sky-500/100 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                  className="w-full rounded-lg bg-green-400/75 px-5 py-2.5 text-center text-base font-medium text-black focus:outline-none focus:ring-4"
                 >
                   Sign in
                 </button>
