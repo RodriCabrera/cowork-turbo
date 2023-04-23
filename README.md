@@ -1,5 +1,14 @@
 # COWORK APP (TBD Title)
 
+## Index
+
+- [Install](#installing-the-dependencies)
+- [Running the project](#running-the-project)
+- [Apps and Packages](#apps-and-packages)
+- [Branching convention](#branching-convention)
+- [Commit convention](#commit-convention)
+
+
 ### Installing the dependencies:
 
 in the root folder, run
