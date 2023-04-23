@@ -33,6 +33,7 @@ export default class MailService {
     if (Object.hasOwn(sent, 'accepted') && sent.accepted instanceof Array) {
       return sent.accepted.length === 0
     }
+    return false
   }
 
   async getTransporter() {
