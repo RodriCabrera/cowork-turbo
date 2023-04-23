@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 import { genSalt, hash, compare } from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
+import jwt from 'jsonwebtoken'
+import MailService from '../mail/mailService'
 
 export default class SuperAdminService {
   static _client = new PrismaClient()
@@ -19,8 +21,23 @@ export default class SuperAdminService {
           token: cryptedToken
         }
       })
-      // TODO: Send email with user data & token as JWT
-      return !!superAdmin.token
+      const userJWT = jwt.sign(
+        {
+          ...superAdmin,
+          token
+        },
+        'keyboardcat'
+      )
+      const mailService = MailService.getInstance()
+      await mailService.sendMail({
+        from: 'noreply@localhost.com',
+        to: superAdmin.mail,
+        subject: 'Login to your account',
+        html: `
+          <a href="http://localhost:3000/api/superadmin?token=${userJWT}">Login</a>
+        `
+      })
+      return true
     } catch (err) {
       return false
     } finally {
