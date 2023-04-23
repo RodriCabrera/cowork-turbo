@@ -4,6 +4,8 @@ import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 
+// TODO: Create html template for login mail
+
 export default class SuperAdminService {
   static _client = new PrismaClient()
 
@@ -26,7 +28,7 @@ export default class SuperAdminService {
           ...superAdmin,
           token
         },
-        'keyboardcat'
+        process.env.SESSION_SECRET
       )
       const mailService = MailService.getInstance()
       await mailService.sendMail({
@@ -34,7 +36,7 @@ export default class SuperAdminService {
         to: superAdmin.mail,
         subject: 'Login to your account',
         html: `
-          <a href="http://localhost:3000/api/superadmin?token=${userJWT}">Login</a>
+          <a href="http://localhost:3000/api/superadmin?access_token=${userJWT}">Login</a>
         `
       })
       return true
