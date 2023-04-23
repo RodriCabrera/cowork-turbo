@@ -556,7 +556,7 @@
 				"operationId": "RequestAuth",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Email sent",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -564,8 +564,12 @@
 								}
 							}
 						}
+					},
+					"401": {
+						"description": "Unauthorized"
 					}
 				},
+				"description": "Send login email to the address given if the superadmin user exists",
 				"tags": [
 					"Super admin auth"
 				],
