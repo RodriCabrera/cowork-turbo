@@ -1,12 +1,50 @@
 import React, { useState } from 'react'
 
+const STATUS = {
+  loading: 'loading',
+  sent: 'sent',
+  error: 'error',
+  waiting: 'waiting'
+} as const
+
+type StatusKeys = keyof typeof STATUS
+
 export const SuperadminLogin = () => {
-  const [enteredEmail, setEnteredEmail] = useState('')
+  const [enteredEmail, setEnteredEmail] = useState<string>('')
+
+  // Display status (now its only text) they should alter the UI
+  const [queryStatus, setQueryStatus] = useState<StatusKeys>(STATUS.waiting)
+  const [btnMessage, setBtnMessage] = useState<string>('Sign in')
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    fetch('http://localhost:8000/superadmin/login', { method: 'POST', body: JSON.stringify({ email: enteredEmail }) })
-      .then(res => res.status === 200 ? alert('email sent') : alert('error'))
+    setQueryStatus(STATUS.loading)
+    setBtnMessage('...')
+    fetch('http://localhost:8000/superadmin/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ email: enteredEmail })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          setQueryStatus(STATUS.sent)
+          // TODO: Change form to display just the OK message
+          setBtnMessage('Email sent, check your inbox')
+        }
+        if (res.status === 401) throw new Error('Email not found')
+      }).catch(err => {
+        setQueryStatus(STATUS.error)
+        if (err instanceof Error) {
+          setBtnMessage(err.message)
+        } else setBtnMessage('Could not send mail')
+      }).finally(() => {
+        setTimeout(() => {
+          setQueryStatus(STATUS.waiting)
+          setBtnMessage('Sign in')
+        }, 5000)
+      })
   }
 
   const emailInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -42,10 +80,11 @@ export const SuperadminLogin = () => {
                 id="email"
                 className={styles.input}
                 required
+                disabled={queryStatus !== STATUS.waiting}
               />
             </div>
             <button type="submit" className={styles.signInButton}>
-              Sign in
+              {btnMessage}
             </button>
           </form>
         </div>
