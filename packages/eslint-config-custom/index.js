@@ -26,6 +26,8 @@ module.exports = {
     'dot-notation': 'off',
     'no-undef': 'off',
     'multiline-ternary': 'off',
-    'no-console': 'warn'
+    'no-console': 'warn',
+    'no-unused-vars': 'warn',
+    camelcase: 'off'
   }
 }
