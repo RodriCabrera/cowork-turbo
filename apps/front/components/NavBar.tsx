@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { bungee } from '@/styles/fonts'
 
 const navigation = [
   { name: 'Quienes Somos', href: 'about', current: false },
@@ -19,16 +20,19 @@ export function NavBar() {
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
-                  <Link href={'/'} className="text-4xl font-bold text-black">
+                  <Link
+                    href={'/'}
+                    className={`${bungee.className} h-16 pl-5 pt-4 text-2xl font-bold md:pl-10 md:text-4xl`}
+                  >
                     BaseBloom
                   </Link>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center rounded-3xl border-2 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className=" inset-y-0 right-0 mr-5 flex items-center rounded-3xl border-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
-                <Menu as="div" className="px-1">
+                <Menu as="div" className="px-2 sm:px-0">
                   <div>
-                    <Menu.Button className=" flex items-center space-x-2 rounded-full p-2 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-200">
+                    <Menu.Button className="flex items-center space-x-2 rounded-full p-0 text-sm focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-200 sm:p-2">
                       <span className="sr-only">Open user menu</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +40,7 @@ export function NavBar() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="h-6 w-6 bg-white text-gray-700"
+                        className="h-10 w-6 bg-white text-gray-700"
                       >
                         <path
                           strokeLinecap="round"
@@ -52,9 +56,9 @@ export function NavBar() {
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                       </div>
