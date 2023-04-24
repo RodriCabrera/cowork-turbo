@@ -235,6 +235,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Users"
+				],
 				"security": [],
 				"parameters": []
 			}
@@ -254,6 +257,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Users"
+				],
 				"security": [],
 				"parameters": [
 					{

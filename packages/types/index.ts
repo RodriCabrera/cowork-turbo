@@ -1,3 +1,7 @@
-export interface TestInterface {
-  test: string
+export interface UserData {
+  id: string
+  name: string
+  mail: string
+  token: string
+  iat: string
 }
