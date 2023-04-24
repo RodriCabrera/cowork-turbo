@@ -12,7 +12,7 @@ type StatusKeys = keyof typeof STATUS
 export const SuperadminLogin = () => {
   const [enteredEmail, setEnteredEmail] = useState<string>('')
 
-  // Display status (now its only text) they should alter the UI
+  // TODO: Display status (now its only text) they should alter the UI
   const [queryStatus, setQueryStatus] = useState<StatusKeys>(STATUS.waiting)
   const [btnMessage, setBtnMessage] = useState<string>('Sign in')
 
