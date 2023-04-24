@@ -512,7 +512,7 @@
 				"operationId": "Auth",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Authorized",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -520,8 +520,12 @@
 								}
 							}
 						}
+					},
+					"401": {
+						"description": "Unauthorized"
 					}
 				},
+				"description": "Receives superadmin ID & token and checks if those match the database.",
 				"tags": [
 					"Super admin auth"
 				],
