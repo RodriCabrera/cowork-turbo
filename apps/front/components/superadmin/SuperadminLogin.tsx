@@ -21,7 +21,7 @@ export const SuperadminLogin = () => {
     input:
       'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm',
     signInButton:
-      'w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black focus:outline-none focus:ring-4'
+      'w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black focus:outline-none focus:ring-4 hover:bg-green-200/75'
   }
 
   return (
