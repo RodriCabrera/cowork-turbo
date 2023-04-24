@@ -19,7 +19,7 @@ export const SuperadminLogin = () => {
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setQueryStatus(STATUS.loading)
-    setBtnMessage('...')
+    setBtnMessage('Checking email...')
     fetch('http://localhost:8000/superadmin/login', {
       method: 'POST',
       headers: {
