@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import MailService from './mail/mailService'
 
 // Desacoplar
@@ -42,6 +43,7 @@ export class App {
         customSiteTitle: this.name
       })
     )
+    this.app.use(cors())
     const mail = MailService.getInstance()
     mail.createConnection()
   }
