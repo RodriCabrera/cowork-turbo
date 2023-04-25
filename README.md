@@ -2,50 +2,12 @@
 
 ## Index
 
-- [Install](#installing-the-dependencies)
-- [Running the project](#running-the-project)
 - [Apps and Packages](#apps-and-packages)
-- [Branching convention](#branching-convention)
-- [Commit convention](#commit-convention)
-
-
-### Installing the dependencies:
-
-in the root folder, run
-
-```
-$ yarn
-```
-
-If you want to install any other dependency, you should target an specific workspace (in our case, an app or package):
-```
-$ yarn workspace <workspace> add <package>
-
-# for example:
-$ yarn workspace front add axios
-
-```
-[See turbo docs](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages)
-
-&nbsp;
-
-
-#### Running the project:
-
-If you run the following command in the root folder, both the `front` app and the `api` will be started in dev mode:
-
-```
-$ yarn dev
-```
-
-If you want to just run (in dev) a specific app, you can do:
-```
-$ yarn workspace <workspace> dev
-
-# for example:
-$ yarn workspace front dev
-```
-&nbsp;
+- [Branch Naming Convention](#branching-and-commiting-naming-conventions)
+  - [Branchs](#branching-convention)
+  - [Commits](#commit-convention)
+- [Installing the dependencies](#installing-the-dependencies)
+- [Running the project](#running-the-project)
 
 ### Apps and Packages
 
@@ -120,6 +82,46 @@ Adjust the get all users endpoint. Remove typescript anys. Minor refactor of the
 #### Message Subject and Body:
 
 Both the subject and body of the commit should use the imperative, present tense: "change" not "changed" nor "changes".
+
+&nbsp;
+
+### Installing the dependencies:
+
+in the root folder, run
+
+```
+$ yarn
+```
+
+If you want to install any other dependency, you should target an specific workspace (in our case, an app or package):
+```
+$ yarn workspace <workspace> add <package>
+
+# for example:
+$ yarn workspace front add axios
+
+```
+[See turbo docs](https://turbo.build/repo/docs/handbook/package-installation#addingremovingupgrading-packages)
+
+&nbsp;
+
+
+### Running the project:
+
+If you run the following command in the root folder, both the `front` app and the `api` will be started in dev mode:
+
+```
+$ yarn dev
+```
+
+If you want to just run (in dev) a specific app, you can do:
+```
+$ yarn workspace <workspace> dev
+
+# for example:
+$ yarn workspace front dev
+```
+
 &nbsp;
 
 ### Utilities
