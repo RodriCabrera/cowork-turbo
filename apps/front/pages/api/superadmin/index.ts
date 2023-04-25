@@ -1,10 +1,10 @@
-import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import jwt_decode from 'jwt-decode'
-import { ironOptions } from '@/lib/config'
+
+import { withSessionRoute } from '@/lib/withSession'
 import { UserData } from 'types'
 
-export default withIronSessionApiRoute(login, ironOptions)
+export default withSessionRoute(login)
 
 async function login(req: NextApiRequest, res: NextApiResponse) {
   const { access_token } = req.query
@@ -30,7 +30,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     if (isAuthOk) {
       req.session.user = userData
       await req.session.save()
-      return res.redirect('/superadmin/dashboard')
+      return res.redirect('/superadmin/coworks')
     }
     return res.redirect('/superadmin')
   } catch (err) {
