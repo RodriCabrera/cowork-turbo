@@ -9,6 +9,8 @@
 - [Installing the dependencies](#installing-the-dependencies)
 - [Running the project](#running-the-project)
 
+&nbsp;
+
 ### Apps and Packages
 
 - `front`: a [Next.js](https://nextjs.org/) app
@@ -34,10 +36,12 @@ Both the branches and the commits will include the type of the task being worked
 - `feat` for a new feature.
 - `fix` for a bug fix.
 - `refactor` for refactoring code, e.g. renaming a variable, no change for the user.
-- `style` for UI styling changes, css, styled components, etc.
-- `test` for adding missing tests, refactoring tests.
+- `style` for UI styling changes: css, tailwind classes, etc.
+- `test` for adding and refatoring tests.
 - `docs` for changes to the documentation.
 - `chore` for "backstage" work, some type of task not included in the previous types.
+
+&nbsp;
 
 ### Branching convention:
 
