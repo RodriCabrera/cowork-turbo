@@ -10,7 +10,9 @@ export const SuperadminLayout = ({
   return (
     <>
       <SuperadminNavbar user={user} />
-      {children}
+      <div className="mx-auto max-w-7xl px-2 pt-8 sm:px-6 lg:px-8">
+        {children}
+      </div>
     </>
   )
 }

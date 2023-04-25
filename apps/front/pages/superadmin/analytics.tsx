@@ -8,7 +8,7 @@ export const Analytics = ({ user }: PropsWithUser) => {
   return (
     <SuperadminLayout user={user}>
       <main>
-        <h1 className="m-8 text-start text-6xl font-bold">ANALYTICS</h1>
+        <h1 className="text-start text-6xl font-bold">ANALYTICS</h1>
       </main>
     </SuperadminLayout>
   )

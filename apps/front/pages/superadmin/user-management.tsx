@@ -8,10 +8,10 @@ export const UserManagement = ({ user }: PropsWithUser) => {
   return (
     <SuperadminLayout user={user}>
       <main>
-        <h1 className="m-8 text-start text-5xl font-bold sm:text-6xl ">
+        <h1 className="mb-8 text-start text-5xl font-bold sm:text-6xl">
           USER MANAGEMENT
         </h1>
-        <div className="mx-8">
+        <div>
           <p>USER ID: {user?.id}</p>
           <p>USER MAIL: {user?.mail}</p>
           <p>USER NAME: {user?.name}</p>
