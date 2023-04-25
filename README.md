@@ -39,7 +39,7 @@ Both the branches and the commits will include the type of the task being worked
 - `docs` for changes to the documentation.
 - `chore` for "backstage" work, some type of task not included in the previous types.
 
-#### Branching convention:
+### Branching convention:
 
 ```
 taskId/{app, package or root}/type/title(optional)
@@ -61,7 +61,7 @@ COW-456/api/fix
 ```
 &nbsp;
 
-#### Commit convention:
+### Commit convention:
 
 Format of the commit message:
 
