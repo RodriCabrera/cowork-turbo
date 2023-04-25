@@ -3,6 +3,7 @@ import { genSalt, hash, compare } from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
+import PrismaErrors from '../errors/prismaErrors'
 
 // TODO: Create html template for login mail
 
@@ -41,6 +42,7 @@ export default class SuperAdminService {
       })
       return true
     } catch (err) {
+      PrismaErrors.parseError(err)
       return false
     } finally {
       this._client.$disconnect()
@@ -55,6 +57,7 @@ export default class SuperAdminService {
       })
       return compare(token, superAdmin.token)
     } catch (err) {
+      PrismaErrors.parseError(err)
       return false
     } finally {
       this._client.$disconnect()
