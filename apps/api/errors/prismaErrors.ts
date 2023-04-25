@@ -6,11 +6,11 @@ export default class PrismaErrors {
     RecordNotFound: 'P2025'
   }
 
-  static parseError(error: unknown) {
+  static parseError(error: unknown, collection?: string | string[]) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === this.ERROR_CODES.RecordNotFound) {
         throw new CustomError(
-          `${error.meta} not found`,
+          `${collection || 'Record'} not found`,
           404,
           ERROR_CODES.PrismaRecordNotFound
         )

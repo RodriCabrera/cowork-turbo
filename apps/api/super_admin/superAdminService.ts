@@ -42,7 +42,7 @@ export default class SuperAdminService {
       })
       return true
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Superadmin')
       return false
     } finally {
       this._client.$disconnect()
