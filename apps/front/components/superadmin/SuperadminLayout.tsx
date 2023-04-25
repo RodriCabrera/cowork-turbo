@@ -8,11 +8,11 @@ export const SuperadminLayout = ({
   user
 }: PropsWithChildren<PropsWithUser>) => {
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <SuperadminNavbar user={user} />
-      <div className="mx-auto max-w-7xl px-2 pt-8 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-2 pt-8 sm:px-6 lg:px-8">
         {children}
-      </div>
-    </>
+      </main>
+    </div>
   )
 }

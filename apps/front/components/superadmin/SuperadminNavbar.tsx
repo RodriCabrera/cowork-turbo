@@ -34,7 +34,7 @@ export const SuperadminNavbar = ({ user }: PropsWithUser) => {
   ]
 
   return (
-    <Disclosure as="nav" className="border-b-2">
+    <Disclosure as="nav" className="border-b-2 bg-white">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
