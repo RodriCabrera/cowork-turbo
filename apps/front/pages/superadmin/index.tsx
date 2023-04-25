@@ -12,7 +12,7 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
   if (user) {
     return {
       redirect: {
-        destination: '/superadmin/dashboard',
+        destination: '/superadmin/coworks',
         permanent: false
       }
     }

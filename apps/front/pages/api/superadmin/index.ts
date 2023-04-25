@@ -30,7 +30,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     if (isAuthOk) {
       req.session.user = userData
       await req.session.save()
-      return res.redirect('/superadmin/dashboard')
+      return res.redirect('/superadmin/coworks')
     }
     return res.redirect('/superadmin')
   } catch (err) {
