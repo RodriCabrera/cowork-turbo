@@ -146,24 +146,3 @@ export const SuperadminNavbar = ({ user }: PropsWithUser) => {
     </Disclosure>
   )
 }
-
-// <nav className="flex h-16 items-center justify-between border-b-2 px-10 pt-3 font-bold">
-//   <header className={`${bungee.className} w-1/3 text-3xl`}>
-//     BaseBloom
-//   </header>
-//   {user && (
-//     <>
-//       <div className="flex w-1/3 justify-between justify-self-center">
-//         <Link href="/superadmin/coworks">COWORKS</Link>
-//         <p className="text-gray-300">|</p>
-//         <Link href="/superadmin/user-management">ADMIN & USERS</Link>
-//         <p className="text-gray-300">|</p>
-//         <Link href="/superadmin/analytics">ANALYTICS</Link>
-//       </div>
-
-//       <Link href="/api/superadmin/logout" className="w-1/3 text-right">
-//         Logout
-//       </Link>
-//     </>
-//   )}
-// </nav>
