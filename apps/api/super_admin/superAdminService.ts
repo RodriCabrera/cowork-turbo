@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import CustomError, { ERROR_CODES } from '../errors/customError'
 import { genSalt, hash, compare } from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
@@ -55,10 +56,24 @@ export default class SuperAdminService {
       const superAdmin = await this._client.superAdmin.findUniqueOrThrow({
         where: { id }
       })
-      return compare(token, superAdmin.token)
+      if (superAdmin.token && compare(token, superAdmin.token)) {
+        await this._client.superAdmin.update({
+          where: {
+            id: superAdmin.id
+          },
+          data: {
+            token: null
+          }
+        })
+        return true
+      }
+      throw new CustomError(
+        'Invalid token',
+        401,
+        ERROR_CODES.TokenExpiredOrInvalid
+      )
     } catch (err) {
-      PrismaErrors.parseError(err)
-      return false
+      throw PrismaErrors.parseError(err, 'Superadmin')
     } finally {
       this._client.$disconnect()
     }
