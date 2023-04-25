@@ -21,7 +21,7 @@ export function NavBar() {
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
                   <Link
-                    href={'/'}
+                    href="/"
                     className={`${bungee.className} h-16 pl-5 pt-4 text-2xl font-bold md:pl-10 md:text-4xl`}
                   >
                     BaseBloom
