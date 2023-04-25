@@ -22,10 +22,11 @@ export default class CoworkController {
 
   @Post('/')
   static async create(
-    @BodyProp() basicData: Pick<Cowork, 'email' | 'phone'>,
+    @BodyProp() email: Cowork['email'],
+    @BodyProp() phone: Cowork['phone'],
     @BodyProp() address: Omit<Address, 'id'>
   ) {
-    return CoworkService.createCowork(basicData, address)
+    return CoworkService.createCowork({ email, phone }, address)
   }
 
   @Delete('/{id}')

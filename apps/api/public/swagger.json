@@ -141,24 +141,6 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"Pick_Cowork.email-or-phone_": {
-				"properties": {
-					"email": {
-						"type": "string",
-						"nullable": true
-					},
-					"phone": {
-						"type": "string",
-						"nullable": true
-					}
-				},
-				"required": [
-					"email",
-					"phone"
-				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
-			},
 			"Pick_Address.Exclude_keyofAddress.id__": {
 				"properties": {
 					"number": {
@@ -396,15 +378,21 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"basicData": {
-										"$ref": "#/components/schemas/Pick_Cowork.email-or-phone_"
+									"email": {
+										"type": "string",
+										"nullable": true
+									},
+									"phone": {
+										"type": "string",
+										"nullable": true
 									},
 									"address": {
 										"$ref": "#/components/schemas/Omit_Address.id_"
 									}
 								},
 								"required": [
-									"basicData",
+									"email",
+									"phone",
 									"address"
 								],
 								"type": "object"
