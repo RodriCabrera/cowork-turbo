@@ -1,5 +1,7 @@
 # BASE BLOOM
 
+This project was built using [TurboRepo](https://turbo.build/repo)
+
 ## Index
 
 - [Apps and Packages](#apps-and-packages)
