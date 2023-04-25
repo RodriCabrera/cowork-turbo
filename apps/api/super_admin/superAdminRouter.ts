@@ -8,10 +8,14 @@ superAdminRouter.post('/auth', async (req, res) => {
     res.sendStatus(200)
   } else res.sendStatus(401)
 })
-superAdminRouter.post('/login', async (req, res) => {
+superAdminRouter.post('/login', async (req, res, next) => {
+  // try {
   if (await SuperAdminController.requestAuth(req.body.email)) {
     res.sendStatus(200)
   } else res.sendStatus(401)
+  // } catch (err) {
+  //   next(err)
+  // }
 })
 
 export default superAdminRouter

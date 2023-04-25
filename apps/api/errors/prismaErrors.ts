@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client'
+import CustomError, { ERROR_CODES } from './customError'
 
 export default class PrismaErrors {
   static ERROR_CODES = {
@@ -8,9 +9,12 @@ export default class PrismaErrors {
   static parseError(error: unknown) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === this.ERROR_CODES.RecordNotFound) {
-        throw new Error('Record not found')
+        throw new CustomError(
+          `${error.meta} not found`,
+          404,
+          ERROR_CODES.PrismaRecordNotFound
+        )
       }
-      console.log(error)
     } else if (error instanceof Prisma.PrismaClientValidationError) {
       throw new Error('Invalid data')
     } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
