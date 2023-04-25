@@ -2,11 +2,7 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { bungee } from '@/styles/fonts'
-
-const navigation = [
-  { name: 'Quienes Somos', href: 'about', current: false },
-  { name: 'Contacto', href: 'contact', current: false }
-]
+import { Bars3Icon, UserIcon } from '@heroicons/react/24/solid'
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
@@ -16,12 +12,12 @@ export function NavBar() {
       {({ open }) => (
         <>
           <div className="mx-1 max-w-full px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-24 items-center justify-between">
+            <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
                   <Link
-                    href={'/'}
+                    href="/"
                     className={`${bungee.className} h-16 pl-5 pt-4 text-2xl font-bold md:pl-10 md:text-4xl`}
                   >
                     BaseBloom
@@ -32,35 +28,11 @@ export function NavBar() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="px-2 sm:px-0">
                   <div>
-                    <Menu.Button className="flex items-center space-x-2 rounded-full p-0 text-sm focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-200 sm:p-2">
+                    <Menu.Button className="flex items-center space-x-2 rounded-full p-0 text-sm focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-200 sm:p-1">
                       <span className="sr-only">Open user menu</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-10 w-6 bg-white text-gray-700"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                        />
-                      </svg>
+                      <Bars3Icon className="h-10 w-6 bg-white text-gray-700" />
                       <div className="relative h-7 w-7 overflow-hidden rounded-full bg-white ">
-                        <svg
-                          className="absolute -left-1 h-9 w-9 bg-gray-400 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
+                        <UserIcon className="absolute -left-1 h-9 w-9 bg-gray-400 text-white" />
                       </div>
                     </Menu.Button>
                   </div>
@@ -134,27 +106,6 @@ export function NavBar() {
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as={Link}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
         </>
       )}
     </Disclosure>
