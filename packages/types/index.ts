@@ -6,4 +6,4 @@ export interface UserData {
   iat: string
 }
 
-export type PropsWithUser<P = unknown> = P & { user: UserData | undefined }
+export type PropsWithUser<P = unknown> = P & { user?: UserData | undefined }
