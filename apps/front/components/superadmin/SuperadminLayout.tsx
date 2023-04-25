@@ -1,10 +1,15 @@
-import { ReactNode } from 'react'
-import { SuperadminNavbar } from './SuperadminNavbar'
+import { PropsWithChildren } from 'react'
 
-export const SuperadminLayout = ({ children }: { children: ReactNode }) => {
+import { SuperadminNavbar } from './SuperadminNavbar'
+import { PropsWithUser } from 'types'
+
+export const SuperadminLayout = ({
+  children,
+  user
+}: PropsWithChildren<PropsWithUser>) => {
   return (
     <>
-      <SuperadminNavbar />
+      <SuperadminNavbar user={user} />
       {children}
     </>
   )

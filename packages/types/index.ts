@@ -5,3 +5,5 @@ export interface UserData {
   token: string
   iat: string
 }
+
+export type PropsWithUser<P = unknown> = P & { user: UserData | undefined }

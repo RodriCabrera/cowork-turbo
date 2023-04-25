@@ -1,23 +1,26 @@
-import React, { ReactElement } from 'react'
-import { withIronSessionSsr } from 'iron-session/next'
+import { ReactElement } from 'react'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { ironOptions } from '@/lib/config'
-import { UserData } from 'types'
+import { withSessionSsr } from '@/lib/withSession'
+import { PropsWithUser } from 'types'
 
-export const SuperadminDashboard = ({ user }: { user: UserData }) => {
+export const SuperadminDashboard = ({ user }: PropsWithUser) => {
   return (
-    <main>
-      <h1 className="text-center text-6xl  font-bold">SUPERADMIN DASHBOARD</h1>
-      <p>USER ID: {user.id}</p>
-      <p>USER MAIL: {user.mail}</p>
-      <p>USER NAME: {user.name}</p>
-      <p>Issued at: {user.iat}</p>
-    </main>
+    <SuperadminLayout user={user}>
+      <main>
+        <h1 className="text-center text-6xl  font-bold">
+          SUPERADMIN DASHBOARD
+        </h1>
+        <p>USER ID: {user?.id}</p>
+        <p>USER MAIL: {user?.mail}</p>
+        <p>USER NAME: {user?.name}</p>
+        <p>Issued at: {user?.iat}</p>
+      </main>
+    </SuperadminLayout>
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
+export const getServerSideProps = withSessionSsr(async ({ req }) => {
   const { user } = req.session
 
   if (!user) {
@@ -32,10 +35,10 @@ export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
   return {
     props: { user }
   }
-}, ironOptions)
+})
 
 SuperadminDashboard.getLayout = function getLayout(page: ReactElement) {
-  return <SuperadminLayout>{page}</SuperadminLayout>
+  return page
 }
 
 export default SuperadminDashboard
