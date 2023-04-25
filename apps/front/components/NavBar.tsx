@@ -25,11 +25,7 @@ export function NavBar() {
                 <div className="flex shrink-0 items-center">
                   <Link
                     href="/"
-<<<<<<< HEAD
                     className={`${bungee.className} h-16 pl-2 pt-4 text-3xl font-bold md:pl-10 md:text-4xl`}
-=======
-                    className={`${bungee.className} h-16 pl-5 pt-4 text-2xl font-bold md:pl-10 md:text-4xl`}
->>>>>>> 6ec8bfb276eee6b2afc77afff9ea3bb855a23ffb
                   >
                     BaseBloom
                   </Link>
