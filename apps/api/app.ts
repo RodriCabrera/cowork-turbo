@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import MailService from './mail/mailService'
+import errorHandler from './errors/errorHandler'
+import notAllowedHandler from './errors/404handler'
 
 // Desacoplar
 import swaggerUi from 'swagger-ui-express'
@@ -44,13 +46,15 @@ export class App {
       })
     )
     this.app.use(cors())
+    this.app.use(notAllowedHandler)
+    this.app.use(errorHandler)
     const mail = MailService.getInstance()
     mail.createConnection()
   }
 
   start() {
-    this._initMiddleware()
     this._initRoutes()
+    this._initMiddleware()
     const server = this.app.listen(this.port, () => {
       console.log(`${this.name} Server running on port ${this.port}`)
     })
