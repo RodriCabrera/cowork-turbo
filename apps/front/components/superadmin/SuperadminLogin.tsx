@@ -45,6 +45,7 @@ export const SuperadminLogin = () => {
         setTimeout(() => {
           setQueryStatus(STATUS.waiting)
           setBtnMessage('Sign in')
+          setEnteredEmail('')
         }, 5000)
       })
   }
