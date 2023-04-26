@@ -1,7 +1,9 @@
 import { ErrorInterface } from './errorInterface'
 
 export const ERROR_CODES = {
-  MethodNotAllowed: 'route_or_method_not_allowed'
+  MethodNotAllowed: 'route_or_method_not_allowed',
+  TokenExpiredOrInvalid: 'invalid_or_expired_token',
+  PrismaRecordNotFound: 'prisma_error_record_not_found'
 } as const
 
 type ErrorCodeKeys = keyof typeof ERROR_CODES
