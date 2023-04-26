@@ -1,8 +1,9 @@
-import { Get, Path, Route } from 'tsoa'
+import { Get, Path, Route, Tags } from 'tsoa'
 import UserService from './userService'
 import { User } from '@prisma/client'
 
 @Route('user')
+@Tags('Users')
 export default class UserController {
   @Get('/')
   async getUsers(): Promise<User[]> {

@@ -2,13 +2,13 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 import { bungee } from '@/styles/fonts'
-import { Bars3Icon, UserIcon } from '@heroicons/react/24/solid'
+import { Bars3Icon } from '@heroicons/react/24/solid'
 
 const dropdownOptions = [
-  { name: 'Registrate como empresa', href: '#', current: false },
-  { name: 'Registrate como freelancer', href: '#', current: false },
-  { name: 'Iniciar sesion', href: '#', current: false },
-  { name: 'Ayuda', href: '#', current: false }
+  { name: 'Sing up as a company', href: '#', current: false },
+  { name: 'Sign up as a freelancer', href: '#', current: false },
+  { name: 'Log in', href: '#', current: false },
+  { name: 'Help', href: '#', current: false }
 ]
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
@@ -16,14 +16,14 @@ const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 export function NavBar() {
   return (
     <nav className="border-b-2 border-gray-300">
-      <div className="mx-1 max-w-full px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
               <Link
                 href="/"
-                className={`${bungee.className} h-16 pl-2 pt-4 text-3xl font-bold md:pl-10 md:text-4xl`}
+                className={`${bungee.className} h-16 pl-2 pt-4 text-3xl md:pl-10 `}
               >
                 BaseBloom
               </Link>
@@ -36,9 +36,7 @@ export function NavBar() {
                 <Menu.Button className="flex items-center space-x-2 rounded-full p-1 text-sm focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 focus:ring-offset-gray-200 ">
                   <span className="sr-only">Open user menu</span>
                   <Bars3Icon className="h-6 w-6 bg-white text-gray-700 sm:h-10" />
-                  <div className="relative h-7 w-7 overflow-hidden rounded-full bg-white">
-                    <UserIcon className="absolute -left-1 h-9 w-9 bg-gray-400 text-white" />
-                  </div>
+                  <div className="relative h-6 w-6 overflow-hidden rounded-full bg-gray-200" />
                 </Menu.Button>
               </div>
               <Transition
