@@ -1,4 +1,5 @@
 import { PrismaClient, Cowork, Address } from '@prisma/client'
+import PrismaErrors from '../errors/prismaErrors'
 
 export default class CoworkService {
   private static _client = new PrismaClient()
@@ -19,6 +20,7 @@ export default class CoworkService {
         }
       })
     } catch (err) {
+      PrismaErrors.parseError(err)
       if (err instanceof Error) throw err
     }
   }
@@ -27,6 +29,7 @@ export default class CoworkService {
     try {
       return this._client.cowork.findMany()
     } catch (err) {
+      PrismaErrors.parseError(err)
       if (err instanceof Error) throw err
     }
   }
@@ -37,6 +40,7 @@ export default class CoworkService {
         where: { id }
       })
     } catch (err) {
+      PrismaErrors.parseError(err)
       if (err instanceof Error) throw err
     }
   }
@@ -50,6 +54,7 @@ export default class CoworkService {
         }
       })
     } catch (err) {
+      PrismaErrors.parseError(err)
       if (err instanceof Error) throw err
     }
   }
@@ -58,6 +63,7 @@ export default class CoworkService {
     try {
       return !!this._client.cowork.delete({ where: { id } })
     } catch (err) {
+      PrismaErrors.parseError(err)
       if (err instanceof Error) throw err
     }
   }
