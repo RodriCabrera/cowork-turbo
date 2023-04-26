@@ -9,7 +9,7 @@ export default class CoworkService {
     address: Omit<Address, 'id'>
   ): Promise<Cowork> {
     try {
-      return this._client.cowork.create({
+      return await this._client.cowork.create({
         data: {
           ...basicData,
           address: {
@@ -27,43 +27,43 @@ export default class CoworkService {
 
   static async fetchAll(): Promise<Cowork[]> {
     try {
-      return this._client.cowork.findMany()
+      return await this._client.cowork.findMany()
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Coworks')
       if (err instanceof Error) throw err
     }
   }
 
   static async fetchById(id: string): Promise<Cowork> {
     try {
-      return this._client.cowork.findUniqueOrThrow({
+      return await this._client.cowork.findUniqueOrThrow({
         where: { id }
       })
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Cowork')
       if (err instanceof Error) throw err
     }
   }
 
   static async edit(id: string, data: Partial<Cowork>): Promise<Cowork> {
     try {
-      return this._client.cowork.update({
+      return await this._client.cowork.update({
         where: { id },
         data: {
           ...data
         }
       })
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Cowork')
       if (err instanceof Error) throw err
     }
   }
 
   static async delete(id: string): Promise<boolean> {
     try {
-      return !!this._client.cowork.delete({ where: { id } })
+      return !!(await this._client.cowork.delete({ where: { id } }))
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Cowork')
       if (err instanceof Error) throw err
     }
   }
