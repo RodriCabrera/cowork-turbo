@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import { bungee } from '@/styles/fonts'
 import { Bars3Icon } from '@heroicons/react/24/solid'
+import { bungee } from '@/styles/fonts'
 
 const dropdownOptions = [
   { name: 'Sing up as a company', href: '#', current: false },
@@ -27,13 +27,12 @@ export function NavBar() {
           </div>
           {/* Profile dropdown */}
           <Menu as="div" className="px-1">
-            <div>
-              <Menu.Button className="flex flex-1 items-center space-x-2 rounded-full p-1 text-sm focus:outline-none ">
-                <span className="sr-only">Open user menu</span>
-                <Bars3Icon className="h-6 w-6 bg-white text-gray-700 " />
-                <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-200" />
-              </Menu.Button>
-            </div>
+            <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <span className="sr-only">Open user menu</span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
+                <Bars3Icon className="h-6 w-6 text-gray-400 " />
+              </div>
+            </Menu.Button>
             <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
