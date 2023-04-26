@@ -56,7 +56,7 @@ export default class SuperAdminService {
       const superAdmin = await this._client.superAdmin.findUniqueOrThrow({
         where: { id }
       })
-      if (superAdmin.token && compare(token, superAdmin.token)) {
+      if (superAdmin.token && (await compare(token, superAdmin.token))) {
         await this._client.superAdmin.update({
           where: {
             id: superAdmin.id
