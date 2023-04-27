@@ -5,8 +5,7 @@ import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import PrismaErrors from '../errors/prismaErrors'
-
-// TODO: Create html template for login mail
+import { loginTemplate } from '../mail/templates'
 
 export default class SuperAdminService {
   static _client = new PrismaClient()
@@ -37,9 +36,7 @@ export default class SuperAdminService {
         from: 'noreply@localhost.com',
         to: superAdmin.mail,
         subject: 'Login to your account',
-        html: `
-          <a href="http://localhost:3000/api/superadmin?access_token=${userJWT}">Login</a>
-        `
+        html: loginTemplate(superAdmin.name, userJWT, 'superadmin')
       })
       return true
     } catch (err) {
