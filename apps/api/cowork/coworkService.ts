@@ -1,20 +1,19 @@
 import { PrismaClient, Cowork, Address } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
+import { EditCoworkInput } from './coworkTypes'
 
 export default class CoworkService {
   private static _client = new PrismaClient()
 
-  static async createCowork(
-    basicData: Pick<Cowork, 'email' | 'phone'>,
-    address: Omit<Address, 'id'>
-  ): Promise<Cowork> {
+  static async createCowork(data: EditCoworkInput): Promise<Cowork> {
     try {
       return await this._client.cowork.create({
         data: {
-          ...basicData,
+          email: data.email,
+          phone: data.phone,
           address: {
             create: {
-              ...address
+              ...data.address
             }
           }
         }
@@ -27,7 +26,11 @@ export default class CoworkService {
 
   static async fetchAll(): Promise<Cowork[]> {
     try {
-      return await this._client.cowork.findMany()
+      return await this._client.cowork.findMany({
+        include: {
+          address: true
+        }
+      })
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')
       if (err instanceof Error) throw err
@@ -37,7 +40,10 @@ export default class CoworkService {
   static async fetchById(id: string): Promise<Cowork> {
     try {
       return await this._client.cowork.findUniqueOrThrow({
-        where: { id }
+        where: { id },
+        include: {
+          address: true
+        }
       })
     } catch (err) {
       PrismaErrors.parseError(err, 'Cowork')
@@ -45,12 +51,16 @@ export default class CoworkService {
     }
   }
 
-  static async edit(id: string, data: Partial<Cowork>): Promise<Cowork> {
+  static async edit(id: string, data: EditCoworkInput): Promise<Cowork> {
     try {
       return await this._client.cowork.update({
         where: { id },
         data: {
-          ...data
+          email: data.email,
+          phone: data.phone,
+          address: {
+            update: { ...data.address }
+          }
         }
       })
     } catch (err) {

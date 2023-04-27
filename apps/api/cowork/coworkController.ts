@@ -1,6 +1,7 @@
 import { Tags, Route, Get, Path, Put, Post, Delete, Body, BodyProp } from 'tsoa'
 import CoworkService from './coworkService'
 import { Cowork, Address } from '@prisma/client'
+import { EditCoworkInput } from './coworkTypes'
 
 @Route('cowork')
 @Tags('Coworks')
@@ -16,17 +17,13 @@ export default class CoworkController {
   }
 
   @Put('/{id}')
-  static async edit(@Path() id: string, @Body() body: Partial<Cowork>) {
+  static async edit(@Path() id: string, @Body() body: EditCoworkInput) {
     return CoworkService.edit(id, body)
   }
 
   @Post('/')
-  static async create(
-    @BodyProp() email: Cowork['email'],
-    @BodyProp() phone: Cowork['phone'],
-    @BodyProp() address: Omit<Address, 'id'>
-  ) {
-    return CoworkService.createCowork({ email, phone }, address)
+  static async create(@BodyProp() data: EditCoworkInput) {
+    return CoworkService.createCowork(data)
   }
 
   @Delete('/{id}')

@@ -29,11 +29,7 @@ coworkRoutes.put('/:id', async (req, res, next) => {
 })
 coworkRoutes.post('/', async (req, res, next) => {
   try {
-    const response = await CoworkController.create(
-      req.body.email,
-      req.body.phone,
-      req.body.address
-    )
+    const response = await CoworkController.create(req.body)
     res.send(response)
   } catch (err) {
     next(err)
