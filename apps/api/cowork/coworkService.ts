@@ -1,25 +1,34 @@
 import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import { EditCoworkInput } from './coworkTypes'
+import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
   private static _client = new PrismaClient()
 
   static async createCowork(data: EditCoworkInput): Promise<Cowork> {
     try {
+      const parsedData = CoworkValidate.validateCreate(data)
       return await this._client.cowork.create({
         data: {
-          email: data.email,
-          phone: data.phone,
+          email: parsedData.email,
+          phone: parsedData.phone,
           address: {
             create: {
-              ...data.address
+              apartment: parsedData.address?.apartment,
+              city: parsedData.address?.city,
+              country: parsedData.address?.country,
+              floor: parsedData.address?.floor,
+              number: parsedData.address?.number,
+              postalCode: parsedData.address?.postalCode,
+              streetName: parsedData.address?.streetName
             }
           }
         }
       })
     } catch (err) {
-      PrismaErrors.parseError(err)
+      PrismaErrors.parseError(err, 'Cowork', true)
+      CoworkValidate.parseError(err)
       if (err instanceof Error) throw err
     }
   }
@@ -53,18 +62,23 @@ export default class CoworkService {
 
   static async edit(id: string, data: EditCoworkInput): Promise<Cowork> {
     try {
+      const parsedData = CoworkValidate.validateEdit(data)
       return await this._client.cowork.update({
         where: { id },
         data: {
-          email: data.email,
-          phone: data.phone,
+          email: parsedData.email,
+          phone: parsedData.phone,
           address: {
-            update: { ...data.address }
+            update: { ...parsedData.address }
           }
+        },
+        include: {
+          address: true
         }
       })
     } catch (err) {
       PrismaErrors.parseError(err, 'Cowork')
+      CoworkValidate.parseError(err)
       if (err instanceof Error) throw err
     }
   }
