@@ -423,20 +423,13 @@
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "CreateCoworkInput",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"data": {
-										"$ref": "#/components/schemas/EditCoworkInput",
-										"description": "EditCoworkInput"
-									}
-								},
-								"required": [
-									"data"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/EditCoworkInput",
+								"description": "CreateCoworkInput"
 							}
 						}
 					}

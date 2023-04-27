@@ -43,12 +43,12 @@ export default class CoworkController {
 
   /**
    *
-   * @param data EditCoworkInput
+   * @param data CreateCoworkInput
    * @returns Cowork
    */
   @Response<CustomError>(406, 'Input data not valid')
   @Post('/')
-  static async create(@BodyProp() data: EditCoworkInput) {
+  static async create(@Body() data: EditCoworkInput) {
     return CoworkService.createCowork(data)
   }
 
