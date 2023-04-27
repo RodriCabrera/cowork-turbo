@@ -369,7 +369,7 @@
 				"operationId": "Create",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Cowork",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -390,22 +390,13 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"email": {
-										"type": "string",
-										"nullable": true
-									},
-									"phone": {
-										"type": "string",
-										"nullable": true
-									},
-									"address": {
-										"$ref": "#/components/schemas/Omit_Address.id_"
+									"data": {
+										"$ref": "#/components/schemas/EditCoworkInput",
+										"description": "EditCoworkInput"
 									}
 								},
 								"required": [
-									"email",
-									"phone",
-									"address"
+									"data"
 								],
 								"type": "object"
 							}
@@ -448,7 +439,7 @@
 				"operationId": "Edit",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Cowork",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -473,11 +464,13 @@
 					}
 				],
 				"requestBody": {
+					"description": "EditCoworkInput",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/EditCoworkInput"
+								"$ref": "#/components/schemas/EditCoworkInput",
+								"description": "EditCoworkInput"
 							}
 						}
 					}
