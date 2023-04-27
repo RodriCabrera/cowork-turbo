@@ -13,8 +13,12 @@ export default class PrismaErrors {
     RecordNotFound: 'P2025'
   }
 
-  static parseError(error: unknown, collection: string | string[] = 'Record') {
-    console.error(error)
+  static parseError(
+    error: unknown,
+    collection: string | string[] = 'Record',
+    debug: boolean = false
+  ) {
+    debug && console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case this.ERROR_CODES.RecordNotFound:
