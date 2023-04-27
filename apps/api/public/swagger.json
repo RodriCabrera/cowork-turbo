@@ -117,6 +117,34 @@
 				"type": "object",
 				"description": "Model Cowork"
 			},
+			"CustomError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
+			},
 			"Pick_Cowork.email-or-phone_": {
 				"properties": {
 					"email": {
@@ -418,6 +446,16 @@
 								}
 							}
 						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -444,6 +482,16 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}
@@ -485,6 +533,16 @@
 							"application/json": {
 								"schema": {
 									"type": "boolean"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}
