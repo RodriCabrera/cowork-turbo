@@ -405,6 +405,16 @@
 								}
 							}
 						}
+					},
+					"406": {
+						"description": "Input data not valid",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -488,6 +498,16 @@
 					},
 					"404": {
 						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid",
 						"content": {
 							"application/json": {
 								"schema": {

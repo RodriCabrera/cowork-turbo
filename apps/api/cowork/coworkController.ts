@@ -22,8 +22,8 @@ export default class CoworkController {
     return CoworkService.fetchAll()
   }
 
-  @Get('/{id}')
   @Response<CustomError>(404, 'Cowork not found')
+  @Get('/{id}')
   static async getOne(@Path() id: string) {
     return CoworkService.fetchById(id)
   }
@@ -35,6 +35,7 @@ export default class CoworkController {
    * @returns Cowork
    */
   @Response<CustomError>(404, 'Cowork not found')
+  @Response<CustomError>(406, 'Input data not valid')
   @Put('/{id}')
   static async edit(@Path() id: string, @Body() data: EditCoworkInput) {
     return CoworkService.edit(id, data)
@@ -45,13 +46,14 @@ export default class CoworkController {
    * @param data EditCoworkInput
    * @returns Cowork
    */
+  @Response<CustomError>(406, 'Input data not valid')
   @Post('/')
   static async create(@BodyProp() data: EditCoworkInput) {
     return CoworkService.createCowork(data)
   }
 
-  @Delete('/{id}')
   @Response<CustomError>(404, 'Cowork not found')
+  @Delete('/{id}')
   static async remove(@Path() id: string) {
     return CoworkService.delete(id)
   }

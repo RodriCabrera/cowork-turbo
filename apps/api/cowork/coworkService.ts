@@ -1,4 +1,4 @@
-import { PrismaClient, Cowork, Address } from '@prisma/client'
+import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import { EditCoworkInput } from './coworkTypes'
 

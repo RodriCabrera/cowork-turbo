@@ -58,6 +58,8 @@ export default class PrismaErrors {
             ERROR_CODES.PrismaUnhandledError
           )
       }
+    } else if (error instanceof Prisma.PrismaClientValidationError) {
+      throw new CustomError(error.message, 406, ERROR_CODES.PrismaValueNotValid)
     } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
       throw new Error('Prisma client error')
     }
