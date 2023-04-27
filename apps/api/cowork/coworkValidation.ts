@@ -4,6 +4,7 @@ import CustomError, { ERROR_CODES } from '../errors/customError'
 export default class CoworkValidate {
   private static $createSchema = z.object({
     email: z.string().email(),
+    name: z.string(),
     phone: z.string(),
     address: z.object({
       country: z.string(),
@@ -18,6 +19,7 @@ export default class CoworkValidate {
 
   private static $editSchema = z.object({
     email: z.string().email().optional(),
+    name: z.string().optional(),
     phone: z.string().optional(),
     address: z
       .object({
@@ -36,8 +38,16 @@ export default class CoworkValidate {
     return this.$createSchema.parse(data)
   }
 
+  static getCreateSchema() {
+    return this.$createSchema
+  }
+
   static validateEdit(data: any) {
     return this.$editSchema.parse(data)
+  }
+
+  static getEditSchema() {
+    return this.$editSchema
   }
 
   static parseError(error: unknown) {

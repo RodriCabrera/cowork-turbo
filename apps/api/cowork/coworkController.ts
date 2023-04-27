@@ -1,17 +1,6 @@
-import {
-  Tags,
-  Route,
-  Get,
-  Path,
-  Put,
-  Post,
-  Delete,
-  Body,
-  BodyProp,
-  Response
-} from 'tsoa'
+import { Tags, Route, Get, Path, Put, Post, Delete, Body, Response } from 'tsoa'
 import CoworkService from './coworkService'
-import { EditCoworkInput } from './coworkTypes'
+import { CreateCoworkInput, EditCoworkInput } from './coworkTypes'
 import CustomError from '../errors/customError'
 
 @Route('cowork')
@@ -48,7 +37,7 @@ export default class CoworkController {
    */
   @Response<CustomError>(406, 'Input data not valid')
   @Post('/')
-  static async create(@Body() data: EditCoworkInput) {
+  static async create(@Body() data: CreateCoworkInput) {
     return CoworkService.createCowork(data)
   }
 

@@ -1,17 +1,18 @@
 import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
-import { EditCoworkInput } from './coworkTypes'
+import { EditCoworkInput, CreateCoworkInput } from './coworkTypes'
 import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
   private static _client = new PrismaClient()
 
-  static async createCowork(data: EditCoworkInput): Promise<Cowork> {
+  static async createCowork(data: CreateCoworkInput): Promise<Cowork> {
     try {
       const parsedData = CoworkValidate.validateCreate(data)
       return await this._client.cowork.create({
         data: {
           email: parsedData.email,
+          name: parsedData.name,
           phone: parsedData.phone,
           address: {
             create: {
@@ -67,6 +68,7 @@ export default class CoworkService {
         where: { id },
         data: {
           email: parsedData.email,
+          name: parsedData.name,
           phone: parsedData.phone,
           address: {
             update: { ...parsedData.address }

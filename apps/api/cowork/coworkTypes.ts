@@ -1,5 +1,9 @@
-import type { Cowork, Address } from '@prisma/client'
+import CoworkValidate from './coworkValidation'
 
-export type EditCoworkInput = Pick<Cowork, 'email' | 'phone'> & {
-  address: Omit<Address, 'id'>
-}
+const createSchema = CoworkValidate.getCreateSchema()
+const editSchema = CoworkValidate.getEditSchema()
+
+type CreateCoworkInput = ReturnType<typeof createSchema.parse>
+type EditCoworkInput = ReturnType<typeof editSchema.parse>
+
+export { CreateCoworkInput, EditCoworkInput }
