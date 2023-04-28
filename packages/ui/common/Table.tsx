@@ -32,9 +32,9 @@ const Header = ({
   <th className={`px-6 py-3 text-left ${className}`}>{children}</th>
 )
 
+Table.Header = Header
 Table.Body = Body
 Table.Cell = Cell
 Table.Row = Row
-Table.Header = Header
 
 export { Table }
