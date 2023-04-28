@@ -12,7 +12,6 @@ export const CoworksManagement = ({ user }: PropsWithUser) => {
     <SuperadminLayout user={user}>
       <main>
         <h1 className="text-start text-6xl font-bold">COWORKS</h1>
-        {/* TODO: Style & Connect button */}
         <div className="flex justify-end">
           <Link
             href={'/superadmin/coworks/new'}
