@@ -3,7 +3,7 @@ import CoworkService from './coworkService'
 import { CreateCoworkInput, EditCoworkInput } from './coworkTypes'
 import CustomError from '../errors/customError'
 
-@Route('cowork')
+@Route('coworks')
 @Tags('Coworks')
 export default class CoworkController {
   @Get('/')

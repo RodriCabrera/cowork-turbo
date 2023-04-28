@@ -20,7 +20,7 @@ export const SuperadminLogin = () => {
     e.preventDefault()
     setQueryStatus(STATUS.loading)
     setBtnMessage('Checking email...')
-    fetch('http://localhost:8000/superadmin/login', {
+    fetch('http://localhost:8000/superadmins/login', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

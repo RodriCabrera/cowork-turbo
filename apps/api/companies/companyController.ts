@@ -2,7 +2,7 @@ import { Get, Path, Route, Tags } from 'tsoa'
 import { Company, User } from '@prisma/client'
 import CompanyService from './companyService'
 
-@Route('company')
+@Route('companies')
 @Tags('Companies')
 export default class CompanyController {
   @Get('/')

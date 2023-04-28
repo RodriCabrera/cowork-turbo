@@ -9,7 +9,7 @@ import {
 } from 'tsoa'
 import SuperAdminService from './superAdminService'
 
-@Route('superadmin')
+@Route('superadmins')
 @Tags('Super admin auth')
 export default class SuperAdminController extends Controller {
   /**
