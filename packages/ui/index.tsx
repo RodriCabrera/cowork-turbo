@@ -1,2 +1,2 @@
 export { Button } from './common/Button'
-export * from './table'
+export * from './Table'
