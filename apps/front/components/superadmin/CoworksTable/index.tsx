@@ -2,6 +2,7 @@ import React from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
+
 import { ActionsCell } from './ActionsCell'
 
 const { Cell, Body, Header, Row } = Table
