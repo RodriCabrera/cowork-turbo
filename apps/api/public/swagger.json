@@ -252,7 +252,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/user": {
+		"/users": {
 			"get": {
 				"operationId": "GetUsers",
 				"responses": {
@@ -277,7 +277,7 @@
 				"parameters": []
 			}
 		},
-		"/user/{id}": {
+		"/users/{id}": {
 			"get": {
 				"operationId": "GetUser",
 				"responses": {
@@ -308,7 +308,7 @@
 				]
 			}
 		},
-		"/company": {
+		"/companies": {
 			"get": {
 				"operationId": "GetCompanies",
 				"responses": {
@@ -333,7 +333,7 @@
 				"parameters": []
 			}
 		},
-		"/company/{id}": {
+		"/companies/{id}": {
 			"get": {
 				"operationId": "GetCompany",
 				"responses": {
@@ -382,7 +382,7 @@
 				]
 			}
 		},
-		"/cowork": {
+		"/coworks": {
 			"get": {
 				"operationId": "GetCoworks",
 				"responses": {
@@ -449,7 +449,7 @@
 				}
 			}
 		},
-		"/cowork/{id}": {
+		"/coworks/{id}": {
 			"get": {
 				"operationId": "GetOne",
 				"responses": {
@@ -590,7 +590,7 @@
 				]
 			}
 		},
-		"/superadmin/auth": {
+		"/superadmins/auth": {
 			"post": {
 				"operationId": "Auth",
 				"responses": {
@@ -638,7 +638,7 @@
 				}
 			}
 		},
-		"/superadmin/login": {
+		"/superadmins/login": {
 			"post": {
 				"operationId": "RequestAuth",
 				"responses": {
