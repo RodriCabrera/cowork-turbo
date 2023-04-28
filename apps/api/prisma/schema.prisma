@@ -62,6 +62,7 @@ model Cowork {
   id        String   @id @unique @default(cuid())
   address   Address  @relation(fields: [addressId], references: [id])
   addressId String
+  name      String   @unique
   email     String?
   phone     String?
   rating    Float    @default(0.0)

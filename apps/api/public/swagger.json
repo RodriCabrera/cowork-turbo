@@ -100,6 +100,9 @@
 						"type": "string",
 						"nullable": true
 					},
+					"name": {
+						"type": "string"
+					},
 					"addressId": {
 						"type": "string"
 					},
@@ -111,96 +114,128 @@
 					"rating",
 					"phone",
 					"email",
+					"name",
 					"addressId",
 					"id"
 				],
 				"type": "object",
 				"description": "Model Cowork"
 			},
-			"Partial_Cowork_": {
+			"CustomError": {
 				"properties": {
-					"id": {
-						"type": "string"
-					},
-					"addressId": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string",
-						"nullable": true
-					},
-					"phone": {
-						"type": "string",
-						"nullable": true
-					},
-					"rating": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"type": "object",
-				"description": "Make all properties in T optional"
-			},
-			"Pick_Cowork.email-or-phone_": {
-				"properties": {
-					"email": {
-						"type": "string",
-						"nullable": true
-					},
-					"phone": {
-						"type": "string",
-						"nullable": true
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
-					"email",
-					"phone"
+					"error"
 				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
+				"type": "object"
 			},
-			"Pick_Address.Exclude_keyofAddress.id__": {
+			"ReturnType_typeofeditSchema.parse_": {
 				"properties": {
-					"number": {
+					"address": {
+						"properties": {
+							"postalCode": {
+								"type": "string"
+							},
+							"apartment": {
+								"type": "string"
+							},
+							"floor": {
+								"type": "string"
+							},
+							"number": {
+								"type": "string"
+							},
+							"streetName": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"country": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"phone": {
 						"type": "string"
 					},
-					"country": {
+					"name": {
 						"type": "string"
 					},
-					"city": {
+					"email": {
 						"type": "string"
-					},
-					"streetName": {
-						"type": "string"
-					},
-					"floor": {
-						"type": "string",
-						"nullable": true
-					},
-					"apartment": {
-						"type": "string",
-						"nullable": true
-					},
-					"postalCode": {
-						"type": "string",
-						"nullable": true
 					}
 				},
-				"required": [
-					"number",
-					"country",
-					"city",
-					"streetName",
-					"floor",
-					"apartment",
-					"postalCode"
-				],
 				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
+				"description": "Obtain the return type of a function type"
 			},
-			"Omit_Address.id_": {
-				"$ref": "#/components/schemas/Pick_Address.Exclude_keyofAddress.id__",
-				"description": "Construct a type with the properties of T except for those in type K."
+			"EditCoworkInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofeditSchema.parse_"
+			},
+			"ReturnType_typeofcreateSchema.parse_": {
+				"properties": {
+					"address": {
+						"properties": {
+							"postalCode": {
+								"type": "string"
+							},
+							"apartment": {
+								"type": "string"
+							},
+							"floor": {
+								"type": "string"
+							},
+							"number": {
+								"type": "string"
+							},
+							"streetName": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"country": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CreateCoworkInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
 			}
 		},
 		"securitySchemes": {}
@@ -375,11 +410,21 @@
 				"operationId": "Create",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Cowork",
 						"content": {
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}
@@ -391,23 +436,13 @@
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "CreateCoworkInput",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"basicData": {
-										"$ref": "#/components/schemas/Pick_Cowork.email-or-phone_"
-									},
-									"address": {
-										"$ref": "#/components/schemas/Omit_Address.id_"
-									}
-								},
-								"required": [
-									"basicData",
-									"address"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/CreateCoworkInput",
+								"description": "CreateCoworkInput"
 							}
 						}
 					}
@@ -424,6 +459,16 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}
@@ -448,11 +493,31 @@
 				"operationId": "Edit",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Cowork",
 						"content": {
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/Cowork"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}
@@ -473,11 +538,13 @@
 					}
 				],
 				"requestBody": {
+					"description": "EditCoworkInput",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Partial_Cowork_"
+								"$ref": "#/components/schemas/EditCoworkInput",
+								"description": "EditCoworkInput"
 							}
 						}
 					}
@@ -492,6 +559,16 @@
 							"application/json": {
 								"schema": {
 									"type": "boolean"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
 								}
 							}
 						}

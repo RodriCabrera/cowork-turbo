@@ -3,7 +3,11 @@ import { ErrorInterface } from './errorInterface'
 export const ERROR_CODES = {
   MethodNotAllowed: 'route_or_method_not_allowed',
   TokenExpiredOrInvalid: 'invalid_or_expired_token',
-  PrismaRecordNotFound: 'prisma_error_record_not_found'
+  PrismaRecordNotFound: 'prisma_error_record_not_found',
+  PrismaMissingValue: 'prisma_error_missing_value',
+  PrismaValueNotValid: 'prisma_error_invalid_value',
+  PrismaUnhandledError: 'prisma_error_unknown',
+  ZodInvalidType: 'zod_error_invalid_type'
 } as const
 
 type ErrorCodeKeys = keyof typeof ERROR_CODES
