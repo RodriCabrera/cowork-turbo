@@ -5,8 +5,16 @@ import { bungee } from '@/styles/fonts'
 import { FiMenu } from 'react-icons/fi'
 
 const dropdownOptions = [
-  { name: 'Sing up as a company', href: '#', current: false },
-  { name: 'Sign up as a freelancer', href: '#', current: false },
+  {
+    name: 'Sing up as a company',
+    href: '/register?role=company',
+    current: false
+  },
+  {
+    name: 'Sign up as a freelancer',
+    href: '/register?role=freelancer',
+    current: false
+  },
   { name: 'Log in', href: '/login', current: false }
 ]
 
