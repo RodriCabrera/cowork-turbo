@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { PropsWithUser } from 'types'
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 
-export const NewCowork = ({ user }: PropsWithUser) => {
+export const NewCoworkPage = ({ user }: PropsWithUser) => {
   const router = useRouter()
   return (
     <SuperadminLayout user={user}>
@@ -12,14 +12,14 @@ export const NewCowork = ({ user }: PropsWithUser) => {
         <button type="button" onClick={() => router.back()}>
           Click here to go back
         </button>
-        <h1>NewCowork</h1>
+        <h1>NewCoworkPage</h1>
       </div>
     </SuperadminLayout>
   )
 }
 
-NewCowork.getLayout = function getLayout(page: ReactElement) {
+NewCoworkPage.getLayout = function getLayout(page: ReactElement) {
   return page
 }
 
-export default NewCowork
+export default NewCoworkPage

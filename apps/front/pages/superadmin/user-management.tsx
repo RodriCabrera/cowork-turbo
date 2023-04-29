@@ -4,7 +4,7 @@ import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { PropsWithUser } from 'types'
 import { protectSuperadminRoute } from '@/lib/protectSuperadminRoute'
 
-export const UserManagement = ({ user }: PropsWithUser) => {
+export const UserManagementPage = ({ user }: PropsWithUser) => {
   return (
     <SuperadminLayout user={user}>
       <main>
@@ -24,8 +24,8 @@ export const UserManagement = ({ user }: PropsWithUser) => {
 
 export const getServerSideProps = protectSuperadminRoute
 
-UserManagement.getLayout = function getLayout(page: ReactElement) {
+UserManagementPage.getLayout = function getLayout(page: ReactElement) {
   return page
 }
 
-export default UserManagement
+export default UserManagementPage
