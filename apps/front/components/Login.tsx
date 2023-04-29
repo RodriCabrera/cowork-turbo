@@ -20,7 +20,7 @@ export const Login = ({ endpoint }: { endpoint: string }) => {
     e.preventDefault()
     setQueryStatus(STATUS.loading)
     setBtnMessage('Checking email...')
-    fetch(`${process.env.API_URL}/${endpoint}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
