@@ -7,8 +7,7 @@ import { FiMenu } from 'react-icons/fi'
 const dropdownOptions = [
   { name: 'Sing up as a company', href: '#', current: false },
   { name: 'Sign up as a freelancer', href: '#', current: false },
-  { name: 'Log in', href: '/login', current: false },
-  { name: 'Help', href: '#', current: false }
+  { name: 'Log in', href: '/login', current: false }
 ]
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
@@ -16,7 +15,7 @@ const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 export function NavBar() {
   return (
     <nav className="border-b-2 bg-white">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <header>
