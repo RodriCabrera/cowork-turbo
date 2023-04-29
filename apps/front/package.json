@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
-    "@heroicons/react": "^2.0.17",
     "iron-session": "^6.3.1",
     "jwt-decode": "^3.1.2",
     "next": "^13.3.0",

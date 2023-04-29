@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import { Bars3Icon } from '@heroicons/react/24/solid'
+import { BiMenu } from 'react-icons/bi'
 import { bungee } from '@/styles/fonts'
 
 const dropdownOptions = [
@@ -30,7 +30,7 @@ export function NavBar() {
             <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="sr-only">Open user menu</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
-                <Bars3Icon className="h-6 w-6 text-gray-400 " />
+                <BiMenu className="h-6 w-6 text-gray-400 " />
               </div>
             </Menu.Button>
             <Transition
