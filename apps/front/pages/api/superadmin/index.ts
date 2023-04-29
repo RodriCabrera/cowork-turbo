@@ -15,11 +15,14 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   const { name, mail, iat, ...idAndToken } = userData
 
   try {
-    const response = await fetch(`${process.env.API_URL}/superadmins/auth`, {
-      method: 'POST',
-      body: JSON.stringify(idAndToken),
-      headers: { 'Content-type': 'application/json' }
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/superadmins/auth`,
+      {
+        method: 'POST',
+        body: JSON.stringify(idAndToken),
+        headers: { 'Content-type': 'application/json' }
+      }
+    )
 
     // TODO: Implement better error handling
     // 1. Invalid token

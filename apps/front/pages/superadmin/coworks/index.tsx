@@ -7,7 +7,7 @@ import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { protectSuperadminRoute } from '@/lib/protectSuperadminRoute'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
 
-export const CoworksManagement = ({ user }: PropsWithUser) => {
+export const CoworksManagementPage = ({ user }: PropsWithUser) => {
   return (
     <SuperadminLayout user={user}>
       <main>
@@ -28,8 +28,8 @@ export const CoworksManagement = ({ user }: PropsWithUser) => {
 
 export const getServerSideProps = protectSuperadminRoute
 
-CoworksManagement.getLayout = function getLayout(page: ReactElement) {
+CoworksManagementPage.getLayout = function getLayout(page: ReactElement) {
   return page
 }
 
-export default CoworksManagement
+export default CoworksManagementPage

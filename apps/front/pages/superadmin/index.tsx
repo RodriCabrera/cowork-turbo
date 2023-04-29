@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { SuperadminLogin } from '@/components/superadmin/SuperadminLogin'
 import { withSessionSsr } from '@/lib/withSession'
+import { Login } from '../../components/Login'
 
-export const Login = () => <SuperadminLogin />
+export const SuperadminLoginPage = () => <Login endpoint="superadmins/login" />
 
 export const getServerSideProps = withSessionSsr(async ({ req }) => {
   const { user } = req.session
@@ -23,8 +23,8 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
   }
 })
 
-Login.getLayout = function getLayout(page: ReactElement) {
+SuperadminLoginPage.getLayout = function getLayout(page: ReactElement) {
   return <SuperadminLayout>{page}</SuperadminLayout>
 }
 
-export default Login
+export default SuperadminLoginPage

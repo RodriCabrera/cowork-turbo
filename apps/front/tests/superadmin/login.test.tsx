@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { SuperadminLogin } from '@/components/superadmin/SuperadminLogin'
+import { Login } from '@/components/Login'
 
 describe('Superadmin Login', () => {
   test('renders the superadmin login form', async () => {
-    const { getByRole, getByText } = render(<SuperadminLogin />)
+    const { getByRole, getByText } = render(<Login endpoint="login" />)
 
     const signInButton = getByRole('button', { name: 'Sign in' })
 

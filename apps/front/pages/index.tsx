@@ -1,7 +1,7 @@
 import { CompanyBanner } from '@/components/CompanyBanner'
 import { Button } from 'ui'
 
-const Landing = () => {
+const LandingPage = () => {
   return (
     <>
       <CompanyBanner />
@@ -10,4 +10,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default LandingPage
