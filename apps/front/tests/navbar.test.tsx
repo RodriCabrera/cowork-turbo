@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { NavBar } from '@/components/NavBar'
+import { NavBar } from '@/components/Layout/NavBar'
 
 describe('User Home', () => {
   test('renders a heading', () => {

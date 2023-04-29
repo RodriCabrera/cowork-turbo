@@ -1,27 +1,18 @@
-import Image from 'next/image'
-
 export const CompanyBanner = () => {
   return (
-    <div>
-      <section className="container mx-2  items-center pb-12 md:px-4 lg:flex">
-        <div>
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA9IYkfamEco4c6HGZwxQ3CB8nGSvrid9wCQ&usqp=CAU"
-            className="mx-10 mt-6 h-80 w-80 rounded-2xl sm:w-10/12 lg:w-full"
-            alt="office-image"
-            width={300}
-            height={300}
-          />
-        </div>
-        <div className="mx-20 flex-1 space-y-4 sm:text-center lg:text-left">
-          <h1 className="text-4xl font-bold text-yellow-500">
-            Bienvenid@s a ...
-          </h1>
-          <p className="max-w-xl leading-relaxed text-gray-500 sm:mx-auto lg:ml-0">
-            Si estas buscando una oficina Coworking, este es tu lugar...
-          </p>
-        </div>
-      </section>
-    </div>
+    <section className="max-w-7xl px-4 pt-6 sm:w-auto md:pt-10">
+      <header
+        className={
+          ' m-1 text-center text-6xl text-gray-900 sm:text-7xl lg:text-8xl'
+        }
+        style={{
+          backgroundImage: 'radial-gradient(#d9f99d 1px, transparent 0)',
+          backgroundSize: '40px 40px',
+          backgroundPosition: '-19px -19px'
+        }}
+      >
+        The future of work is the future of the work
+      </header>
+    </section>
   )
 }

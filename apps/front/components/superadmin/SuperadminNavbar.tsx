@@ -59,7 +59,7 @@ export const SuperadminNavbar = ({ user }: PropsWithUser) => {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
                   <header
-                    className={`${bungee.className} w-1/3 text-2xl sm:text-4xl `}
+                    className={`${bungee.className} w-1/3 text-2xl sm:text-3xl `}
                   >
                     BaseBloom
                   </header>
