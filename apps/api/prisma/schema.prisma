@@ -36,6 +36,8 @@ model User {
   isActive    Boolean  @default(true)
   Review      Review[]
   token       String?
+
+  @@index([companyId])
 }
 
 // TODO add admin relation
@@ -69,6 +71,8 @@ model Cowork {
   rating    Float    @default(0.0)
   Space     Space[]
   Review    Review[]
+
+  @@index([addressId])
 }
 
 // TODO: model availability & shape schema for spaces
@@ -81,6 +85,8 @@ model Space {
   // availability
   // shape
   Review   Review[]
+
+  @@index([coworkId])
 }
 
 model Review {
@@ -93,4 +99,8 @@ model Review {
   authorId String
   rating   Float
   comment  String?
+
+  @@index([coworkId])
+  @@index([spaceId])
+  @@index([authorId])
 }
