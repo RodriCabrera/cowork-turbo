@@ -16,6 +16,10 @@
 			},
 			"User": {
 				"properties": {
+					"token": {
+						"type": "string",
+						"nullable": true
+					},
 					"isActive": {
 						"type": "boolean"
 					},
@@ -48,6 +52,7 @@
 					}
 				},
 				"required": [
+					"token",
 					"isActive",
 					"isValidated",
 					"companyId",
@@ -306,6 +311,98 @@
 						}
 					}
 				]
+			}
+		},
+		"/users/auth": {
+			"post": {
+				"operationId": "Auth",
+				"responses": {
+					"200": {
+						"description": "Authorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Receives user's ID & token and checks if those match the database.",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"token": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id",
+									"token"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/login": {
+			"post": {
+				"operationId": "RequestAuth",
+				"responses": {
+					"200": {
+						"description": "Email sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Send login email to the address given if the user exists",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/companies": {
