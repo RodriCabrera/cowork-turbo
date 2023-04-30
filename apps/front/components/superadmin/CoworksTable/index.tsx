@@ -2,73 +2,52 @@ import React from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
+import { Cowork, Coworks } from 'types'
 
 import { ActionsCell } from './ActionsCell'
+import { loadingPlaceholder } from './placeholders'
 
 const { Cell, Body, Header, Row } = Table
 
-interface Cowork {
-  coworkId: string
-  coworks: string
-  email: string
-  status: string
+interface CoworksTableProps {
+  coworks: Coworks | undefined
+  isLoading: boolean
 }
 
-export const CoworksTable = () => {
-  // TODO: Replace this mocked data:
-  const data = React.useMemo(
-    () => [
-      {
-        coworkId: '781236hgjds',
-        coworks: 'La Maquinita',
-        email: 'info@lmq.com',
-        status: 'Active'
-      },
-      {
-        coworkId: 'ahsdj87123',
-        coworks: 'Huerta',
-        email: 'contact@huertacoworking.com',
-        status: 'Active'
-      },
-      {
-        coworkId: '987asd12',
-        coworks: 'Bionic',
-        email: 'info@bionic.com',
-        status: 'Active'
-      }
-    ],
-    []
-  )
+export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
+  const columns: Column<Cowork & { actions?: string; status?: string }>[] =
+    React.useMemo(
+      () => [
+        {
+          Header: 'coworks',
+          accessor: 'name'
+        },
+        {
+          Header: 'email',
+          accessor: 'email'
+        },
+        {
+          Header: 'status',
+          accessor: 'status',
+          Cell: ({ value }) => (
+            <span className="rounded-full bg-green-200 px-3 py-1 text-xs text-green-600">
+              {value}
+            </span>
+          )
+        },
+        {
+          Header: 'actions',
+          accessor: 'actions',
+          Cell: ({ row }) => <ActionsCell coworkId={row.original.id} />
+        }
+      ],
+      []
+    )
 
-  const columns: Column<Cowork & { actions?: string }>[] = React.useMemo(
-    () => [
-      {
-        Header: 'coworks',
-        accessor: 'coworks'
-      },
-      {
-        Header: 'email',
-        accessor: 'email'
-      },
-      {
-        Header: 'status',
-        accessor: 'status',
-        Cell: ({ value }) => (
-          <span className="rounded-full bg-green-200 px-3 py-1 text-xs text-green-600">
-            {value}
-          </span>
-        )
-      },
-      {
-        Header: 'actions',
-        accessor: 'actions',
-        Cell: ({ row }) => <ActionsCell coworkId={row.original.coworkId} />
-      }
-    ],
-    []
-  )
-
-  const tableInstance = useTable({ columns, data })
+  const tableInstance = useTable({
+    columns,
+    data: isLoading ? loadingPlaceholder : coworks || []
+  })
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance

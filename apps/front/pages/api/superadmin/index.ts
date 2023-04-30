@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import jwt_decode from 'jwt-decode'
 
 import { withSessionRoute } from '@/lib/withSession'
-import { UserData } from 'types'
+import { SuperAdminData } from 'types'
 
 export default withSessionRoute(login)
 
@@ -11,8 +11,8 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
 
   if (typeof access_token !== 'string') return res.end()
 
-  const userData: UserData = jwt_decode(access_token)
-  const { name, mail, iat, ...idAndToken } = userData
+  const superAdminData: SuperAdminData = jwt_decode(access_token)
+  const { name, mail, iat, ...idAndToken } = superAdminData
 
   try {
     const response = await fetch(
@@ -31,7 +31,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     const isAuthOk = (await response.status) === 200
 
     if (isAuthOk) {
-      req.session.user = userData
+      req.session.superadmin = superAdminData
       await req.session.save()
       return res.redirect('/superadmin/coworks')
     }

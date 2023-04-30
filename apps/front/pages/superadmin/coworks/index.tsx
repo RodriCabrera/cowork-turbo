@@ -1,15 +1,26 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
+import { useQuery } from 'react-query'
 
-import { PropsWithUser } from 'types'
+import { Coworks, PropsWithSuperadmin } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { protectSuperadminRoute } from '@/lib/protectSuperadminRoute'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
+import { withSessionSsr } from '@/lib/withSession'
 
-export const CoworksManagementPage = ({ user }: PropsWithUser) => {
+export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
+  const getCoworks = async () => {
+    const coworksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coworks`)
+    return await coworksRes.json()
+  }
+
+  const { isLoading, data: coworks } = useQuery<Coworks>(
+    `${process.env.NEXT_PUBLIC_API_URL}/coworks`,
+    () => getCoworks()
+  )
+
   return (
-    <SuperadminLayout user={user}>
+    <SuperadminLayout superadmin={superadmin}>
       <main>
         <h1 className="text-start text-6xl font-bold">COWORKS</h1>
         <div className="flex justify-end">
@@ -20,13 +31,18 @@ export const CoworksManagementPage = ({ user }: PropsWithUser) => {
             Add Cowork
           </Link>
         </div>
-        <CoworksTable />
+        <CoworksTable coworks={coworks || []} isLoading={isLoading} />
       </main>
     </SuperadminLayout>
   )
 }
 
-export const getServerSideProps = protectSuperadminRoute
+export const getServerSideProps = withSessionSsr(async ({ req }) => {
+  const { superadmin } = req.session
+  return {
+    props: { superadmin }
+  }
+})
 
 CoworksManagementPage.getLayout = function getLayout(page: ReactElement) {
   return page
