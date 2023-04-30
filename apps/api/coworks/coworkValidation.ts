@@ -21,6 +21,26 @@ export default class CoworkValidate {
     email: z.string().email().optional(),
     name: z.string().optional(),
     phone: z.string().optional(),
+    description: z.string().optional(),
+    status: z.enum(['ACTIVE', 'PAUSED', 'CLOSED']).optional(),
+    amenities: z
+      .object({
+        wifi: z.boolean().optional(),
+        bathrooms: z.number().optional(),
+        buffet: z.boolean().optional()
+      })
+      .optional(),
+    openSchedule: z
+      .object({
+        mon: z.string().optional(),
+        tue: z.string().optional(),
+        wed: z.string().optional(),
+        thu: z.string().optional(),
+        fri: z.string().optional(),
+        sat: z.string().optional(),
+        sun: z.string().optional()
+      })
+      .optional(),
     address: z
       .object({
         country: z.string().optional(),

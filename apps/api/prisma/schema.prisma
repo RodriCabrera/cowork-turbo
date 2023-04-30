@@ -12,11 +12,10 @@ datasource db {
 }
 
 model SuperAdmin {
-  id            String   @id @unique @default(cuid())
-  name          String?
-  mail          String   @unique
-  token         String?
-  editedCoworks Cowork[]
+  id    String  @id @unique @default(cuid())
+  name  String?
+  mail  String  @unique
+  token String?
 }
 
 enum Role {
@@ -83,35 +82,33 @@ model OpenSchedule {
 // TODO: expand / check specificity
 model CoworkAmenities {
   id        String   @id @unique @default(cuid())
-  wifi      Boolean
-  bathrooms Int
-  buffet    Boolean
+  wifi      Boolean?
+  bathrooms Int?
+  buffet    Boolean?
   Cowork    Cowork[]
 }
 
 model Cowork {
-  id             String          @id @unique @default(cuid())
-  address        Address         @relation(fields: [addressId], references: [id])
-  addressId      String          @unique
-  name           String          @unique
+  id             String           @id @unique @default(cuid())
+  address        Address          @relation(fields: [addressId], references: [id])
+  addressId      String           @unique
+  name           String           @unique
   email          String?
-  description    String
-  status         Status          @default(ACTIVE)
+  description    String?
+  status         Status           @default(ACTIVE)
   phone          String?
-  openSchedule   OpenSchedule?   @relation(fields: [openScheduleId], references: [id])
-  amenities      CoworkAmenities @relation(fields: [amenitiesId], references: [id])
-  rating         Float           @default(0.0)
+  openSchedule   OpenSchedule?    @relation(fields: [openScheduleId], references: [id])
+  amenities      CoworkAmenities? @relation(fields: [amenitiesId], references: [id])
+  rating         Float            @default(0.0)
   Space          Space[]
   Review         Review[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  updatedBy      SuperAdmin      @relation(fields: [superAdminId], references: [id])
-  superAdminId   String
-  openScheduleId String?         @unique
-  amenitiesId    String          @unique
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  updatedBy      String
+  openScheduleId String?          @unique
+  amenitiesId    String           @unique
 
   @@index([addressId])
-  @@index([superAdminId])
   @@index([openScheduleId])
   @@index([amenitiesId])
 }

@@ -66,7 +66,7 @@ export default class UserService {
         html: loginTemplate(
           `${user.firstName} ${user.lastName}`,
           userJWT,
-          user.rol
+          user.role
         )
       })
       return true
