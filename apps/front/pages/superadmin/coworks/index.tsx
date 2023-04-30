@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
+import { useQuery } from 'react-query'
 
 import { Coworks, PropsWithSuperadmin } from 'types'
 
@@ -7,10 +8,17 @@ import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
 import { withSessionSsr } from '@/lib/withSession'
 
-export const CoworksManagementPage = ({
-  superadmin,
-  coworks
-}: PropsWithSuperadmin<{ coworks: Coworks }>) => {
+export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
+  const getCoworks = async () => {
+    const coworksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coworks`)
+    return await coworksRes.json()
+  }
+
+  const { isLoading, data: coworks } = useQuery<Coworks>(
+    `${process.env.NEXT_PUBLIC_API_URL}/coworks`,
+    () => getCoworks()
+  )
+
   return (
     <SuperadminLayout superadmin={superadmin}>
       <main>
@@ -23,21 +31,16 @@ export const CoworksManagementPage = ({
             Add Cowork
           </Link>
         </div>
-        <CoworksTable coworks={coworks} />
+        <CoworksTable coworks={coworks || []} isLoading={isLoading} />
       </main>
     </SuperadminLayout>
   )
 }
 
 export const getServerSideProps = withSessionSsr(async ({ req }) => {
-  // The superadmin comes from the iron session
   const { superadmin } = req.session
-  // Fetch the coworks:
-  const coworksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coworks`)
-  const coworks = await coworksRes.json()
-
   return {
-    props: { superadmin, coworks }
+    props: { superadmin }
   }
 })
 

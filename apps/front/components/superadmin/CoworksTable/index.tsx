@@ -5,10 +5,16 @@ import { Table } from 'ui'
 import { Cowork, Coworks } from 'types'
 
 import { ActionsCell } from './ActionsCell'
+import { loadingPlaceholder } from './placeholders'
 
 const { Cell, Body, Header, Row } = Table
 
-export const CoworksTable = ({ coworks }: { coworks: Coworks }) => {
+interface CoworksTableProps {
+  coworks: Coworks | undefined
+  isLoading: boolean
+}
+
+export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
   const columns: Column<Cowork & { actions?: string; status?: string }>[] =
     React.useMemo(
       () => [
@@ -38,7 +44,10 @@ export const CoworksTable = ({ coworks }: { coworks: Coworks }) => {
       []
     )
 
-  const tableInstance = useTable({ columns, data: coworks })
+  const tableInstance = useTable({
+    columns,
+    data: isLoading ? loadingPlaceholder : coworks || []
+  })
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
