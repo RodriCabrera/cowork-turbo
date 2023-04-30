@@ -1,12 +1,12 @@
 import { ReactElement } from 'react'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { PropsWithUser } from 'types'
-import { protectSuperadminRoute } from '@/lib/protectSuperadminRoute'
+import { PropsWithSuperadmin } from 'types'
+import { getSuperAdminData } from '@/lib/superadmin'
 
-export const AnalyticsPage = ({ user }: PropsWithUser) => {
+export const AnalyticsPage = ({ superadmin }: PropsWithSuperadmin) => {
   return (
-    <SuperadminLayout user={user}>
+    <SuperadminLayout superadmin={superadmin}>
       <main>
         <h1 className="text-start text-6xl font-bold">ANALYTICSPage</h1>
       </main>
@@ -14,7 +14,7 @@ export const AnalyticsPage = ({ user }: PropsWithUser) => {
   )
 }
 
-export const getServerSideProps = protectSuperadminRoute
+export const getServerSideProps = getSuperAdminData
 
 AnalyticsPage.getLayout = function getLayout(page: ReactElement) {
   return page

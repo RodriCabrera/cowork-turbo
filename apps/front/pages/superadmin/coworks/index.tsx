@@ -1,15 +1,18 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
 
-import { PropsWithUser } from 'types'
+import { Coworks, PropsWithSuperadmin } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { protectSuperadminRoute } from '@/lib/protectSuperadminRoute'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
+import { withSessionSsr } from '@/lib/withSession'
 
-export const CoworksManagementPage = ({ user }: PropsWithUser) => {
+export const CoworksManagementPage = ({
+  superadmin,
+  coworks
+}: PropsWithSuperadmin<{ coworks: Coworks }>) => {
   return (
-    <SuperadminLayout user={user}>
+    <SuperadminLayout superadmin={superadmin}>
       <main>
         <h1 className="text-start text-6xl font-bold">COWORKS</h1>
         <div className="flex justify-end">
@@ -20,13 +23,23 @@ export const CoworksManagementPage = ({ user }: PropsWithUser) => {
             Add Cowork
           </Link>
         </div>
-        <CoworksTable />
+        <CoworksTable coworks={coworks} />
       </main>
     </SuperadminLayout>
   )
 }
 
-export const getServerSideProps = protectSuperadminRoute
+export const getServerSideProps = withSessionSsr(async ({ req }) => {
+  // The superadmin comes from the iron session
+  const { superadmin } = req.session
+  // Fetch the coworks:
+  const coworksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coworks`)
+  const coworks = await coworksRes.json()
+
+  return {
+    props: { superadmin, coworks }
+  }
+})
 
 CoworksManagementPage.getLayout = function getLayout(page: ReactElement) {
   return page

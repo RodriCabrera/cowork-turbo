@@ -1,13 +1,15 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-import { PropsWithUser } from 'types'
-import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
+import { PropsWithSuperadmin } from 'types'
 
-export const NewCoworkPage = ({ user }: PropsWithUser) => {
+import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
+import { getSuperAdminData } from '@/lib/superadmin'
+
+export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
   return (
-    <SuperadminLayout user={user}>
+    <SuperadminLayout superadmin={superadmin}>
       <div>
         <button type="button" onClick={() => router.back()}>
           Click here to go back
@@ -18,8 +20,8 @@ export const NewCoworkPage = ({ user }: PropsWithUser) => {
   )
 }
 
-NewCoworkPage.getLayout = function getLayout(page: ReactElement) {
-  return page
-}
+export const getServerSideProps = getSuperAdminData
+
+NewCoworkPage.getLayout = (page: ReactElement) => page
 
 export default NewCoworkPage

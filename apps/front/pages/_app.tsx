@@ -6,7 +6,7 @@ import '../styles/globals.css'
 
 import { Layout } from '@/components/Layout'
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
