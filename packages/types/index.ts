@@ -4,7 +4,6 @@ export interface SuperAdminData {
   mail: string
   token: string
   iat: string
-  role: string
 }
 
 export type PropsWithSuperadmin<P = unknown> = P & {
