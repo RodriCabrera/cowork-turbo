@@ -101,7 +101,7 @@ export default class UserService {
         ERROR_CODES.TokenExpiredOrInvalid
       )
     } catch (err) {
-      throw PrismaErrors.parseError(err, 'Superadmin')
+      throw PrismaErrors.parseError(err, 'User')
     } finally {
       this._client.$disconnect()
     }
