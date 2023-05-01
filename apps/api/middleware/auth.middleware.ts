@@ -23,8 +23,9 @@ export default class Auth {
   }
 
   private static _getAuthTokenFromHeader(req: Request) {
-    const token = req.headers['authorization']
-    if (!token) throw new Error('No authorization token was found')
+    const bearerToken = req.headers['authorization']
+    if (!bearerToken) throw new Error('No authorization token was found')
+    const token = bearerToken.split(' ')[1]
     return token
   }
 
@@ -41,7 +42,7 @@ export default class Auth {
     try {
       const token = Auth._verifyToken(req) as JwtPayload
       if (Object.hasOwn(token, 'id')) {
-        const superadmin = await this._client.superAdmin.findUniqueOrThrow({
+        const superadmin = await Auth._client.superAdmin.findUniqueOrThrow({
           where: { id: token.id }
         })
         req.user = {
