@@ -5,7 +5,7 @@ import { Table } from 'ui'
 import { Cowork, Coworks } from 'types'
 
 import { ActionsCell } from './ActionsCell'
-import { loadingPlaceholder } from './placeholders'
+import { Placeholder } from './Placeholder'
 
 const { Cell, Body, Header, Row } = Table
 
@@ -46,7 +46,7 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
 
   const tableInstance = useTable({
     columns,
-    data: isLoading ? loadingPlaceholder : coworks || []
+    data: coworks || []
   })
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -93,6 +93,7 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
               </thead>
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
+                {coworks?.length === 0 && <Placeholder isLoading={isLoading} />}
                 {
                   // Loop over the table rows
                   rows.map((row) => {
