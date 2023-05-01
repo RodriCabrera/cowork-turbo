@@ -1,7 +1,19 @@
-import { Tags, Route, Get, Path, Put, Post, Delete, Body, Response } from 'tsoa'
+import {
+  Tags,
+  Route,
+  Get,
+  Path,
+  Put,
+  Post,
+  Delete,
+  Body,
+  Response,
+  Request as tsoaReq
+} from 'tsoa'
 import CoworkService from './coworkService'
 import { CreateCoworkInput, EditCoworkInput } from './coworkTypes'
 import CustomError from '../errors/customError'
+import { Request } from 'express'
 
 @Route('coworks')
 @Tags('Coworks')
@@ -37,8 +49,11 @@ export default class CoworkController {
    */
   @Response<CustomError>(406, 'Input data not valid')
   @Post('/')
-  static async create(@Body() data: CreateCoworkInput) {
-    return CoworkService.createCowork(data)
+  static async create(
+    @Body() data: CreateCoworkInput,
+    @tsoaReq() req: Request
+  ) {
+    return CoworkService.createCowork(data, req.user?.id || 'anon')
   }
 
   @Response<CustomError>(404, 'Cowork not found')

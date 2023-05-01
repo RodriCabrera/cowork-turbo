@@ -106,7 +106,8 @@
 			"Cowork": {
 				"properties": {
 					"amenitiesId": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"openScheduleId": {
 						"type": "string",

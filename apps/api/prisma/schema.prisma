@@ -106,7 +106,7 @@ model Cowork {
   updatedAt      DateTime         @updatedAt
   updatedBy      String
   openScheduleId String?          @unique
-  amenitiesId    String           @unique
+  amenitiesId    String?          @unique
 
   @@index([addressId])
   @@index([openScheduleId])

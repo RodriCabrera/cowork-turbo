@@ -30,7 +30,7 @@ coworkRoutes.put('/:id', Auth.authorizeSuperAdmin, async (req, res, next) => {
 })
 coworkRoutes.post('/', Auth.authorizeSuperAdmin, async (req, res, next) => {
   try {
-    const response = await CoworkController.create(req.body)
+    const response = await CoworkController.create(req.body, req)
     res.send(response)
   } catch (err) {
     next(err)
