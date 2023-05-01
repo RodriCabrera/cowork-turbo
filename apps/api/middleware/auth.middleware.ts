@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Role } from '@prisma/client'
 import { verify, JwtPayload } from 'jsonwebtoken'
 import CustomError, { ERROR_CODES } from '../errors/customError'
 import {
@@ -36,7 +36,7 @@ export default class Auth {
 
   static async authorizeSuperAdmin(
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
   ) {
     try {
@@ -58,10 +58,50 @@ export default class Auth {
     }
   }
 
-  static async authorizeUser(req: Request, res: Response, next: NextFunction) {}
+  static async authorizeUser(req: Request, _res: Response, next: NextFunction) {
+    try {
+      const token = Auth._verifyToken(req) as JwtPayload
+      if (Object.hasOwn(token, 'id')) {
+        const user = await Auth._client.user.findUniqueOrThrow({
+          where: { id: token.id }
+        })
+        req.user = {
+          role: 'user',
+          id: user.id
+        }
+        return next()
+      }
+      throw new Error('No property id was found on auth token')
+    } catch (err) {
+      const authError = Auth._createAuthError(err)
+      return next(authError)
+    }
+  }
+
   static async authorizeAdmin(
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
-  ) {}
+  ) {
+    try {
+      const token = Auth._verifyToken(req) as JwtPayload
+      if (Object.hasOwn(token, 'id')) {
+        const user = await Auth._client.user.findUniqueOrThrow({
+          where: { id: token.id }
+        })
+        if (user.role !== Role.ADMIN) {
+          throw new Error('Admin credentials required')
+        }
+        req.user = {
+          role: 'admin',
+          id: user.id
+        }
+        return next()
+      }
+      throw new Error('No property id was found on auth token')
+    } catch (err) {
+      const authError = Auth._createAuthError(err)
+      return next(authError)
+    }
+  }
 }
