@@ -29,22 +29,24 @@ model User {
   lastName    String?
   mail        String   @unique
   password    String?
-  rol         Role     @default(EMPLEADO)
+  role        Role     @default(EMPLEADO)
   company     Company  @relation(fields: [companyId], references: [id])
   companyId   String
   isValidated Boolean  @default(false)
   isActive    Boolean  @default(true)
   Review      Review[]
   token       String?
+
+  @@index([companyId])
 }
 
-// TODO add admin relation
 model Company {
   id        String @id @unique @default(cuid())
   name      String
   employees User[]
-  creditos  Int    @default(0)
+  credits   Int    @default(0)
   email     String
+  userId    String
 }
 
 model Address {
@@ -59,28 +61,81 @@ model Address {
   Cowork     Cowork[]
 }
 
-model Cowork {
+enum Status {
+  ACTIVE
+  PAUSED
+  CLOSED
+}
+
+model OpenSchedule {
+  id     String   @id @unique @default(cuid())
+  mon    String?
+  tue    String?
+  wed    String?
+  thu    String?
+  fri    String?
+  sat    String?
+  sun    String?
+  Cowork Cowork[]
+}
+
+// TODO: expand / check specificity
+model CoworkAmenities {
   id        String   @id @unique @default(cuid())
-  address   Address  @relation(fields: [addressId], references: [id])
-  addressId String
-  name      String   @unique
-  email     String?
-  phone     String?
-  rating    Float    @default(0.0)
-  Space     Space[]
-  Review    Review[]
+  wifi      Boolean?
+  bathrooms Int?
+  buffet    Boolean?
+  Cowork    Cowork[]
+}
+
+model Cowork {
+  id             String           @id @unique @default(cuid())
+  address        Address          @relation(fields: [addressId], references: [id])
+  addressId      String           @unique
+  name           String           @unique
+  email          String?
+  description    String?
+  status         Status           @default(ACTIVE)
+  phone          String?
+  openSchedule   OpenSchedule?    @relation(fields: [openScheduleId], references: [id])
+  amenities      CoworkAmenities? @relation(fields: [amenitiesId], references: [id])
+  rating         Float            @default(0.0)
+  Space          Space[]
+  Review         Review[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  updatedBy      String
+  openScheduleId String?          @unique
+  amenitiesId    String           @unique
+
+  @@index([addressId])
+  @@index([openScheduleId])
+  @@index([amenitiesId])
+}
+
+// TODO: expand / check specificity
+model SpaceAmenities {
+  id     String  @id @unique @default(cuid())
+  chairs Int
+  size   String
+  Space  Space[]
 }
 
 // TODO: model availability & shape schema for spaces
 model Space {
-  id       String   @id @unique @default(cuid())
-  cowork   Cowork   @relation(fields: [coworkId], references: [id])
-  coworkId String
-  capacity Int
-  price    Float
-  // availability
-  // shape
-  Review   Review[]
+  id               String         @id @unique @default(cuid())
+  cowork           Cowork         @relation(fields: [coworkId], references: [id])
+  coworkId         String
+  capacity         Int
+  price            Float
+  amenities        SpaceAmenities @relation(fields: [spaceAmenitiesId], references: [id])
+  // availability                 // <-- maybe a JSON?
+  // shape                      // <-- url? JSON?
+  Review           Review[]
+  spaceAmenitiesId String
+
+  @@index([coworkId])
+  @@index([spaceAmenitiesId])
 }
 
 model Review {
@@ -93,4 +148,8 @@ model Review {
   authorId String
   rating   Float
   comment  String?
+
+  @@index([coworkId])
+  @@index([spaceId])
+  @@index([authorId])
 }

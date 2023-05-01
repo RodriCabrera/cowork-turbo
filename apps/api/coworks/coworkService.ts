@@ -9,11 +9,13 @@ export default class CoworkService {
   static async createCowork(data: CreateCoworkInput): Promise<Cowork> {
     try {
       const parsedData = CoworkValidate.validateCreate(data)
+      const superAdmin = await this._client.superAdmin.findFirst() // TODO: Change with superadmin auth name
       return await this._client.cowork.create({
         data: {
           email: parsedData.email,
           name: parsedData.name,
           phone: parsedData.phone,
+          updatedBy: superAdmin.name,
           address: {
             create: {
               apartment: parsedData.address?.apartment,
@@ -72,10 +74,24 @@ export default class CoworkService {
           phone: parsedData.phone,
           address: {
             update: { ...parsedData.address }
+          },
+          amenities: {
+            upsert: {
+              update: { ...parsedData.amenities },
+              create: { ...parsedData.amenities }
+            }
+          },
+          openSchedule: {
+            upsert: {
+              update: { ...parsedData.openSchedule },
+              create: { ...parsedData.openSchedule }
+            }
           }
         },
         include: {
-          address: true
+          address: true,
+          openSchedule: true,
+          amenities: true
         }
       })
     } catch (err) {
