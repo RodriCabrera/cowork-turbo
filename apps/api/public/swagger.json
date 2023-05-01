@@ -340,7 +340,13 @@
 				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"bearer_token": {
+				"type": "jwt",
+				"name": "token",
+				"in": "headers"
+			}
+		}
 	},
 	"info": {
 		"title": "Cowork API",
@@ -613,6 +619,16 @@
 							}
 						}
 					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
 					"406": {
 						"description": "Input data not valid",
 						"content": {
@@ -627,7 +643,11 @@
 				"tags": [
 					"Coworks"
 				],
-				"security": [],
+				"security": [
+					{
+						"": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"description": "CreateCoworkInput",
@@ -696,6 +716,16 @@
 							}
 						}
 					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
 					"404": {
 						"description": "Cowork not found",
 						"content": {
@@ -720,7 +750,11 @@
 				"tags": [
 					"Coworks"
 				],
-				"security": [],
+				"security": [
+					{
+						"": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -757,6 +791,16 @@
 							}
 						}
 					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
 					"404": {
 						"description": "Cowork not found",
 						"content": {
@@ -771,7 +815,11 @@
 				"tags": [
 					"Coworks"
 				],
-				"security": [],
+				"security": [
+					{
+						"": []
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
