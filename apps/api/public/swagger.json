@@ -29,7 +29,7 @@
 					"companyId": {
 						"type": "string"
 					},
-					"rol": {
+					"role": {
 						"$ref": "#/components/schemas/Role"
 					},
 					"password": {
@@ -56,7 +56,7 @@
 					"isActive",
 					"isValidated",
 					"companyId",
-					"rol",
+					"role",
 					"password",
 					"mail",
 					"lastName",
@@ -68,10 +68,13 @@
 			},
 			"Company": {
 				"properties": {
+					"userId": {
+						"type": "string"
+					},
 					"email": {
 						"type": "string"
 					},
-					"creditos": {
+					"credits": {
 						"type": "number",
 						"format": "double"
 					},
@@ -83,21 +86,55 @@
 					}
 				},
 				"required": [
+					"userId",
 					"email",
-					"creditos",
+					"credits",
 					"name",
 					"id"
 				],
 				"type": "object",
 				"description": "Model Company"
 			},
+			"Status": {
+				"type": "string",
+				"enum": [
+					"ACTIVE",
+					"PAUSED",
+					"CLOSED"
+				]
+			},
 			"Cowork": {
 				"properties": {
+					"amenitiesId": {
+						"type": "string"
+					},
+					"openScheduleId": {
+						"type": "string",
+						"nullable": true
+					},
+					"updatedBy": {
+						"type": "string"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"rating": {
 						"type": "number",
 						"format": "double"
 					},
 					"phone": {
+						"type": "string",
+						"nullable": true
+					},
+					"status": {
+						"$ref": "#/components/schemas/Status"
+					},
+					"description": {
 						"type": "string",
 						"nullable": true
 					},
@@ -116,8 +153,15 @@
 					}
 				},
 				"required": [
+					"amenitiesId",
+					"openScheduleId",
+					"updatedBy",
+					"updatedAt",
+					"createdAt",
 					"rating",
 					"phone",
+					"status",
+					"description",
 					"email",
 					"name",
 					"addressId",
@@ -181,6 +225,58 @@
 							}
 						},
 						"type": "object"
+					},
+					"openSchedule": {
+						"properties": {
+							"sun": {
+								"type": "string"
+							},
+							"sat": {
+								"type": "string"
+							},
+							"fri": {
+								"type": "string"
+							},
+							"thu": {
+								"type": "string"
+							},
+							"wed": {
+								"type": "string"
+							},
+							"tue": {
+								"type": "string"
+							},
+							"mon": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"amenities": {
+						"properties": {
+							"buffet": {
+								"type": "boolean"
+							},
+							"bathrooms": {
+								"type": "number",
+								"format": "double"
+							},
+							"wifi": {
+								"type": "boolean"
+							}
+						},
+						"type": "object"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
+					},
+					"description": {
+						"type": "string"
 					},
 					"phone": {
 						"type": "string"
@@ -313,6 +409,50 @@
 				]
 			}
 		},
+		"/users/login": {
+			"post": {
+				"operationId": "RequestAuth",
+				"responses": {
+					"200": {
+						"description": "Email sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Send login email to the address given if the user exists",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/users/auth": {
 			"post": {
 				"operationId": "Auth",
@@ -353,50 +493,6 @@
 								"required": [
 									"id",
 									"token"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/users/login": {
-			"post": {
-				"operationId": "RequestAuth",
-				"responses": {
-					"200": {
-						"description": "Email sent",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "boolean"
-								}
-							}
-						}
-					},
-					"401": {
-						"description": "Unauthorized"
-					}
-				},
-				"description": "Send login email to the address given if the user exists",
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"email"
 								],
 								"type": "object"
 							}

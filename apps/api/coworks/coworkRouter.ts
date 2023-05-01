@@ -1,7 +1,10 @@
 import { Router } from 'express'
 import CoworkController from './coworkController'
+import Auth from '../middleware/auth.middleware'
 
 const coworkRoutes = Router()
+
+coworkRoutes.use(Auth.authorizeSuperAdmin)
 
 coworkRoutes.get('/', async (req, res, next) => {
   try {
