@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import { bungee } from '@/styles/fonts'
+import { bungeeHairline } from '@/styles/fonts'
 import { FiMenu } from 'react-icons/fi'
 
 const dropdownOptions = [
@@ -27,7 +27,10 @@ export function NavBar() {
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <header>
-              <Link href="/" className={`${bungee.className} h-16 text-3xl`}>
+              <Link
+                href="/"
+                className={`${bungeeHairline.className} h-16 text-3xl`}
+              >
                 BaseBloom
               </Link>
             </header>

@@ -7,7 +7,7 @@ import { RiCloseLine } from 'react-icons/ri'
 
 import { PropsWithSuperadmin } from 'types'
 
-import { bungee } from '@/styles/fonts'
+import { bungee, bungeeOutline } from '@/styles/fonts'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
@@ -61,7 +61,7 @@ export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
                 <div className="flex shrink-0 items-center">
                   <Link href={'/superadmin/coworks'}>
                     <header
-                      className={`${bungee.className} w-1/3 text-2xl sm:text-3xl `}
+                      className={`${bungeeOutline.className} w-1/3 text-2xl sm:text-3xl `}
                     >
                       BaseBloom
                     </header>

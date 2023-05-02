@@ -1,4 +1,4 @@
-import { AboutBanner } from '@/components/AboutBanner'
+import { AboutBanner } from '@/components/banners/AboutBanner'
 import React from 'react'
 
 export const AboutPage = () => {
