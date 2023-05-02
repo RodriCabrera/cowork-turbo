@@ -15,6 +15,7 @@ export const UserManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
           <p>USER ID: {superadmin?.id}</p>
           <p>USER MAIL: {superadmin?.mail}</p>
           <p>USER NAME: {superadmin?.name}</p>
+          <p>token: {superadmin?.token}</p>
           <p>Issued at: {superadmin?.iat}</p>
         </div>
       </main>
