@@ -7,7 +7,8 @@ export const ERROR_CODES = {
   PrismaMissingValue: 'prisma_error_missing_value',
   PrismaValueNotValid: 'prisma_error_invalid_value',
   PrismaUnhandledError: 'prisma_error_unknown',
-  ZodInvalidType: 'zod_error_invalid_type'
+  ZodInvalidType: 'zod_error_invalid_type',
+  Unauthorized: 'auth_error_unauthorized'
 } as const
 
 type ErrorCodeKeys = keyof typeof ERROR_CODES

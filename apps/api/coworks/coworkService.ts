@@ -6,16 +6,18 @@ import CoworkValidate from './coworkValidation'
 export default class CoworkService {
   private static _client = new PrismaClient()
 
-  static async createCowork(data: CreateCoworkInput): Promise<Cowork> {
+  static async createCowork(
+    data: CreateCoworkInput,
+    author: string
+  ): Promise<Cowork> {
     try {
       const parsedData = CoworkValidate.validateCreate(data)
-      const superAdmin = await this._client.superAdmin.findFirst() // TODO: Change with superadmin auth name
       return await this._client.cowork.create({
         data: {
           email: parsedData.email,
           name: parsedData.name,
           phone: parsedData.phone,
-          updatedBy: superAdmin.name,
+          updatedBy: author,
           address: {
             create: {
               apartment: parsedData.address?.apartment,
