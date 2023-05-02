@@ -72,6 +72,7 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
           </label>
 
           <label className="flex flex-col">
+            <p className="py-2">Phone number</p>
             <input className="p-2" {...register('phone')} type="tel" />
           </label>
 
