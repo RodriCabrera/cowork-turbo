@@ -85,7 +85,6 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
                 {...register('address.country', { required: true })}
               />
             </label>
-
             <label className="flex flex-col">
               <p className="py-2">City</p>
               <input
@@ -93,7 +92,6 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
                 {...register('address.city', { required: true })}
               />
             </label>
-
             <label className="flex flex-col">
               <p className="py-2">Street</p>
               <input
@@ -101,12 +99,11 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
                 {...register('address.street', { required: true })}
               />
             </label>
-
             <label className="flex flex-col">
               <p className="py-2">Number</p>
               <input
                 className="p-2"
-                {...register('address.street', { required: true })}
+                {...register('address.number', { required: true })}
               />
             </label>
           </div>
@@ -116,7 +113,6 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
               <p className="py-2">Floor</p>
               <input className="p-2" {...register('address.floor')} />
             </label>
-
             <label className="flex flex-col">
               <p className="py-2">Apartment</p>
               <input
@@ -124,21 +120,12 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
                 {...register('address.apartment', { required: true })}
               />
             </label>
-
             <label className="flex flex-col">
               <p className="py-2">Postal Code</p>
-              <input className="p-2" {...register('address.street')} />
+              <input className="p-2" {...register('address.postalCode')} />
             </label>
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row"></div>
-          {/* country: z.string(),
-      city: z.string(),
-      streetName: z.string(),
-      number: z.string(),
-      floor: z.string().optional(),
-      apartment: z.string().optional(),
-      postalCode: z.string().optional() */}
           <input
             type="submit"
             className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
