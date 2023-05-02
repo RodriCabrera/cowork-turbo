@@ -18,6 +18,7 @@ export default class CoworkService {
           name: parsedData.name,
           phone: parsedData.phone,
           updatedBy: author,
+          description: parsedData.description,
           address: {
             create: {
               apartment: parsedData.address?.apartment,
