@@ -75,7 +75,70 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
             <p className="py-2">Phone number</p>
             <input className="p-2" {...register('phone')} type="tel" />
           </label>
+          <p className="text-lg">Address Information</p>
 
+          <div className="flex w-full flex-col gap-6 md:flex-row">
+            <label className="flex flex-col">
+              <p className="py-2">Country</p>
+              <input
+                className="p-2"
+                {...register('address.country', { required: true })}
+              />
+            </label>
+
+            <label className="flex flex-col">
+              <p className="py-2">City</p>
+              <input
+                className="p-2"
+                {...register('address.city', { required: true })}
+              />
+            </label>
+
+            <label className="flex flex-col">
+              <p className="py-2">Street</p>
+              <input
+                className="p-2"
+                {...register('address.street', { required: true })}
+              />
+            </label>
+
+            <label className="flex flex-col">
+              <p className="py-2">Number</p>
+              <input
+                className="p-2"
+                {...register('address.street', { required: true })}
+              />
+            </label>
+          </div>
+
+          <div className="flex w-full flex-col gap-6 sm:flex-row">
+            <label className="flex flex-col">
+              <p className="py-2">Floor</p>
+              <input className="p-2" {...register('address.floor')} />
+            </label>
+
+            <label className="flex flex-col">
+              <p className="py-2">Apartment</p>
+              <input
+                className="p-2"
+                {...register('address.apartment', { required: true })}
+              />
+            </label>
+
+            <label className="flex flex-col">
+              <p className="py-2">Postal Code</p>
+              <input className="p-2" {...register('address.street')} />
+            </label>
+          </div>
+
+          <div className="flex flex-col gap-6 md:flex-row"></div>
+          {/* country: z.string(),
+      city: z.string(),
+      streetName: z.string(),
+      number: z.string(),
+      floor: z.string().optional(),
+      apartment: z.string().optional(),
+      postalCode: z.string().optional() */}
           <input
             type="submit"
             className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
