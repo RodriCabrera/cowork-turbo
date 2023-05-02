@@ -6,6 +6,7 @@ export default class CoworkValidate {
     email: z.string().email(),
     name: z.string(),
     phone: z.string(),
+    description: z.string(),
     address: z.object({
       country: z.string(),
       city: z.string(),
