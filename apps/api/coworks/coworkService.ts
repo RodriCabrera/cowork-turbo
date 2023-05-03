@@ -1,6 +1,6 @@
 import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
-import { EditCoworkInput, CreateCoworkInput } from './coworkTypes'
+import { EditCoworkInput, CreateCoworkInput, CoworkFull } from './coworkTypes'
 import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
@@ -39,11 +39,13 @@ export default class CoworkService {
     }
   }
 
-  static async fetchAll(): Promise<Cowork[]> {
+  static async fetchAll(): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({
         include: {
-          address: true
+          address: true,
+          amenities: true,
+          openSchedule: true
         }
       })
     } catch (err) {
@@ -52,12 +54,14 @@ export default class CoworkService {
     }
   }
 
-  static async fetchById(id: string): Promise<Cowork> {
+  static async fetchById(id: string): Promise<CoworkFull> {
     try {
       return await this._client.cowork.findUniqueOrThrow({
         where: { id },
         include: {
-          address: true
+          address: true,
+          amenities: true,
+          openSchedule: true
         }
       })
     } catch (err) {
@@ -66,7 +70,7 @@ export default class CoworkService {
     }
   }
 
-  static async edit(id: string, data: EditCoworkInput): Promise<Cowork> {
+  static async edit(id: string, data: EditCoworkInput): Promise<CoworkFull> {
     try {
       const parsedData = CoworkValidate.validateEdit(data)
       return await this._client.cowork.update({
