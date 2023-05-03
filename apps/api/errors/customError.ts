@@ -17,11 +17,11 @@ export type ErrorCode = (typeof ERROR_CODES)[ErrorCodeKeys]
 export default class CustomError extends Error {
   status: ErrorInterface['status']
   message: ErrorInterface['message']
-  code: ErrorInterface['code']
+  code?: ErrorInterface['code']
 
   constructor(
     message: ErrorInterface['message'],
-    status?: ErrorInterface['status'],
+    status: ErrorInterface['status'],
     code?: ErrorInterface['code']
   ) {
     super()

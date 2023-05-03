@@ -323,6 +323,9 @@
 						},
 						"type": "object"
 					},
+					"description": {
+						"type": "string"
+					},
 					"phone": {
 						"type": "string"
 					},
@@ -340,13 +343,7 @@
 				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
 			}
 		},
-		"securitySchemes": {
-			"bearer_token": {
-				"type": "jwt",
-				"name": "token",
-				"in": "headers"
-			}
-		}
+		"securitySchemes": {}
 	},
 	"info": {
 		"title": "Cowork API",
