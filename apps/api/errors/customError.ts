@@ -21,7 +21,7 @@ export default class CustomError extends Error {
 
   constructor(
     message: ErrorInterface['message'],
-    status?: ErrorInterface['status'],
+    status: ErrorInterface['status'],
     code?: ErrorInterface['code']
   ) {
     super()
