@@ -6,10 +6,6 @@ export interface SuperAdminData {
   iat: string
 }
 
-export type PropsWithSuperadmin<P = unknown> = P & {
-  superadmin?: SuperAdminData | undefined
-}
-
 interface Address {
   apartment: string
   city: string
@@ -30,5 +26,3 @@ export interface Cowork {
   phone: string
   rating: number
 }
-
-export type Coworks = Cowork[]

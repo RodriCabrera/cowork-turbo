@@ -1,8 +1,7 @@
 import { PropsWithChildren } from 'react'
 
-import { PropsWithSuperadmin } from 'types'
-
 import { SuperadminNavbar } from './SuperadminNavbar'
+import { PropsWithSuperadmin } from '@/types/superadmin'
 
 export const SuperadminLayout = ({
   children,
