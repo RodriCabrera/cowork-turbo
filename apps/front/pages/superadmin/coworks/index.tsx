@@ -2,11 +2,12 @@ import { ReactElement } from 'react'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 
-import { Coworks, PropsWithSuperadmin } from 'types'
+import { Cowork } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
 import { withSessionSsr } from '@/lib/withSession'
+import { PropsWithSuperadmin } from '@/types/superadmin'
 
 export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
   const getCoworks = async () => {
@@ -14,7 +15,7 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
     return await coworksRes.json()
   }
 
-  const { isLoading, data: coworks } = useQuery<Coworks>(
+  const { isLoading, data: coworks } = useQuery<Cowork[]>(
     `${process.env.NEXT_PUBLIC_API_URL}/coworks`,
     () => getCoworks()
   )

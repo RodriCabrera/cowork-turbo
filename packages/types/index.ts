@@ -1,11 +1,11 @@
 /*
   Proposed naming style for api/web com types -> {
-    1) first letter indicates if its input or output (I/O)
-    2) Referenced model or type name
-    3) Verb for the http method or similar (Post, Create, Delete)
+    1) Referenced model or type name
+    2) Verb for the http method or similar (Post, Create, Delete)
+    3) Req / Res to indicate type origin
   }
-  ie: ICoworkEdit  => expected input type to edit (put request) a cowork
-      OCompanyCreate => return type on creating a company
+  ie: CoworkEditReq  => expected input type to edit (put request) a cowork
+      CompanyCreateRes => return type on creating a company
 */
 
 import {
@@ -21,11 +21,6 @@ export interface SuperAdminData {
   mail: string
   token: string
   iat: string
-}
-
-// Should we separate shared types and workspace specific types?
-export type PropsWithSuperadmin<P = unknown> = P & {
-  superadmin?: SuperAdminData | undefined
 }
 
 interface Address {
@@ -49,10 +44,7 @@ export interface Cowork {
   rating: number
 }
 
-// Should we avoid plurals and just use the Cowork[] directly?
-export type Coworks = Cowork[]
-
-export type ICoworkCreate = CreateCoworkInput
-export type ICoworkEdit = EditCoworkInput
-export type OCoworkGetFull = CoworkFull
-export type OErrorAll = ErrorInterface
+export type CoworkCreateReq = CreateCoworkInput
+export type CoworkEditReq = EditCoworkInput
+export type CoworkFullGetRes = CoworkFull
+export type ErrorAllRes = ErrorInterface

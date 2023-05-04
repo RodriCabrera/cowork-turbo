@@ -5,9 +5,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BiMenu } from 'react-icons/bi'
 import { RiCloseLine } from 'react-icons/ri'
 
-import { PropsWithSuperadmin } from 'types'
-
-import { bungee, bungeeOutline } from '@/styles/fonts'
+import { bungeeOutline } from '@/styles/fonts'
+import { PropsWithSuperadmin } from '@/types/superadmin'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()

@@ -2,7 +2,7 @@ import React from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
-import { Cowork, Coworks } from 'types'
+import { Cowork } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
@@ -10,7 +10,7 @@ import { Placeholder } from './Placeholder'
 const { Cell, Body, Header, Row } = Table
 
 interface CoworksTableProps {
-  coworks: Coworks | undefined
+  coworks: Cowork[] | undefined
   isLoading: boolean
 }
 

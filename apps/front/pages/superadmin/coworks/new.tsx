@@ -2,10 +2,9 @@ import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { PropsWithSuperadmin } from 'types'
-
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { getSuperAdminData } from '@/lib/superadmin'
+import { PropsWithSuperadmin } from '@/types/superadmin'
 import Axios from '@/lib/axios'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {

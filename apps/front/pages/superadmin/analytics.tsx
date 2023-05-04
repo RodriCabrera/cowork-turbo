@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { PropsWithSuperadmin } from 'types'
 import { getSuperAdminData } from '@/lib/superadmin'
+import { PropsWithSuperadmin } from '@/types/superadmin'
 
 export const AnalyticsPage = ({ superadmin }: PropsWithSuperadmin) => {
   return (
