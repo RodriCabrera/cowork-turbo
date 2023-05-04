@@ -7,7 +7,6 @@ import { getSuperAdminData } from '@/lib/superadmin'
 import { PropsWithSuperadmin } from '@/types/superadmin'
 import Axios from '@/lib/axios'
 
-
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
   const axios = Axios.getInstance(superadmin?.access_token)
