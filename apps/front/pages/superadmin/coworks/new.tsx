@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { useMutation, useQueryClient } from 'react-query'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { getSuperAdminData } from '@/lib/superadmin'
@@ -9,19 +10,27 @@ import Axios from '@/lib/axios'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
-  const axios = Axios.getInstance(superadmin?.access_token)
-  const {
-    register,
-    handleSubmit
-    // watch
-    // formState: { errors }
-  } = useForm()
 
-  const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
-    axios.post('/coworks', data)
-    console.log(data)
-  }
+  const axios = Axios.getInstance(superadmin?.access_token)
+  const queryClient = useQueryClient()
+
+  const createCowork = useMutation({
+    mutationKey: 'coworks',
+    mutationFn: (newCoworkData) => {
+      return axios.post('/coworks', newCoworkData)
+    },
+    onSuccess: () => {
+      queryClient.prefetchQuery({
+        queryKey: ['coworks']
+      })
+      router.push('/superadmin/coworks')
+    }
+  })
+
+  const { register, handleSubmit } = useForm()
+
+  // TODO: TYPE newCoworkData
+  const onSubmit = (newCoworkData: any) => createCowork.mutate(newCoworkData)
 
   return (
     <SuperadminLayout superadmin={superadmin}>
@@ -127,10 +136,13 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
             </label>
           </div>
 
-          <input
+          <button
             type="submit"
+            disabled={createCowork.isLoading}
             className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
-          />
+          >
+            {createCowork.isLoading ? 'Creating cowork...' : 'Submit'}
+          </button>
         </form>
       </div>
     </SuperadminLayout>
