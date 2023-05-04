@@ -1,12 +1,16 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldError } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { getSuperAdminData } from '@/lib/superadmin'
 import { PropsWithSuperadmin } from '@/types/superadmin'
+import { CoworkCreateReq } from 'types'
 import Axios from '@/lib/axios'
+
+import { createCoworkSchema, CreateCoworkValidationSchema } from './newValidation'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
@@ -16,7 +20,8 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 
   const createCowork = useMutation({
     mutationKey: 'coworks',
-    mutationFn: (newCoworkData) => {
+    // * Pass validation schema type to submit function & API type to mutation call to make any mismatch self evident (?)
+    mutationFn: (newCoworkData: CoworkCreateReq) => {
       return axios.post('/coworks', newCoworkData)
     },
     onSuccess: () => {
@@ -27,10 +32,13 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
     }
   })
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm<CreateCoworkValidationSchema>({ resolver: zodResolver(createCoworkSchema) })
 
-  // TODO: TYPE newCoworkData
-  const onSubmit = (newCoworkData: any) => createCowork.mutate(newCoworkData)
+  // * Pass validation schema type to submit function & API type to mutation call to make any mismatch self evident (?)
+  const onSubmit = (newCoworkData: CreateCoworkValidationSchema) => createCowork.mutate(newCoworkData)
+
+  const renderFormError = (error?: FieldError) => (
+    error?.message && <p className='text-xs italic text-red-500'>* {error.message}</p>)
 
   return (
     <SuperadminLayout superadmin={superadmin}>
@@ -55,23 +63,26 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
         >
           <label className="flex flex-col">
             <p className="py-2">Name</p>
-            <input className="p-2" {...register('name', { required: true })} />
+            <input className="p-2" {...register('name')} />
+            {renderFormError(errors.name)}
           </label>
 
           <label className="flex flex-col">
             <p className="py-2">Email</p>
             <input className="p-2" type="email" {...register('email')} />
+            {renderFormError(errors.email)}
           </label>
 
           <label className="flex flex-col">
             <p className="py-2">Description</p>
             <textarea className="p-2" {...register('description')} />
+            {renderFormError(errors.description)}
           </label>
 
           <label className="flex flex-col">
             <p className="py-2">Status</p>
             <select
-              {...register('status', { required: true })}
+              {...register('status')}
               defaultValue="PAUSED"
               className="p-2"
             >
@@ -79,11 +90,13 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
               <option value="PAUSED">Paused</option>
               <option value="CLOSED">Closed</option>
             </select>
+            {renderFormError(errors.status)}
           </label>
 
           <label className="flex flex-col">
             <p className="py-2">Phone number</p>
             <input className="p-2" {...register('phone')} type="tel" />
+            {renderFormError(errors.phone)}
           </label>
           <p className="text-lg">Address Information</p>
 
@@ -92,29 +105,33 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
               <p className="py-2">Country</p>
               <input
                 className="p-2"
-                {...register('address.country', { required: true })}
+                {...register('address.country')}
               />
+              {renderFormError(errors.address?.country)}
             </label>
             <label className="flex flex-col">
               <p className="py-2">City</p>
               <input
                 className="p-2"
-                {...register('address.city', { required: true })}
+                {...register('address.city')}
               />
+              {renderFormError(errors.address?.city)}
             </label>
             <label className="flex flex-col">
               <p className="py-2">Street</p>
               <input
                 className="p-2"
-                {...register('address.streetName', { required: true })}
+                {...register('address.streetName')}
               />
+              {renderFormError(errors.address?.streetName)}
             </label>
             <label className="flex flex-col">
               <p className="py-2">Number</p>
               <input
                 className="p-2"
-                {...register('address.number', { required: true })}
+                {...register('address.number')}
               />
+              {renderFormError(errors.address?.number)}
             </label>
           </div>
 
@@ -122,17 +139,20 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
             <label className="flex flex-col">
               <p className="py-2">Floor</p>
               <input className="p-2" {...register('address.floor')} />
+              {renderFormError(errors.address?.floor)}
             </label>
             <label className="flex flex-col">
               <p className="py-2">Apartment</p>
               <input
                 className="p-2"
-                {...register('address.apartment', { required: true })}
+                {...register('address.apartment')}
               />
+              {renderFormError(errors.address?.apartment)}
             </label>
             <label className="flex flex-col">
               <p className="py-2">Postal Code</p>
               <input className="p-2" {...register('address.postalCode')} />
+              {renderFormError(errors.address?.postalCode)}
             </label>
           </div>
 
