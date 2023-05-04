@@ -19,7 +19,7 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 
   const onSubmit = (data: any) => {
     // eslint-disable-next-line no-console
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/coworks`, data)
+    axios.post('/coworks', data)
     console.log(data)
   }
 
