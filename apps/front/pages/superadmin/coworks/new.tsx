@@ -29,7 +29,8 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = (data: any) => createCowork.mutate(data)
+  // TODO: TYPE newCoworkData
+  const onSubmit = (newCoworkData: any) => createCowork.mutate(newCoworkData)
 
   return (
     <SuperadminLayout superadmin={superadmin}>
