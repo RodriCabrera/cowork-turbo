@@ -10,7 +10,7 @@ import { PropsWithSuperadmin } from '@/types/superadmin'
 import { CoworkCreateReq } from 'types'
 import Axios from '@/lib/axios'
 
-import { createCoworkSchema, CreateCoworkValidationSchema } from './newValidation'
+import { createCoworkSchema, CreateCoworkValidationSchema } from '../../../validators/newCoworkValidation'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
