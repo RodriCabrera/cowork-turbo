@@ -7,6 +7,7 @@ export default class CoworkValidate {
     name: z.string(),
     phone: z.string(),
     description: z.string(),
+    status: z.enum(['ACTIVE', 'PAUSED', 'CLOSED']).optional(),
     address: z.object({
       country: z.string(),
       city: z.string(),
