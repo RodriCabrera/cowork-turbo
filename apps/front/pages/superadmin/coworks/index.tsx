@@ -1,8 +1,8 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
 
-import { Cowork } from 'types'
+import { CoworkFullGetRes } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
@@ -16,7 +16,7 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
     return await coworksRes.json()
   }
 
-  const { isLoading, data: coworks } = useQuery<Cowork[]>({
+  const { isLoading, data: coworks } = useQuery<CoworkFullGetRes[]>({
     queryKey: 'coworks',
     queryFn: getCoworks
   })
