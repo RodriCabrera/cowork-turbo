@@ -171,6 +171,148 @@
 				"type": "object",
 				"description": "Model Cowork"
 			},
+			"Address": {
+				"properties": {
+					"postalCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"apartment": {
+						"type": "string",
+						"nullable": true
+					},
+					"floor": {
+						"type": "string",
+						"nullable": true
+					},
+					"number": {
+						"type": "string"
+					},
+					"streetName": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"postalCode",
+					"apartment",
+					"floor",
+					"number",
+					"streetName",
+					"city",
+					"country",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Address"
+			},
+			"CoworkAmenities": {
+				"properties": {
+					"buffet": {
+						"type": "boolean",
+						"nullable": true
+					},
+					"bathrooms": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"wifi": {
+						"type": "boolean",
+						"nullable": true
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"buffet",
+					"bathrooms",
+					"wifi",
+					"id"
+				],
+				"type": "object",
+				"description": "Model CoworkAmenities"
+			},
+			"OpenSchedule": {
+				"properties": {
+					"sun": {
+						"type": "string",
+						"nullable": true
+					},
+					"sat": {
+						"type": "string",
+						"nullable": true
+					},
+					"fri": {
+						"type": "string",
+						"nullable": true
+					},
+					"thu": {
+						"type": "string",
+						"nullable": true
+					},
+					"wed": {
+						"type": "string",
+						"nullable": true
+					},
+					"tue": {
+						"type": "string",
+						"nullable": true
+					},
+					"mon": {
+						"type": "string",
+						"nullable": true
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"sun",
+					"sat",
+					"fri",
+					"thu",
+					"wed",
+					"tue",
+					"mon",
+					"id"
+				],
+				"type": "object",
+				"description": "Model OpenSchedule"
+			},
+			"CoworkFull": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Cowork"
+					},
+					{
+						"properties": {
+							"openSchedule": {
+								"$ref": "#/components/schemas/OpenSchedule"
+							},
+							"amenities": {
+								"$ref": "#/components/schemas/CoworkAmenities"
+							},
+							"address": {
+								"$ref": "#/components/schemas/Address"
+							}
+						},
+						"required": [
+							"address"
+						],
+						"type": "object"
+					}
+				]
+			},
 			"CustomError": {
 				"properties": {
 					"error": {
@@ -589,7 +731,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Cowork"
+										"$ref": "#/components/schemas/CoworkFull"
 									},
 									"type": "array"
 								}
@@ -669,7 +811,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Cowork"
+									"$ref": "#/components/schemas/CoworkFull"
 								}
 							}
 						}
@@ -708,7 +850,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Cowork"
+									"$ref": "#/components/schemas/CoworkFull"
 								}
 							}
 						}
