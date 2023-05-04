@@ -465,6 +465,14 @@
 						},
 						"type": "object"
 					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
+					},
 					"description": {
 						"type": "string"
 					},
