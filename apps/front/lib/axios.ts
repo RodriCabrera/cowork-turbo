@@ -7,7 +7,9 @@ export default class Axios {
 
   static getInstance(token?: string): AxiosInstance {
     if (!Axios.instance) {
-      Axios.instance = axios.create()
+      Axios.instance = axios.create({
+        baseURL: `${process.env.NEXT_PUBLIC_API_URL}`
+      })
     }
     if (token) Axios.setToken(token)
     return Axios.instance
