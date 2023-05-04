@@ -32,6 +32,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
 
     if (isAuthOk) {
       req.session.superadmin = superAdminData
+      req.session.access_token = access_token
       await req.session.save()
       return res.redirect('/superadmin/coworks')
     }

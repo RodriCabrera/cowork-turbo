@@ -6,10 +6,11 @@ import { PropsWithSuperadmin } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { getSuperAdminData } from '@/lib/superadmin'
+import Axios from '@/lib/axios'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
-
+  const axios = Axios.getInstance()
   const {
     register,
     handleSubmit
@@ -19,6 +20,7 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 
   const onSubmit = (data: any) => {
     // eslint-disable-next-line no-console
+    axios.post('http://localhost:8000/coworks', data)
     console.log(data)
   }
 
