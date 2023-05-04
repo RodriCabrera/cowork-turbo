@@ -31,8 +31,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     const isAuthOk = (await response.status) === 200
 
     if (isAuthOk) {
-      req.session.superadmin = superAdminData
-      req.session.access_token = access_token
+      req.session.superadmin = { ...superAdminData, access_token }
       await req.session.save()
       return res.redirect('/superadmin/coworks')
     }

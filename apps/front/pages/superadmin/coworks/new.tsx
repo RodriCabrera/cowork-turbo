@@ -9,7 +9,7 @@ import Axios from '@/lib/axios'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
-  const axios = Axios.getInstance()
+  const axios = Axios.getInstance(superadmin?.access_token)
   const {
     register,
     handleSubmit
@@ -19,7 +19,7 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 
   const onSubmit = (data: any) => {
     // eslint-disable-next-line no-console
-    axios.post('http://localhost:8000/coworks', data)
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/coworks`, data)
     console.log(data)
   }
 
@@ -97,7 +97,7 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
               <p className="py-2">Street</p>
               <input
                 className="p-2"
-                {...register('address.street', { required: true })}
+                {...register('address.streetName', { required: true })}
               />
             </label>
             <label className="flex flex-col">

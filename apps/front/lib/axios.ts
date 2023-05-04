@@ -5,17 +5,15 @@ export default class Axios {
   private static instance: AxiosInstance
   private constructor() {}
 
-  static getInstance(): AxiosInstance {
+  static getInstance(token?: string): AxiosInstance {
     if (!Axios.instance) {
       Axios.instance = axios.create()
     }
+    if (token) Axios.setToken(token)
     return Axios.instance
   }
 
-  static setToken(token?: string) {
-    if (token) {
-      if (!Axios.instance) Axios.getInstance()
-      Axios.instance.defaults.headers.common.Authorization = token
-    }
+  private static setToken(token: string) {
+    Axios.instance.defaults.headers.common.Authorization = `Bearer ${token}`
   }
 }

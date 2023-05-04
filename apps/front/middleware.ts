@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getIronSession } from 'iron-session/edge'
-import Axios from './lib/axios'
 
 export const middleware = async (req: NextRequest) => {
   const res = NextResponse.next()
@@ -14,8 +13,7 @@ export const middleware = async (req: NextRequest) => {
   })
 
   // do anything with session here:
-  const { superadmin, access_token } = session
-  Axios.setToken(access_token)
+  const { superadmin } = session
 
   // like mutate superadmin:
   // superadmin.something = someOtherThing;
