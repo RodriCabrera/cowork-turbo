@@ -15,10 +15,10 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
     return await coworksRes.json()
   }
 
-  const { isLoading, data: coworks } = useQuery<Cowork[]>(
-    `${process.env.NEXT_PUBLIC_API_URL}/coworks`,
-    () => getCoworks()
-  )
+  const { isLoading, data: coworks } = useQuery<Cowork[]>({
+    queryKey: 'coworks',
+    queryFn: getCoworks
+  })
 
   return (
     <SuperadminLayout superadmin={superadmin}>
