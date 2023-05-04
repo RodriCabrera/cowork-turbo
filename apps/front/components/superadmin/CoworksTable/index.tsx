@@ -2,7 +2,7 @@ import React from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
-import { Cowork } from 'types'
+import { CoworkFullGetRes } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
@@ -10,39 +10,40 @@ import { Placeholder } from './Placeholder'
 const { Cell, Body, Header, Row } = Table
 
 interface CoworksTableProps {
-  coworks: Cowork[] | undefined
+  coworks: CoworkFullGetRes[] | undefined
   isLoading: boolean
 }
 
 export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
-  const columns: Column<Cowork & { actions?: string; status?: string }>[] =
-    React.useMemo(
-      () => [
-        {
-          Header: 'coworks',
-          accessor: 'name'
-        },
-        {
-          Header: 'email',
-          accessor: 'email'
-        },
-        {
-          Header: 'status',
-          accessor: 'status',
-          Cell: ({ value }) => (
-            <span className="rounded-full bg-green-200 px-3 py-1 text-xs text-green-600">
-              {value}
-            </span>
-          )
-        },
-        {
-          Header: 'actions',
-          accessor: 'actions',
-          Cell: ({ row }) => <ActionsCell coworkId={row.original.id} />
-        }
-      ],
-      []
-    )
+  const columns: Column<
+    CoworkFullGetRes & { actions?: string; status?: string }
+  >[] = React.useMemo(
+    () => [
+      {
+        Header: 'coworks',
+        accessor: 'name'
+      },
+      {
+        Header: 'email',
+        accessor: 'email'
+      },
+      {
+        Header: 'status',
+        accessor: 'status',
+        Cell: ({ value }) => (
+          <span className="rounded-full bg-green-200 px-3 py-1 text-xs text-green-600">
+            {value}
+          </span>
+        )
+      },
+      {
+        Header: 'actions',
+        accessor: 'actions',
+        Cell: ({ row }) => <ActionsCell coworkId={row.original.id} />
+      }
+    ],
+    []
+  )
 
   const tableInstance = useTable({
     columns,
