@@ -1,5 +1,11 @@
 import CoworkValidate from './coworkValidation'
-import { Cowork, Address, CoworkAmenities, OpenSchedule } from '@prisma/client'
+import {
+  Cowork,
+  Address,
+  CoworkAmenities,
+  OpenSchedule,
+  Status
+} from '@prisma/client'
 
 const createSchema = CoworkValidate.getCreateSchema()
 const editSchema = CoworkValidate.getEditSchema()
@@ -13,7 +19,7 @@ export type CoworkFull = Cowork & {
 }
 
 export type CoworkFilters = {
-  status?: string
+  status?: Status
   city?: Address['city']
   country?: Address['country']
 }

@@ -13,7 +13,11 @@ import {
   Query
 } from 'tsoa'
 import CoworkService from './coworkService'
-import { CreateCoworkInput, EditCoworkInput } from './coworkTypes'
+import {
+  CreateCoworkInput,
+  EditCoworkInput,
+  CoworkFilters
+} from './coworkTypes'
 import CustomError from '../errors/customError'
 import express from 'express'
 
@@ -22,7 +26,7 @@ import express from 'express'
 export default class CoworkController {
   @Get('/')
   static async getCoworks(
-    @Query('status') status?: string,
+    @Query('status') status?: CoworkFilters['status'],
     @Query('city') city?: string,
     @Query('country') country?: string
   ) {

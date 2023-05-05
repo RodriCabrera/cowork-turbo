@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import CoworkController from './coworkController'
 import Auth from '../middleware/auth.middleware'
+import { CoworkFilters } from './coworkTypes'
 
 const coworkRoutes = Router()
 
@@ -8,7 +9,7 @@ coworkRoutes.get('/', async (req, res, next) => {
   try {
     const { status, city, country } = req.query
     const response = await CoworkController.getCoworks(
-      status?.toString(),
+      status?.toString() as CoworkFilters['status'],
       city?.toString(),
       country?.toString()
     )

@@ -47,6 +47,7 @@ export default class CoworkService {
 
   private static $getCoworkFilterParameters(filters?: CoworkFilters) {
     if (!filters) return {}
+    // TODO: Validate if status is in Enum
     let params = {}
     if (filters.status) {
       params = { ...params, status: { equals: filters.status.toUpperCase() } }
