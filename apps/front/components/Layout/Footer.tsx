@@ -1,6 +1,5 @@
 import { bungeeHairline } from '@/styles/fonts'
 import Link from 'next/link'
-import React from 'react'
 
 export const Footer = () => {
   return (
