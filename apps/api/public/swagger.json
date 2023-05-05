@@ -751,7 +751,32 @@
 					"Coworks"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "city",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "country",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			},
 			"post": {
 				"operationId": "Create",

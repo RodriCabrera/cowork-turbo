@@ -1,6 +1,11 @@
 import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
-import { EditCoworkInput, CreateCoworkInput, CoworkFull } from './coworkTypes'
+import {
+  EditCoworkInput,
+  CreateCoworkInput,
+  CoworkFull,
+  CoworkFilters
+} from './coworkTypes'
 import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
@@ -40,9 +45,40 @@ export default class CoworkService {
     }
   }
 
-  static async fetchAll(): Promise<CoworkFull[]> {
+  private static $getCoworkFilterParameters(filters?: CoworkFilters) {
+    if (!filters) return {}
+    let params = {}
+    if (filters.status) {
+      params = { ...params, status: { equals: filters.status.toUpperCase() } }
+    }
+    return params
+  }
+
+  private static $getAddressFilterParameters(filters?: CoworkFilters) {
+    if (!filters) return {}
+    let params = {}
+    if (filters.city) {
+      params = {
+        ...params,
+        city: { contains: filters.city }
+      }
+    }
+    if (filters.country) {
+      params = {
+        ...params,
+        country: { contains: filters.country }
+      }
+    }
+    return params
+  }
+
+  static async fetchAll(filters?: CoworkFilters): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({
+        where: {
+          ...this.$getCoworkFilterParameters(filters),
+          address: this.$getAddressFilterParameters(filters)
+        },
         include: {
           address: true,
           amenities: true,

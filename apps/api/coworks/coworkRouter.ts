@@ -6,7 +6,12 @@ const coworkRoutes = Router()
 
 coworkRoutes.get('/', async (req, res, next) => {
   try {
-    const response = await CoworkController.getCoworks()
+    const { status, city, country } = req.query
+    const response = await CoworkController.getCoworks(
+      status?.toString(),
+      city?.toString(),
+      country?.toString()
+    )
     res.send(response)
   } catch (err) {
     next(err)

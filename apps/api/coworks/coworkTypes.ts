@@ -11,3 +11,9 @@ export type CoworkFull = Cowork & {
   amenities?: CoworkAmenities
   openSchedule?: OpenSchedule
 }
+
+export type CoworkFilters = {
+  status?: string
+  city?: Address['city']
+  country?: Address['country']
+}

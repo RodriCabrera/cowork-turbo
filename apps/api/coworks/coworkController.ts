@@ -9,7 +9,8 @@ import {
   Body,
   Response,
   Request,
-  Security
+  Security,
+  Query
 } from 'tsoa'
 import CoworkService from './coworkService'
 import { CreateCoworkInput, EditCoworkInput } from './coworkTypes'
@@ -20,8 +21,12 @@ import express from 'express'
 @Tags('Coworks')
 export default class CoworkController {
   @Get('/')
-  static async getCoworks() {
-    return CoworkService.fetchAll()
+  static async getCoworks(
+    @Query('status') status?: string,
+    @Query('city') city?: string,
+    @Query('country') country?: string
+  ) {
+    return CoworkService.fetchAll({ status, city, country })
   }
 
   @Response<CustomError>(404, 'Cowork not found')
