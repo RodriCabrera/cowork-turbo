@@ -5,6 +5,7 @@ import { NavBar } from '@/components/Layout/NavBar'
 import { raleway } from '@/styles/fonts'
 
 import './globals.css'
+import Providers from '@/utils/provider'
 
 export const metadata = {
   title: 'BaseBloom',
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         <div className={`${raleway.className}`}>
           <NavBar />
-          {children}
+          <Providers>{children}</Providers>
           <Footer />
         </div>
       </body>
