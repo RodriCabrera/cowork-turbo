@@ -1,4 +1,4 @@
-import { PrismaClient, Cowork } from '@prisma/client'
+import { PrismaClient, Cowork, Status } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import {
   EditCoworkInput,
@@ -47,10 +47,12 @@ export default class CoworkService {
 
   private static $getCoworkFilterParameters(filters?: CoworkFilters) {
     if (!filters) return {}
-    // TODO: Validate if status is in Enum
+    const validatedStatus = CoworkValidate.validateStatus(
+      filters.status.toString()
+    )
     let params = {}
     if (filters.status) {
-      params = { ...params, status: { equals: filters.status.toUpperCase() } }
+      params = { ...params, status: { equals: validatedStatus } }
     }
     return params
   }
@@ -88,6 +90,7 @@ export default class CoworkService {
       })
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')
+      CoworkValidate.parseError(err)
       if (err instanceof Error) throw err
     }
   }

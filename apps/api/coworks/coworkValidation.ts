@@ -77,4 +77,8 @@ export default class CoworkValidate {
       throw new CustomError(error.message, 406, ERROR_CODES.ZodInvalidType)
     }
   }
+
+  static validateStatus(status: string) {
+    return z.enum(['ACTIVE', 'PAUSED', 'CLOSED']).parse(status.toUpperCase())
+  }
 }
