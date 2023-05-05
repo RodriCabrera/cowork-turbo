@@ -25,8 +25,6 @@ export const UserManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
 
 export const getServerSideProps = getSuperAdminData
 
-UserManagementPage.getLayout = function getLayout(page: ReactElement) {
-  return page
-}
+UserManagementPage.getLayout = (page: ReactElement) => page
 
 export default UserManagementPage

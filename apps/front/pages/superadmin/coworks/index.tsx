@@ -48,8 +48,6 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
   }
 })
 
-CoworksManagementPage.getLayout = function getLayout(page: ReactElement) {
-  return page
-}
+CoworksManagementPage.getLayout = (page: ReactElement) => page
 
 export default CoworksManagementPage

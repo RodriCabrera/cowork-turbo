@@ -16,8 +16,6 @@ export const AnalyticsPage = ({ superadmin }: PropsWithSuperadmin) => {
 
 export const getServerSideProps = getSuperAdminData
 
-AnalyticsPage.getLayout = function getLayout(page: ReactElement) {
-  return page
-}
+AnalyticsPage.getLayout = (page: ReactElement) => page
 
 export default AnalyticsPage

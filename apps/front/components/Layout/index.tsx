@@ -3,7 +3,7 @@ import { NavBar } from './NavBar'
 import { Footer } from './Footer'
 import { raleway } from '@/styles/fonts'
 
-export const Layout = ({ children }: PropsWithChildren) => {
+export const BaseLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className={`${raleway.className}`}>
       <NavBar />

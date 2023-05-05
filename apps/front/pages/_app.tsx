@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 
 import '../styles/globals.css'
 
-import { Layout } from '@/components/Layout'
+import { BaseLayout } from '@/components/Layout'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -18,8 +18,9 @@ type AppPropsWithLayout = AppProps & {
 const queryClient = new QueryClient()
 
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  // Use the layout defined at the page level, if available, else use the Layout
-  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>)
+  // Use the layout defined at the page level, if available, else use the BaseLayout
+  const getLayout =
+    Component.getLayout ?? ((page) => <BaseLayout>{page}</BaseLayout>)
 
   return getLayout(
     <QueryClientProvider client={queryClient}>
