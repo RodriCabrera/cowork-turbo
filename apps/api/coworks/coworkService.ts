@@ -47,11 +47,11 @@ export default class CoworkService {
 
   private static $getCoworkFilterParameters(filters?: CoworkFilters) {
     if (!filters) return {}
-    const validatedStatus = CoworkValidate.validateStatus(
-      filters.status.toString()
-    )
     let params = {}
     if (filters.status) {
+      const validatedStatus = CoworkValidate.validateStatus(
+        filters.status.toString()
+      )
       params = { ...params, status: { equals: validatedStatus } }
     }
     return params
@@ -75,13 +75,28 @@ export default class CoworkService {
     return params
   }
 
-  static async fetchAll(filters?: CoworkFilters): Promise<CoworkFull[]> {
+  private static $getSortParameter(sort: string) {
+    if (!sort) return {}
+    if (sort[0] === '-') {
+      return CoworkValidate.insertValueIntoCoworkObject(
+        sort.substring(1),
+        'desc'
+      )
+    }
+    return CoworkValidate.insertValueIntoCoworkObject(sort, 'asc')
+  }
+
+  static async fetchAll(
+    filters?: CoworkFilters,
+    sort?: string
+  ): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({
         where: {
           ...this.$getCoworkFilterParameters(filters),
           address: this.$getAddressFilterParameters(filters)
         },
+        orderBy: this.$getSortParameter(sort),
         include: {
           address: true,
           amenities: true,

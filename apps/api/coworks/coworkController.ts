@@ -24,13 +24,22 @@ import express from 'express'
 @Route('coworks')
 @Tags('Coworks')
 export default class CoworkController {
+  /**
+   *
+   * @param status
+   * @param city
+   * @param country
+   * @param sort field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)
+   * @returns CoworkFull[]
+   */
   @Get('/')
   static async getCoworks(
     @Query('status') status?: CoworkFilters['status'],
     @Query('city') city?: string,
-    @Query('country') country?: string
+    @Query('country') country?: string,
+    @Query('sort') sort?: string
   ) {
-    return CoworkService.fetchAll({ status, city, country })
+    return CoworkService.fetchAll({ status, city, country }, sort)
   }
 
   @Response<CustomError>(404, 'Cowork not found')

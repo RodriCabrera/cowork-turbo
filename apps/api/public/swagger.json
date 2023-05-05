@@ -410,14 +410,6 @@
 						},
 						"type": "object"
 					},
-					"status": {
-						"type": "string",
-						"enum": [
-							"ACTIVE",
-							"PAUSED",
-							"CLOSED"
-						]
-					},
 					"description": {
 						"type": "string"
 					},
@@ -429,6 +421,14 @@
 					},
 					"email": {
 						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
 					}
 				},
 				"type": "object",
@@ -465,14 +465,6 @@
 						},
 						"type": "object"
 					},
-					"status": {
-						"type": "string",
-						"enum": [
-							"ACTIVE",
-							"PAUSED",
-							"CLOSED"
-						]
-					},
 					"description": {
 						"type": "string"
 					},
@@ -484,6 +476,14 @@
 					},
 					"email": {
 						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
 					}
 				},
 				"type": "object",
@@ -734,7 +734,7 @@
 				"operationId": "GetCoworks",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "CoworkFull[]",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -771,6 +771,15 @@
 					{
 						"in": "query",
 						"name": "country",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)",
+						"in": "query",
+						"name": "sort",
 						"required": false,
 						"schema": {
 							"type": "string"
