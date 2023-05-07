@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import { SuperadminNavbar } from './SuperadminNavbar'
 import { PropsWithSuperadmin } from '@/types/superadmin'
+import { ApiProvider } from '@/context/apiContext'
 
 export const SuperadminLayout = ({
   children,
@@ -11,7 +12,7 @@ export const SuperadminLayout = ({
     <div className="min-h-screen bg-gray-50">
       <SuperadminNavbar superadmin={superadmin} />
       <main className="mx-auto max-w-7xl px-2 pt-8 sm:px-6 lg:px-8">
-        {children}
+        <ApiProvider token={superadmin?.access_token}>{children}</ApiProvider>
       </main>
     </div>
   )
