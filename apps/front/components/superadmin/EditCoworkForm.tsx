@@ -5,9 +5,10 @@ import { FieldError, useForm } from 'react-hook-form'
 import { CoworkEditReq } from 'types'
 
 import { useApi } from '@/context/apiContext'
+import { CoworkFull } from '@/../api/coworks/coworkTypes'
 
 interface CoworkFormProps {
-  data: CoworkEditReq & { id: string }
+  data: CoworkFull
 }
 
 export const EditCoworkForm = ({ data }: CoworkFormProps) => {
