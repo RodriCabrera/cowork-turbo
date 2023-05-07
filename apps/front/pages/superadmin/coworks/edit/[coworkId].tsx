@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { Cowork } from 'types'
+import { Cowork, CoworkEditReq } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { withSessionSsr } from '@/lib/withSession'
@@ -10,7 +10,7 @@ import { EditCoworkForm } from '@/components/superadmin/EditCoworkForm'
 const EditCowork = ({
   superadmin,
   coworkData
-}: PropsWithSuperadmin<{ coworkData: Cowork }>) => {
+}: PropsWithSuperadmin<{ coworkData: CoworkEditReq & { id: string } }>) => {
   return (
     <SuperadminLayout superadmin={superadmin}>
       <div>
