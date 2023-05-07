@@ -4,12 +4,14 @@ import { useMutation, useQueryClient } from 'react-query'
 
 import { Modal } from '@/components/modals'
 import { useApi } from '@/context/apiContext'
+import { useRouter } from 'next/router'
 
 interface ActionsCellProps {
   coworkId: string
 }
 
 export const ActionsCell = ({ coworkId }: ActionsCellProps) => {
+  const router = useRouter()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   const api = useApi()
@@ -41,7 +43,10 @@ export const ActionsCell = ({ coworkId }: ActionsCellProps) => {
         <button className="mr-2 w-4 cursor-pointer hover:scale-110 hover:text-purple-500">
           <AiOutlineEye />
         </button>
-        <button className="mr-2 w-4 cursor-pointer hover:scale-110 hover:text-purple-500">
+        <button
+          onClick={() => router.push(`coworks/edit/${coworkId}`)}
+          className="mr-2 w-4 cursor-pointer hover:scale-110 hover:text-purple-500"
+        >
           <AiOutlineEdit />
         </button>
         <button
