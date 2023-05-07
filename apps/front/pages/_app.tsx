@@ -6,6 +6,7 @@ import '../styles/globals.css'
 
 import { BaseLayout } from '@/components/Layout'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Toaster } from 'sonner'
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -24,6 +25,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <QueryClientProvider client={queryClient}>
+      <Toaster />
       <Component {...pageProps} />
     </QueryClientProvider>
   )

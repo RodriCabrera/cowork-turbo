@@ -1,6 +1,11 @@
-import { PrismaClient, Cowork } from '@prisma/client'
+import { PrismaClient, Cowork, Status } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
-import { EditCoworkInput, CreateCoworkInput, CoworkFull } from './coworkTypes'
+import {
+  EditCoworkInput,
+  CreateCoworkInput,
+  CoworkFull,
+  CoworkFilters
+} from './coworkTypes'
 import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
@@ -40,9 +45,58 @@ export default class CoworkService {
     }
   }
 
-  static async fetchAll(): Promise<CoworkFull[]> {
+  private static $getCoworkFilterParameters(filters?: CoworkFilters) {
+    if (!filters) return {}
+    let params = {}
+    if (filters.status) {
+      const validatedStatus = CoworkValidate.validateStatus(
+        filters.status.toString()
+      )
+      params = { ...params, status: { equals: validatedStatus } }
+    }
+    return params
+  }
+
+  private static $getAddressFilterParameters(filters?: CoworkFilters) {
+    if (!filters) return {}
+    let params = {}
+    if (filters.city) {
+      params = {
+        ...params,
+        city: { contains: filters.city }
+      }
+    }
+    if (filters.country) {
+      params = {
+        ...params,
+        country: { contains: filters.country }
+      }
+    }
+    return params
+  }
+
+  private static $getSortParameter(sort: string) {
+    if (!sort) return {}
+    if (sort[0] === '-') {
+      return CoworkValidate.insertValueIntoCoworkObject(
+        sort.substring(1),
+        'desc'
+      )
+    }
+    return CoworkValidate.insertValueIntoCoworkObject(sort, 'asc')
+  }
+
+  static async fetchAll(
+    filters?: CoworkFilters,
+    sort?: string
+  ): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({
+        where: {
+          ...this.$getCoworkFilterParameters(filters),
+          address: this.$getAddressFilterParameters(filters)
+        },
+        orderBy: this.$getSortParameter(sort),
         include: {
           address: true,
           amenities: true,
@@ -51,6 +105,7 @@ export default class CoworkService {
       })
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')
+      CoworkValidate.parseError(err)
       if (err instanceof Error) throw err
     }
   }
