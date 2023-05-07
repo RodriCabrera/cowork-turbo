@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 
 import { LoginForm } from '@/components/LoginForm'
 
-describe('Superadmin Login', () => {
+describe('Superadmin/LoginForm', () => {
   test('renders the superadmin login form', async () => {
     const { getByRole, getByText } = render(<LoginForm endpoint="login" />)
 
