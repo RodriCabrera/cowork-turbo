@@ -23,8 +23,15 @@ export const ActionsCell = ({ coworkId }: ActionsCellProps) => {
       queryClient.invalidateQueries({
         queryKey: ['coworks']
       })
+      setIsDeleteModalOpen(false)
     }
   })
+
+  const generateDeleteStatusText = () => {
+    if (deleteCowork.isLoading) return 'Deleting cowork...'
+    if (deleteCowork.isError) return 'Error deleting cowork'
+    return 'Delete'
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ export const ActionsCell = ({ coworkId }: ActionsCellProps) => {
         title="Delete Cowork"
         description="This action can not be undone"
         body="Consider setting the cowork status as inactive"
-        confirmButton="Delete"
+        confirmButton={generateDeleteStatusText()}
       />
       <div className="flex items-center ">
         <button className="mr-2 w-4 cursor-pointer hover:scale-110 hover:text-purple-500">
