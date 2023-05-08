@@ -33,9 +33,9 @@ export default class CoworkValidate {
   })
 
   private static $amenitiesSchema = z.object({
-    wifi: z.boolean().optional(),
-    bathrooms: z.number().optional(),
-    buffet: z.boolean().optional()
+    wifi: z.boolean().optional().nullable(),
+    bathrooms: z.number().optional().nullable(),
+    buffet: z.boolean().optional().nullable()
   })
 
   private static $createSchema = this.$baseCoworkSchema.extend({
