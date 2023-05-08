@@ -17,9 +17,9 @@ export default class CoworkValidate {
     city: z.string(),
     streetName: z.string(),
     number: z.string(),
-    floor: z.string().optional(),
-    apartment: z.string().optional(),
-    postalCode: z.string().optional()
+    floor: z.string().optional().nullable(),
+    apartment: z.string().optional().nullable(),
+    postalCode: z.string().optional().nullable()
   })
 
   private static $openScheduleSchema = z.object({
