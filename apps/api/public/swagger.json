@@ -110,7 +110,8 @@
 						"nullable": true
 					},
 					"openScheduleId": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"updatedBy": {
 						"type": "string"
@@ -128,16 +129,19 @@
 						"format": "double"
 					},
 					"phone": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
 					"description": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"email": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"name": {
 						"type": "string"
@@ -170,13 +174,16 @@
 			"Address": {
 				"properties": {
 					"postalCode": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"apartment": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"floor": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"number": {
 						"type": "string"
@@ -195,6 +202,9 @@
 					}
 				},
 				"required": [
+					"postalCode",
+					"apartment",
+					"floor",
 					"number",
 					"streetName",
 					"city",
@@ -207,20 +217,26 @@
 			"CoworkAmenities": {
 				"properties": {
 					"buffet": {
-						"type": "boolean"
+						"type": "boolean",
+						"nullable": true
 					},
 					"bathrooms": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"nullable": true
 					},
 					"wifi": {
-						"type": "boolean"
+						"type": "boolean",
+						"nullable": true
 					},
 					"id": {
 						"type": "string"
 					}
 				},
 				"required": [
+					"buffet",
+					"bathrooms",
+					"wifi",
 					"id"
 				],
 				"type": "object",
