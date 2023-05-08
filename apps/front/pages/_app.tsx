@@ -25,7 +25,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <QueryClientProvider client={queryClient}>
-      <Toaster />
+      <Toaster richColors />
       <Component {...pageProps} />
     </QueryClientProvider>
   )

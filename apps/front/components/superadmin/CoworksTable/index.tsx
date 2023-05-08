@@ -30,11 +30,20 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
       {
         Header: 'status',
         accessor: 'status',
-        Cell: ({ value }) => (
-          <span className="rounded-full bg-green-200 px-3 py-1 text-xs text-green-600">
-            {value}
-          </span>
-        )
+        Cell: ({ value }) => {
+          const colorsByStatus = {
+            ACTIVE: 'text-green-600 bg-green-200',
+            CLOSED: 'text-yellow-600 bg-yellow-200',
+            PAUSED: 'text-gray-600 bg-gray-200'
+          }
+          return (
+            <span
+              className={`rounded-full  px-3 py-1 text-xs ${colorsByStatus[value]}`}
+            >
+              {value}
+            </span>
+          )
+        }
       },
       {
         Header: 'actions',
