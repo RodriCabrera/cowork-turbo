@@ -93,10 +93,10 @@ model Cowork {
   address        Address          @relation(fields: [addressId], references: [id])
   addressId      String           @unique
   name           String           @unique
-  email          String?
-  description    String?
+  email          String
+  description    String
   status         Status           @default(ACTIVE)
-  phone          String?
+  phone          String
   openSchedule   OpenSchedule?    @relation(fields: [openScheduleId], references: [id])
   amenities      CoworkAmenities? @relation(fields: [amenitiesId], references: [id])
   rating         Float            @default(0.0)
