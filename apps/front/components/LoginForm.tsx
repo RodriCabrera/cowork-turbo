@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import Axios from '@/lib/axios'
+import { useState } from 'react'
 
 const STATUS = {
   loading: 'loading',
@@ -9,9 +10,9 @@ const STATUS = {
 
 type StatusKeys = keyof typeof STATUS
 
-export const Login = ({ endpoint }: { endpoint: string }) => {
+export const LoginForm = ({ endpoint }: { endpoint: string }) => {
   const [enteredEmail, setEnteredEmail] = useState<string>('')
-
+  const api = Axios.getInstance()
   // TODO: Display status (now its only text) they should alter the UI
   const [queryStatus, setQueryStatus] = useState<StatusKeys>(STATUS.waiting)
   const [btnMessage, setBtnMessage] = useState<string>('Sign in')
@@ -20,13 +21,10 @@ export const Login = ({ endpoint }: { endpoint: string }) => {
     e.preventDefault()
     setQueryStatus(STATUS.loading)
     setBtnMessage('Checking email...')
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({ email: enteredEmail })
-    })
+    api
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
+        email: enteredEmail
+      })
       .then((res) => {
         if (res.status === 200) {
           setQueryStatus(STATUS.sent)
