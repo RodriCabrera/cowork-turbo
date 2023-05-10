@@ -1,4 +1,5 @@
 import Axios from '@/lib/axios'
+import { AxiosInstance } from 'axios'
 import { PropsWithChildren, createContext, useContext } from 'react'
 
 export const ApiContext = createContext<null | any>(null)
@@ -13,6 +14,6 @@ export function ApiProvider({
 }
 
 export const useApi = () => {
-  const api = useContext(ApiContext)
+  const api: AxiosInstance = useContext(ApiContext)
   return api
 }
