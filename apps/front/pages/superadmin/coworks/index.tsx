@@ -6,8 +6,8 @@ import { CoworkFullGetRes } from 'types'
 
 import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
 import { CoworksTable } from '@/components/superadmin/CoworksTable'
-import { withSessionSsr } from '@/lib/withSession'
 import { PropsWithSuperadmin } from '@/types/superadmin'
+import { getSuperAdminData } from '@/lib/superadmin'
 
 export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
   const getCoworks = async () => {
@@ -38,12 +38,7 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
   )
 }
 
-export const getServerSideProps = withSessionSsr(async ({ req }) => {
-  const { superadmin } = req.session
-  return {
-    props: { superadmin }
-  }
-})
+export const getServerSideProps = getSuperAdminData
 
 CoworksManagementPage.getLayout = (page: ReactElement) => page
 
