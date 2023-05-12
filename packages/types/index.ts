@@ -51,5 +51,10 @@ export type PaginatedResponse<T> = {
 
 export type CoworkCreateReq = CreateCoworkInput
 export type CoworkEditReq = EditCoworkInput
-export type CoworkFullGetRes = CoworkFull
+export type SingleCoworkFullGetRes = CoworkFull
+export type CoworkFullGetRes = PaginatedResponse<CoworkFull[]>
 export type ErrorAllRes = ErrorInterface
+
+// Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
+export type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never
