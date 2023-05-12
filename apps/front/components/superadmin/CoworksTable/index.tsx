@@ -6,17 +6,18 @@ import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
+import { useGetCoworks } from '@/hooks/useGetCoworks'
 
 const { Cell, Body, Header, Row } = Table
 
-interface CoworksTableProps {
-  coworks: CoworkFullGetRes['results'] | undefined
-  isLoading: boolean
-}
+export const CoworksTable = () => {
+  const { coworks, isLoading, nextPage, pageSize } = useGetCoworks()
 
-export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
   const columns: Column<
-    ArrayElement<CoworkFullGetRes['results']> & { actions?: string; status?: string }
+    ArrayElement<CoworkFullGetRes['results']> & {
+      actions?: string
+      status?: string
+    }
   >[] = React.useMemo(
     () => [
       {
@@ -103,7 +104,7 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
               </thead>
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
-                {coworks?.length === 0 && <Placeholder isLoading={isLoading} />}
+                {!coworks?.length && <Placeholder isLoading={isLoading} />}
                 {
                   // Loop over the table rows
                   rows.map((row) => {
@@ -146,6 +147,8 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
                 }
               </Body>
             </Table>
+            <div>PAGE SIZE: {pageSize}</div>
+            <button onClick={() => nextPage()}>NEXT PAGE</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from 'react'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import '../styles/globals.css'
 
@@ -26,6 +27,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <QueryClientProvider client={queryClient}>
       <Toaster richColors />
+      <ReactQueryDevtools initialIsOpen={false} />
       <Component {...pageProps} />
     </QueryClientProvider>
   )
