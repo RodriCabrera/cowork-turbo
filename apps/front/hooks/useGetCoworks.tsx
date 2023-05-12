@@ -8,7 +8,7 @@ import { useApi } from '@/context/apiContext'
 export const useGetCoworks = () => {
   const api = useApi()
   const [pageSize, setPageSize] = useState(2)
-  const [cursor, setCursor] = useState<string | undefined>('')
+  const [cursor, setCursor] = useState<string>('')
 
   const getCoworks = async () =>
     await api.get(`/coworks?count=${pageSize}&cursor=${cursor}`)
@@ -20,7 +20,7 @@ export const useGetCoworks = () => {
       keepPreviousData: true
     })
 
-  const nextPage = () => setCursor(data?.data.cursor)
+  const nextPage = () => setCursor(data?.data.cursor || '')
 
   return { isLoading, coworks: data?.data.results, pageSize, nextPage }
 }
