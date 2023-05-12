@@ -6,6 +6,7 @@ import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError
 } from '@prisma/client/runtime'
+import config from '../config/config'
 
 export default class Auth {
   private static _client = new PrismaClient()
@@ -31,7 +32,7 @@ export default class Auth {
 
   private static _verifyToken(req: Request) {
     const token = Auth._getAuthTokenFromHeader(req)
-    return verify(token, process.env.SESSION_SECRET)
+    return verify(token, config.sessionSecret)
   }
 
   static async authorizeSuperAdmin(

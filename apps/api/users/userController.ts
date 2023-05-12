@@ -9,18 +9,17 @@ import {
   Tags
 } from 'tsoa'
 import UserService from './userService'
-import { User } from '@prisma/client'
 
 @Route('users')
 @Tags('Users')
 export default class UserController {
   @Get('/')
-  async getUsers(): Promise<User[]> {
+  async getUsers() {
     return UserService.fetchAll()
   }
 
   @Get('/{id}')
-  async getUser(@Path() id: string): Promise<User> {
+  async getUser(@Path() id: string) {
     return UserService.fetchById(id)
   }
 
