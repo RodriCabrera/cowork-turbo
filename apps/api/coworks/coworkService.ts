@@ -1,4 +1,4 @@
-import { PrismaClient, Cowork, Status } from '@prisma/client'
+import { PrismaClient, Cowork } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import {
   EditCoworkInput,
@@ -88,7 +88,8 @@ export default class CoworkService {
 
   static async fetchAll(
     filters?: CoworkFilters,
-    sort?: string
+    sort?: string,
+    pagination?: { count?: number; cursor?: string }
   ): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({

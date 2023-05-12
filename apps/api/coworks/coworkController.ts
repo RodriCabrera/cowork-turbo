@@ -37,9 +37,14 @@ export default class CoworkController {
     @Query('status') status?: CoworkFilters['status'],
     @Query('city') city?: string,
     @Query('country') country?: string,
-    @Query('sort') sort?: string
+    @Query('sort') sort?: string,
+    @Query('count') count?: number,
+    @Query('cursor') cursor?: string
   ) {
-    return CoworkService.fetchAll({ status, city, country }, sort)
+    return CoworkService.fetchAll({ status, city, country }, sort, {
+      count,
+      cursor
+    })
   }
 
   @Response<CustomError>(404, 'Cowork not found')

@@ -7,12 +7,14 @@ const coworkRoutes = Router()
 
 coworkRoutes.get('/', async (req, res, next) => {
   try {
-    const { status, city, country, sort } = req.query
+    const { status, city, country, sort, count, cursor } = req.query
     const response = await CoworkController.getCoworks(
       status?.toString() as CoworkFilters['status'],
       city?.toString(),
       country?.toString(),
-      sort?.toString()
+      sort?.toString(),
+      count ? parseInt(count.toString()) : undefined,
+      cursor?.toString()
     )
     res.send(response)
   } catch (err) {
