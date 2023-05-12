@@ -45,7 +45,7 @@ export interface Cowork {
 }
 
 export type PaginatedResponse<T> = {
-  result: T
+  results: T
   cursor: string
 }
 

@@ -330,7 +330,7 @@
 					"cursor": {
 						"type": "string"
 					},
-					"result": {
+					"results": {
 						"items": {
 							"$ref": "#/components/schemas/CoworkFull"
 						},
@@ -339,7 +339,7 @@
 				},
 				"required": [
 					"cursor",
-					"result"
+					"results"
 				],
 				"type": "object"
 			},
@@ -449,12 +449,6 @@
 					"phone": {
 						"type": "string"
 					},
-					"name": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
 					"status": {
 						"type": "string",
 						"enum": [
@@ -462,6 +456,12 @@
 							"PAUSED",
 							"CLOSED"
 						]
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
 					}
 				},
 				"type": "object",
@@ -504,12 +504,6 @@
 					"phone": {
 						"type": "string"
 					},
-					"name": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
 					"status": {
 						"type": "string",
 						"enum": [
@@ -517,6 +511,12 @@
 							"PAUSED",
 							"CLOSED"
 						]
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
 					}
 				},
 				"type": "object",

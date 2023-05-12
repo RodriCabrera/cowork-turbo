@@ -1,4 +1,4 @@
-import { PrismaClient, Cowork } from '@prisma/client'
+import { PrismaClient, Cowork, Prisma } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import {
   EditCoworkInput,
@@ -93,28 +93,29 @@ export default class CoworkService {
     pagination?: { count?: number; cursor?: string }
   ): Promise<PaginatedCoworks | undefined> {
     try {
-      const result = await this._client.cowork.findMany({
+      const queryOptions: Prisma.CoworkFindManyArgs = {
         take: pagination?.count || 10,
-        skip: pagination?.cursor ? 1 : 0,
         where: {
           ...this.$getCoworkFilterParameters(filters),
           address: this.$getAddressFilterParameters(filters)
         },
         orderBy: this.$getSortParameter(sort),
-        cursor: pagination?.cursor
-          ? {
-              id: pagination.cursor
-            }
-          : {},
         include: {
           address: true,
           amenities: true,
           openSchedule: true
         }
-      })
+      }
+      if (pagination?.cursor) {
+        queryOptions.skip = 1
+        queryOptions.cursor = { id: pagination.cursor }
+      }
+      const results = (await this._client.cowork.findMany(
+        queryOptions
+      )) as CoworkFull[]
       return {
-        result,
-        cursor: result[result.length - 1].id
+        results,
+        cursor: results[results.length - 1].id
       }
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')

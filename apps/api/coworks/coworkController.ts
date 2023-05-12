@@ -30,7 +30,7 @@ export default class CoworkController {
    * @param city
    * @param country
    * @param sort field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)
-   * @returns PaginatedResponse<CoworkFull[]>
+   * @returns PaginatedCoworks
    */
   @Get('/')
   static async getCoworks(
