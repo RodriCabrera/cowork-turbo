@@ -6,6 +6,7 @@ import {
   OpenSchedule,
   Status
 } from '@prisma/client'
+import { PaginatedResponse } from 'types'
 
 const createSchema = CoworkValidate.getCreateSchema()
 const editSchema = CoworkValidate.getEditSchema()
@@ -14,8 +15,8 @@ export type CreateCoworkInput = ReturnType<typeof createSchema.parse>
 export type EditCoworkInput = ReturnType<typeof editSchema.parse>
 export type CoworkFull = Cowork & {
   address: Address
-  amenities?: CoworkAmenities
-  openSchedule?: OpenSchedule
+  amenities: CoworkAmenities | null
+  openSchedule: OpenSchedule | null
 }
 
 export type CoworkFilters = {
@@ -23,3 +24,5 @@ export type CoworkFilters = {
   city?: Address['city']
   country?: Address['country']
 }
+
+export type PaginatedCoworks = PaginatedResponse<CoworkFull[]>

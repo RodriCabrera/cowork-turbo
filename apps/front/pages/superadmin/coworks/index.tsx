@@ -15,7 +15,7 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
     return await coworksRes.json()
   }
 
-  const { isLoading, data: coworks } = useQuery<CoworkFullGetRes[]>({
+  const { isLoading, data: coworks } = useQuery<CoworkFullGetRes>({
     queryKey: 'coworks',
     queryFn: getCoworks
   })
@@ -32,7 +32,7 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
             Add Cowork
           </Link>
         </div>
-        <CoworksTable coworks={coworks || []} isLoading={isLoading} />
+        <CoworksTable coworks={coworks?.results || []} isLoading={isLoading} />
       </main>
     </SuperadminLayout>
   )

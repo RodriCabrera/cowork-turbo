@@ -5,7 +5,7 @@ import MailInterface from './MailInterface'
 
 export default class MailService {
   private static instance: MailService
-  private transporter: Transporter
+  private transporter?: Transporter
 
   private constructor() {}
   static getInstance(): MailService {
@@ -27,7 +27,7 @@ export default class MailService {
   }
 
   async sendMail(options: MailInterface) {
-    const sent = await this.transporter.sendMail({
+    const sent = await this.transporter?.sendMail({
       ...options
     })
     if (Object.hasOwn(sent, 'accepted') && sent.accepted instanceof Array) {
@@ -41,6 +41,6 @@ export default class MailService {
   }
 
   async verifyConnection() {
-    return this.transporter.verify()
+    return this.transporter?.verify()
   }
 }

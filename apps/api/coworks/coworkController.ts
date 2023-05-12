@@ -30,16 +30,21 @@ export default class CoworkController {
    * @param city
    * @param country
    * @param sort field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)
-   * @returns CoworkFull[]
+   * @returns PaginatedCoworks
    */
   @Get('/')
   static async getCoworks(
     @Query('status') status?: CoworkFilters['status'],
     @Query('city') city?: string,
     @Query('country') country?: string,
-    @Query('sort') sort?: string
+    @Query('sort') sort?: string,
+    @Query('count') count?: number,
+    @Query('cursor') cursor?: string
   ) {
-    return CoworkService.fetchAll({ status, city, country }, sort)
+    return CoworkService.fetchAll({ status, city, country }, sort, {
+      count,
+      cursor
+    })
   }
 
   @Response<CustomError>(404, 'Cowork not found')

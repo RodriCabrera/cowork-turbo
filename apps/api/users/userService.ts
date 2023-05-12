@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import { loginTemplate } from '../mail/templates'
+import config from '../config/config'
 
 export default class UserService {
   private static _client = new PrismaClient()
@@ -56,7 +57,7 @@ export default class UserService {
           ...user,
           token
         },
-        process.env.SESSION_SECRET
+        config.sessionSecret
       )
       const mailService = MailService.getInstance()
       await mailService.sendMail({

@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import PrismaErrors from '../errors/prismaErrors'
 import { loginTemplate } from '../mail/templates'
+import config from '../config/config'
 
 export default class SuperAdminService {
   static _client = new PrismaClient()
@@ -29,14 +30,14 @@ export default class SuperAdminService {
           ...superAdmin,
           token
         },
-        process.env.SESSION_SECRET
+        config.sessionSecret
       )
       const mailService = MailService.getInstance()
       await mailService.sendMail({
         from: 'noreply@localhost.com',
         to: superAdmin.mail,
         subject: 'Login to your account',
-        html: loginTemplate(superAdmin.name, userJWT, 'superadmin')
+        html: loginTemplate(superAdmin?.name || '', userJWT, 'superadmin')
       })
       return true
     } catch (err) {

@@ -17,25 +17,25 @@ export default class CoworkValidate {
     city: z.string(),
     streetName: z.string(),
     number: z.string(),
-    floor: z.string().optional().nullable(),
-    apartment: z.string().optional().nullable(),
-    postalCode: z.string().optional().nullable()
+    floor: z.string().nullish(),
+    apartment: z.string().nullish(),
+    postalCode: z.string().nullish()
   })
 
   private static $openScheduleSchema = z.object({
-    mon: z.string().optional(),
-    tue: z.string().optional(),
-    wed: z.string().optional(),
-    thu: z.string().optional(),
-    fri: z.string().optional(),
-    sat: z.string().optional(),
-    sun: z.string().optional()
+    mon: z.string().nullish(),
+    tue: z.string().nullish(),
+    wed: z.string().nullish(),
+    thu: z.string().nullish(),
+    fri: z.string().nullish(),
+    sat: z.string().nullish(),
+    sun: z.string().nullish()
   })
 
   private static $amenitiesSchema = z.object({
-    wifi: z.boolean().optional().nullable(),
-    bathrooms: z.number().optional().nullable(),
-    buffet: z.boolean().optional().nullable()
+    wifi: z.boolean().nullish(),
+    bathrooms: z.number().nullish(),
+    buffet: z.boolean().nullish()
   })
 
   private static $createSchema = this.$baseCoworkSchema.extend({
@@ -43,9 +43,9 @@ export default class CoworkValidate {
   })
 
   private static $editSchema = this.$baseCoworkSchema.extend({
-    amenities: this.$amenitiesSchema.optional(),
-    openSchedule: this.$openScheduleSchema.optional(),
-    address: this.$addressSchema.optional()
+    amenities: this.$amenitiesSchema.nullish(),
+    openSchedule: this.$openScheduleSchema.nullish(),
+    address: this.$addressSchema.nullish()
   })
 
   static validateCreate(data: any) {

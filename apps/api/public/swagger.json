@@ -129,16 +129,19 @@
 						"format": "double"
 					},
 					"phone": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
 					"description": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"email": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"name": {
 						"type": "string"
@@ -294,21 +297,54 @@
 					{
 						"properties": {
 							"openSchedule": {
-								"$ref": "#/components/schemas/OpenSchedule"
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/OpenSchedule"
+									}
+								],
+								"nullable": true
 							},
 							"amenities": {
-								"$ref": "#/components/schemas/CoworkAmenities"
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/CoworkAmenities"
+									}
+								],
+								"nullable": true
 							},
 							"address": {
 								"$ref": "#/components/schemas/Address"
 							}
 						},
 						"required": [
+							"openSchedule",
+							"amenities",
 							"address"
 						],
 						"type": "object"
 					}
 				]
+			},
+			"PaginatedResponse_CoworkFull-Array_": {
+				"properties": {
+					"cursor": {
+						"type": "string"
+					},
+					"results": {
+						"items": {
+							"$ref": "#/components/schemas/CoworkFull"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"cursor",
+					"results"
+				],
+				"type": "object"
+			},
+			"PaginatedCoworks": {
+				"$ref": "#/components/schemas/PaginatedResponse_CoworkFull-Array_"
 			},
 			"CustomError": {
 				"properties": {
@@ -413,12 +449,6 @@
 					"phone": {
 						"type": "string"
 					},
-					"name": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
 					"status": {
 						"type": "string",
 						"enum": [
@@ -426,6 +456,12 @@
 							"PAUSED",
 							"CLOSED"
 						]
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
 					}
 				},
 				"type": "object",
@@ -468,12 +504,6 @@
 					"phone": {
 						"type": "string"
 					},
-					"name": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
 					"status": {
 						"type": "string",
 						"enum": [
@@ -481,6 +511,12 @@
 							"PAUSED",
 							"CLOSED"
 						]
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
 					}
 				},
 				"type": "object",
@@ -731,14 +767,11 @@
 				"operationId": "GetCoworks",
 				"responses": {
 					"200": {
-						"description": "CoworkFull[]",
+						"description": "PaginatedResponse<CoworkFull[]>",
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/CoworkFull"
-									},
-									"type": "array"
+									"$ref": "#/components/schemas/PaginatedCoworks"
 								}
 							}
 						}
@@ -777,6 +810,23 @@
 						"description": "field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)",
 						"in": "query",
 						"name": "sort",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "count",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "cursor",
 						"required": false,
 						"schema": {
 							"type": "string"

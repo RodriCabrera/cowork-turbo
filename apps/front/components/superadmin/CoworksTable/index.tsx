@@ -2,7 +2,7 @@ import React from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
-import { CoworkFullGetRes } from 'types'
+import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
@@ -10,13 +10,13 @@ import { Placeholder } from './Placeholder'
 const { Cell, Body, Header, Row } = Table
 
 interface CoworksTableProps {
-  coworks: CoworkFullGetRes[] | undefined
+  coworks: CoworkFullGetRes['results'] | undefined
   isLoading: boolean
 }
 
 export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
   const columns: Column<
-    CoworkFullGetRes & { actions?: string; status?: string }
+    ArrayElement<CoworkFullGetRes['results']> & { actions?: string; status?: string }
   >[] = React.useMemo(
     () => [
       {
