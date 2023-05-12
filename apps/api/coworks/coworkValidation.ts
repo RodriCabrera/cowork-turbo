@@ -43,9 +43,9 @@ export default class CoworkValidate {
   })
 
   private static $editSchema = this.$baseCoworkSchema.extend({
-    amenities: this.$amenitiesSchema.optional(),
-    openSchedule: this.$openScheduleSchema.optional(),
-    address: this.$addressSchema.optional()
+    amenities: this.$amenitiesSchema.nullish(),
+    openSchedule: this.$openScheduleSchema.nullish(),
+    address: this.$addressSchema.nullish()
   })
 
   static validateCreate(data: any) {
