@@ -93,11 +93,18 @@ export default class CoworkService {
   ): Promise<CoworkFull[]> {
     try {
       return await this._client.cowork.findMany({
+        take: pagination.count || 10,
+        skip: pagination.cursor ? 1 : 0,
         where: {
           ...this.$getCoworkFilterParameters(filters),
           address: this.$getAddressFilterParameters(filters)
         },
         orderBy: this.$getSortParameter(sort),
+        cursor: pagination.cursor
+          ? {
+              id: pagination.cursor
+            }
+          : {},
         include: {
           address: true,
           amenities: true,
