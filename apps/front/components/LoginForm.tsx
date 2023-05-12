@@ -1,4 +1,5 @@
 import Axios from '@/lib/axios'
+import { AxiosError } from 'axios'
 import { useState } from 'react'
 
 const STATUS = {
@@ -12,32 +13,28 @@ type StatusKeys = keyof typeof STATUS
 
 export const LoginForm = ({ endpoint }: { endpoint: string }) => {
   const [enteredEmail, setEnteredEmail] = useState<string>('')
-  const api = Axios.getInstance()
-  // TODO: Display status (now its only text) they should alter the UI
   const [queryStatus, setQueryStatus] = useState<StatusKeys>(STATUS.waiting)
   const [btnMessage, setBtnMessage] = useState<string>('Sign in')
+
+  const api = Axios.getInstance()
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setQueryStatus(STATUS.loading)
     setBtnMessage('Checking email...')
     api
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
+      .post(endpoint, {
         email: enteredEmail
       })
       .then((res) => {
-        if (res.status === 200) {
-          setQueryStatus(STATUS.sent)
-          // TODO: Change form to display just the OK message
-          setBtnMessage('Email sent, check your inbox')
-        }
-        if (res.status === 401) throw new Error('Email not found')
+        setQueryStatus(STATUS.sent)
+        setBtnMessage('Email sent, check your inbox')
       })
-      .catch((err) => {
+      .catch((err: AxiosError) => {
         setQueryStatus(STATUS.error)
         if (err instanceof Error) {
-          setBtnMessage(err.message)
-        } else setBtnMessage('Could not send mail')
+          setBtnMessage('Could not send mail')
+        }
       })
       .finally(() => {
         setTimeout(() => {
@@ -77,7 +74,10 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
             </div>
             <button
               type="submit"
-              className="w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black hover:bg-green-200/75 focus:outline-none focus:ring-4"
+              className={`w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black hover:bg-green-200/75 focus:outline-none focus:ring-4 ${
+                queryStatus === STATUS.error &&
+                'bg-red-100/75 hover:bg-red-200/75'
+              }`}
             >
               {btnMessage}
             </button>
