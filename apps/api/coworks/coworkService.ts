@@ -4,7 +4,8 @@ import {
   EditCoworkInput,
   CreateCoworkInput,
   CoworkFull,
-  CoworkFilters
+  CoworkFilters,
+  PaginatedCoworks
 } from './coworkTypes'
 import CoworkValidate from './coworkValidation'
 
@@ -14,7 +15,7 @@ export default class CoworkService {
   static async createCowork(
     data: CreateCoworkInput,
     author: string
-  ): Promise<Cowork> {
+  ): Promise<Cowork | undefined> {
     try {
       const parsedData = CoworkValidate.validateCreate(data)
       return await this._client.cowork.create({
@@ -75,7 +76,7 @@ export default class CoworkService {
     return params
   }
 
-  private static $getSortParameter(sort: string) {
+  private static $getSortParameter(sort?: string) {
     if (!sort) return {}
     if (sort[0] === '-') {
       return CoworkValidate.insertValueIntoCoworkObject(
@@ -90,17 +91,17 @@ export default class CoworkService {
     filters?: CoworkFilters,
     sort?: string,
     pagination?: { count?: number; cursor?: string }
-  ): Promise<CoworkFull[]> {
+  ): Promise<PaginatedCoworks | undefined> {
     try {
-      return await this._client.cowork.findMany({
-        take: pagination.count || 10,
-        skip: pagination.cursor ? 1 : 0,
+      const result = await this._client.cowork.findMany({
+        take: pagination?.count || 10,
+        skip: pagination?.cursor ? 1 : 0,
         where: {
           ...this.$getCoworkFilterParameters(filters),
           address: this.$getAddressFilterParameters(filters)
         },
         orderBy: this.$getSortParameter(sort),
-        cursor: pagination.cursor
+        cursor: pagination?.cursor
           ? {
               id: pagination.cursor
             }
@@ -111,6 +112,10 @@ export default class CoworkService {
           openSchedule: true
         }
       })
+      return {
+        result,
+        cursor: result[result.length - 1].id
+      }
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')
       CoworkValidate.parseError(err)
@@ -118,7 +123,7 @@ export default class CoworkService {
     }
   }
 
-  static async fetchById(id: string): Promise<CoworkFull> {
+  static async fetchById(id: string): Promise<CoworkFull | undefined> {
     try {
       return await this._client.cowork.findUniqueOrThrow({
         where: { id },
@@ -134,7 +139,10 @@ export default class CoworkService {
     }
   }
 
-  static async edit(id: string, data: EditCoworkInput): Promise<CoworkFull> {
+  static async edit(
+    id: string,
+    data: EditCoworkInput
+  ): Promise<CoworkFull | undefined> {
     try {
       const parsedData = CoworkValidate.validateEdit(data)
       return await this._client.cowork.update({
@@ -172,7 +180,7 @@ export default class CoworkService {
     }
   }
 
-  static async delete(id: string): Promise<boolean> {
+  static async delete(id: string): Promise<boolean | undefined> {
     try {
       return !!(await this._client.cowork.delete({ where: { id } }))
     } catch (err) {

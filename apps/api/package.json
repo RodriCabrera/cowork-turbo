@@ -39,6 +39,7 @@
     "tailwind-config": "*",
     "ts-node": "^10.9.1",
     "tsconfig": "*",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "types": "*"
   }
 }

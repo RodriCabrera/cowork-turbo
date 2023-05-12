@@ -44,6 +44,11 @@ export interface Cowork {
   rating: number
 }
 
+export type PaginatedResponse<T> = {
+  result: T
+  cursor: string
+}
+
 export type CoworkCreateReq = CreateCoworkInput
 export type CoworkEditReq = EditCoworkInput
 export type CoworkFullGetRes = CoworkFull

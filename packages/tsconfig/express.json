@@ -1,4 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "ExpressJs",
+  "extends": "./base.json",
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
@@ -9,9 +12,8 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
-  }
+    "resolveJsonModule": true,
+    "baseUrl": "."
+  },
+  "include": ["**/*.ts"]
 }
