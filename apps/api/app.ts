@@ -6,6 +6,7 @@ import notAllowedHandler from './errors/404handler'
 
 // Desacoplar
 import swaggerUi from 'swagger-ui-express'
+import { Server } from 'http'
 
 export interface Router {
   path: string
@@ -14,6 +15,7 @@ export interface Router {
 
 export class App {
   app: express.Application
+  private _server: Server = new Server()
 
   constructor(
     public port: string,
@@ -59,12 +61,16 @@ export class App {
     this._initMiddleware()
     this._initRoutes()
     this._initErrorHandlers()
-    const server = this.app.listen(this.port, () => {
+    this._server = this.app.listen(this.port, () => {
       console.log(`${this.name} Server running on port ${this.port}`)
     })
-    server.on('error', (err) => {
+    this._server.on('error', (err) => {
       console.error('Server error: ', err)
       return this.start()
     })
+  }
+
+  stop() {
+    this._server.close()
   }
 }

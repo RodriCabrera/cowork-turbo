@@ -18,4 +18,4 @@ const app = new App(port.toString(), routes, 'Cowork API')
 
 app.start()
 
-export default app.app
+export default app
