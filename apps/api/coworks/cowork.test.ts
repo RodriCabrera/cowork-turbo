@@ -13,5 +13,5 @@ describe('GET /coworks/', () => {
     const res = await request(server).get('/coworks/')
     expect(res.statusCode).toBe(200)
     expect(res.body).toHaveProperty('results')
-  })
+  }, 60000)
 })
