@@ -39,11 +39,13 @@ export default class CoworkController {
     @Query('country') country?: string,
     @Query('sort') sort?: string,
     @Query('count') count?: number,
-    @Query('cursor') cursor?: string
+    @Query('cursor') cursor?: string,
+    @Query('page') page?: number
   ) {
     return CoworkService.fetchAll({ status, city, country }, sort, {
       count,
-      cursor
+      cursor,
+      page
     })
   }
 
