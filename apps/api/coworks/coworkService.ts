@@ -87,13 +87,50 @@ export default class CoworkService {
     return CoworkValidate.insertValueIntoCoworkObject(sort, 'asc')
   }
 
+  private static async $paginateByCursor(
+    queryOptions: Prisma.CoworkFindManyArgs,
+    cursor?: string
+  ) {
+    queryOptions.skip = 1
+    if (cursor) queryOptions.cursor = { id: cursor }
+    const results = (await this._client.cowork.findMany(
+      queryOptions
+    )) as CoworkFull[]
+    return {
+      results,
+      cursor: results[results.length - 1]?.id || undefined,
+      page: undefined,
+      totalPages: undefined
+    }
+  }
+
+  private static async $paginateAbsolutely(
+    queryOptions: Prisma.CoworkFindManyArgs,
+    page: number
+  ) {
+    queryOptions.skip = (queryOptions.take || 10) * (page - 1)
+    const count = await this._client.cowork.count({
+      where: queryOptions.where
+    })
+    const totalPages = Math.ceil(count / (queryOptions.take || 10))
+    const results = (await this._client.cowork.findMany(
+      queryOptions
+    )) as CoworkFull[]
+    return {
+      results,
+      cursor: undefined,
+      page: page.toString(),
+      totalPages: totalPages.toString()
+    }
+  }
+
   static async fetchAll(
     filters?: CoworkFilters,
     sort?: string,
-    pagination?: { count?: number; cursor?: string }
+    pagination?: { count?: number; cursor?: string; page?: number }
   ): Promise<PaginatedCoworks | undefined> {
     try {
-      const queryOptions: Prisma.CoworkFindManyArgs = {
+      const queryOptions = {
         take: pagination?.count || 10,
         where: {
           ...this.$getCoworkFilterParameters(filters),
@@ -106,17 +143,9 @@ export default class CoworkService {
           openSchedule: true
         }
       }
-      if (pagination?.cursor) {
-        queryOptions.skip = 1
-        queryOptions.cursor = { id: pagination.cursor }
-      }
-      const results = (await this._client.cowork.findMany(
-        queryOptions
-      )) as CoworkFull[]
-      return {
-        results,
-        cursor: results[results.length - 1].id
-      }
+      if (pagination?.page) {
+        return this.$paginateAbsolutely(queryOptions, pagination.page)
+      } else return this.$paginateByCursor(queryOptions, pagination?.cursor)
     } catch (err) {
       PrismaErrors.parseError(err, 'Coworks')
       CoworkValidate.parseError(err)
