@@ -4,11 +4,10 @@ import 'dotenv/config'
 
 const server = app.app
 
-afterAll(() => {
-  app.stop()
-})
-
 describe('GET /coworks/', () => {
+  afterAll(() => {
+    app.stop()
+  })
   it('Should return status code 200 and a results array on body', async () => {
     const res = await request(server).get('/coworks/')
     expect(res.statusCode).toBe(200)

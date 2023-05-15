@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit --runInBand --detectOpenHandles",
     "dev": "yarn swagger && nodemon --ignore ./public index.ts",
     "swagger": "tsoa spec",
     "lint": "yarn eslint ."
