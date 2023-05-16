@@ -46,7 +46,9 @@ export interface Cowork {
 
 export type PaginatedResponse<T> = {
   results: T
-  cursor: string
+  cursor?: string
+  page?: string
+  totalPages?: string
 }
 
 export type CoworkCreateReq = CreateCoworkInput

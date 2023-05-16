@@ -324,6 +324,12 @@
 			},
 			"PaginatedResponse_CoworkFull-Array_": {
 				"properties": {
+					"totalPages": {
+						"type": "string"
+					},
+					"page": {
+						"type": "string"
+					},
 					"cursor": {
 						"type": "string"
 					},
@@ -335,7 +341,6 @@
 					}
 				},
 				"required": [
-					"cursor",
 					"results"
 				],
 				"type": "object"
@@ -827,6 +832,15 @@
 						"required": false,
 						"schema": {
 							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
