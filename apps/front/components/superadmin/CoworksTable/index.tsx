@@ -15,8 +15,10 @@ export const CoworksTable = () => {
   const [pageSize, setPageSize] = useState(10)
   const [pageIndex, setPageIndex] = useState(1)
 
-  const { coworks, isLoading, prefetchNext, isFetching, totalPages } =
-    useGetCoworks({ pageIndex, pageSize })
+  const { coworks, isLoading, isFetching, totalPages } = useGetCoworks({
+    pageIndex,
+    pageSize
+  })
 
   const nextPage = () => setPageIndex((prevState) => prevState + 1)
   const prevPage = () => setPageIndex((prevState) => prevState - 1)
@@ -174,7 +176,6 @@ export const CoworksTable = () => {
               <button
                 onClick={nextPage}
                 disabled={pageIndex === totalPages}
-                onMouseEnter={prefetchNext}
                 className="cursor-pointer rounded-md border-2 bg-gray-50/100 px-3 py-2 text-sm font-medium"
               >
                 {'>'}

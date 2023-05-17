@@ -14,20 +14,17 @@ export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
   const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
     AxiosResponse<CoworkFullGetRes>
   >({
-    queryKey: ['coworks', `pageSize:${pageSize}`, `pageIndex:${pageIndex}`],
+    queryKey: ['coworks', { pageSize, pageIndex }],
     queryFn: () => getCoworks(pageIndex),
-    keepPreviousData: true
+    keepPreviousData: true,
+    refetchOnWindowFocus: false
   })
 
-  const prefetchNext = () => {
+  if (data) {
     queryClient.prefetchQuery({
-      queryKey: [
-        'coworks',
-        `pageSize:${pageSize}`,
-        `pageIndex:${pageIndex + 1}`
-      ],
+      queryKey: ['coworks', { pageSize, pageIndex: pageIndex + 1 }],
       queryFn: () => getCoworks(pageIndex + 1),
-      staleTime: 5000
+      staleTime: 20000
     })
   }
 
@@ -37,7 +34,6 @@ export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
     isFetching,
     isError,
     isPreviousData,
-    prefetchNext,
     totalPages: Number(data?.data.totalPages || 1)
   }
 }
