@@ -4,10 +4,10 @@ import { useQuery } from 'react-query'
 
 import { CoworkFullGetRes } from 'types'
 
-import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { CoworksTable } from '@/components/superadmin/CoworksTable'
-import { PropsWithSuperadmin } from '@/types/superadmin'
-import { getSuperAdminData } from '@/lib/superadmin'
+import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { CoworksTable } from '@/modules/coworks/components/CoworksTable'
+import { PropsWithSuperadmin } from '@/common/types'
+import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
 
 export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
   const getCoworks = async () => {

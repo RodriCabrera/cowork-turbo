@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
-import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { LoginForm } from '../../components/LoginForm'
+import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { LoginForm } from '../../modules/auth/components/LoginForm'
 
 export const SuperadminLoginPage = () => (
   <LoginForm endpoint="superadmins/login" />

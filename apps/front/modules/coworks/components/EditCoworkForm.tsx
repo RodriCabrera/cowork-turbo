@@ -4,7 +4,7 @@ import { FieldError, useForm } from 'react-hook-form'
 
 import { CoworkEditReq } from 'types'
 
-import { useApi } from '@/context/apiContext'
+import { useApi } from '@/common/context/apiContext'
 import { CoworkFull } from '@/../api/coworks/coworkTypes'
 
 interface CoworkFormProps {

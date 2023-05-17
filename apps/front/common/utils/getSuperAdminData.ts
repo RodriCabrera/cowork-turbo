@@ -1,4 +1,4 @@
-import { withSessionSsr } from './withSession'
+import { withSessionSsr } from '../../modules/auth/utils/withSession'
 
 export const getSuperAdminData = withSessionSsr(async ({ req }) => {
   return {

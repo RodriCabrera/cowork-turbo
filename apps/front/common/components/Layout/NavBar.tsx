@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import { bungeeHairline } from '@/styles/fonts'
 import { FiMenu } from 'react-icons/fi'
+
+import { bungeeHairline } from '@/common/styles/fonts'
 
 const dropdownOptions = [
   {
