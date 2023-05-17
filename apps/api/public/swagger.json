@@ -129,19 +129,16 @@
 						"format": "double"
 					},
 					"phone": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
 					"description": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"email": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"name": {
 						"type": "string"

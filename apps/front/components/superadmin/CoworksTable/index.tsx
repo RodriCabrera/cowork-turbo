@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
@@ -6,18 +6,28 @@ import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
+import { useGetCoworks } from '@/hooks/useGetCoworks'
+import { COLORS_BY_STATUS } from './constants'
+import { Pagination } from '@/components/pagination'
+import { usePagination } from '@/hooks/usePagination'
 
 const { Cell, Body, Header, Row } = Table
 
-interface CoworksTableProps {
-  coworks: CoworkFullGetRes['results'] | undefined
-  isLoading: boolean
-}
+export const CoworksTable = () => {
+  const { pageSize, pageIndex, nextPage, prevPage, handlePageSizeChange } =
+    usePagination()
 
-export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
+  const { coworks, isLoading, isFetching, totalPages } = useGetCoworks({
+    pageIndex,
+    pageSize
+  })
+
   const columns: Column<
-    ArrayElement<CoworkFullGetRes['results']> & { actions?: string; status?: string }
-  >[] = React.useMemo(
+    ArrayElement<CoworkFullGetRes['results']> & {
+      actions?: string
+      status?: string
+    }
+  >[] = useMemo(
     () => [
       {
         Header: 'coworks',
@@ -31,14 +41,9 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
         Header: 'status',
         accessor: 'status',
         Cell: ({ value }) => {
-          const colorsByStatus = {
-            ACTIVE: 'text-green-600 bg-green-200',
-            CLOSED: 'text-yellow-600 bg-yellow-200',
-            PAUSED: 'text-gray-600 bg-gray-200'
-          }
           return (
             <span
-              className={`rounded-full  px-3 py-1 text-xs ${colorsByStatus[value]}`}
+              className={`rounded-full  px-3 py-1 text-xs ${COLORS_BY_STATUS[value]}`}
             >
               {value}
             </span>
@@ -103,8 +108,9 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
               </thead>
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
-                {coworks?.length === 0 && <Placeholder isLoading={isLoading} />}
-                {
+                {isLoading || isFetching ? (
+                  <Placeholder isLoading={isLoading || isFetching} />
+                ) : (
                   // Loop over the table rows
                   rows.map((row) => {
                     // Prepare the row for display
@@ -143,10 +149,17 @@ export const CoworksTable = ({ coworks, isLoading }: CoworksTableProps) => {
                       </Row>
                     )
                   })
-                }
+                )}
               </Body>
             </Table>
           </div>
+          <Pagination
+            pageIndex={pageIndex}
+            totalPages={totalPages}
+            handlePageSizeChange={handlePageSizeChange}
+            prevPage={prevPage}
+            nextPage={nextPage}
+          />
         </div>
       </div>
     </div>
