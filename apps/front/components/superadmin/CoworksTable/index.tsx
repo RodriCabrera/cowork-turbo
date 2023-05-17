@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useMemo } from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
@@ -9,28 +9,25 @@ import { Placeholder } from './Placeholder'
 import { useGetCoworks } from '@/hooks/useGetCoworks'
 import { COLORS_BY_STATUS } from './constants'
 import { Pagination } from '@/components/pagination'
+import { usePagination } from '@/hooks/usePagination'
 
 const { Cell, Body, Header, Row } = Table
 
 export const CoworksTable = () => {
-  const [pageSize, setPageSize] = useState(10)
-  const [pageIndex, setPageIndex] = useState(1)
+  const { pageSize, pageIndex, nextPage, prevPage, handlePageSizeChange } =
+    usePagination()
 
   const { coworks, isLoading, isFetching, totalPages } = useGetCoworks({
     pageIndex,
     pageSize
   })
 
-  const nextPage = () => setPageIndex((prevState) => prevState + 1)
-  const prevPage = () => setPageIndex((prevState) => prevState - 1)
-  const handlePageSizeChange = (size: number) => setPageSize(size)
-
   const columns: Column<
     ArrayElement<CoworkFullGetRes['results']> & {
       actions?: string
       status?: string
     }
-  >[] = React.useMemo(
+  >[] = useMemo(
     () => [
       {
         Header: 'coworks',
