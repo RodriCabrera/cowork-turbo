@@ -1,26 +1,40 @@
-import { useState } from 'react'
 import { AxiosResponse } from 'axios'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 import { CoworkFullGetRes } from '@/../../packages/types'
 import { useApi } from '@/context/apiContext'
 
-export const useGetCoworks = () => {
+export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
+  const queryClient = useQueryClient()
   const api = useApi()
-  const [pageSize, setPageSize] = useState(2)
-  const [cursor, setCursor] = useState<string>('')
+  console.log('TODO?')
 
-  const getCoworks = async () =>
-    await api.get(`/coworks?count=${pageSize}&cursor=${cursor}`)
+  const getCoworks = async (page: number) =>
+    await api.get(`/coworks?count=${pageSize}&page=${page}`)
 
-  const { isLoading, isError, error, data, isFetching, isPreviousData } =
-    useQuery<AxiosResponse<CoworkFullGetRes>>({
-      queryKey: ['coworks', cursor],
-      queryFn: () => getCoworks(),
-      keepPreviousData: true
+  const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
+    AxiosResponse<CoworkFullGetRes>
+  >({
+    queryKey: ['coworks', pageIndex],
+    queryFn: () => getCoworks(pageIndex),
+    keepPreviousData: true
+  })
+
+  const prefetchNext = () => {
+    queryClient.prefetchQuery({
+      queryKey: ['coworks', pageIndex + 1],
+      queryFn: () => getCoworks(pageIndex + 1),
+      staleTime: 5000
     })
+  }
 
-  const nextPage = () => setCursor(data?.data.cursor || '')
-
-  return { isLoading, coworks: data?.data.results, pageSize, nextPage }
+  return {
+    coworks: data?.data.results,
+    isLoading,
+    isFetching,
+    isError,
+    isPreviousData,
+    prefetchNext,
+    totalPages: Number(data?.data.totalPages || 1)
+  }
 }

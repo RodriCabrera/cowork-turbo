@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Column, useTable } from 'react-table'
 
 import { Table } from 'ui'
@@ -7,11 +7,20 @@ import { CoworkFullGetRes, ArrayElement } from 'types'
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
 import { useGetCoworks } from '@/hooks/useGetCoworks'
+import { COLORS_BY_STATUS } from './constants'
 
 const { Cell, Body, Header, Row } = Table
 
 export const CoworksTable = () => {
-  const { coworks, isLoading, nextPage, pageSize } = useGetCoworks()
+  const [pageSize, setPageSize] = useState(5)
+  const [pageIndex, setPageIndex] = useState(1)
+
+  const { coworks, isLoading, prefetchNext, isFetching, totalPages } =
+    useGetCoworks({ pageIndex, pageSize })
+
+  const nextPage = () => setPageIndex((prevState) => prevState + 1)
+  const prevPage = () => setPageIndex((prevState) => prevState - 1)
+  const handlePageSizeChange = (size: number) => setPageSize(size)
 
   const columns: Column<
     ArrayElement<CoworkFullGetRes['results']> & {
@@ -32,14 +41,9 @@ export const CoworksTable = () => {
         Header: 'status',
         accessor: 'status',
         Cell: ({ value }) => {
-          const colorsByStatus = {
-            ACTIVE: 'text-green-600 bg-green-200',
-            CLOSED: 'text-yellow-600 bg-yellow-200',
-            PAUSED: 'text-gray-600 bg-gray-200'
-          }
           return (
             <span
-              className={`rounded-full  px-3 py-1 text-xs ${colorsByStatus[value]}`}
+              className={`rounded-full  px-3 py-1 text-xs ${COLORS_BY_STATUS[value]}`}
             >
               {value}
             </span>
@@ -104,8 +108,9 @@ export const CoworksTable = () => {
               </thead>
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
-                {!coworks?.length && <Placeholder isLoading={isLoading} />}
-                {
+                {isLoading || isFetching ? (
+                  <Placeholder isLoading={isLoading || isFetching} />
+                ) : (
                   // Loop over the table rows
                   rows.map((row) => {
                     // Prepare the row for display
@@ -144,11 +149,30 @@ export const CoworksTable = () => {
                       </Row>
                     )
                   })
-                }
+                )}
               </Body>
             </Table>
+          </div>
+          <div className="flex items-center justify-end gap-4 pb-8">
             <div>PAGE SIZE: {pageSize}</div>
-            <button onClick={() => nextPage()}>NEXT PAGE</button>
+            <button
+              onClick={prevPage}
+              disabled={pageIndex === 1}
+              className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium"
+            >
+              {'<'}
+            </button>
+            <p>
+              Page {pageIndex} of {totalPages}
+            </p>
+            <button
+              onClick={nextPage}
+              disabled={pageIndex === totalPages}
+              onMouseEnter={prefetchNext}
+              className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium"
+            >
+              {'>'}
+            </button>
           </div>
         </div>
       </div>
