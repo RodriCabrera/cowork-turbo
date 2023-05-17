@@ -13,8 +13,6 @@ describe('GET /coworks/', () => {
       const res = await request(server)
         .get('/coworks/')
         .type('application/json')
-        .retry(2)
-        .timeout(120000)
       expect(res.statusCode).toBe(200)
       expect(res.body).toHaveProperty('results')
     } catch (err) {
