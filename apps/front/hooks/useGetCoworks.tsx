@@ -7,7 +7,6 @@ import { useApi } from '@/context/apiContext'
 export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
   const queryClient = useQueryClient()
   const api = useApi()
-  console.log('TODO?')
 
   const getCoworks = async (page: number) =>
     await api.get(`/coworks?count=${pageSize}&page=${page}`)
@@ -15,14 +14,18 @@ export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
   const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
     AxiosResponse<CoworkFullGetRes>
   >({
-    queryKey: ['coworks', pageIndex],
+    queryKey: ['coworks', `pageSize:${pageSize}`, `pageIndex:${pageIndex}`],
     queryFn: () => getCoworks(pageIndex),
     keepPreviousData: true
   })
 
   const prefetchNext = () => {
     queryClient.prefetchQuery({
-      queryKey: ['coworks', pageIndex + 1],
+      queryKey: [
+        'coworks',
+        `pageSize:${pageSize}`,
+        `pageIndex:${pageIndex + 1}`
+      ],
       queryFn: () => getCoworks(pageIndex + 1),
       staleTime: 5000
     })

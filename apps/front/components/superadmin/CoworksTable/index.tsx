@@ -12,7 +12,7 @@ import { COLORS_BY_STATUS } from './constants'
 const { Cell, Body, Header, Row } = Table
 
 export const CoworksTable = () => {
-  const [pageSize, setPageSize] = useState(5)
+  const [pageSize, setPageSize] = useState(10)
   const [pageIndex, setPageIndex] = useState(1)
 
   const { coworks, isLoading, prefetchNext, isFetching, totalPages } =
@@ -153,26 +153,33 @@ export const CoworksTable = () => {
               </Body>
             </Table>
           </div>
-          <div className="flex items-center justify-end gap-4 pb-8">
-            <div>PAGE SIZE: {pageSize}</div>
-            <button
-              onClick={prevPage}
-              disabled={pageIndex === 1}
-              className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium"
-            >
-              {'<'}
-            </button>
-            <p>
-              Page {pageIndex} of {totalPages}
-            </p>
-            <button
-              onClick={nextPage}
-              disabled={pageIndex === totalPages}
-              onMouseEnter={prefetchNext}
-              className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium"
-            >
-              {'>'}
-            </button>
+          <div className="flex justify-end pb-8 pt-0">
+            <div className="flex items-center gap-4 rounded-md bg-white p-2">
+              <div>Page size:</div>
+              <select onChange={(e) => handlePageSizeChange(+e.target.value)}>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+              </select>
+              <button
+                onClick={prevPage}
+                disabled={pageIndex === 1}
+                className="cursor-pointer rounded-md border-2 bg-gray-50/100 px-3 py-2 text-sm font-medium"
+              >
+                {'<'}
+              </button>
+              <p>
+                Page {pageIndex} of {totalPages}
+              </p>
+              <button
+                onClick={nextPage}
+                disabled={pageIndex === totalPages}
+                onMouseEnter={prefetchNext}
+                className="cursor-pointer rounded-md border-2 bg-gray-50/100 px-3 py-2 text-sm font-medium"
+              >
+                {'>'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
