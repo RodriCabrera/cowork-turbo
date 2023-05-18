@@ -9,14 +9,8 @@ describe('GET /coworks/', () => {
     app.stop()
   })
   it('Should return status code 200 and a results array on body', async () => {
-    try {
-      const res = await request(server)
-        .get('/coworks/')
-        .type('application/json')
-      expect(res.statusCode).toBe(200)
-      expect(res.body).toHaveProperty('results')
-    } catch (err) {
-      console.error(err)
-    }
-  }, 120000)
+    const res = await request(server).get('/coworks/').type('application/json')
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toHaveProperty('results')
+  })
 })
