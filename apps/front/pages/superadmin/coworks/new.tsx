@@ -1,10 +1,10 @@
 import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-import { getSuperAdminData } from '@/lib/superadmin'
-import { PropsWithSuperadmin } from '@/types/superadmin'
-import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { NewCoworkForm } from '@/components/superadmin/NewCoworkForm'
+import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
+import { PropsWithSuperadmin } from '@/common/types'
+import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { NewCoworkForm } from '@/modules/coworks/components/NewCoworkForm'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()

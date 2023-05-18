@@ -1,6 +1,6 @@
-import Axios from '@/lib/axios'
-import { AxiosInstance } from 'axios'
 import { PropsWithChildren, createContext, useContext } from 'react'
+import Axios from '@/common/utils/axios'
+import { AxiosInstance } from 'axios'
 
 export const ApiContext = createContext<null | any>(null)
 

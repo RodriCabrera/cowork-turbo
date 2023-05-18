@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { useQuery, useQueryClient } from 'react-query'
 
 import { CoworkFullGetRes } from '@/../../packages/types'
-import { useApi } from '@/context/apiContext'
+import { useApi } from '@/common/context/apiContext'
 
 export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
   const queryClient = useQueryClient()

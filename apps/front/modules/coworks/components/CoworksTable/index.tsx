@@ -6,10 +6,10 @@ import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { ActionsCell } from './ActionsCell'
 import { Placeholder } from './Placeholder'
-import { useGetCoworks } from '@/hooks/useGetCoworks'
+import { useGetCoworks } from '@/modules/coworks/hooks/useGetCoworks'
 import { COLORS_BY_STATUS } from './constants'
-import { Pagination } from '@/components/pagination'
-import { usePagination } from '@/hooks/usePagination'
+import { Pagination } from '@/modules/coworks/components/CoworksTable/pagination'
+import { usePagination } from '@/modules/coworks/hooks/usePagination'
 
 const { Cell, Body, Header, Row } = Table
 

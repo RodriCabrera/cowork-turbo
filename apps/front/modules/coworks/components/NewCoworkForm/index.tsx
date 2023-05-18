@@ -8,8 +8,8 @@ import { CoworkCreateReq } from 'types'
 import {
   CreateCoworkValidationSchema,
   createCoworkSchema
-} from '@/validators/newCoworkValidation'
-import { useApi } from '@/context/apiContext'
+} from '@/modules/coworks/components/NewCoworkForm/newCoworkValidation'
+import { useApi } from '@/common/context/apiContext'
 
 export const NewCoworkForm = () => {
   const router = useRouter()

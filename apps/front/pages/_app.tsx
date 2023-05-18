@@ -3,9 +3,9 @@ import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import '../styles/globals.css'
+import '../common/styles/globals.css'
 
-import { BaseLayout } from '@/components/Layout'
+import { BaseLayout } from '@/common/components/Layout'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Toaster } from 'sonner'
 

@@ -2,10 +2,10 @@ import { ReactElement } from 'react'
 
 import { Cowork } from 'types'
 
-import { SuperadminLayout } from '@/components/superadmin/SuperadminLayout'
-import { withSessionSsr } from '@/lib/withSession'
-import { PropsWithSuperadmin } from '@/types/superadmin'
-import { EditCoworkForm } from '@/components/superadmin/EditCoworkForm'
+import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { withSessionSsr } from '@/modules/auth/utils/withSession'
+import { PropsWithSuperadmin } from '@/common/types'
+import { EditCoworkForm } from '@/modules/coworks/components/EditCoworkForm'
 import { CoworkFull } from '@/../api/coworks/coworkTypes'
 
 const EditCowork = ({

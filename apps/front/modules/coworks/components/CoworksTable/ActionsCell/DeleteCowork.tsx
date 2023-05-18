@@ -3,8 +3,8 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
 
-import { Modal } from '@/components/modals'
-import { useApi } from '@/context/apiContext'
+import { Modal } from '@/common/components/Modal'
+import { useApi } from '@/common/context/apiContext'
 
 export const DeleteCowork = ({ coworkId }: { coworkId: string }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)

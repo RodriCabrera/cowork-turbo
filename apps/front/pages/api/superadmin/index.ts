@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import jwt_decode from 'jwt-decode'
 
-import { withSessionRoute } from '@/lib/withSession'
+import { withSessionRoute } from '@/modules/auth/utils/withSession'
 import { SuperAdminData } from 'types'
 
 export default withSessionRoute(login)

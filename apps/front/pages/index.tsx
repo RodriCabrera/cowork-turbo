@@ -1,5 +1,5 @@
-import { CompanyBanner } from '@/components/banners/CompanyBanner'
-import { bungeeHairline } from '@/styles/fonts'
+import { CompanyBanner } from '@/modules/landing/banners/CompanyBanner'
+import { bungeeHairline } from '@/common/styles/fonts'
 import Image from 'next/image'
 
 const LandingPage = () => {

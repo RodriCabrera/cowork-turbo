@@ -1,4 +1,4 @@
-import { bungeeHairline } from '@/styles/fonts'
+import { bungeeHairline } from '@/common/styles/fonts'
 import Link from 'next/link'
 import React from 'react'
 

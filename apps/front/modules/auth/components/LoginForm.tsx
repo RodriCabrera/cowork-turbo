@@ -1,4 +1,4 @@
-import Axios from '@/lib/axios'
+import Axios from '@/common/utils/axios'
 import { AxiosError } from 'axios'
 import { useState } from 'react'
 
