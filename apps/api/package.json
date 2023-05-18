@@ -36,6 +36,7 @@
     "@types/uuid": "^9.0.1",
     "eslint-config-custom": "*",
     "jest": "^29.5.0",
+    "jest-mock-extended": "^3.0.4",
     "nodemon": "^2.0.22",
     "prisma": "^4.13.0",
     "supertest": "^6.3.3",
