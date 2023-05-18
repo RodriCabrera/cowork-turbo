@@ -33,13 +33,5 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Prepare test env
-          uses: SpicyPizza/create-envfile@v1.3
-          with:
-            envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-            directory: /apps/api
-            file_name: .env
-            fail_on_empty: true
-
       - name: Test
         run: yarn test
