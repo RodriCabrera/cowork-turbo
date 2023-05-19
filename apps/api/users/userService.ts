@@ -1,12 +1,11 @@
 import { PrismaClient } from '@prisma/client'
-import { compare, genSalt, hash } from 'bcryptjs'
 import CustomError, { ERROR_CODES } from '../errors/customError'
 import PrismaErrors from '../errors/prismaErrors'
-import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import { loginTemplate } from '../mail/templates'
 import config from '../config/config'
+import AuthUtils from '../utils/auth.utils'
 
 export default class UserService {
   private static _client = new PrismaClient()
@@ -34,9 +33,7 @@ export default class UserService {
 
   static async sendAuthEmail(email: string): Promise<boolean> {
     try {
-      const salt = await genSalt(10)
-      const token = uuid()
-      const cryptedToken = await hash(token, salt)
+      const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const user = await this._client.user.update({
         where: {
           mail: email
@@ -75,7 +72,7 @@ export default class UserService {
       const user = await this._client.user.findUniqueOrThrow({
         where: { id }
       })
-      if (user.token && (await compare(token, user.token))) {
+      if (user.token && (await AuthUtils.compareHashToken(token, user.token))) {
         await this._client.user.update({
           where: {
             id: user.id
