@@ -12,7 +12,6 @@ export default class SuperAdminService {
   static _client = new PrismaClient()
 
   static async sendAuthEmail(email: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const salt = await genSalt(10)
       const token = uuid()
@@ -43,13 +42,10 @@ export default class SuperAdminService {
     } catch (err) {
       PrismaErrors.parseError(err, 'Superadmin')
       return false
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async checkAuthorization(id: string, token: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const superAdmin = await this._client.superAdmin.findUniqueOrThrow({
         where: { id }
@@ -72,8 +68,6 @@ export default class SuperAdminService {
       )
     } catch (err) {
       throw PrismaErrors.parseError(err, 'Superadmin')
-    } finally {
-      this._client.$disconnect()
     }
   }
 }

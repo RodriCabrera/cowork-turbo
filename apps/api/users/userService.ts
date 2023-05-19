@@ -11,19 +11,15 @@ import config from '../config/config'
 export default class UserService {
   private static _client = new PrismaClient()
   static async fetchAll() {
-    this._client.$connect()
     try {
       const response = this._client.user.findMany()
       return response
     } catch (err) {
       console.error(err)
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async fetchById(id: string) {
-    this._client.$connect()
     try {
       const response = this._client.user.findUnique({
         where: {
@@ -33,13 +29,10 @@ export default class UserService {
       return response
     } catch (err) {
       console.error(err)
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async sendAuthEmail(email: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const salt = await genSalt(10)
       const token = uuid()
@@ -74,13 +67,10 @@ export default class UserService {
     } catch (err) {
       PrismaErrors.parseError(err, 'User')
       return false
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async checkAuthorization(id: string, token: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const user = await this._client.user.findUniqueOrThrow({
         where: { id }
@@ -103,8 +93,6 @@ export default class UserService {
       )
     } catch (err) {
       throw PrismaErrors.parseError(err, 'User')
-    } finally {
-      this._client.$disconnect()
     }
   }
 }
