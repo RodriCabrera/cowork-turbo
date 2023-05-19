@@ -9,7 +9,7 @@ export const CompanyBanner = () => {
           backgroundPosition: '-19px -19px'
         }}
       >
-        The future of work is the future of the work
+        Join us and choose where to turn your projects into reality!
       </header>
     </section>
   )

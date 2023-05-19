@@ -17,10 +17,11 @@ const LandingPage = () => {
           />
           <div className="flex max-w-2xl flex-col gap-4 p-6 text-center text-3xl md:text-left">
             <p className={`${bungeeHairline.className}`}>
-              We offer more than just one cowork
+              Experience work without limits
             </p>
             <p className=" text-2xl font-extralight">
-              Check out our growing list of coworks.
+              BaseBloom is here to bring spaces together so you can make your
+              ideas flourish anywhere.
             </p>
             <p className={`${bungeeHairline.className}`}>
               The decision is up to you
