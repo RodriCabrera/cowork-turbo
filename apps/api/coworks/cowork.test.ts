@@ -4,6 +4,9 @@ import CoworkService from './coworkService'
 import { Address } from '@prisma/client'
 import { CoworkFull } from './coworkTypes'
 import CustomError from '../errors/customError'
+import { ErrorInterface } from '../errors/errorInterface'
+import Auth from '../middleware/auth.middleware'
+import { Request, Response, NextFunction } from 'express'
 
 const mockAddress: Address = {
   id: '',
@@ -97,6 +100,20 @@ describe('coworks', () => {
             cursor: ''
           })
           expect(getCoworkServiceMock).toHaveBeenCalled()
+        })
+      })
+    })
+    describe('post cowork', () => {
+      describe('authenticated', () => {
+        describe('given data is valid', () => {
+          it('should return 200 and cowork data', async () => {
+            // TODO: Resolve authentication
+          })
+        })
+      })
+      describe('unauthenticated', () => {
+        it('should return 401 error', async () => {
+          // TODO: Resolve no authentication prevent middleware of being called
         })
       })
     })
