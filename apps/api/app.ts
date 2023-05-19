@@ -3,9 +3,11 @@ import cors from 'cors'
 import MailService from './mail/mailService'
 import errorHandler from './errors/errorHandler'
 import notAllowedHandler from './errors/404handler'
+import routes from './middleware/routers.middleware'
 
 // Desacoplar
 import swaggerUi from 'swagger-ui-express'
+import { Server } from 'http'
 
 export interface Router {
   path: string
@@ -14,17 +16,16 @@ export interface Router {
 
 export class App {
   app: express.Application
+  private _server: Server = new Server()
+  private _routers: Router[]
 
-  constructor(
-    public port: string,
-    private routers: Router[],
-    public name?: string
-  ) {
+  constructor(public port: string, public name?: string) {
     this.app = express()
+    this._routers = routes
   }
 
   private _initRoutes() {
-    this.routers.forEach((router) => {
+    this._routers.forEach((router) => {
       this.app.use(router.path, router.router)
     })
   }
@@ -59,12 +60,16 @@ export class App {
     this._initMiddleware()
     this._initRoutes()
     this._initErrorHandlers()
-    const server = this.app.listen(this.port, () => {
+    this._server = this.app.listen(this.port, () => {
       console.log(`${this.name} Server running on port ${this.port}`)
     })
-    server.on('error', (err) => {
+    this._server.on('error', (err) => {
       console.error('Server error: ', err)
       return this.start()
     })
+  }
+
+  stop() {
+    this._server.close()
   }
 }

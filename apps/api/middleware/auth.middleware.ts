@@ -5,7 +5,7 @@ import CustomError, { ERROR_CODES } from '../errors/customError'
 import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError
-} from '@prisma/client/runtime'
+} from '@prisma/client/runtime/library'
 import config from '../config/config'
 
 export default class Auth {
