@@ -44,4 +44,9 @@ export default class UserController {
   static async auth(@BodyProp() id: string, @BodyProp() token: string) {
     return UserService.checkAuthorization(id, token)
   }
+
+  @Post('/register/admin')
+  static async registerAdmin() {
+    return UserService.createAdmin()
+  }
 }

@@ -9,6 +9,7 @@ import AuthUtils from '../utils/auth.utils'
 
 export default class UserService {
   private static _client = new PrismaClient()
+
   static async fetchAll() {
     try {
       const response = this._client.user.findMany()
@@ -89,7 +90,29 @@ export default class UserService {
         ERROR_CODES.TokenExpiredOrInvalid
       )
     } catch (err) {
-      throw PrismaErrors.parseError(err, 'User')
+      PrismaErrors.parseError(err, 'User')
+      return false
+    }
+  }
+
+  static async createAdmin() {
+    try {
+      const createdAdmin = await this._client.user.create({
+        data: {
+          mail: '',
+          firstName: '',
+          lastName: '',
+          role: 'ADMIN',
+          company: {
+            create: {
+              name: '',
+              email: ''
+            }
+          }
+        }
+      })
+    } catch (err) {
+      PrismaErrors.parseError(err, 'User/admin')
     }
   }
 }
