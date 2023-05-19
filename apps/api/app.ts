@@ -3,6 +3,7 @@ import cors from 'cors'
 import MailService from './mail/mailService'
 import errorHandler from './errors/errorHandler'
 import notAllowedHandler from './errors/404handler'
+import routes from './middleware/routers.middleware'
 
 // Desacoplar
 import swaggerUi from 'swagger-ui-express'
@@ -16,17 +17,15 @@ export interface Router {
 export class App {
   app: express.Application
   private _server: Server = new Server()
+  private _routers: Router[]
 
-  constructor(
-    public port: string,
-    private routers: Router[],
-    public name?: string
-  ) {
+  constructor(public port: string, public name?: string) {
     this.app = express()
+    this._routers = routes
   }
 
   private _initRoutes() {
-    this.routers.forEach((router) => {
+    this._routers.forEach((router) => {
       this.app.use(router.path, router.router)
     })
   }

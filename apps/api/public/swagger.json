@@ -6,6 +6,35 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Company": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"credits": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"email",
+					"credits",
+					"name",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Company"
+			},
 			"Role": {
 				"type": "string",
 				"enum": [
@@ -66,35 +95,6 @@
 				"type": "object",
 				"description": "Model User"
 			},
-			"Company": {
-				"properties": {
-					"userId": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"credits": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"userId",
-					"email",
-					"credits",
-					"name",
-					"id"
-				],
-				"type": "object",
-				"description": "Model Company"
-			},
 			"Status": {
 				"type": "string",
 				"enum": [
@@ -129,19 +129,16 @@
 						"format": "double"
 					},
 					"phone": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
 					"description": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"email": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"name": {
 						"type": "string"
@@ -540,154 +537,6 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/users": {
-			"get": {
-				"operationId": "GetUsers",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/User"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/users/{id}": {
-			"get": {
-				"operationId": "GetUser",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/User"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/users/login": {
-			"post": {
-				"operationId": "RequestAuth",
-				"responses": {
-					"200": {
-						"description": "Email sent",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "boolean"
-								}
-							}
-						}
-					},
-					"401": {
-						"description": "Unauthorized"
-					}
-				},
-				"description": "Send login email to the address given if the user exists",
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"email"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/users/auth": {
-			"post": {
-				"operationId": "Auth",
-				"responses": {
-					"200": {
-						"description": "Authorized",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "boolean"
-								}
-							}
-						}
-					},
-					"401": {
-						"description": "Unauthorized"
-					}
-				},
-				"description": "Receives user's ID & token and checks if those match the database.",
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"id": {
-										"type": "string"
-									},
-									"token": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"id",
-									"token"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
-			}
-		},
 		"/companies": {
 			"get": {
 				"operationId": "GetCompanies",
@@ -767,7 +616,7 @@
 				"operationId": "GetCoworks",
 				"responses": {
 					"200": {
-						"description": "PaginatedResponse<CoworkFull[]>",
+						"description": "PaginatedCoworks",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1144,6 +993,154 @@
 								},
 								"required": [
 									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/User"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/login": {
+			"post": {
+				"operationId": "RequestAuth",
+				"responses": {
+					"200": {
+						"description": "Email sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Send login email to the address given if the user exists",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/auth": {
+			"post": {
+				"operationId": "Auth",
+				"responses": {
+					"200": {
+						"description": "Authorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Receives user's ID & token and checks if those match the database.",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"token": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id",
+									"token"
 								],
 								"type": "object"
 							}

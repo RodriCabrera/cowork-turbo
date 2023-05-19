@@ -2,6 +2,6 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  clearMocks: true,
-  setupFilesAfterEnv: ['<rootDir>/singleton.ts']
+  forceExit: true,
+  clearMocks: true
 }
