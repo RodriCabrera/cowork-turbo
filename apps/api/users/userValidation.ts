@@ -13,7 +13,7 @@ export default class UserValidate {
   private static $createAdminSchema = this.$baseUserSchema.extend({
     company: z.object({
       name: z.string(),
-      email: z.string().email()
+      email: z.string().email().nullish()
     })
   })
 

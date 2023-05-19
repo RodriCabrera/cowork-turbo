@@ -6,9 +6,11 @@ import {
   Response,
   Route,
   SuccessResponse,
-  Tags
+  Tags,
+  Body
 } from 'tsoa'
 import UserService from './userService'
+import { CreateAdminInput } from './userTypes'
 
 @Route('users')
 @Tags('Users')
@@ -45,8 +47,16 @@ export default class UserController {
     return UserService.checkAuthorization(id, token)
   }
 
+  /**
+   * Creates a new user with admin role and a company linked to they
+   * if successful sends mail to login to the new account
+   * @param data CreateAdminInput
+   * @returns true if created correctly
+   */
+  @SuccessResponse(200, 'true')
+  @Response(406, 'Input data not valid')
   @Post('/register/admin')
-  static async registerAdmin() {
-    return UserService.createAdmin()
+  static async registerAdmin(@Body() data: CreateAdminInput) {
+    return UserService.createAdmin(data)
   }
 }

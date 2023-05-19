@@ -6,6 +6,8 @@ import MailService from '../mail/mailService'
 import { loginTemplate } from '../mail/templates'
 import config from '../config/config'
 import AuthUtils from '../utils/auth.utils'
+import { CreateAdminInput } from './userTypes'
+import UserValidate from './userValidation'
 
 export default class UserService {
   private static _client = new PrismaClient()
@@ -95,22 +97,24 @@ export default class UserService {
     }
   }
 
-  static async createAdmin() {
+  static async createAdmin(data: CreateAdminInput) {
     try {
+      const parsedData = UserValidate.validateCreateAdmin(data)
       const createdAdmin = await this._client.user.create({
         data: {
-          mail: '',
-          firstName: '',
-          lastName: '',
+          mail: parsedData.mail,
+          firstName: parsedData.firstName,
+          lastName: parsedData.lastName,
           role: 'ADMIN',
           company: {
             create: {
-              name: '',
-              email: ''
+              name: parsedData.company.name,
+              email: parsedData.company.email || parsedData.mail
             }
           }
         }
       })
+      return this.sendAuthEmail(createdAdmin.mail)
     } catch (err) {
       PrismaErrors.parseError(err, 'User/admin')
     }
