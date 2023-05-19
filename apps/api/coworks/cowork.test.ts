@@ -57,16 +57,21 @@ describe('coworks', () => {
         })
       })
       describe('given it exists', () => {
-        // TODO: Fails due to authorization middleware
-        // it('should return 200 and a cowork', async () => {
-        //   const getCoworkServiceMock = jest
-        //     .spyOn(CoworkService, 'createCowork')
-        //     .mockReturnValueOnce(new Promise((resolve) => resolve(mockCowork)))
-        //   const { statusCode, body } = await supertest(app.app).post('/coworks')
-        //   expect(statusCode).toBe(200)
-        //   expect(body).toEqual(mockCowork)
-        //   expect(getCoworkServiceMock).toHaveBeenCalled()
-        // })
+        it('should return 200 and a cowork', async () => {
+          const getCoworkServiceMock = jest
+            .spyOn(CoworkService, 'fetchById')
+            .mockReturnValueOnce(new Promise((resolve) => resolve(mockCowork)))
+          const { statusCode, body } = await supertest(app.app).get(
+            `/coworks/${mockCowork.id}`
+          )
+          expect(statusCode).toBe(200)
+          expect(body).toEqual({
+            ...mockCowork,
+            updatedAt: mockCowork.updatedAt.toISOString(),
+            createdAt: mockCowork.createdAt.toISOString()
+          })
+          expect(getCoworkServiceMock).toHaveBeenCalled()
+        })
       })
     })
     describe('all', () => {
