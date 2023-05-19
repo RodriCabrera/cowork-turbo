@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
 import { LoginForm } from '../../modules/auth/components/LoginForm'
 
 export const SuperadminLoginPage = () => (

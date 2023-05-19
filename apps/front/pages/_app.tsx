@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 import '../common/styles/globals.css'
 
-import { BaseLayout } from '@/common/components/Layout'
+import { BaseLayout } from '@/common/Layout'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Toaster } from 'sonner'
 
