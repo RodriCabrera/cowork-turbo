@@ -3,6 +3,7 @@ import { App } from '../app'
 import CoworkService from './coworkService'
 import { Address } from '@prisma/client'
 import { CoworkFull } from './coworkTypes'
+import CustomError from '../errors/customError'
 
 const mockAddress: Address = {
   id: '',
@@ -46,8 +47,13 @@ describe('coworks', () => {
     describe('by id', () => {
       describe('given it does not exists', () => {
         it('should return 404', async () => {
+          const getCoworkServiceMock = jest
+            .spyOn(CoworkService, 'fetchById')
+            .mockRejectedValueOnce(new CustomError('not found', 404))
           const id = 'pipicuculele'
-          await supertest(app.app).get(`/coworks/${id}`).expect(404)
+          const { statusCode } = await supertest(app.app).get(`/coworks/${id}`)
+          expect(statusCode).toBe(404)
+          expect(getCoworkServiceMock).toHaveBeenCalled()
         })
       })
       describe('given it exists', () => {
@@ -59,7 +65,7 @@ describe('coworks', () => {
         //   const { statusCode, body } = await supertest(app.app).post('/coworks')
         //   expect(statusCode).toBe(200)
         //   expect(body).toEqual(mockCowork)
-        //   expect(getCoworkServiceMock).toHaveBeenLastCalled()
+        //   expect(getCoworkServiceMock).toHaveBeenCalled()
         // })
       })
     })
