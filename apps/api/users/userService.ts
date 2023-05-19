@@ -117,6 +117,8 @@ export default class UserService {
       return this.sendAuthEmail(createdAdmin.mail)
     } catch (err) {
       PrismaErrors.parseError(err, 'User/admin')
+      UserValidate.parseError(err)
+      if (err instanceof Error) throw err
     }
   }
 }
