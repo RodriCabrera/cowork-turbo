@@ -14,6 +14,12 @@ companyRouter.get('/:id', async (req, res) => {
   return res.send(response)
 })
 
+companyRouter.post(
+  '/employees/:id',
+  Auth.authorizeAdmin,
+  async (req, res) => {}
+)
+
 companyRouter.put('/:id', Auth.authorizeAdmin, async (req, res) => {
   const response = CompanyController.editCompany(
     req.params.id,
