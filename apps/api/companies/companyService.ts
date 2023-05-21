@@ -3,6 +3,7 @@ import PrismaErrors from '../errors/prismaErrors'
 import { CompanyEditInput, EmployeeInput } from './companyTypes'
 import CompanyValidator from './companyValidator'
 import CustomError, { ERROR_CODES } from '../errors/customError'
+import MailService from '../mail/mailService'
 
 export default class CompanyService {
   private static _client = new PrismaClient()
@@ -78,10 +79,10 @@ export default class CompanyService {
           })
         )
       )
+      // TODO: send mail to each employee
       return newEmployees
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
-      console.log('aaaa')
       CompanyValidator.parseError(err)
       if (err instanceof Error) throw err
     }
