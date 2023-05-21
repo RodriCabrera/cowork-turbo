@@ -106,19 +106,6 @@
 			"CompanyEditInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofeditCompanySchema.parse_"
 			},
-			"BatchPayload": {
-				"properties": {
-					"count": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"required": [
-					"count"
-				],
-				"type": "object",
-				"description": "Batch Payload for updateMany & deleteMany & createMany"
-			},
 			"EmployeeInput": {
 				"properties": {
 					"mail": {
@@ -731,7 +718,10 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/BatchPayload"
+									"items": {
+										"$ref": "#/components/schemas/User"
+									},
+									"type": "array"
 								}
 							}
 						}

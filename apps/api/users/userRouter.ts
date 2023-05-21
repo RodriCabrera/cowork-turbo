@@ -4,14 +4,17 @@ import UserController from './userController'
 const userRoutes = Router()
 
 userRoutes.get('/', async (_req, res: Response) => {
-  const controller = new UserController()
-  const response = await controller.getUsers()
+  const response = await UserController.getUsers()
   return res.send(response)
 })
 
 userRoutes.get('/:id', async (req: Request, res: Response) => {
-  const controller = new UserController()
-  const response = await controller.getUser(req.params.id)
+  const response = await UserController.getUser(req.params.id)
+  return res.send(response)
+})
+
+userRoutes.post('/login', async (req: Request, res: Response) => {
+  const response = await UserController.requestAuth(req.body.email)
   return res.send(response)
 })
 

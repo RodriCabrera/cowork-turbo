@@ -16,12 +16,12 @@ import { CreateAdminInput } from './userTypes'
 @Tags('Users')
 export default class UserController {
   @Get('/')
-  async getUsers() {
+  static async getUsers() {
     return UserService.fetchAll()
   }
 
   @Get('/{id}')
-  async getUser(@Path() id: string) {
+  static async getUser(@Path() id: string) {
     return UserService.fetchById(id)
   }
 

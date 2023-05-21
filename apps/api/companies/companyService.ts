@@ -71,16 +71,17 @@ export default class CompanyService {
         where: { id: idCompany },
         include: { employees: { where: { id: userId } } }
       })
-      const newEmployees = await this._client.user.createMany({
-        data: employeeData.map((employee) => ({
-          ...employee,
-          companyId: idCompany
-        })),
-        skipDuplicates: true
-      })
+      const newEmployees = await this._client.$transaction(
+        employeeData.map((employee) =>
+          this._client.user.create({
+            data: { ...employee, company: { connect: { id: idCompany } } }
+          })
+        )
+      )
       return newEmployees
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
+      console.log('aaaa')
       CompanyValidator.parseError(err)
       if (err instanceof Error) throw err
     }
