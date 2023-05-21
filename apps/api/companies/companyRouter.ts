@@ -23,14 +23,13 @@ companyRouter.get('/:id', async (req, res, next) => {
 })
 
 companyRouter.post(
-  '/employees',
+  '/:id/employees',
   Auth.authorizeAdmin,
   async (req, res, next) => {
     try {
-      const { idCompany } = req.query
       const response = await CompanyController.addEmployees(
         req.body,
-        idCompany?.toString(),
+        req.params.id,
         req.user
       )
       return res.send(response)
