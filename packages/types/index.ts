@@ -13,6 +13,7 @@ import {
   EditCoworkInput,
   CoworkFull
 } from '../../apps/api/coworks/coworkTypes'
+import { CreateAdminInput } from '../../apps/api/users/userTypes'
 import { ErrorInterface } from '../../apps/api/errors/errorInterface'
 
 export interface SuperAdminData {
@@ -56,6 +57,7 @@ export type CoworkEditReq = EditCoworkInput
 export type SingleCoworkFullGetRes = CoworkFull
 export type CoworkFullGetRes = PaginatedResponse<CoworkFull[]>
 export type ErrorAllRes = ErrorInterface
+export type UserAdminCreateReq = CreateAdminInput
 
 // Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
 export type ArrayElement<ArrayType extends readonly unknown[]> =

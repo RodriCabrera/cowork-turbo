@@ -46,7 +46,6 @@ model Company {
   employees User[]
   credits   Int    @default(0)
   email     String
-  userId    String
 }
 
 model Address {
