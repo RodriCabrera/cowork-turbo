@@ -62,21 +62,19 @@ export default class CompanyService {
     }
   }
 
+  // TODO: Create and connect mail template
   private static async $sendEmployeeMails(employees: User[]) {
     const mailer = MailService.getInstance()
     return Promise.all(
-      employees.map(async (employee) => {
-        const sent = await mailer.sendMail({
+      employees.map(async (employee) => ({
+        email: employee.email,
+        sent: await mailer.sendMail({
           from: 'bloom@bloom.com',
-          to: employee.mail,
+          to: employee.email,
           subject: 'Invitation to Bloom',
           text: 'You are invited'
         })
-        return {
-          email: employee.mail,
-          sent
-        }
-      })
+      }))
     )
   }
 
@@ -97,8 +95,7 @@ export default class CompanyService {
           })
         )
       )
-      const result = await this.$sendEmployeeMails(newEmployees)
-      return result
+      return this.$sendEmployeeMails(newEmployees)
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
       CompanyValidator.parseError(err)

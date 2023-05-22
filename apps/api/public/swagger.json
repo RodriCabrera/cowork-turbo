@@ -108,7 +108,7 @@
 			},
 			"EmployeeInput": {
 				"properties": {
-					"mail": {
+					"email": {
 						"type": "string"
 					},
 					"name": {
@@ -116,7 +116,7 @@
 					}
 				},
 				"required": [
-					"mail"
+					"email"
 				],
 				"type": "object"
 			},
@@ -565,35 +565,6 @@
 						},
 						"type": "object"
 					},
-					"mail": {
-						"type": "string"
-					},
-					"lastName": {
-						"type": "string"
-					},
-					"firstName": {
-						"type": "string"
-					}
-				},
-				"type": "object",
-				"description": "Obtain the return type of a function type"
-			},
-			"CreateAdminInput": {
-				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
-			},
-			"ReturnType_typeofcreateAdminSchema.parse_": {
-				"properties": {
-					"company": {
-						"properties": {
-							"email": {
-								"type": "string"
-							},
-							"name": {
-								"type": "string"
-							}
-						},
-						"type": "object"
-					},
 					"lastName": {
 						"type": "string"
 					},
@@ -748,19 +719,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"properties": {
-											"sent": {
-												"type": "boolean"
-											},
-											"email": {
-												"type": "string"
-											}
-										},
-										"required": [
-											"sent",
-											"email"
-										],
-										"type": "object"
+										"type": "boolean"
 									},
 									"type": "array"
 								}
