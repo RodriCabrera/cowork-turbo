@@ -24,6 +24,21 @@ export interface SuperAdminData {
   iat: string
 }
 
+// TODO: Replace with the corresponding package types interface
+export interface AdminData {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  token: string
+  password: null
+  role: string
+  companyId: string
+  isValidated: boolean
+  isActive: boolean
+  iat: number
+}
+
 interface Address {
   apartment: string
   city: string
