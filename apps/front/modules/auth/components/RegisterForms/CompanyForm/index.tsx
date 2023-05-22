@@ -1,7 +1,10 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
+import { toast } from 'sonner'
 
 import { FormError } from '@/common/components/FormError'
+import Axios from '@/common/utils/axios'
 import {
   RegisterAdminValidationSchema,
   registerAdminSchema
@@ -17,9 +20,18 @@ export const CompanyForm = () => {
     resolver: zodResolver(registerAdminSchema)
   })
 
-  const formSubmitHandler = (data: RegisterAdminValidationSchema) => {
-    // eslint-disable-next-line no-console
-    console.log('data', data, 'getValues', getValues())
+  const api = Axios.getInstance()
+
+  const formSubmitHandler = () => {
+    const newAdminData = getValues()
+    api
+      .post('users/register/admin', newAdminData)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err: AxiosError) => {
+        toast.error(err.message)
+      })
   }
 
   return (

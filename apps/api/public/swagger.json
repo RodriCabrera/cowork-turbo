@@ -1193,7 +1193,7 @@
 				"operationId": "RegisterAdmin",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "true",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1201,19 +1201,25 @@
 								}
 							}
 						}
+					},
+					"406": {
+						"description": "Input data not valid"
 					}
 				},
+				"description": "Creates a new user with admin role and a company linked to they\r\nif successful sends mail to login to the new account",
 				"tags": [
 					"Users"
 				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "CreateAdminInput",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateAdminInput"
+								"$ref": "#/components/schemas/CreateAdminInput",
+								"description": "CreateAdminInput"
 							}
 						}
 					}
