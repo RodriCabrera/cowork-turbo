@@ -16,7 +16,8 @@ import {
 import { CreateAdminInput } from '../../apps/api/users/userTypes'
 import {
   EmployeeInput,
-  CompanyEditInput
+  CompanyEditInput,
+  CompanyGetById
 } from '../../apps/api/companies/companyTypes'
 import { ErrorInterface } from '../../apps/api/errors/errorInterface'
 
@@ -64,6 +65,7 @@ export type ErrorAllRes = ErrorInterface
 export type UserAdminCreateReq = CreateAdminInput
 export type EmployeeAddReq = EmployeeInput[]
 export type CompanyEditReq = CompanyEditInput
+export type CompanyGetOneRes = CompanyGetById
 
 // Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
 export type ArrayElement<ArrayType extends readonly unknown[]> =

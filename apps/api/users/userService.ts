@@ -78,7 +78,8 @@ export default class UserService {
             id: user.id
           },
           data: {
-            token: null
+            token: null,
+            isActive: true
           }
         })
         return true
