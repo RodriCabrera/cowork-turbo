@@ -46,7 +46,7 @@ export const RegisterBanner = ({
               className="text-left font-thin"
             >
               If you have people in charge and you need to manage their credits,
-              click here to sign in as a Company
+              click here to register as a Company
             </button>
           </>
         )}
