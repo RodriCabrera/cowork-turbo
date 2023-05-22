@@ -38,9 +38,7 @@ export default class UserService {
     try {
       const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const user = await this._client.user.update({
-        where: {
-          email: email
-        },
+        where: { email },
         data: {
           token: cryptedToken
         }
@@ -109,7 +107,7 @@ export default class UserService {
           company: {
             create: {
               name: parsedData.company.name,
-              email: parsedData.company.email || parsedData.eemail
+              email: parsedData.company.email || parsedData.email
             }
           }
         }
