@@ -15,7 +15,7 @@ export default class SuperAdminService {
       const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const superAdmin = await this._client.superAdmin.update({
         where: {
-          mail: email
+          email: email
         },
         data: {
           token: cryptedToken

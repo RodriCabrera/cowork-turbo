@@ -14,7 +14,7 @@ datasource db {
 model SuperAdmin {
   id    String  @id @unique @default(cuid())
   name  String?
-  mail  String  @unique
+  email String  @unique
   token String?
 }
 
@@ -27,7 +27,7 @@ model User {
   id          String   @id @unique @default(cuid())
   firstName   String?
   lastName    String?
-  mail        String   @unique
+  email       String   @unique
   password    String?
   role        Role     @default(EMPLEADO)
   company     Company  @relation(fields: [companyId], references: [id])

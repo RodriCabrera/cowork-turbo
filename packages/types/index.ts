@@ -19,7 +19,7 @@ import { ErrorInterface } from '../../apps/api/errors/errorInterface'
 export interface SuperAdminData {
   id: string
   name: string
-  mail: string
+  email: string
   token: string
   iat: string
 }
