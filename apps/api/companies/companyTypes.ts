@@ -9,3 +9,4 @@ export type EmployeeInput = {
 
 export type CompanyEditInput = ReturnType<typeof editCompanySchema.parse>
 export type CompanyGetById = Company & { employees: User[] }
+export type CompanyGetAll = Company[]
