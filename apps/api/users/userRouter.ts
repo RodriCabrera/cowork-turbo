@@ -1,5 +1,4 @@
 import { Router, Response, Request, NextFunction } from 'express'
-import Auth from '../middleware/auth.middleware'
 import UserController from './userController'
 
 const userRoutes = Router()
