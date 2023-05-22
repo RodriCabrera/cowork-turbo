@@ -3,6 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { toast } from 'sonner'
 
+import { UserAdminCreateReq } from 'types'
+
 import { FormError } from '@/common/components/FormError'
 import Axios from '@/common/utils/axios'
 import {
@@ -23,10 +25,12 @@ export const CompanyForm = () => {
   const api = Axios.getInstance()
 
   const formSubmitHandler = () => {
-    const newAdminData = getValues()
+    const newAdminData: UserAdminCreateReq = getValues()
     api
       .post('users/register/admin', newAdminData)
-      .then((res) => toast.success(res.statusText))
+      .then(() =>
+        toast.success('Check your email to continue the registering!')
+      )
       .catch((err: AxiosError) => toast.error(err.message))
   }
 

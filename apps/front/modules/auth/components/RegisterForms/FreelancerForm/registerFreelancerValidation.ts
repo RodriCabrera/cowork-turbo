@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 const company = z.object({
-  name: z.string().optional(),
-  email: z.string().optional()
+  name: z.string(),
+  email: z.string().nullish()
 })
 
 export const registerFreelancerSchema = z.object({

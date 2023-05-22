@@ -3,6 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 
+import { UserAdminCreateReq } from 'types'
+
 import { FormError } from '@/common/components/FormError'
 import Axios from '@/common/utils/axios'
 import {
@@ -27,10 +29,10 @@ export const FreelancerForm = () => {
     const email = getValues('email')
     setValue('company.email', email)
     setValue('company.name', email)
-    const newAdminData = getValues()
+    const newAdminData: UserAdminCreateReq = getValues()
     api
       .post('users/register/admin', newAdminData)
-      .then((res) => toast.success(res.statusText))
+      .then(() => toast.success('Check your email to finish the registration!'))
       .catch((err: AxiosError) => toast.error(err.message))
   }
 
