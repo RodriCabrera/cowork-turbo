@@ -2,5 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 yarn test
+yarn lint 
+
 yarn workspace api swagger
 yarn workspace api prisma db push
