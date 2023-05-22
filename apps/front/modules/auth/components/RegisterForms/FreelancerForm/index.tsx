@@ -27,8 +27,6 @@ export const FreelancerForm = () => {
     const email = getValues('email')
     setValue('company.email', email)
     setValue('company.name', email)
-    console.log('POSTING FORM:', getValues())
-
     const newAdminData = getValues()
     api
       .post('users/register/admin', newAdminData)

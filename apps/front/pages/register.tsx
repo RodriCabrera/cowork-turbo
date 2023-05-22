@@ -22,7 +22,7 @@ export const RegisterPage = () => {
     })
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-h-[calc(100vh-8rem)]   flex-col md:flex-row">
       <RegisterBanner
         isCompany={isCompany}
         goToCompanyRegister={goToCompanyRegister}
