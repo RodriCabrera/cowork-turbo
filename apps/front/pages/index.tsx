@@ -11,9 +11,10 @@ const LandingPage = () => {
           <Image
             alt="illustration"
             src="/illustration.gif"
-            className=" h-96 object-cover brightness-110 grayscale"
-            width={500}
-            height={500}
+            className="h-auto w-auto object-cover brightness-110 grayscale"
+            priority
+            width={600}
+            height={600}
           />
           <div className="flex max-w-2xl flex-col gap-4 p-6 text-center text-3xl md:text-left">
             <p className={`${bungeeHairline.className}`}>
