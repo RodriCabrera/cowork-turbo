@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import { CompanyEditInput, EmployeeInput } from './companyTypes'
 import CompanyValidator from './companyValidator'
@@ -62,6 +62,24 @@ export default class CompanyService {
     }
   }
 
+  private static async $sendEmployeeMails(employees: User[]) {
+    const mailer = MailService.getInstance()
+    return Promise.all(
+      employees.map(async (employee) => {
+        const sent = await mailer.sendMail({
+          from: 'bloom@bloom.com',
+          to: employee.mail,
+          subject: 'Invitation to Bloom',
+          text: 'You are invited'
+        })
+        return {
+          email: employee.mail,
+          sent
+        }
+      })
+    )
+  }
+
   static async createEmployees(
     idCompany: string,
     employeeData: EmployeeInput[],
@@ -79,8 +97,8 @@ export default class CompanyService {
           })
         )
       )
-      // TODO: send mail to each employee
-      return newEmployees
+      const result = await this.$sendEmployeeMails(newEmployees)
+      return result
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
       CompanyValidator.parseError(err)

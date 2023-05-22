@@ -719,7 +719,19 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/User"
+										"properties": {
+											"sent": {
+												"type": "boolean"
+											},
+											"email": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"sent",
+											"email"
+										],
+										"type": "object"
 									},
 									"type": "array"
 								}

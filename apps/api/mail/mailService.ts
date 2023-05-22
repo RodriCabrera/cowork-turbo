@@ -21,7 +21,8 @@ export default class MailService {
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS
-      }
+      },
+      pool: true
     })
     console.log('Connected to test SMTP')
   }
