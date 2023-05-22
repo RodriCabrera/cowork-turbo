@@ -21,7 +21,8 @@ export default class MailService {
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS
-      }
+      },
+      pool: true
     })
     console.log('Connected to test SMTP')
   }
@@ -31,7 +32,7 @@ export default class MailService {
       ...options
     })
     if (Object.hasOwn(sent, 'accepted') && sent.accepted instanceof Array) {
-      return sent.accepted.length === 0
+      return sent.accepted.length !== 0
     }
     return false
   }

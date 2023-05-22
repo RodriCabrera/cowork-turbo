@@ -11,7 +11,6 @@ import UserValidate from './userValidation'
 
 export default class UserService {
   private static _client = new PrismaClient()
-
   static async fetchAll() {
     try {
       const response = this._client.user.findMany()
