@@ -1,29 +1,27 @@
 import { PrismaClient } from '@prisma/client'
-import { compare, genSalt, hash } from 'bcryptjs'
 import CustomError, { ERROR_CODES } from '../errors/customError'
 import PrismaErrors from '../errors/prismaErrors'
-import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import { loginTemplate } from '../mail/templates'
 import config from '../config/config'
+import AuthUtils from '../utils/auth.utils'
+import { CreateAdminInput } from './userTypes'
+import UserValidate from './userValidation'
 
 export default class UserService {
   private static _client = new PrismaClient()
+
   static async fetchAll() {
-    this._client.$connect()
     try {
       const response = this._client.user.findMany()
       return response
     } catch (err) {
       console.error(err)
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async fetchById(id: string) {
-    this._client.$connect()
     try {
       const response = this._client.user.findUnique({
         where: {
@@ -33,17 +31,12 @@ export default class UserService {
       return response
     } catch (err) {
       console.error(err)
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async sendAuthEmail(email: string): Promise<boolean> {
-    this._client.$connect()
     try {
-      const salt = await genSalt(10)
-      const token = uuid()
-      const cryptedToken = await hash(token, salt)
+      const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const user = await this._client.user.update({
         where: {
           mail: email
@@ -74,18 +67,15 @@ export default class UserService {
     } catch (err) {
       PrismaErrors.parseError(err, 'User')
       return false
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async checkAuthorization(id: string, token: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const user = await this._client.user.findUniqueOrThrow({
         where: { id }
       })
-      if (user.token && (await compare(token, user.token))) {
+      if (user.token && (await AuthUtils.compareHashToken(token, user.token))) {
         await this._client.user.update({
           where: {
             id: user.id
@@ -102,9 +92,33 @@ export default class UserService {
         ERROR_CODES.TokenExpiredOrInvalid
       )
     } catch (err) {
-      throw PrismaErrors.parseError(err, 'User')
-    } finally {
-      this._client.$disconnect()
+      PrismaErrors.parseError(err, 'User')
+      return false
+    }
+  }
+
+  static async createAdmin(data: CreateAdminInput) {
+    try {
+      const parsedData = UserValidate.validateCreateAdmin(data)
+      const createdAdmin = await this._client.user.create({
+        data: {
+          mail: parsedData.mail,
+          firstName: parsedData.firstName,
+          lastName: parsedData.lastName,
+          role: 'ADMIN',
+          company: {
+            create: {
+              name: parsedData.company.name,
+              email: parsedData.company.email || parsedData.mail
+            }
+          }
+        }
+      })
+      return this.sendAuthEmail(createdAdmin.mail)
+    } catch (err) {
+      PrismaErrors.parseError(err, 'User/admin')
+      UserValidate.parseError(err)
+      if (err instanceof Error) throw err
     }
   }
 }

@@ -8,9 +8,6 @@
 		"schemas": {
 			"Company": {
 				"properties": {
-					"userId": {
-						"type": "string"
-					},
 					"email": {
 						"type": "string"
 					},
@@ -26,7 +23,6 @@
 					}
 				},
 				"required": [
-					"userId",
 					"email",
 					"credits",
 					"name",
@@ -526,6 +522,35 @@
 			},
 			"CreateCoworkInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
+			},
+			"ReturnType_typeofcreateAdminSchema.parse_": {
+				"properties": {
+					"company": {
+						"properties": {
+							"email": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"mail": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CreateAdminInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
 			}
 		},
 		"securitySchemes": {}
@@ -1157,6 +1182,38 @@
 									"token"
 								],
 								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/register/admin": {
+			"post": {
+				"operationId": "RegisterAdmin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateAdminInput"
 							}
 						}
 					}

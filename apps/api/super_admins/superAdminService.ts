@@ -1,22 +1,18 @@
 import { PrismaClient } from '@prisma/client'
 import CustomError, { ERROR_CODES } from '../errors/customError'
-import { genSalt, hash, compare } from 'bcryptjs'
-import { v4 as uuid } from 'uuid'
 import jwt from 'jsonwebtoken'
 import MailService from '../mail/mailService'
 import PrismaErrors from '../errors/prismaErrors'
 import { loginTemplate } from '../mail/templates'
 import config from '../config/config'
+import AuthUtils from '../utils/auth.utils'
 
 export default class SuperAdminService {
   static _client = new PrismaClient()
 
   static async sendAuthEmail(email: string): Promise<boolean> {
-    this._client.$connect()
     try {
-      const salt = await genSalt(10)
-      const token = uuid()
-      const cryptedToken = await hash(token, salt)
+      const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const superAdmin = await this._client.superAdmin.update({
         where: {
           mail: email
@@ -43,18 +39,18 @@ export default class SuperAdminService {
     } catch (err) {
       PrismaErrors.parseError(err, 'Superadmin')
       return false
-    } finally {
-      this._client.$disconnect()
     }
   }
 
   static async checkAuthorization(id: string, token: string): Promise<boolean> {
-    this._client.$connect()
     try {
       const superAdmin = await this._client.superAdmin.findUniqueOrThrow({
         where: { id }
       })
-      if (superAdmin.token && (await compare(token, superAdmin.token))) {
+      if (
+        superAdmin.token &&
+        (await AuthUtils.compareHashToken(token, superAdmin.token))
+      ) {
         await this._client.superAdmin.update({
           where: {
             id: superAdmin.id
@@ -72,8 +68,6 @@ export default class SuperAdminService {
       )
     } catch (err) {
       throw PrismaErrors.parseError(err, 'Superadmin')
-    } finally {
-      this._client.$disconnect()
     }
   }
 }
