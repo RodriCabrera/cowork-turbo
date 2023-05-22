@@ -61,7 +61,7 @@
 						"type": "string",
 						"nullable": true
 					},
-					"mail": {
+					"email": {
 						"type": "string"
 					},
 					"lastName": {
@@ -83,7 +83,7 @@
 					"companyId",
 					"role",
 					"password",
-					"mail",
+					"email",
 					"lastName",
 					"firstName",
 					"id"
@@ -536,13 +536,13 @@
 						},
 						"type": "object"
 					},
-					"mail": {
-						"type": "string"
-					},
 					"lastName": {
 						"type": "string"
 					},
 					"firstName": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},
