@@ -28,6 +28,7 @@ export const CompanyForm = () => {
       .post('users/register/admin', newAdminData)
       .then((res) => {
         console.log(res)
+        toast.success(res.statusText)
       })
       .catch((err: AxiosError) => {
         toast.error(err.message)

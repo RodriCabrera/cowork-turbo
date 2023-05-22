@@ -1,7 +1,10 @@
+import { AxiosError } from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 
 import { FormError } from '@/common/components/FormError'
+import Axios from '@/common/utils/axios'
 import {
   RegisterFreelancerValidationSchema,
   registerFreelancerSchema
@@ -19,11 +22,18 @@ export const FreelancerForm = () => {
     defaultValues: { company: { email: '', name: '' } }
   })
 
+  const api = Axios.getInstance()
   const formSubmitHandler = (data: RegisterFreelancerValidationSchema) => {
     const email = getValues('email')
     setValue('company.email', email)
     setValue('company.name', email)
     console.log('POSTING FORM:', getValues())
+
+    const newAdminData = getValues()
+    api
+      .post('users/register/admin', newAdminData)
+      .then((res) => toast.success(res.statusText))
+      .catch((err: AxiosError) => toast.error(err.message))
   }
 
   return (
