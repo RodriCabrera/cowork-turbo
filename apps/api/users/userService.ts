@@ -12,7 +12,6 @@ import PublicUserDTO from './DTOs/publicUser.dto'
 
 export default class UserService {
   private static _client = new PrismaClient()
-
   static async fetchAll() {
     try {
       const user = await this._client.user.findMany()
