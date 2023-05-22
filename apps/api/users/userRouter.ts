@@ -50,5 +50,4 @@ userRoutes.post('/register/admin', async (req: Request, res: Response) => {
   return res.send(response)
 })
 
-
 export default userRoutes
