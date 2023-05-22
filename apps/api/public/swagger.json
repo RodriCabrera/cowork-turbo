@@ -61,7 +61,7 @@
 						"type": "string",
 						"nullable": true
 					},
-					"mail": {
+					"email": {
 						"type": "string"
 					},
 					"lastName": {
@@ -83,7 +83,7 @@
 					"companyId",
 					"role",
 					"password",
-					"mail",
+					"email",
 					"lastName",
 					"firstName",
 					"id"
@@ -572,6 +572,35 @@
 						"type": "string"
 					},
 					"firstName": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CreateAdminInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
+			},
+			"ReturnType_typeofcreateAdminSchema.parse_": {
+				"properties": {
+					"company": {
+						"properties": {
+							"email": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},

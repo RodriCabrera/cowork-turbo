@@ -14,9 +14,7 @@ export default class SuperAdminService {
     try {
       const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const superAdmin = await this._client.superAdmin.update({
-        where: {
-          mail: email
-        },
+        where: { email },
         data: {
           token: cryptedToken
         }
@@ -31,7 +29,7 @@ export default class SuperAdminService {
       const mailService = MailService.getInstance()
       await mailService.sendMail({
         from: 'noreply@localhost.com',
-        to: superAdmin.mail,
+        to: superAdmin.email,
         subject: 'Login to your account',
         html: loginTemplate(superAdmin?.name || '', userJWT, 'superadmin')
       })

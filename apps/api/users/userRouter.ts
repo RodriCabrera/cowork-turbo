@@ -23,4 +23,9 @@ userRoutes.post('/register/admin', async (req: Request, res: Response) => {
   return res.send(response)
 })
 
+userRoutes.post('/register/admin', async (req: Request, res: Response) => {
+  const response = await UserController.registerAdmin(req.body)
+  return res.send(response)
+})
+
 export default userRoutes

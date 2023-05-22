@@ -14,7 +14,7 @@ export const Pagination = ({
   nextPage
 }: PaginationProps) => {
   return (
-    <div className="flex justify-end pb-8 pt-0">
+    <div className="flex justify-start pb-8 pt-0 sm:justify-end">
       <div className="flex items-center gap-4 rounded-md bg-white p-2">
         <div>Page size:</div>
         <select onChange={(e) => handlePageSizeChange(+e.target.value)}>

@@ -5,7 +5,7 @@ import { Table } from 'ui'
 import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { ActionsCell } from './ActionsCell'
-import { Placeholder } from './Placeholder'
+import { CellPlaceholder } from './CellPlaceholder'
 import { useGetCoworks } from '@/modules/coworks/hooks/useGetCoworks'
 import { COLORS_BY_STATUS } from './constants'
 import { Pagination } from '@/modules/coworks/components/CoworksTable/pagination'
@@ -67,6 +67,8 @@ export const CoworksTable = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
 
+  const isDataEmpty = coworks?.length === 0
+
   return (
     <div className="overflow-x-auto">
       <div className="flex  min-w-max items-center justify-center overflow-hidden  font-sans">
@@ -108,8 +110,15 @@ export const CoworksTable = () => {
               </thead>
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
+                {isDataEmpty && <CellPlaceholder text="No coworks available" />}
                 {isLoading || isFetching ? (
-                  <Placeholder isLoading={isLoading || isFetching} />
+                  <CellPlaceholder
+                    text={
+                      isLoading || isFetching
+                        ? 'Loading coworks...'
+                        : 'No coworks available'
+                    }
+                  />
                 ) : (
                   // Loop over the table rows
                   rows.map((row) => {

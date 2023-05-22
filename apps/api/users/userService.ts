@@ -11,7 +11,6 @@ import UserValidate from './userValidation'
 
 export default class UserService {
   private static _client = new PrismaClient()
-
   static async fetchAll() {
     try {
       const response = this._client.user.findMany()
@@ -38,9 +37,7 @@ export default class UserService {
     try {
       const { token, cryptedToken } = await AuthUtils.generateHashToken()
       const user = await this._client.user.update({
-        where: {
-          mail: email
-        },
+        where: { email },
         data: {
           token: cryptedToken
         }
@@ -55,7 +52,7 @@ export default class UserService {
       const mailService = MailService.getInstance()
       await mailService.sendMail({
         from: 'noreply@localhost.com',
-        to: user.mail,
+        to: user.email,
         subject: 'Login to your account',
         html: loginTemplate(
           `${user.firstName} ${user.lastName}`,
@@ -102,19 +99,19 @@ export default class UserService {
       const parsedData = UserValidate.validateCreateAdmin(data)
       const createdAdmin = await this._client.user.create({
         data: {
-          mail: parsedData.mail,
+          email: parsedData.email,
           firstName: parsedData.firstName,
           lastName: parsedData.lastName,
           role: 'ADMIN',
           company: {
             create: {
               name: parsedData.company.name,
-              email: parsedData.company.email || parsedData.mail
+              email: parsedData.company.email || parsedData.email
             }
           }
         }
       })
-      return this.sendAuthEmail(createdAdmin.mail)
+      return this.sendAuthEmail(createdAdmin.email)
     } catch (err) {
       PrismaErrors.parseError(err, 'User/admin')
       UserValidate.parseError(err)

@@ -5,9 +5,9 @@ import { Footer } from './Footer'
 import { raleway } from '@/common/styles/fonts'
 
 export const BaseLayout = ({ children }: PropsWithChildren) => (
-  <div className={`${raleway.className} min-h-screen `}>
+  <div className={`${raleway.className} h-full min-h-screen pb-16`} id="layout">
     <NavBar />
-    <main>{children}</main>
+    {children}
     <Footer />
   </div>
 )

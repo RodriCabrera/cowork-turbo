@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
-import { FieldError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { CoworkEditReq } from 'types'
 
 import { useApi } from '@/common/context/apiContext'
 import { CoworkFull } from '@/../api/coworks/coworkTypes'
+import { FormError } from '@/common/components/FormError'
 
 interface CoworkFormProps {
   data: CoworkFull
@@ -51,11 +52,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   const onSubmit = (newCoworkData: CoworkEditReq) =>
     editCowork.mutate(newCoworkData)
 
-  const renderFormError = (error?: FieldError) =>
-    error?.message && (
-      <p className="text-xs italic text-red-500">* {error.message}</p>
-    )
-
   return (
     <div className="flex justify-center pb-4">
       <form
@@ -67,17 +63,17 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
         <label className="flex flex-col">
           <p className="py-2">Name</p>
           <input className="p-2" {...register('name')} />
-          {renderFormError(errors.name)}
+          <FormError error={errors.name} />
         </label>
         <label className="flex flex-col">
           <p className="py-2">Email</p>
           <input className="p-2" type="email" {...register('email')} />
-          {renderFormError(errors.email)}
+          <FormError error={errors.email} />
         </label>
         <label className="flex flex-col">
           <p className="py-2">Description</p>
           <textarea className="p-2" {...register('description')} />
-          {renderFormError(errors.description)}
+          <FormError error={errors.description} />
         </label>
         <label className="flex flex-col">
           <p className="py-2">Status</p>
@@ -86,12 +82,12 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
             <option value="PAUSED">Paused</option>
             <option value="CLOSED">Closed</option>
           </select>
-          {renderFormError(errors.status)}
+          <FormError error={errors.status} />
         </label>
         <label className="flex flex-col">
           <p className="py-2">Phone number</p>
           <input className="p-2" {...register('phone')} type="tel" />
-          {renderFormError(errors.phone)}
+          <FormError error={errors.phone} />
         </label>
 
         <p className="border-b-2 text-lg font-semibold">Address Information</p>
@@ -100,39 +96,39 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           <label className="flex flex-col">
             <p className="py-2">Country</p>
             <input className="p-2" {...register('address.country')} />
-            {renderFormError(errors.address?.country)}
+            <FormError error={errors.address?.country} />
           </label>
           <label className="flex flex-col">
             <p className="py-2">City</p>
             <input className="p-2" {...register('address.city')} />
-            {renderFormError(errors.address?.city)}
+            <FormError error={errors.address?.city} />
           </label>
           <label className="flex flex-col">
             <p className="py-2">Street</p>
             <input className="p-2" {...register('address.streetName')} />
-            {renderFormError(errors.address?.streetName)}
+            <FormError error={errors.address?.streetName} />
           </label>
           <label className="flex flex-col">
             <p className="py-2">Number</p>
             <input className="p-2" {...register('address.number')} />
-            {renderFormError(errors.address?.number)}
+            <FormError error={errors.address?.number} />
           </label>
         </div>
         <div className="flex w-full flex-col gap-6 sm:flex-row">
           <label className="flex flex-col">
             <p className="py-2">Floor</p>
             <input className="p-2" {...register('address.floor')} />
-            {renderFormError(errors.address?.floor)}
+            <FormError error={errors.address?.floor} />
           </label>
           <label className="flex flex-col">
             <p className="py-2">Apartment</p>
             <input className="p-2" {...register('address.apartment')} />
-            {renderFormError(errors.address?.apartment)}
+            <FormError error={errors.address?.apartment} />
           </label>
           <label className="flex flex-col">
             <p className="py-2">Postal Code</p>
             <input className="p-2" {...register('address.postalCode')} />
-            {renderFormError(errors.address?.postalCode)}
+            <FormError error={errors.address?.postalCode} />
           </label>
         </div>
 

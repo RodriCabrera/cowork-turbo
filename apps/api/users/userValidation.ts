@@ -5,7 +5,7 @@ export default class UserValidate {
   //   private static $roleEnumValues = ['ADMIN', 'USER']
 
   private static $baseUserSchema = z.object({
-    mail: z.string().email(),
+    email: z.string().email(),
     firstName: z.string().nullish(),
     lastName: z.string().nullish()
   })

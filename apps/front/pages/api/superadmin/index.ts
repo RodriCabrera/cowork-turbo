@@ -12,7 +12,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   if (typeof access_token !== 'string') return res.end()
 
   const superAdminData: SuperAdminData = jwt_decode(access_token)
-  const { name, mail, iat, ...idAndToken } = superAdminData
+  const { name, email, iat, ...idAndToken } = superAdminData
 
   try {
     const response = await fetch(
