@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
 
-import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
 import { CoworksTable } from '@/modules/coworks/components/CoworksTable'
 import { PropsWithSuperadmin } from '@/common/types'
 import { getSuperAdminData } from '@/common/utils/getSuperAdminData'

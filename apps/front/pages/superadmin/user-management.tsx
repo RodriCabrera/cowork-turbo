@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
 import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
 import { PropsWithSuperadmin } from '@/common/types'
 

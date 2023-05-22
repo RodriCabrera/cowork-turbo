@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
 import { PropsWithSuperadmin } from '@/common/types'
-import { SuperadminLayout } from '@/common/components/Layout/SuperadminLayout'
+import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
 import { NewCoworkForm } from '@/modules/coworks/components/NewCoworkForm'
 
 export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
