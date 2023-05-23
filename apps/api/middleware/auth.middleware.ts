@@ -67,7 +67,7 @@ export default class Auth {
           where: { id: token.id }
         })
         req.user = {
-          role: 'user',
+          role: user.role === 'ADMIN' ? 'admin' : 'user',
           id: user.id
         }
         return next()
