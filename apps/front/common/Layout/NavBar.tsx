@@ -16,7 +16,9 @@ const dropdownOptions = [
     href: '/register?role=freelancer',
     current: false
   },
+  // TODO: If the user is logged in, replace login with logout:
   { name: 'Log in', href: '/login', current: false }
+  // { name: 'Log in', href: '/api/logout', current: false }
 ]
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')

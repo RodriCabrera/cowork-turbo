@@ -12,32 +12,26 @@ export const middleware = async (req: NextRequest) => {
     }
   })
 
-  // do anything with session here:
-  const { superadmin } = session
-
-  // like mutate superadmin:
-  // superadmin.something = someOtherThing;
-  // or:
-  // session.superadmin = someoneElse;
-
-  // uncomment next line to commit changes:
-  // await session.save();
-  // or maybe you want to destroy session:
-  // await session.destroy();
-
+  const { superadmin, admin } = session
   const { pathname } = req.nextUrl
 
+  // ADMIN PROTECTED ROUTES:
+  if (!admin && pathname.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
+  if (admin && pathname.startsWith('/login')) {
+    return NextResponse.redirect(new URL('/dashboard', req.url))
+  }
+
+  // SUPERADMIN REDIRECTS:
+  // if the superadmin is logged in, redirect from login to coworks
   if (superadmin && pathname === '/superadmin') {
     return NextResponse.redirect(new URL('/superadmin/coworks', req.url))
   }
-
-  if (!superadmin && pathname !== '/superadmin') {
+  // if NO superadmin, protect /superadmin routes
+  if (!superadmin && pathname.startsWith('/superadmin/')) {
     return NextResponse.redirect(new URL('/superadmin', req.url))
   }
 
   return res
-}
-
-export const config = {
-  matcher: ['/superadmin/:path*']
 }
