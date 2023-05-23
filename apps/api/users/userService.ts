@@ -8,28 +8,29 @@ import config from '../config/config'
 import AuthUtils from '../utils/auth.utils'
 import { CreateAdminInput } from './userTypes'
 import UserValidate from './userValidation'
+import PublicUserDTO from './DTOs/publicUser.dto'
 
 export default class UserService {
   private static _client = new PrismaClient()
   static async fetchAll() {
     try {
-      const response = this._client.user.findMany()
-      return response
+      const user = await this._client.user.findMany()
+      return user.map((u) => new PublicUserDTO(u))
     } catch (err) {
-      console.error(err)
+      PrismaErrors.parseError(err)
     }
   }
 
   static async fetchById(id: string) {
     try {
-      const response = this._client.user.findUnique({
+      const user = await this._client.user.findUniqueOrThrow({
         where: {
           id
         }
       })
-      return response
+      return new PublicUserDTO(user)
     } catch (err) {
-      console.error(err)
+      PrismaErrors.parseError(err)
     }
   }
 
@@ -78,7 +79,8 @@ export default class UserService {
             id: user.id
           },
           data: {
-            token: null
+            token: null,
+            isActive: true
           }
         })
         return true
