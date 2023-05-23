@@ -58,7 +58,7 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
             onSubmit={formSubmitHandler}
           >
             <div>
-              <label htmlFor="email" className="mb-2 block text-xl">
+              <label htmlFor="email" className="mb-2 block">
                 Email
               </label>
               <input

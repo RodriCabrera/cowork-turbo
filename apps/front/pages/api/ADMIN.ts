@@ -17,12 +17,26 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   const userData: AdminData = jwt_decode(access_token)
   const { id, token } = userData
 
-  api
-    .post('users/auth', { id, token })
-    .then(() => {
-      req.session.admin = { ...userData, access_token }
-      req.session.save()
-      return res.redirect('/AuthOK') // TODO: Replace with some authenticated route
-    })
-    .catch(() => res.redirect('/')) // TODO: Replace with some route with error notification
+  try {
+    const response = await api.post('users/auth', { id, token })
+
+    // TODO: Implement better error handling
+    // 1. Invalid token
+    // 2. Token already used
+
+    const isAuthOk = response.status === 200
+
+    if (isAuthOk) {
+      req.session.admin = {
+        ...userData,
+        access_token // We are using this value for the API header
+      }
+      await req.session.save()
+      return res.redirect('/dashboard')
+    } else {
+      return res.redirect('/') // TODO: Replace with some route with error notification
+    }
+  } catch (err) {
+    res.status(500).json(err)
+  }
 }

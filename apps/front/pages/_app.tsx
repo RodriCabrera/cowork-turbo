@@ -2,12 +2,12 @@ import { ReactElement, ReactNode } from 'react'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { Toaster } from 'sonner'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import '../common/styles/globals.css'
 
 import { BaseLayout } from '@/common/Layout'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { Toaster } from 'sonner'
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
