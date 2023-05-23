@@ -552,6 +552,40 @@
 			"CreateCoworkInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
 			},
+			"PublicUserDTO": {
+				"properties": {
+					"companyId": {
+						"type": "string"
+					},
+					"role": {
+						"$ref": "#/components/schemas/Role"
+					},
+					"email": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string",
+						"nullable": true
+					},
+					"firstName": {
+						"type": "string",
+						"nullable": true
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"companyId",
+					"role",
+					"email",
+					"lastName",
+					"firstName",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ReturnType_typeofcreateAdminSchema.parse_": {
 				"properties": {
 					"company": {
@@ -719,7 +753,19 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"type": "boolean"
+										"properties": {
+											"sent": {
+												"type": "boolean"
+											},
+											"email": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"sent",
+											"email"
+										],
+										"type": "object"
 									},
 									"type": "array"
 								}
@@ -1165,7 +1211,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/User"
+										"$ref": "#/components/schemas/PublicUserDTO"
 									},
 									"type": "array"
 								}
@@ -1189,7 +1235,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/User"
+									"$ref": "#/components/schemas/PublicUserDTO"
 								}
 							}
 						}
