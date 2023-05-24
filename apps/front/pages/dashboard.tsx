@@ -49,8 +49,8 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
                     'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-slate-400 focus:outline-none focus:ring-2',
                     selected
-                      ? 'bg-white shadow'
-                      : 'hover:text-slate text-stone-300 hover:bg-stone-100'
+                      ? ' bg-emerald-100 text-emerald-900 shadow'
+                      : 'hover:text-slate bg-stone-50 text-stone-300 hover:bg-stone-100 hover:text-gray-400'
                   )
                 }
               >
