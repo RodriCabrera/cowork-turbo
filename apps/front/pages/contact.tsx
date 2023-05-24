@@ -1,7 +1,17 @@
-import React from 'react'
+import { NextPage } from 'next'
 
-export const ContactPage = () => {
-  return <div>contact</div>
-}
+import { BaseLayout } from '@/common/Layout/BaseLayout'
+import { PropsWithAdmin } from '@/common/types'
+import { getAdminSession } from '@/common/utils/getAdminSession'
+
+export const ContactPage = ({ admin }: PropsWithAdmin) => (
+  <BaseLayout admin={admin}>
+    <div>contact</div>
+  </BaseLayout>
+)
+
+export const getServerSideProps = getAdminSession
+
+ContactPage.getLayout = (page: NextPage) => page
 
 export default ContactPage
