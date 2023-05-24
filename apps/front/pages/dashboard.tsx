@@ -60,13 +60,7 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
           </Tab.List>
           <Tab.Panels className="mt-2">
             {Object.values(tabs).map((tabComponent, idx) => (
-              <Tab.Panel
-                key={idx}
-                className={joinClassNames(
-                  'rounded-xl bg-white p-3',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
-                )}
-              >
+              <Tab.Panel key={idx} className="rounded-xl p-3">
                 {tabComponent}
               </Tab.Panel>
             ))}
