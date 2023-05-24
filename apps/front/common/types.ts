@@ -6,5 +6,5 @@ export type PropsWithSuperadmin<P = unknown> = P & {
 }
 
 export type PropsWithAdmin<P = unknown> = P & {
-  admin?: (AdminData & Auth) | undefined
+  admin: (AdminData & Auth) | undefined
 }
