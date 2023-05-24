@@ -12,6 +12,4 @@ export const ContactPage = ({ admin }: PropsWithAdmin) => (
 
 export const getServerSideProps = getAdminSession
 
-ContactPage.getLayout = (page: NextPage) => page
-
 export default ContactPage

@@ -133,6 +133,4 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
   }
 })
 
-AddPeoplePage.getLayout = (page: NextPage) => page
-
 export default AddPeoplePage

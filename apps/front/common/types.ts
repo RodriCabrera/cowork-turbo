@@ -5,6 +5,6 @@ export type PropsWithSuperadmin<P = unknown> = P & {
   superadmin?: (SuperAdminData & Auth) | undefined
 }
 
-export type AdminProp = (AdminData & Auth) | undefined
+export type AdminProp = (AdminData & Auth) | null
 
-export type PropsWithAdmin<P = unknown> = P & { admin: AdminProp | undefined }
+export type PropsWithAdmin<P = unknown> = P & { admin: AdminProp | null }

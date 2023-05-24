@@ -15,6 +15,4 @@ const AboutPage = ({ admin }: PropsWithAdmin) => (
 
 export const getServerSideProps = getAdminSession
 
-AboutPage.getLayout = (page: NextPage) => page
-
 export default AboutPage

@@ -1,12 +1,17 @@
 import { useRouter } from 'next/router'
+import { InferGetServerSidePropsType } from 'next'
 
 import { RegisterBanner } from '@/modules/auth/components/banners/RegisterBanner'
 import {
   CompanyForm,
   FreelancerForm
 } from '@/modules/auth/components/RegisterForms'
+import { getAdminSession } from '@/common/utils/getAdminSession'
+import { BaseLayout } from '@/common/Layout/BaseLayout'
 
-export const RegisterPage = () => {
+export const RegisterPage = ({
+  admin
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
 
   const isCompany = router.query.role === 'company'
@@ -22,15 +27,19 @@ export const RegisterPage = () => {
     })
 
   return (
-    <div className="flex min-h-[calc(100vh-8rem)]   flex-col md:flex-row">
-      <RegisterBanner
-        isCompany={isCompany}
-        goToCompanyRegister={goToCompanyRegister}
-        goToFreelancerRegister={goToFreelancerRegister}
-      />
-      {isCompany ? <CompanyForm /> : <FreelancerForm />}
-    </div>
+    <BaseLayout admin={admin}>
+      <div className="flex min-h-[calc(100vh-8rem)]   flex-col md:flex-row">
+        <RegisterBanner
+          isCompany={isCompany}
+          goToCompanyRegister={goToCompanyRegister}
+          goToFreelancerRegister={goToFreelancerRegister}
+        />
+        {isCompany ? <CompanyForm /> : <FreelancerForm />}
+      </div>
+    </BaseLayout>
   )
 }
+
+export const getServerSideProps = getAdminSession
 
 export default RegisterPage

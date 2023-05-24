@@ -1,4 +1,3 @@
-import { ReactElement } from 'react'
 import Link from 'next/link'
 
 import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
@@ -26,7 +25,5 @@ export const CoworksManagementPage = ({ superadmin }: PropsWithSuperadmin) => {
 }
 
 export const getServerSideProps = getSuperAdminData
-
-CoworksManagementPage.getLayout = (page: ReactElement) => page
 
 export default CoworksManagementPage
