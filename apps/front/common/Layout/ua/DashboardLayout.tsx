@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
-import { TopBar } from './TopBar'
 import { Sidebar } from './Sidebar'
+import { UserBar } from './UserBar'
 
 export const DashboardLayout = ({
   children,
@@ -9,10 +9,10 @@ export const DashboardLayout = ({
   return (
     <div className="flex h-screen w-screen flex-col md:flex-row">
       <Sidebar>
-        <TopBar className="flex md:hidden" nameInitial={nameInitial} />
+        <UserBar className="flex md:hidden" nameInitial={nameInitial} />
       </Sidebar>
       <section className="p-8 md:w-[calc(100vw-136px)]">
-        <TopBar className="hidden md:flex" nameInitial={nameInitial} />
+        <UserBar className="hidden md:flex" nameInitial={nameInitial} />
         {children}
       </section>
     </div>
