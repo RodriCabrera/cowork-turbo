@@ -1,26 +1,39 @@
 import { NextPage } from 'next'
 import { Tab } from '@headlessui/react'
+import Axios from '@/common/utils/axios'
+import { AxiosResponse } from 'axios'
+import { useQuery } from 'react-query'
+
+import { CompanyGetOneRes } from 'types'
 
 import { bungee } from '@/common/styles/fonts'
 import { PropsWithAdmin } from '@/common/types'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { PeopleList } from '@/modules/dashboard/components/PeopleList'
-import { withSessionSsr } from '@/modules/auth/utils/withSession'
-import Axios from '@/common/utils/axios'
-import { CompanyGetOneRes } from '@/../../packages/types'
+import { getCompany } from '@/modules/dashboard/endpoints'
+import { getAdminSession } from '@/common/utils/getAdminSession'
 
-export const AdminDashboardPage = ({
-  admin,
-  companyData
-}: PropsWithAdmin<{ companyData: CompanyGetOneRes }>) => {
+export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
+  const api = Axios.getInstance(admin?.access_token) // TODO: Use api provider?
+
+  const { isLoading: isPeopleLoading, data: peopleData } = useQuery<
+    AxiosResponse<CompanyGetOneRes>
+  >({
+    queryKey: ['company', { companyId: admin?.companyId }],
+    queryFn: () => getCompany(api, admin?.companyId),
+    refetchOnWindowFocus: false
+  })
+
   const tabs = {
-    People: <PeopleList />,
+    People: (
+      <PeopleList
+        employees={peopleData?.data.employees}
+        isLoading={isPeopleLoading}
+      />
+    ),
     Credits: <div>Credits Component</div>
   }
-  // const { companyId } = admin
-  console.log(admin?.companyId)
-  console.log(companyData)
 
   return (
     <DashboardLayout>
@@ -28,9 +41,9 @@ export const AdminDashboardPage = ({
       <div className="w-full max-w-md px-2 py-16 sm:px-0">
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl p-1">
-            {Object.keys(tabs).map((tab) => (
+            {Object.keys(tabs).map((tabName) => (
               <Tab
-                key={tab}
+                key={tabName}
                 className={({ selected }) =>
                   joinClassNames(
                     'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
@@ -41,12 +54,12 @@ export const AdminDashboardPage = ({
                   )
                 }
               >
-                {tab}
+                {tabName}
               </Tab>
             ))}
           </Tab.List>
           <Tab.Panels className="mt-2">
-            {Object.values(tabs).map((tab, idx) => (
+            {Object.values(tabs).map((tabComponent, idx) => (
               <Tab.Panel
                 key={idx}
                 className={joinClassNames(
@@ -54,7 +67,7 @@ export const AdminDashboardPage = ({
                   'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
                 )}
               >
-                <ul>{tab}</ul>
+                {tabComponent}
               </Tab.Panel>
             ))}
           </Tab.Panels>
@@ -64,19 +77,7 @@ export const AdminDashboardPage = ({
   )
 }
 
-export const getServerSideProps = withSessionSsr(async ({ req }) => {
-  const { session } = req
-
-  const api = Axios.getInstance()
-  const res = await api<CompanyGetOneRes>(
-    `/companies/${session.admin?.companyId}`
-  )
-  const { data: companyData } = res
-
-  return {
-    props: { admin: session.admin || null, companyData }
-  }
-})
+export const getServerSideProps = getAdminSession
 
 AdminDashboardPage.getLayout = (page: NextPage) => page
 
