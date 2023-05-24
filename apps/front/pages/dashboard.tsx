@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType, NextPage } from 'next'
+import { InferGetServerSidePropsType } from 'next'
 import { Tab } from '@headlessui/react'
 import Axios from '@/common/utils/axios'
 import { AxiosResponse } from 'axios'
@@ -73,7 +73,5 @@ export const AdminDashboardPage = ({
 }
 
 export const getServerSideProps = getAdminSession
-
-AdminDashboardPage.getLayout = (page: NextPage) => page
 
 export default AdminDashboardPage
