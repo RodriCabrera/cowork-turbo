@@ -38,7 +38,7 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
   return (
     <DashboardLayout>
       <p className={`p-6 text-3xl ${bungee.className}`}>Dashboard</p>
-      <div className="w-full max-w-md px-2 py-16 sm:px-0">
+      <div className="w-full max-w-5xl px-2 py-8 sm:px-0">
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl p-1">
             {Object.keys(tabs).map((tabName) => (
