@@ -7,7 +7,7 @@ import { PropsWithAdmin } from '@/common/types'
 
 export const AddPeoplePage = ({ admin }: PropsWithAdmin) => {
   return (
-    <DashboardLayout user={admin}>
+    <DashboardLayout nameInitial={admin?.firstName[0]}>
       <Link href={'/dashboard'}>Back to dashboard</Link>
       <div>AddPeoplePage</div>
     </DashboardLayout>
