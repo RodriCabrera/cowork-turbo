@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { CompanyBanner } from '@/modules/landing/banners/CompanyBanner'
 import { bungeeHairline } from '@/common/styles/fonts'
 import { getAdminSession } from '@/common/utils/getAdminSession'
-import { BaseLayout } from '@/common/Layout'
+import { BaseLayout } from '@/common/Layout/BaseLayout'
 import { PropsWithAdmin } from '@/common/types'
 
 const LandingPage = ({ admin }: PropsWithAdmin) => {
