@@ -7,4 +7,4 @@ export type PropsWithSuperadmin<P = unknown> = P & {
 
 export type AdminProp = AdminData & Auth
 
-export type PropsWithAdmin<P = unknown> = (AdminProp & P) | undefined
+export type PropsWithAdmin<P = unknown> = P & { admin: AdminProp | undefined }

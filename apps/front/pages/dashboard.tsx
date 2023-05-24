@@ -6,9 +6,14 @@ import { PropsWithAdmin } from '@/common/types'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { PeopleList } from '@/modules/dashboard/components/PeopleList'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { withSessionSsr } from '@/modules/auth/utils/withSession'
+import Axios from '@/common/utils/axios'
+import { CompanyGetOneRes } from '@/../../packages/types'
 
-export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
+export const AdminDashboardPage = ({
+  admin,
+  companyData
+}: PropsWithAdmin<{ companyData: CompanyGetOneRes }>) => {
   const tabs = {
     People: <PeopleList />,
     Credits: <div>Credits Component</div>
@@ -56,7 +61,19 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = withSessionSsr(async ({ req }) => {
+  const { session } = req
+
+  const api = Axios.getInstance()
+  const res = await api<CompanyGetOneRes>(
+    `/companies/${session.admin?.companyId}`
+  )
+  const { data: companyData } = res
+
+  return {
+    props: { admin: session.admin || null, companyData }
+  }
+})
 
 AdminDashboardPage.getLayout = (page: NextPage) => page
 
