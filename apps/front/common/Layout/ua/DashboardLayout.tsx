@@ -8,7 +8,7 @@ export const DashboardLayout = ({ children }: PropsWithChildren) => {
       <Sidebar>
         <Topbar className="flex md:hidden" />
       </Sidebar>
-      <section className="w-[calc(100vw-136px)] p-8">
+      <section className="p-8 md:w-[calc(100vw-136px)]">
         <Topbar className="hidden md:flex" />
         {children}
       </section>
