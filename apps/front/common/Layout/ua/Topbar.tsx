@@ -42,7 +42,7 @@ export const Topbar = ({ className, nameInitial }: TopbarProps) => (
                     'block px-4 py-2 text-sm text-gray-700'
                   )}
                 >
-                  Sign out
+                  Logout
                 </Link>
               )}
             </Menu.Item>

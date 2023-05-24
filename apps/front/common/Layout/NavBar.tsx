@@ -25,7 +25,7 @@ export function NavBar({ admin }: PropsWithAdmin) {
   ]
 
   const dropdownOptions = isAdminLogged
-    ? [{ name: 'Log out', href: '/api/logout', current: false }]
+    ? [{ name: 'Logout', href: '/api/logout', current: false }]
     : notLoggedOptions
 
   return (
