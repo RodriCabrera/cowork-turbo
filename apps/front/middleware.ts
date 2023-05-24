@@ -16,10 +16,17 @@ export const middleware = async (req: NextRequest) => {
   const { pathname } = req.nextUrl
 
   // ADMIN PROTECTED ROUTES:
-  if (!admin && pathname.startsWith('/dashboard')) {
+  if (
+    !admin &&
+    (pathname.startsWith('/dashboard') || pathname.startsWith('/people'))
+  ) {
     return NextResponse.redirect(new URL('/', req.url))
   }
-  if (admin && pathname.startsWith('/login')) {
+  // ADMIN REDIRECTS:
+  if (
+    admin &&
+    (pathname.startsWith('/login') || pathname.startsWith('/register'))
+  ) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
