@@ -24,7 +24,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ??
     ((page) => <BaseLayout admin={undefined}>{page}</BaseLayout>)
-
+  // NOTE: Might need to remove this getLayout implementation and use custom layouts per page
   return getLayout(
     <QueryClientProvider client={queryClient}>
       <Toaster richColors />
