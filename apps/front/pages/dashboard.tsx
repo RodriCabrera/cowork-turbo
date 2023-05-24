@@ -18,6 +18,9 @@ export const AdminDashboardPage = ({
     People: <PeopleList />,
     Credits: <div>Credits Component</div>
   }
+  // const { companyId } = admin
+  console.log(admin?.companyId)
+  console.log(companyData)
 
   return (
     <DashboardLayout>
