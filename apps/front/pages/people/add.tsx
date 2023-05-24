@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FiDelete } from 'react-icons/fi'
 import Axios from '@/common/utils/axios'

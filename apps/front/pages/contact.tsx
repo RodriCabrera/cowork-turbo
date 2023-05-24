@@ -1,5 +1,3 @@
-import { NextPage } from 'next'
-
 import { BaseLayout } from '@/common/Layout/BaseLayout'
 import { PropsWithAdmin } from '@/common/types'
 import { getAdminSession } from '@/common/utils/getAdminSession'
