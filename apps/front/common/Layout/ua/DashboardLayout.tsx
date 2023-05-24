@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
-import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
+import { Sidebar } from './Sidebar'
 
 export const DashboardLayout = ({
   children,
