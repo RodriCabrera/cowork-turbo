@@ -3,15 +3,25 @@ import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 
 import { joinClassNames } from '@/common/utils/joinClassNames'
+import { bungeeHairline } from '@/common/styles/fonts'
 
-export const Topbar = ({ className }: { className?: string }) => (
-  <nav className={`flex w-full justify-end ${className}`}>
+interface TopbarProps {
+  className?: string
+  nameInitial: string | undefined
+}
+
+export const Topbar = ({ className, nameInitial }: TopbarProps) => (
+  <nav className={`flex w-full max-w-5xl justify-end ${className}`}>
     <div className="absolute  right-0 flex items-center pr-2 sm:static sm:inset-auto">
       {/* Profile dropdown */}
       <Menu as="div" className="relative">
         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="sr-only">Open user menu</span>
-          <div className="h-8 w-8 rounded-full bg-green-300" />
+          <div
+            className={`flex h-8 w-8 items-center justify-center rounded-full bg-green-300 text-2xl ${bungeeHairline.className}`}
+          >
+            {nameInitial}
+          </div>
         </Menu.Button>
         <Transition
           as={Fragment}

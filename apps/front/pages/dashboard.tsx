@@ -36,7 +36,7 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout nameInitial={admin?.firstName[0]}>
       <p className={`pt-6 text-3xl ${bungee.className}`}>Dashboard</p>
       <div className="w-full max-w-5xl py-8 sm:px-0">
         <Tab.Group>
