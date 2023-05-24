@@ -7,14 +7,12 @@ import { RiCloseLine } from 'react-icons/ri'
 
 import { bungeeOutline } from '@/common/styles/fonts'
 import { PropsWithSuperadmin } from '@/common/types'
+import { joinClassNames } from '../utils/joinClassNames'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
 
   const isCurrentPage = (page: string) => router.pathname.includes(page)
-
-  const joinClassNames = (...classes: Array<string>) =>
-    classes.filter(Boolean).join(' ')
 
   const navigation = [
     {

@@ -1,14 +1,16 @@
 import { bungee } from '@/common/styles/fonts'
 
+interface RegisterBannerProps {
+  isCompany: boolean
+  goToCompanyRegister: () => void
+  goToFreelancerRegister: () => void
+}
+
 export const RegisterBanner = ({
   isCompany,
   goToCompanyRegister,
   goToFreelancerRegister
-}: {
-  isCompany: boolean
-  goToCompanyRegister: () => void
-  goToFreelancerRegister: () => void
-}) => {
+}: RegisterBannerProps) => {
   return (
     <div
       className={`flex w-full items-center justify-center bg-gradient-to-r from-transparent ${
@@ -16,7 +18,7 @@ export const RegisterBanner = ({
       }`}
     >
       <div className="flex max-w-3xl flex-col items-start gap-5 p-6">
-        <p className={`text-4xl ${bungee.className} text-gray-800`}>
+        <p className={`text-2xl md:text-4xl ${bungee.className} text-gray-800`}>
           Almost there!
         </p>
         {isCompany ? (
