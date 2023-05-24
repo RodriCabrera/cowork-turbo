@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { NextPage } from 'next'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FiDelete } from 'react-icons/fi'
 import Axios from '@/common/utils/axios'
 import { useFieldArray, useForm } from 'react-hook-form'
@@ -10,14 +11,23 @@ import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { PropsWithAdmin } from '@/common/types'
 import { withSessionSsr } from '@/modules/auth/utils/withSession'
 import { addEmployees, getCompany } from '@/modules/dashboard/endpoints'
+import { bungee } from '@/common/styles/fonts'
+import { Modal } from '@/common/components/Modal'
 
 export const AddPeoplePage = ({
   admin,
   employees
 }: PropsWithAdmin<{ employees: EmployeeAddReq }>) => {
+  const router = useRouter()
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
   const api = Axios.getInstance(admin?.access_token) // TODO: Check if should use api provider
 
-  const { control, register, handleSubmit } = useForm({
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { isDirty }
+  } = useForm({
     defaultValues: { employees }
   })
 
@@ -33,7 +43,25 @@ export const AddPeoplePage = ({
 
   return (
     <DashboardLayout nameInitial={admin?.firstName[0]}>
-      <Link href={'/dashboard'}>Back to dashboard</Link>
+      <Modal
+        isOpen={isConfirmModalOpen}
+        close={() => setIsConfirmModalOpen(false)}
+        confirm={() => router.push('/dashboard')}
+        title="Are you sure you want to go back?"
+        description="If you exit this page without saving, the modifications to the employee list will be lost"
+        body=""
+        confirmButton={'Yes, go back'}
+      />
+      <button
+        onClick={() =>
+          isDirty ? setIsConfirmModalOpen(true) : router.push('/dashboard')
+        }
+        className="mb-6 text-gray-500"
+      >
+        Back to dashboard
+      </button>
+
+      <p className={`${bungee.className} my-2 text-2xl`}>Employee List</p>
       <div className="flex">
         <form
           onSubmit={handleSubmit(onSubmit)}
