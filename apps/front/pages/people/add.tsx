@@ -124,6 +124,7 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
     data: { employees }
   } = res
 
+  // If this should be displayed together name fields shouldn't be sent to Backend joined
   // const parsedEmployees = employees.map((e) => ({
   //   name: `${e.firstName} ${e.lastName}`,
   //   email: e.email
