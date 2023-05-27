@@ -1,13 +1,11 @@
 import { useState } from 'react'
+import { InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { FiDelete } from 'react-icons/fi'
 import Axios from '@/common/utils/axios'
 import { useFieldArray, useForm } from 'react-hook-form'
 
-import { EmployeeAddReq } from 'types'
-
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
-import { PropsWithAdmin } from '@/common/types'
 import { withSessionSsr } from '@/modules/auth/utils/withSession'
 import { addEmployees, getCompany } from '@/modules/dashboard/endpoints'
 import { bungee } from '@/common/styles/fonts'
@@ -16,7 +14,7 @@ import { Modal } from '@/common/components/Modal'
 export const AddPeoplePage = ({
   admin,
   employees
-}: PropsWithAdmin<{ employees: EmployeeAddReq }>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
   const api = Axios.getInstance(admin?.access_token) // TODO: Check if should use api provider
@@ -27,7 +25,9 @@ export const AddPeoplePage = ({
     handleSubmit,
     formState: { isDirty }
   } = useForm({
-    defaultValues: { employees }
+    defaultValues: {
+      employees
+    }
   })
 
   const { fields, append, remove } = useFieldArray({
@@ -35,10 +35,30 @@ export const AddPeoplePage = ({
     name: 'employees'
   })
 
-  const onSubmit = async ({ employees }: { employees: EmployeeAddReq }) => {
-    const res = await addEmployees(api, admin?.companyId, employees)
+  const onSubmit = async ({
+    employees
+  }: {
+    employees: {
+      firstName: string
+      lastName: string
+      email: string
+      isActive: boolean
+    }[]
+  }) => {
+    const filteredEmployees = employees
+      .filter((e) => !e.isActive)
+      .map((e) => {
+        const { isActive, ...rest } = e
+        return rest
+      })
+
+    const res = await addEmployees(api, admin?.companyId, filteredEmployees)
+    router.push('/dashboard')
     return res
   }
+
+  const handleAddField = () =>
+    append({ firstName: '', lastName: '', email: '', isActive: false })
 
   return (
     <DashboardLayout nameInitial={admin?.firstName[0]}>
@@ -73,30 +93,35 @@ export const AddPeoplePage = ({
                 placeholder="Name"
                 className="m-2 rounded-md border-2 p-2"
                 {...register(`employees.${index}.firstName`)}
+                disabled={field.isActive}
               />
               <input
                 placeholder="Last name"
                 className="m-2 rounded-md border-2 p-2"
                 {...register(`employees.${index}.lastName`)}
+                disabled={field.isActive}
               />
               <input
                 className="m-2 rounded-md border-2 p-2"
                 placeholder="Email"
                 {...register(`employees.${index}.email`)}
+                disabled={field.isActive}
               />
-              <button
-                onClick={() => remove(index)}
-                className="flex items-center gap-2 font-light text-red-600 hover:text-red-700"
-              >
-                <FiDelete />
-                <p>Remove</p>
-              </button>
+              {!field.isActive && (
+                <button
+                  onClick={() => remove(index)}
+                  className="flex items-center gap-2 font-light text-red-600 hover:text-red-700"
+                >
+                  <FiDelete />
+                  <p>Remove</p>
+                </button>
+              )}
             </label>
           ))}
 
           <button
             type="button"
-            onClick={() => append({ firstName: '', lastName: '', email: '' })}
+            onClick={handleAddField}
             className="w-full max-w-lg rounded-md border-white p-2 font-medium hover:bg-gray-100"
           >
             Add field
@@ -124,16 +149,17 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
     data: { employees }
   } = res
 
-  // If this should be displayed together name fields shouldn't be sent to Backend joined
-  // const parsedEmployees = employees.map((e) => ({
-  //   name: `${e.firstName} ${e.lastName}`,
-  //   email: e.email
-  // }))
+  const parsedEmployees = employees.map((e) => ({
+    firstName: e.firstName || '',
+    lastName: e.lastName || '',
+    isActive: e.isActive,
+    email: e.email
+  }))
 
   return {
     props: {
       admin: session.admin || null,
-      employees
+      employees: parsedEmployees
     }
   }
 })
