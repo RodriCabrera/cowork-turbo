@@ -18,4 +18,4 @@ export const addEmployees = async (
       sent: boolean
       email: string
     }[]
-  >(`/companies/employees?idCompany=${companyId}`, { employees })
+  >(`/companies/${companyId}/employees`, employees)
