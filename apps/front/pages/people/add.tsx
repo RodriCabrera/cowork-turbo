@@ -72,7 +72,12 @@ export const AddPeoplePage = ({
               <input
                 placeholder="Name"
                 className="m-2 rounded-md border-2 p-2"
-                {...register(`employees.${index}.name`)}
+                {...register(`employees.${index}.firstName`)}
+              />
+              <input
+                placeholder="Last name"
+                className="m-2 rounded-md border-2 p-2"
+                {...register(`employees.${index}.lastName`)}
               />
               <input
                 className="m-2 rounded-md border-2 p-2"
@@ -91,7 +96,7 @@ export const AddPeoplePage = ({
 
           <button
             type="button"
-            onClick={() => append({ name: '', email: '' })}
+            onClick={() => append({ firstName: '', lastName: '', email: '' })}
             className="w-full max-w-lg rounded-md border-white p-2 font-medium hover:bg-gray-100"
           >
             Add field
@@ -119,15 +124,15 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
     data: { employees }
   } = res
 
-  const parsedEmployees = employees.map((e) => ({
-    name: `${e.firstName} ${e.lastName}`,
-    email: e.email
-  }))
+  // const parsedEmployees = employees.map((e) => ({
+  //   name: `${e.firstName} ${e.lastName}`,
+  //   email: e.email
+  // }))
 
   return {
     props: {
       admin: session.admin || null,
-      employees: parsedEmployees
+      employees
     }
   }
 })

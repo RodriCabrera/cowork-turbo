@@ -3,7 +3,8 @@ import { Company, User } from '@prisma/client'
 
 const editCompanySchema = CompanyValidator.getCompanyEditSchema()
 export type EmployeeInput = {
-  name?: string
+  firstName?: string
+  lastName?: string
   email: string
 }
 
