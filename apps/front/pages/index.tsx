@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import Image from 'next/image'
 
 import { CompanyBanner } from '@/modules/landing/banners/CompanyBanner'
@@ -46,7 +45,5 @@ const LandingPage = ({ admin }: PropsWithAdmin) => {
 }
 
 export const getServerSideProps = getAdminSession
-
-LandingPage.getLayout = (page: NextPage) => page
 
 export default LandingPage

@@ -1,4 +1,3 @@
-import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
 import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
@@ -31,7 +30,5 @@ export const NewCoworkPage = ({ superadmin }: PropsWithSuperadmin) => {
 }
 
 export const getServerSideProps = getSuperAdminData
-
-NewCoworkPage.getLayout = (page: ReactElement) => page
 
 export default NewCoworkPage

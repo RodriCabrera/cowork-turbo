@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { InferGetServerSidePropsType } from 'next'
 import { Tab } from '@headlessui/react'
 import Axios from '@/common/utils/axios'
 import { AxiosResponse } from 'axios'
@@ -7,14 +7,15 @@ import { useQuery } from 'react-query'
 import { CompanyGetOneRes } from 'types'
 
 import { bungee } from '@/common/styles/fonts'
-import { PropsWithAdmin } from '@/common/types'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { PeopleList } from '@/modules/dashboard/components/PeopleList'
 import { getCompany } from '@/modules/dashboard/endpoints'
 import { getAdminSession } from '@/common/utils/getAdminSession'
 
-export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
+export const AdminDashboardPage = ({
+  admin
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const api = Axios.getInstance(admin?.access_token) // TODO: Use api provider?
 
   const { isLoading: isPeopleLoading, data: peopleData } = useQuery<
@@ -72,7 +73,5 @@ export const AdminDashboardPage = ({ admin }: PropsWithAdmin) => {
 }
 
 export const getServerSideProps = getAdminSession
-
-AdminDashboardPage.getLayout = (page: NextPage) => page
 
 export default AdminDashboardPage

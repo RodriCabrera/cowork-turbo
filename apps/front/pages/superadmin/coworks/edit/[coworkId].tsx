@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 import { Cowork } from 'types'
 
 import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
@@ -33,7 +31,5 @@ export const getServerSideProps = withSessionSsr(async (context) => {
     props: { superadmin, coworkData }
   }
 })
-
-EditCowork.getLayout = (page: ReactElement) => page
 
 export default EditCowork

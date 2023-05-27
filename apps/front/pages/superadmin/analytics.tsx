@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 import { SuperadminLayout } from '@/common/Layout/SuperadminLayout'
 import { getSuperAdminData } from '@/common/utils/getSuperAdminData'
 import { PropsWithSuperadmin } from '@/common/types'
@@ -15,7 +13,5 @@ export const AnalyticsPage = ({ superadmin }: PropsWithSuperadmin) => {
 }
 
 export const getServerSideProps = getSuperAdminData
-
-AnalyticsPage.getLayout = (page: ReactElement) => page
 
 export default AnalyticsPage

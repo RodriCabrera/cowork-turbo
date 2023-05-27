@@ -3,10 +3,15 @@ import { Company, User } from '@prisma/client'
 
 const editCompanySchema = CompanyValidator.getCompanyEditSchema()
 export type EmployeeInput = {
-  name?: string
+  firstName?: string
+  lastName?: string
   email: string
 }
 
 export type CompanyEditInput = ReturnType<typeof editCompanySchema.parse>
 export type CompanyGetById = Company & { employees: User[] }
 export type CompanyGetAll = Company[]
+export type CompanyEmployeeAdded = {
+  email: User['email']
+  sent: boolean
+}[]

@@ -5,12 +5,12 @@ import { Menu, Transition } from '@headlessui/react'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { bungeeHairline } from '@/common/styles/fonts'
 
-interface TopbarProps {
+interface UserBarProps {
   className?: string
   nameInitial: string | undefined
 }
 
-export const Topbar = ({ className, nameInitial }: TopbarProps) => (
+export const UserBar = ({ className, nameInitial }: UserBarProps) => (
   <nav className={`flex w-full max-w-5xl justify-end ${className}`}>
     <div className="absolute  right-0 flex items-center pr-2 sm:static sm:inset-auto">
       {/* Profile dropdown */}
@@ -42,7 +42,7 @@ export const Topbar = ({ className, nameInitial }: TopbarProps) => (
                     'block px-4 py-2 text-sm text-gray-700'
                   )}
                 >
-                  Sign out
+                  Logout
                 </Link>
               )}
             </Menu.Item>

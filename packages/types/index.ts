@@ -18,7 +18,8 @@ import {
   EmployeeInput,
   CompanyEditInput,
   CompanyGetById,
-  CompanyGetAll
+  CompanyGetAll,
+  CompanyEmployeeAdded
 } from '../../apps/api/companies/companyTypes'
 import { ErrorInterface } from '../../apps/api/errors/errorInterface'
 
@@ -84,6 +85,7 @@ export type CompanyEditReq = CompanyEditInput
 export type CompanyGetOneRes = CompanyGetById
 export type CompanyGetRes = CompanyGetAll
 export type UserGetRes = PublicUser
+export type CompanyPostEmployeesRes = CompanyEmployeeAdded
 
 // Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
 export type ArrayElement<ArrayType extends readonly unknown[]> =

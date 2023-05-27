@@ -84,12 +84,19 @@ export default class CompanyService {
     userId: string
   ) {
     try {
-      await this._client.company.findUniqueOrThrow({
+      const companyData = await this._client.company.findUniqueOrThrow({
         where: { id: idCompany },
         include: { employees: { where: { id: userId } } }
       })
+      // temp fix -> TODO: Handle existing mail changes and deletes
+      const filteredEmployees = employeeData.filter(
+        (employee) =>
+          companyData.employees.filter((e) => e.email === employee.email)
+            .length === 0
+      )
+      // ***
       const newEmployees = await this._client.$transaction(
-        employeeData.map((employee) =>
+        filteredEmployees.map((employee) =>
           this._client.user.create({
             data: { ...employee, company: { connect: { id: idCompany } } }
           })
