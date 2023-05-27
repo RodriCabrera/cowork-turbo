@@ -11,3 +11,7 @@ export type EmployeeInput = {
 export type CompanyEditInput = ReturnType<typeof editCompanySchema.parse>
 export type CompanyGetById = Company & { employees: User[] }
 export type CompanyGetAll = Company[]
+export type CompanyEmployeeAdded = {
+  email: User['email']
+  sent: boolean
+}[]

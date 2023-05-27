@@ -1,6 +1,10 @@
 import { AxiosInstance } from 'axios'
 
-import { CompanyGetOneRes, EmployeeAddReq } from 'types'
+import {
+  CompanyGetOneRes,
+  EmployeeAddReq,
+  CompanyPostEmployeesRes
+} from 'types'
 
 export const getCompany = async (
   api: AxiosInstance,
@@ -12,10 +16,7 @@ export const addEmployees = async (
   companyId: string | undefined,
   employees: EmployeeAddReq
 ) =>
-  await api.post<
-    EmployeeAddReq,
-    {
-      sent: boolean
-      email: string
-    }[]
-  >(`/companies/${companyId}/employees`, employees)
+  await api.post<EmployeeAddReq, CompanyPostEmployeesRes>(
+    `/companies/${companyId}/employees`,
+    employees
+  )
