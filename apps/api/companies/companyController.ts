@@ -26,20 +26,13 @@ export default class CompanyController {
     return CompanyService.editById(id, data, user.id)
   }
 
-  @Post('/employees')
+  @Post('/:id/employees')
   static async addEmployees(
     @Body() employees: EmployeeInput[],
-    @Query() idCompany?: string,
+    @Path() id: string,
     @Request() user?: Express.Request['user']
   ) {
     if (!user) throw new CustomError('Unauthorized', 401)
-    if (!idCompany) {
-      throw new CustomError(
-        'Company id is required',
-        406,
-        ERROR_CODES.QueryMissingValue
-      )
-    }
-    return CompanyService.createEmployees(idCompany, employees, user.id)
+    return CompanyService.createEmployees(id, employees, user.id)
   }
 }

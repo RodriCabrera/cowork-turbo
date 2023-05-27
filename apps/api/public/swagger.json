@@ -743,7 +743,7 @@
 				}
 			}
 		},
-		"/companies/employees": {
+		"/companies/{id}/employees": {
 			"post": {
 				"operationId": "AddEmployees",
 				"responses": {
@@ -779,9 +779,9 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "query",
-						"name": "idCompany",
-						"required": false,
+						"in": "path",
+						"name": "id",
+						"required": true,
 						"schema": {
 							"type": "string"
 						}
