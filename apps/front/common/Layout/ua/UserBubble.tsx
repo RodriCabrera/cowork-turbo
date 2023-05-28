@@ -10,7 +10,7 @@ interface UserBarProps {
   nameInitial: string | undefined
 }
 
-export const UserBar = ({ className, nameInitial }: UserBarProps) => (
+export const UserBubble = ({ className, nameInitial }: UserBarProps) => (
   <nav className={`flex w-full max-w-5xl justify-end ${className}`}>
     <div className="absolute  right-0 flex items-center pr-2 sm:static sm:inset-auto">
       {/* Profile dropdown */}

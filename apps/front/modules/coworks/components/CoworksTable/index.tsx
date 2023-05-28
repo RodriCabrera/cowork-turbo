@@ -4,12 +4,12 @@ import { Column, useTable } from 'react-table'
 import { Table } from 'ui'
 import { CoworkFullGetRes, ArrayElement } from 'types'
 
-import { ActionsCell } from './ActionsCell'
-import { CellPlaceholder } from './CellPlaceholder'
+import { CellPlaceholder } from '@/common/components/CellPlaceholder'
 import { useGetCoworks } from '@/modules/coworks/hooks/useGetCoworks'
-import { COLORS_BY_STATUS } from './constants'
 import { Pagination } from '@/modules/coworks/components/CoworksTable/pagination'
 import { usePagination } from '@/modules/coworks/hooks/usePagination'
+import { COLORS_BY_STATUS } from './constants'
+import { ActionsCell } from './ActionsCell'
 
 const { Cell, Body, Header, Row } = Table
 

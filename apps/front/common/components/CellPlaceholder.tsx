@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Table } from 'ui'
 
 export const CellPlaceholder = ({ text }: { text: string }) => (

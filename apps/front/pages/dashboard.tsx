@@ -3,13 +3,14 @@ import { Tab } from '@headlessui/react'
 import Axios from '@/common/utils/axios'
 import { AxiosResponse } from 'axios'
 import { useQuery } from 'react-query'
+import { HiOutlineUsers, HiOutlineCurrencyDollar } from 'react-icons/hi2'
 
 import { CompanyGetOneRes } from 'types'
 
 import { bungee } from '@/common/styles/fonts'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { joinClassNames } from '@/common/utils/joinClassNames'
-import { PeopleList } from '@/modules/dashboard/components/PeopleList'
+import { PeopleList } from '@/modules/dashboard/components/PeopleTable'
 import { getCompany } from '@/modules/dashboard/endpoints'
 import { getAdminSession } from '@/common/utils/getAdminSession'
 
@@ -26,14 +27,22 @@ export const AdminDashboardPage = ({
     refetchOnWindowFocus: false
   })
 
-  const tabs = {
-    People: (
-      <PeopleList
-        employees={peopleData?.data.employees}
-        isLoading={isPeopleLoading}
-      />
-    ),
-    Credits: <div>Credits Component</div>
+  const tabs: {
+    [Key: string]: { component: JSX.Element; icon: JSX.Element }
+  } = {
+    People: {
+      component: (
+        <PeopleList
+          employees={peopleData?.data.employees}
+          isLoading={isPeopleLoading}
+        />
+      ),
+      icon: <HiOutlineUsers />
+    },
+    Credits: {
+      component: <div>a</div>,
+      icon: <HiOutlineCurrencyDollar />
+    }
   }
 
   return (
@@ -47,7 +56,7 @@ export const AdminDashboardPage = ({
                 key={tabName}
                 className={({ selected }) =>
                   joinClassNames(
-                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
+                    'flex h-20 w-20 flex-col items-center justify-center rounded-lg py-2.5 text-sm font-semibold leading-5',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-slate-400 focus:outline-none focus:ring-2',
                     selected
                       ? ' bg-emerald-100 text-emerald-900 shadow'
@@ -55,14 +64,15 @@ export const AdminDashboardPage = ({
                   )
                 }
               >
+                <div className="text-2xl">{tabs[tabName].icon}</div>
                 {tabName}
               </Tab>
             ))}
           </Tab.List>
           <Tab.Panels className="mt-2">
-            {Object.values(tabs).map((tabComponent, idx) => (
+            {Object.values(tabs).map((tab, idx) => (
               <Tab.Panel key={idx} className="rounded-xl py-3">
-                {tabComponent}
+                {tab.component}
               </Tab.Panel>
             ))}
           </Tab.Panels>
