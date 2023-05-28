@@ -46,7 +46,10 @@ export const AdminDashboardPage = ({
   }
 
   return (
-    <DashboardLayout nameInitial={admin?.firstName[0]}>
+    <DashboardLayout
+      nameInitial={admin?.firstName[0]}
+      token={admin?.access_token}
+    >
       <p className={`pt-6 text-3xl ${bungee.className}`}>Dashboard</p>
       <div className="w-full max-w-5xl py-8 sm:px-0">
         <Tab.Group>
