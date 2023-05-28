@@ -5,6 +5,8 @@ import { FiDelete } from 'react-icons/fi'
 import Axios from '@/common/utils/axios'
 import { useFieldArray, useForm } from 'react-hook-form'
 
+import { EmployeeAddReq } from 'types'
+
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { withSessionSsr } from '@/modules/auth/utils/withSession'
 import { addEmployees, getCompany } from '@/modules/dashboard/endpoints'
@@ -45,7 +47,7 @@ export const AddPeoplePage = ({
       isActive: boolean
     }[]
   }) => {
-    const filteredEmployees = employees
+    const filteredEmployees: EmployeeAddReq = employees
       .filter((e) => !e.isActive)
       .map((e) => {
         const { isActive, ...rest } = e
