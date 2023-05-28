@@ -2,16 +2,16 @@ import { useState } from 'react'
 import { InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { FiDelete } from 'react-icons/fi'
-import Axios from '@/common/utils/axios'
 import { useFieldArray, useForm } from 'react-hook-form'
 
 import { EmployeeAddReq } from 'types'
 
+import Axios from '@/common/utils/axios'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
-import { withSessionSsr } from '@/modules/auth/utils/withSession'
-import { addEmployees, getCompany } from '@/modules/dashboard/endpoints'
 import { bungee } from '@/common/styles/fonts'
 import { Modal } from '@/common/components/Modal'
+import { withSessionSsr } from '@/modules/auth/utils/withSession'
+import { addEmployees, getCompany } from '@/modules/dashboard/endpoints'
 
 export const AddPeoplePage = ({
   admin,
