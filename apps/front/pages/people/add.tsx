@@ -63,7 +63,10 @@ export const AddPeoplePage = ({
     append({ firstName: '', lastName: '', email: '', isActive: false })
 
   return (
-    <DashboardLayout nameInitial={admin?.firstName[0]}>
+    <DashboardLayout
+      nameInitial={admin?.firstName[0]}
+      token={admin?.access_token}
+    >
       <Modal
         isOpen={isConfirmModalOpen}
         close={() => setIsConfirmModalOpen(false)}

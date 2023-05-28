@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from 'react-query'
 import { CoworkFullGetRes } from '@/../../packages/types'
 import { useApi } from '@/common/context/apiContext'
 
+// TODO: Type params
 export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
   const queryClient = useQueryClient()
   const api = useApi()
