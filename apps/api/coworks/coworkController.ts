@@ -20,6 +20,7 @@ import {
 } from './coworkTypes'
 import CustomError from '../errors/customError'
 import express from 'express'
+import NotFoundError from '../errors/404Error'
 
 @Route('coworks')
 @Tags('Coworks')
@@ -49,7 +50,7 @@ export default class CoworkController {
     })
   }
 
-  @Response<CustomError>(404, 'Cowork not found')
+  @Response<NotFoundError>(404, 'Cowork not found')
   @Get('/{id}')
   static async getOne(@Path() id: string) {
     return CoworkService.fetchById(id)
@@ -61,7 +62,7 @@ export default class CoworkController {
    * @param data EditCoworkInput
    * @returns Cowork
    */
-  @Response<CustomError>(404, 'Cowork not found')
+  @Response<NotFoundError>(404, 'Cowork not found')
   @Response<CustomError>(406, 'Input data not valid')
   @Response<CustomError>(401, 'Unauthorized')
   @Security('')
@@ -91,7 +92,7 @@ export default class CoworkController {
    * @param id
    * @returns
    */
-  @Response<CustomError>(404, 'Cowork not found')
+  @Response<NotFoundError>(404, 'Cowork not found')
   @Response<CustomError>(401, 'Unauthorized')
   @Security('')
   @Delete('/{id}')

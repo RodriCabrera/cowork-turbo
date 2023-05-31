@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import MailService from './mail/mailService'
 import errorHandler from './errors/errorHandler'
-import notAllowedHandler from './errors/404handler'
+import notAllowedHandler from './errors/405handler'
 import routes from './middleware/routers.middleware'
 
 // Desacoplar

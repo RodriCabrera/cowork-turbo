@@ -10,7 +10,8 @@ export const ERROR_CODES = {
   ZodInvalidType: 'zod_error_invalid_type',
   Unauthorized: 'auth_error_unauthorized',
   Unauthorized_foreign_company: 'auth_error_not_own_company',
-  QueryMissingValue: 'missing_query_value_error'
+  QueryMissingValue: 'missing_query_value_error',
+  RecordNotFound: 'generic_record_not_found'
 } as const
 
 type ErrorCodeKeys = keyof typeof ERROR_CODES

@@ -41,6 +41,9 @@
 			},
 			"PublicUser": {
 				"properties": {
+					"isActive": {
+						"type": "boolean"
+					},
 					"companyId": {
 						"type": "string"
 					},
@@ -63,6 +66,7 @@
 					}
 				},
 				"required": [
+					"isActive",
 					"companyId",
 					"role",
 					"email",
@@ -93,7 +97,7 @@
 					}
 				]
 			},
-			"CustomError": {
+			"NotFoundError": {
 				"properties": {
 					"error": {
 						"properties": {
@@ -406,6 +410,34 @@
 			"PaginatedCoworks": {
 				"$ref": "#/components/schemas/PaginatedResponse_CoworkFull-Array_"
 			},
+			"CustomError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
+			},
 			"ReturnType_typeofeditSchema.parse_": {
 				"properties": {
 					"address": {
@@ -559,6 +591,9 @@
 			},
 			"PublicUserDTO": {
 				"properties": {
+					"isActive": {
+						"type": "boolean"
+					},
 					"companyId": {
 						"type": "string"
 					},
@@ -581,6 +616,7 @@
 					}
 				},
 				"required": [
+					"isActive",
 					"companyId",
 					"role",
 					"email",
@@ -679,7 +715,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
@@ -954,9 +990,9 @@
 					"404": {
 						"description": "Cowork not found",
 						"content": {
-							"application/json": {
+							"NotFoundError": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
