@@ -24,28 +24,51 @@ enum Role {
 }
 
 model User {
-  id          String   @id @unique @default(cuid())
-  firstName   String?
-  lastName    String?
-  email       String   @unique
-  password    String?
-  role        Role     @default(EMPLEADO)
-  company     Company  @relation(fields: [companyId], references: [id])
-  companyId   String
-  isValidated Boolean  @default(false)
-  isActive    Boolean  @default(true)
-  Review      Review[]
-  token       String?
+  id           String         @id @unique @default(cuid())
+  firstName    String?
+  lastName     String?
+  email        String         @unique
+  password     String?
+  role         Role           @default(EMPLEADO)
+  company      Company        @relation(fields: [companyId], references: [id])
+  companyId    String
+  isValidated  Boolean        @default(false)
+  isActive     Boolean        @default(true)
+  Review       Review[]
+  token        String?
+  CreditAssign CreditAssign[]
 
   @@index([companyId])
 }
 
 model Company {
-  id        String @id @unique @default(cuid())
+  id        String   @id @unique @default(cuid())
   name      String
   employees User[]
-  credits   Int    @default(0)
   email     String
+  Wallet    Wallet[]
+}
+
+model Wallet {
+  id           String         @id @unique @default(cuid())
+  Company      Company        @relation(fields: [companyId], references: [id])
+  companyId    String
+  credits      Int            @default(0)
+  CreditAssign CreditAssign[]
+
+  @@index([companyId])
+}
+
+model CreditAssign {
+  id       String @id @unique @default(cuid())
+  ammount  Int
+  Wallet   Wallet @relation(fields: [walletId], references: [id])
+  User     User   @relation(fields: [userId], references: [id])
+  walletId String
+  userId   String
+
+  @@index([walletId])
+  @@index([userId])
 }
 
 model Address {
