@@ -1,4 +1,15 @@
-import { Get, Path, Route, Tags, Put, Body, Request, Post, Query } from 'tsoa'
+import {
+  Get,
+  Path,
+  Route,
+  Tags,
+  Put,
+  Body,
+  Request,
+  Post,
+  Response,
+  SuccessResponse
+} from 'tsoa'
 import CompanyService from './companyService'
 import { CompanyEditInput, EmployeeInput } from './companyTypes'
 import CustomError, { ERROR_CODES } from '../errors/customError'
@@ -11,6 +22,8 @@ export default class CompanyController {
     return CompanyService.fetchAll()
   }
 
+  @SuccessResponse(200, 'Company with employees', 'CompanyGetById')
+  @Response<CustomError>(404, 'Company not found')
   @Get('/{id}')
   static async getCompany(@Path() id: string) {
     return CompanyService.fetchById(id)
