@@ -8,6 +8,9 @@
 		"schemas": {
 			"Company": {
 				"properties": {
+					"walletId": {
+						"type": "string"
+					},
 					"email": {
 						"type": "string"
 					},
@@ -19,6 +22,7 @@
 					}
 				},
 				"required": [
+					"walletId",
 					"email",
 					"name",
 					"id"
@@ -80,6 +84,23 @@
 				],
 				"type": "object",
 				"description": "Model User"
+			},
+			"Wallet": {
+				"properties": {
+					"credits": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"credits",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Wallet"
 			},
 			"ReturnType_typeofeditCompanySchema.parse_": {
 				"properties": {
@@ -608,40 +629,15 @@
 			"CreateAdminInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
 			},
-			"Wallet": {
-				"properties": {
-					"credits": {
-						"type": "number",
-						"format": "double"
-					},
-					"companyId": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"credits",
-					"companyId",
-					"id"
-				],
-				"type": "object",
-				"description": "Model Wallet"
-			},
 			"AddCreditsInput": {
 				"properties": {
 					"ammount": {
 						"type": "number",
 						"format": "double"
-					},
-					"companyId": {
-						"type": "string"
 					}
 				},
 				"required": [
-					"ammount",
-					"companyId"
+					"ammount"
 				],
 				"type": "object"
 			},
@@ -750,6 +746,9 @@
 										},
 										{
 											"properties": {
+												"Wallet": {
+													"$ref": "#/components/schemas/Wallet"
+												},
 												"employees": {
 													"items": {
 														"$ref": "#/components/schemas/User"
@@ -758,6 +757,7 @@
 												}
 											},
 											"required": [
+												"Wallet",
 												"employees"
 											],
 											"type": "object"

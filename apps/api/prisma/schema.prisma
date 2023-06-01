@@ -41,21 +41,19 @@ model User {
 }
 
 model Company {
-  id        String   @id @unique @default(cuid())
+  id        String @id @unique @default(cuid())
   name      String
   employees User[]
   email     String
-  Wallet    Wallet[]
+  Wallet    Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  walletId  String @unique
 }
 
 model Wallet {
   id           String         @id @unique @default(cuid())
-  Company      Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  companyId    String         @unique
+  Company      Company?
   credits      Int            @default(0)
   CreditAssign CreditAssign[]
-
-  @@index([companyId])
 }
 
 model CreditAssign {

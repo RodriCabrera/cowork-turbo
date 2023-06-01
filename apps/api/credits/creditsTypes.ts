@@ -2,7 +2,6 @@ import { Wallet } from '@prisma/client'
 import { PublicUser } from '../users/userTypes'
 
 export type AddCreditsInput = {
-  companyId: Wallet['companyId']
   ammount: Wallet['credits']
 }
 

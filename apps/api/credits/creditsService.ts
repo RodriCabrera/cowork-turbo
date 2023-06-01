@@ -9,7 +9,10 @@ export default class CreditsService {
   static async getById(id: string) {
     try {
       return await this._client.wallet.findUniqueOrThrow({
-        where: { id }
+        where: { id },
+        include: {
+          CreditAssign: true
+        }
       })
     } catch (err) {
       PrismaErrors.parseError(err)
@@ -19,7 +22,7 @@ export default class CreditsService {
   static async addCredits(id: string, data: AddCreditsInput) {
     try {
       return await this._client.wallet.update({
-        where: { id, companyId: data.companyId },
+        where: { id },
         data: {
           credits: {
             increment: data.ammount

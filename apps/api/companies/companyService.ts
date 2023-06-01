@@ -23,7 +23,8 @@ export default class CompanyService {
           id
         },
         include: {
-          employees: true
+          employees: true,
+          Wallet: true
         }
       })
       return response
