@@ -108,7 +108,12 @@ export default class UserService {
           company: {
             create: {
               name: parsedData.company.name,
-              email: parsedData.company.email || parsedData.email
+              email: parsedData.company.email || parsedData.email,
+              Wallet: {
+                create: {
+                  credits: 0
+                }
+              }
             }
           }
         }

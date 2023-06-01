@@ -11,10 +11,6 @@
 					"email": {
 						"type": "string"
 					},
-					"credits": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -24,7 +20,6 @@
 				},
 				"required": [
 					"email",
-					"credits",
 					"name",
 					"id"
 				],
@@ -57,10 +52,6 @@
 					"role": {
 						"$ref": "#/components/schemas/Role"
 					},
-					"password": {
-						"type": "string",
-						"nullable": true
-					},
 					"email": {
 						"type": "string"
 					},
@@ -82,7 +73,6 @@
 					"isValidated",
 					"companyId",
 					"role",
-					"password",
 					"email",
 					"lastName",
 					"firstName",
@@ -617,6 +607,93 @@
 			},
 			"CreateAdminInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
+			},
+			"Wallet": {
+				"properties": {
+					"credits": {
+						"type": "number",
+						"format": "double"
+					},
+					"companyId": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"credits",
+					"companyId",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Wallet"
+			},
+			"AddCreditsInput": {
+				"properties": {
+					"ammount": {
+						"type": "number",
+						"format": "double"
+					},
+					"companyId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"ammount",
+					"companyId"
+				],
+				"type": "object"
+			},
+			"PublicUser": {
+				"properties": {
+					"companyId": {
+						"type": "string"
+					},
+					"role": {
+						"$ref": "#/components/schemas/Role"
+					},
+					"email": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string",
+						"nullable": true
+					},
+					"firstName": {
+						"type": "string",
+						"nullable": true
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"companyId",
+					"role",
+					"email",
+					"lastName",
+					"firstName",
+					"id"
+				],
+				"type": "object"
+			},
+			"CreditsAssignedResponse": {
+				"properties": {
+					"credits": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"employee": {
+						"$ref": "#/components/schemas/PublicUser"
+					}
+				},
+				"required": [
+					"credits",
+					"employee"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -1384,6 +1461,125 @@
 							"schema": {
 								"$ref": "#/components/schemas/CreateAdminInput",
 								"description": "CreateAdminInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/credits/{id}": {
+			"get": {
+				"operationId": "GetWalletById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Wallet"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "AddCredits",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Wallet"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddCreditsInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/credits/{id}/{employeeId}": {
+			"post": {
+				"operationId": "AssignToEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreditsAssignedResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "employeeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddCreditsInput"
 							}
 						}
 					}

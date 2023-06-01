@@ -28,9 +28,8 @@ model User {
   firstName    String?
   lastName     String?
   email        String         @unique
-  password     String?
   role         Role           @default(EMPLEADO)
-  company      Company        @relation(fields: [companyId], references: [id])
+  company      Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
   companyId    String
   isValidated  Boolean        @default(false)
   isActive     Boolean        @default(true)
@@ -51,8 +50,8 @@ model Company {
 
 model Wallet {
   id           String         @id @unique @default(cuid())
-  Company      Company        @relation(fields: [companyId], references: [id])
-  companyId    String
+  Company      Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    String         @unique
   credits      Int            @default(0)
   CreditAssign CreditAssign[]
 
@@ -62,8 +61,8 @@ model Wallet {
 model CreditAssign {
   id       String @id @unique @default(cuid())
   ammount  Int
-  Wallet   Wallet @relation(fields: [walletId], references: [id])
-  User     User   @relation(fields: [userId], references: [id])
+  Wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  User     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   walletId String
   userId   String
 
