@@ -15,6 +15,16 @@ creditsRouter.get('/:id', async (req, res, next) => {
   }
 })
 
+creditsRouter.get('/:id/:employeeId', async (req, res, next) => {
+  try {
+    const { id, employeeId } = req.params
+    const result = await CreditsController.getAssignedToEmployee(id, employeeId)
+    return res.send(result)
+  } catch (err) {
+    next(err)
+  }
+})
+
 creditsRouter.post('/:id', async (req, res, next) => {
   try {
     const { id } = req.params

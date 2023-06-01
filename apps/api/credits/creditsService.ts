@@ -19,13 +19,13 @@ export default class CreditsService {
     }
   }
 
-  static async addCredits(id: string, data: AddCreditsInput) {
+  static async addCredits(id: string, ammount: AddCreditsInput['ammount']) {
     try {
       return await this._client.wallet.update({
         where: { id },
         data: {
           credits: {
-            increment: data.ammount
+            increment: ammount
           }
         }
       })
@@ -34,17 +34,27 @@ export default class CreditsService {
     }
   }
 
+  static async getCreditsAssignedToEmployee(walletId: string, userId: string) {
+    try {
+      return await this._client.creditAssign.findMany({
+        where: { walletId, userId }
+      })
+    } catch (err) {
+      PrismaErrors.parseError(err)
+    }
+  }
+
   static async assignCreditsToEmployee(
-    id: string,
-    employeeId: string,
-    data: AddCreditsInput
+    walletId: string,
+    userId: string,
+    ammount: AddCreditsInput['ammount']
   ): Promise<CreditsAssignedResponse | undefined> {
     try {
       const assignation = await this._client.creditAssign.create({
         data: {
-          ammount: data.ammount,
-          userId: employeeId,
-          walletId: id
+          ammount,
+          userId,
+          walletId
         },
         include: {
           User: true

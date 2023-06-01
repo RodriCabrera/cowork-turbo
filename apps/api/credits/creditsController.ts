@@ -11,16 +11,24 @@ export default class CreditsController {
   }
 
   @Post('/{id}')
-  static async addCredits(@Path() id: string, @Body() data: AddCreditsInput) {
-    return CreditsService.addCredits(id, data)
+  static async addCredits(@Path() id: string, @Body() input: AddCreditsInput) {
+    return CreditsService.addCredits(id, input.ammount)
+  }
+
+  @Get('/{id}/{employeeId}')
+  static async getAssignedToEmployee(
+    @Path() id: string,
+    @Path() employeeId: string
+  ) {
+    return CreditsService.getCreditsAssignedToEmployee(id, employeeId)
   }
 
   @Post('/{id}/{employeeId}')
   static async assignToEmployee(
     @Path() id: string,
     @Path() employeeId: string,
-    @Body() data: AddCreditsInput
+    @Body() input: AddCreditsInput
   ) {
-    return CreditsService.assignCreditsToEmployee(id, employeeId, data)
+    return CreditsService.assignCreditsToEmployee(id, employeeId, input.ammount)
   }
 }
