@@ -629,6 +629,31 @@
 			"CreateAdminInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
 			},
+			"CreditAssign": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"walletId": {
+						"type": "string"
+					},
+					"ammount": {
+						"type": "number",
+						"format": "double"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"walletId",
+					"ammount",
+					"id"
+				],
+				"type": "object",
+				"description": "Model CreditAssign"
+			},
 			"AddCreditsInput": {
 				"properties": {
 					"ammount": {
@@ -1476,7 +1501,25 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Wallet"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Wallet"
+										},
+										{
+											"properties": {
+												"CreditAssign": {
+													"items": {
+														"$ref": "#/components/schemas/CreditAssign"
+													},
+													"type": "array"
+												}
+											},
+											"required": [
+												"CreditAssign"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
@@ -1538,6 +1581,46 @@
 			}
 		},
 		"/credits/{id}/{employeeId}": {
+			"get": {
+				"operationId": "GetAssignedToEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/CreditAssign"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "employeeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
 			"post": {
 				"operationId": "AssignToEmployee",
 				"responses": {
