@@ -73,8 +73,7 @@
 					"firstName",
 					"id"
 				],
-				"type": "object",
-				"description": "Model User"
+				"type": "object"
 			},
 			"Wallet": {
 				"properties": {
@@ -92,6 +91,59 @@
 				],
 				"type": "object",
 				"description": "Model Wallet"
+			},
+			"CompanyGetById": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Company"
+					},
+					{
+						"properties": {
+							"Wallet": {
+								"$ref": "#/components/schemas/Wallet"
+							},
+							"employees": {
+								"items": {
+									"$ref": "#/components/schemas/PublicUser"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"Wallet",
+							"employees"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"NotFoundError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
 			},
 			"ReturnType_typeofeditCompanySchema.parse_": {
 				"properties": {
@@ -661,39 +713,6 @@
 				],
 				"type": "object"
 			},
-			"PublicUser": {
-				"properties": {
-					"companyId": {
-						"type": "string"
-					},
-					"role": {
-						"$ref": "#/components/schemas/Role"
-					},
-					"email": {
-						"type": "string"
-					},
-					"lastName": {
-						"type": "string",
-						"nullable": true
-					},
-					"firstName": {
-						"type": "string",
-						"nullable": true
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"companyId",
-					"role",
-					"email",
-					"lastName",
-					"firstName",
-					"id"
-				],
-				"type": "object"
-			},
 			"CreditsAssignedResponse": {
 				"properties": {
 					"credits": {
@@ -1045,7 +1064,7 @@
 					"404": {
 						"description": "Cowork not found",
 						"content": {
-							"NotFoundError": {
+							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/NotFoundError"
 								}
@@ -1096,7 +1115,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
@@ -1171,7 +1190,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}

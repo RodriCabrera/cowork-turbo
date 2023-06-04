@@ -12,7 +12,7 @@ export type EmployeeInput = {
 export type CompanyEditInput = ReturnType<typeof editCompanySchema.parse>
 export type CompanyGetById = Company & {
   employees: PublicUser[]
-  wallet: Wallet
+  Wallet: Wallet
 }
 export type CompanyGetAll = Company[]
 export type CompanyEmployeeAdded = {
