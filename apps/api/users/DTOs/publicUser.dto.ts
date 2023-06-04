@@ -8,6 +8,7 @@ export default class PublicUserDTO implements PublicUser {
   email: PublicUser['email']
   role: PublicUser['role']
   companyId: PublicUser['companyId']
+  isActive: PublicUser['isActive']
   constructor(userData: User) {
     this.companyId = userData.companyId
     this.email = userData.email
@@ -15,5 +16,6 @@ export default class PublicUserDTO implements PublicUser {
     this.lastName = userData.lastName
     this.id = userData.id
     this.role = userData.role
+    this.isActive = userData.isActive
   }
 }

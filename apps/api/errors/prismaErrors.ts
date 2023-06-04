@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client'
 import CustomError, { ERROR_CODES } from './customError'
+import NotFoundError from './404Error'
 
 export default class PrismaErrors {
   static ERROR_CODES = {
@@ -22,9 +23,8 @@ export default class PrismaErrors {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case this.ERROR_CODES.RecordNotFound:
-          throw new CustomError(
-            `${collection} not found`,
-            404,
+          throw new NotFoundError(
+            collection.toString(),
             ERROR_CODES.PrismaRecordNotFound
           )
         case this.ERROR_CODES.MissingValue:

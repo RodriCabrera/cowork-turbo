@@ -11,4 +11,5 @@ export type PublicUser = {
   email: User['email']
   role: User['role']
   companyId: User['companyId']
+  isActive: User['isActive']
 }

@@ -39,16 +39,9 @@
 				],
 				"description": "Enums"
 			},
-			"User": {
+			"PublicUser": {
 				"properties": {
-					"token": {
-						"type": "string",
-						"nullable": true
-					},
 					"isActive": {
-						"type": "boolean"
-					},
-					"isValidated": {
 						"type": "boolean"
 					},
 					"companyId": {
@@ -56,10 +49,6 @@
 					},
 					"role": {
 						"$ref": "#/components/schemas/Role"
-					},
-					"password": {
-						"type": "string",
-						"nullable": true
 					},
 					"email": {
 						"type": "string"
@@ -77,19 +66,64 @@
 					}
 				},
 				"required": [
-					"token",
 					"isActive",
-					"isValidated",
 					"companyId",
 					"role",
-					"password",
 					"email",
 					"lastName",
 					"firstName",
 					"id"
 				],
-				"type": "object",
-				"description": "Model User"
+				"type": "object"
+			},
+			"CompanyGetById": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Company"
+					},
+					{
+						"properties": {
+							"employees": {
+								"items": {
+									"$ref": "#/components/schemas/PublicUser"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"employees"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"NotFoundError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
 			},
 			"ReturnType_typeofeditCompanySchema.parse_": {
 				"properties": {
@@ -557,6 +591,9 @@
 			},
 			"PublicUserDTO": {
 				"properties": {
+					"isActive": {
+						"type": "boolean"
+					},
 					"companyId": {
 						"type": "string"
 					},
@@ -579,6 +616,7 @@
 					}
 				},
 				"required": [
+					"isActive",
 					"companyId",
 					"role",
 					"email",
@@ -663,29 +701,21 @@
 				"operationId": "GetCompany",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Company with employees",
+						"content": {
+							"CompanyGetById": {
+								"schema": {
+									"$ref": "#/components/schemas/CompanyGetById"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Company not found",
 						"content": {
 							"application/json": {
 								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Company"
-										},
-										{
-											"properties": {
-												"employees": {
-													"items": {
-														"$ref": "#/components/schemas/User"
-													},
-													"type": "array"
-												}
-											},
-											"required": [
-												"employees"
-											],
-											"type": "object"
-										}
-									]
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
@@ -960,9 +990,9 @@
 					"404": {
 						"description": "Cowork not found",
 						"content": {
-							"application/json": {
+							"NotFoundError": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
