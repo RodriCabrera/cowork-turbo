@@ -38,16 +38,9 @@
 				],
 				"description": "Enums"
 			},
-			"User": {
+			"PublicUser": {
 				"properties": {
-					"token": {
-						"type": "string",
-						"nullable": true
-					},
 					"isActive": {
-						"type": "boolean"
-					},
-					"isValidated": {
 						"type": "boolean"
 					},
 					"companyId": {
@@ -72,9 +65,7 @@
 					}
 				},
 				"required": [
-					"token",
 					"isActive",
-					"isValidated",
 					"companyId",
 					"role",
 					"email",
@@ -568,6 +559,9 @@
 			},
 			"PublicUserDTO": {
 				"properties": {
+					"isActive": {
+						"type": "boolean"
+					},
 					"companyId": {
 						"type": "string"
 					},
@@ -590,6 +584,7 @@
 					}
 				},
 				"required": [
+					"isActive",
 					"companyId",
 					"role",
 					"email",
@@ -761,33 +756,21 @@
 				"operationId": "GetCompany",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Company with employees",
+						"content": {
+							"CompanyGetById": {
+								"schema": {
+									"$ref": "#/components/schemas/CompanyGetById"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Company not found",
 						"content": {
 							"application/json": {
 								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Company"
-										},
-										{
-											"properties": {
-												"Wallet": {
-													"$ref": "#/components/schemas/Wallet"
-												},
-												"employees": {
-													"items": {
-														"$ref": "#/components/schemas/User"
-													},
-													"type": "array"
-												}
-											},
-											"required": [
-												"Wallet",
-												"employees"
-											],
-											"type": "object"
-										}
-									]
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
@@ -1062,9 +1045,9 @@
 					"404": {
 						"description": "Cowork not found",
 						"content": {
-							"application/json": {
+							"NotFoundError": {
 								"schema": {
-									"$ref": "#/components/schemas/CustomError"
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}

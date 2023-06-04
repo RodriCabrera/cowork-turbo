@@ -1,8 +1,9 @@
 import { PrismaClient, User } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
-import { CompanyEditInput, EmployeeInput } from './companyTypes'
+import { CompanyEditInput, CompanyGetById, EmployeeInput } from './companyTypes'
 import CompanyValidator from './companyValidator'
 import CustomError, { ERROR_CODES } from '../errors/customError'
+import PublicUserDTO from '../users/DTOs/publicUser.dto'
 import MailService from '../mail/mailService'
 
 export default class CompanyService {
@@ -16,7 +17,7 @@ export default class CompanyService {
     }
   }
 
-  static async fetchById(id: string) {
+  static async fetchById(id: string): Promise<CompanyGetById | undefined> {
     try {
       const response = await this._client.company.findUnique({
         where: {
@@ -27,7 +28,12 @@ export default class CompanyService {
           Wallet: true
         }
       })
-      return response
+      if (response) {
+        return {
+          ...response,
+          employees: response.employees.map((e) => new PublicUserDTO(e))
+        }
+      } else return undefined
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
     }
