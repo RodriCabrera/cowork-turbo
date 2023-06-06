@@ -45,7 +45,7 @@ export default class UserService {
       })
       const userJWT = jwt.sign(
         {
-          ...user,
+          ...new PublicUserDTO(user),
           token
         },
         config.sessionSecret
