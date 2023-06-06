@@ -10,7 +10,7 @@ import { getUserSession } from '@/common/utils/getAdminSession'
 import { BaseLayout } from '@/common/Layout/BaseLayout'
 
 export const RegisterPage = ({
-  admin
+  user
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
 
@@ -27,7 +27,7 @@ export const RegisterPage = ({
     })
 
   return (
-    <BaseLayout admin={admin}>
+    <BaseLayout user={user}>
       <div className="flex min-h-[calc(100vh-8rem)]   flex-col md:flex-row">
         <RegisterBanner
           isCompany={isCompany}
