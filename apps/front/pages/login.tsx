@@ -1,11 +1,11 @@
 import { BaseLayout } from '@/common/Layout/BaseLayout'
-import { PropsWithAdmin } from '@/common/types'
+import { PropsWithUser } from '@/common/types'
 import { getUserSession } from '@/common/utils/getAdminSession'
 import { LoginForm } from '@/modules/auth/components/LoginForm'
 
-export const UserLoginPage = ({ admin }: PropsWithAdmin) => {
+export const UserLoginPage = ({ user }: PropsWithUser) => {
   return (
-    <BaseLayout admin={admin}>
+    <BaseLayout user={user}>
       <div className="flex h-[calc(100vh-8.1rem)] w-screen flex-col items-center justify-center gap-2 bg-gray-50 md:gap-8">
         <div className="flex flex-col gap-2 p-8">
           <p className="text-left text-2xl">Just 3 steps to login:</p>
