@@ -1,5 +1,7 @@
 import { compare, genSalt, hash } from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
+import jwt from 'jsonwebtoken'
+import config from '../config/config'
 
 export default class AuthUtils {
   static async generateHashToken(): Promise<{
@@ -20,5 +22,9 @@ export default class AuthUtils {
     input: string
   ): Promise<boolean> {
     return compare(token, input)
+  }
+
+  static createJWT(data: any) {
+    return jwt.sign(data, config.sessionSecret)
   }
 }
