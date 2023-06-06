@@ -25,7 +25,6 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     // 2. Token already used
 
     const isAuthOk = response.status === 200
-
     if (isAuthOk) {
       req.session.user = {
         ...userData,

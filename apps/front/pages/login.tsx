@@ -1,6 +1,6 @@
 import { BaseLayout } from '@/common/Layout/BaseLayout'
 import { PropsWithAdmin } from '@/common/types'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { getUserSession } from '@/common/utils/getAdminSession'
 import { LoginForm } from '@/modules/auth/components/LoginForm'
 
 export const UserLoginPage = ({ admin }: PropsWithAdmin) => {
@@ -24,6 +24,6 @@ export const UserLoginPage = ({ admin }: PropsWithAdmin) => {
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = getUserSession
 
 export default UserLoginPage

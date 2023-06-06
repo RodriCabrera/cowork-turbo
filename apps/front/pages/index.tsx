@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { CompanyBanner } from '@/modules/landing/banners/CompanyBanner'
 import { bungeeHairline } from '@/common/styles/fonts'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { getUserSession } from '@/common/utils/getAdminSession'
 import { BaseLayout } from '@/common/Layout/BaseLayout'
 import { PropsWithUser } from '@/common/types'
 
@@ -44,6 +44,6 @@ const LandingPage = ({ user }: PropsWithUser) => {
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = getUserSession
 
 export default LandingPage

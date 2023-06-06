@@ -6,7 +6,7 @@ import {
   CompanyForm,
   FreelancerForm
 } from '@/modules/auth/components/RegisterForms'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { getUserSession } from '@/common/utils/getAdminSession'
 import { BaseLayout } from '@/common/Layout/BaseLayout'
 
 export const RegisterPage = ({
@@ -40,6 +40,6 @@ export const RegisterPage = ({
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = getUserSession
 
 export default RegisterPage
