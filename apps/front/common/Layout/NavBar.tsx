@@ -5,10 +5,10 @@ import { FiMenu } from 'react-icons/fi'
 
 import { bungeeHairline } from '@/common/styles/fonts'
 import { joinClassNames } from '../utils/joinClassNames'
-import { PropsWithAdmin } from '../types'
+import { PropsWithUser } from '../types'
 
-export function NavBar({ admin }: PropsWithAdmin) {
-  const isAdminLogged = !!admin && Object.keys(admin).length !== 0
+export function NavBar({ user }: PropsWithUser) {
+  const isAdminLogged = !!user && Object.keys(user).length !== 0 && user.role === 'ADMIN'
 
   const notLoggedOptions = [
     { name: 'Log in', href: '/login', current: false },
