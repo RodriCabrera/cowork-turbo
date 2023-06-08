@@ -8,7 +8,7 @@ import { joinClassNames } from '../utils/joinClassNames'
 import { PropsWithUser } from '../types'
 
 export function NavBar({ user }: PropsWithUser) {
-  const isAdminLogged = !!user && Object.keys(user).length !== 0 && user.role === 'ADMIN'
+  const isUserLogged = !!user && Object.keys(user).length !== 0
 
   const notLoggedOptions = [
     { name: 'Log in', href: '/login', current: false },
