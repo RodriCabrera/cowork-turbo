@@ -86,6 +86,7 @@ export type CompanyGetOneRes = CompanyGetById
 export type CompanyGetRes = CompanyGetAll
 export type UserGetRes = PublicUser
 export type CompanyPostEmployeesRes = CompanyEmployeeAdded
+export type UserJWT = PublicUser & { token: string }
 
 // Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
 export type ArrayElement<ArrayType extends readonly unknown[]> =

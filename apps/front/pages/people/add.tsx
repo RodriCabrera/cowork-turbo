@@ -64,7 +64,7 @@ export const AddPeoplePage = ({
 
   return (
     <DashboardLayout
-      nameInitial={admin?.firstName[0]}
+      nameInitial={admin?.firstName ? admin.firstName[0] : 'A'}
       token={admin?.access_token}
     >
       <Modal
@@ -147,8 +147,8 @@ export const AddPeoplePage = ({
 export const getServerSideProps = withSessionSsr(async ({ req }) => {
   const { session } = req
 
-  const api = Axios.getInstance(session.admin?.access_token)
-  const res = await getCompany(api, session.admin?.companyId)
+  const api = Axios.getInstance(session.user?.access_token)
+  const res = await getCompany(api, session.user?.companyId)
 
   const {
     data: { employees }
@@ -163,7 +163,7 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
 
   return {
     props: {
-      admin: session.admin || null,
+      admin: session.user || null,
       employees: parsedEmployees
     }
   }

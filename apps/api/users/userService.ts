@@ -43,13 +43,7 @@ export default class UserService {
           token: cryptedToken
         }
       })
-      const userJWT = jwt.sign(
-        {
-          ...user,
-          token
-        },
-        config.sessionSecret
-      )
+
       const mailService = MailService.getInstance()
       await mailService.sendMail({
         from: 'noreply@localhost.com',
@@ -57,7 +51,7 @@ export default class UserService {
         subject: 'Login to your account',
         html: loginTemplate(
           `${user.firstName} ${user.lastName}`,
-          userJWT,
+          AuthUtils.createJWT({ ...new PublicUserDTO(user), token }),
           user.role
         )
       })

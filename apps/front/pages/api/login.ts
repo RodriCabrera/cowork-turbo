@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import jwt_decode from 'jwt-decode'
 
-import { AdminData } from 'types'
+import { UserJWT } from 'types'
 
 import { withSessionRoute } from '@/modules/auth/utils/withSession'
 import Axios from '@/common/utils/axios'
@@ -14,7 +14,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   const { access_token } = req.query
   if (typeof access_token !== 'string') return res.redirect('/')
 
-  const userData: AdminData = jwt_decode(access_token)
+  const userData: UserJWT = jwt_decode(access_token)
   const { id, token } = userData
 
   try {
@@ -25,9 +25,8 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
     // 2. Token already used
 
     const isAuthOk = response.status === 200
-
     if (isAuthOk) {
-      req.session.admin = {
+      req.session.user = {
         ...userData,
         access_token // We are using this value for the API header
       }

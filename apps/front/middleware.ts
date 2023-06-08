@@ -12,19 +12,19 @@ export const middleware = async (req: NextRequest) => {
     }
   })
 
-  const { superadmin, admin } = session
+  const { superadmin, user } = session
   const { pathname } = req.nextUrl
 
   // ADMIN PROTECTED ROUTES:
   if (
-    !admin &&
+    (!user || user.role !== 'ADMIN') &&
     (pathname.startsWith('/dashboard') || pathname.startsWith('/people'))
   ) {
     return NextResponse.redirect(new URL('/', req.url))
   }
-  // ADMIN REDIRECTS:
+  // USER REDIRECTS:
   if (
-    admin &&
+    user &&
     (pathname.startsWith('/login') || pathname.startsWith('/register'))
   ) {
     return NextResponse.redirect(new URL('/dashboard', req.url))

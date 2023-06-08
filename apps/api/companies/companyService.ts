@@ -5,6 +5,8 @@ import CompanyValidator from './companyValidator'
 import CustomError, { ERROR_CODES } from '../errors/customError'
 import PublicUserDTO from '../users/DTOs/publicUser.dto'
 import MailService from '../mail/mailService'
+import { invitationTemplate } from '../mail/templates'
+import AuthUtils from '../utils/auth.utils'
 
 export default class CompanyService {
   private static _client = new PrismaClient()
@@ -70,7 +72,10 @@ export default class CompanyService {
   }
 
   // TODO: Create and connect mail template
-  private static async $sendEmployeeMails(employees: User[]) {
+  private static async $sendEmployeeMails(
+    employees: User[],
+    companyName: string
+  ) {
     const mailer = MailService.getInstance()
     return Promise.all(
       employees.map(async (employee) => ({
@@ -79,7 +84,14 @@ export default class CompanyService {
           from: 'bloom@bloom.com',
           to: employee.email,
           subject: 'Invitation to Bloom',
-          text: 'You are invited'
+          html: invitationTemplate(
+            [employee.firstName, employee.lastName].join(' '),
+            AuthUtils.createJWT({
+              ...new PublicUserDTO(employee),
+              token: employee.token
+            }),
+            companyName
+          )
         })
       }))
     )
@@ -96,20 +108,37 @@ export default class CompanyService {
         include: { employees: { where: { id: userId } } }
       })
       // temp fix -> TODO: Handle existing mail changes and deletes
-      const filteredEmployees = employeeData.filter(
-        (employee) =>
-          companyData.employees.filter((e) => e.email === employee.email)
-            .length === 0
+      // const filteredEmployees = employeeData.filter(
+      //   (employee) =>
+      //     companyData.employees.filter((e) => e.email === employee.email)
+      //       .length === 0
+      // )
+      const filteredEmployees = await Promise.all(
+        employeeData.map(async (employee) => {
+          const { token, cryptedToken } = await AuthUtils.generateHashToken()
+          return { ...employee, token, cryptedToken }
+        })
       )
       // ***
       const newEmployees = await this._client.$transaction(
-        filteredEmployees.map((employee) =>
+        filteredEmployees.map(({ token, cryptedToken, ...employee }) =>
           this._client.user.create({
-            data: { ...employee, company: { connect: { id: idCompany } } }
+            data: {
+              ...employee,
+              token: cryptedToken,
+              company: { connect: { id: idCompany } }
+            }
           })
         )
       )
-      return this.$sendEmployeeMails(newEmployees)
+      return this.$sendEmployeeMails(
+        newEmployees.map((e) => ({
+          ...e,
+          token:
+            filteredEmployees.find((u) => u.email === e.email)?.token || null
+        })),
+        companyData.name
+      )
     } catch (err) {
       PrismaErrors.parseError(err, 'Company')
       CompanyValidator.parseError(err)

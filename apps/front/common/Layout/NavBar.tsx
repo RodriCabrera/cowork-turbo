@@ -5,10 +5,10 @@ import { FiMenu } from 'react-icons/fi'
 
 import { bungeeHairline } from '@/common/styles/fonts'
 import { joinClassNames } from '../utils/joinClassNames'
-import { PropsWithAdmin } from '../types'
+import { PropsWithUser } from '../types'
 
-export function NavBar({ admin }: PropsWithAdmin) {
-  const isAdminLogged = !!admin && Object.keys(admin).length !== 0
+export function NavBar({ user }: PropsWithUser) {
+  const isUserLogged = !!user && Object.keys(user).length !== 0
 
   const notLoggedOptions = [
     { name: 'Log in', href: '/login', current: false },
@@ -24,7 +24,7 @@ export function NavBar({ admin }: PropsWithAdmin) {
     }
   ]
 
-  const dropdownOptions = isAdminLogged
+  const dropdownOptions = isUserLogged
     ? [{ name: 'Logout', href: '/api/logout', current: false }]
     : notLoggedOptions
 
@@ -43,7 +43,7 @@ export function NavBar({ admin }: PropsWithAdmin) {
             </header>
           </div>
           <div className="flex items-center gap-4">
-            {isAdminLogged && (
+            {isUserLogged && (
               <Link
                 className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
                 href="/dashboard"

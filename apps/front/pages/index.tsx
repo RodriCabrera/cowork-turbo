@@ -2,13 +2,13 @@ import Image from 'next/image'
 
 import { CompanyBanner } from '@/modules/landing/banners/CompanyBanner'
 import { bungeeHairline } from '@/common/styles/fonts'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { getUserSession } from '@/common/utils/getAdminSession'
 import { BaseLayout } from '@/common/Layout/BaseLayout'
-import { PropsWithAdmin } from '@/common/types'
+import { PropsWithUser } from '@/common/types'
 
-const LandingPage = ({ admin }: PropsWithAdmin) => {
+const LandingPage = ({ user }: PropsWithUser) => {
   return (
-    <BaseLayout admin={admin}>
+    <BaseLayout user={user}>
       <div className="flex min-h-[calc(100vh-126px)] w-full flex-col items-center pb-20 md:p-0">
         <div className="max-w-7xl">
           <CompanyBanner />
@@ -44,6 +44,6 @@ const LandingPage = ({ admin }: PropsWithAdmin) => {
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = getUserSession
 
 export default LandingPage

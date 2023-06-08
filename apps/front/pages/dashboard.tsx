@@ -12,18 +12,18 @@ import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { PeopleList } from '@/modules/dashboard/components/PeopleTable'
 import { getCompany } from '@/modules/dashboard/endpoints'
-import { getAdminSession } from '@/common/utils/getAdminSession'
+import { getUserSession } from '@/common/utils/getAdminSession'
 
 export const AdminDashboardPage = ({
-  admin
+  user
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const api = Axios.getInstance(admin?.access_token) // TODO: Use api provider?
+  const api = Axios.getInstance(user?.access_token) // TODO: Use api provider?
 
   const { isLoading: isPeopleLoading, data: peopleData } = useQuery<
     AxiosResponse<CompanyGetOneRes>
   >({
-    queryKey: ['company', { companyId: admin?.companyId }],
-    queryFn: () => getCompany(api, admin?.companyId),
+    queryKey: ['company', { companyId: user?.companyId }],
+    queryFn: () => getCompany(api, user?.companyId),
     refetchOnWindowFocus: false
   })
 
@@ -44,11 +44,10 @@ export const AdminDashboardPage = ({
       icon: <HiOutlineCurrencyDollar />
     }
   }
-
   return (
     <DashboardLayout
-      nameInitial={admin?.firstName[0]}
-      token={admin?.access_token}
+      nameInitial={user?.firstName ? user.firstName[0] : 'B'}
+      token={user?.access_token}
     >
       <p className={`pt-6 text-3xl ${bungee.className}`}>Dashboard</p>
       <div className="w-full max-w-5xl py-8 sm:px-0">
@@ -85,6 +84,6 @@ export const AdminDashboardPage = ({
   )
 }
 
-export const getServerSideProps = getAdminSession
+export const getServerSideProps = getUserSession
 
 export default AdminDashboardPage
