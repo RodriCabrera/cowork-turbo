@@ -24,7 +24,7 @@ export function NavBar({ user }: PropsWithUser) {
     }
   ]
 
-  const dropdownOptions = isAdminLogged
+  const dropdownOptions = isUserLogged
     ? [{ name: 'Logout', href: '/api/logout', current: false }]
     : notLoggedOptions
 
@@ -43,7 +43,7 @@ export function NavBar({ user }: PropsWithUser) {
             </header>
           </div>
           <div className="flex items-center gap-4">
-            {isAdminLogged && (
+            {isUserLogged && (
               <Link
                 className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
                 href="/dashboard"
