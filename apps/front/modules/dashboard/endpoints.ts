@@ -11,11 +11,6 @@ export const getCompany = async (
   companyId: string | undefined
 ) => await api.get<CompanyGetOneRes>(`/companies/${companyId}`)
 
-export const getCredits = async (
-  api: AxiosInstance,
-  companyId: string | undefined
-) => await api.get(`/credits/${companyId}`)
-
 export const addEmployees = async (
   api: AxiosInstance,
   companyId: string | undefined,
@@ -25,3 +20,8 @@ export const addEmployees = async (
     `/companies/${companyId}/employees`,
     employees
   )
+
+export const getCredits = async (
+  api: AxiosInstance,
+  companyId: string | undefined
+) => await api.get(`/credits/${companyId}`).then((res) => res.data)

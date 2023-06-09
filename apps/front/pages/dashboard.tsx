@@ -2,7 +2,7 @@ import { InferGetServerSidePropsType } from 'next'
 
 import { bungeeHairline } from '@/common/styles/fonts'
 import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
-import { PeopleList } from '@/modules/dashboard/components/PeopleTable'
+import { PeopleList } from '@/modules/dashboard/components/PeopleList'
 import { getUserSession } from '@/common/utils/getAdminSession'
 import { useFetchCompany } from '@/modules/dashboard/hooks/useFetchCompany'
 
