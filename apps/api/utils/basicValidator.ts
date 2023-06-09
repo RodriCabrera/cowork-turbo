@@ -12,5 +12,6 @@ export default class BasicValidator {
     if (error instanceof ZodError) {
       throw new CustomError(error.message, 406, ERROR_CODES.ZodInvalidType)
     }
+    if (error instanceof CustomError) throw error
   }
 }

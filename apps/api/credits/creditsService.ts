@@ -68,6 +68,11 @@ export default class CreditsService {
         userId,
         ammount
       )
+      const wallet = await this._client.wallet.findUniqueOrThrow({
+        where: { id: validated.walletId },
+        include: { CreditAssign: true }
+      })
+      CreditsValidation.checkFunds(wallet, ammount)
       const assignation = await this._client.creditAssign.create({
         data: { ...validated },
         include: {
