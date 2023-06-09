@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import { AddCreditsInput, CreditsAssignedResponse } from './creditsTypes'
+import CreditsValidation from './creditsValidation'
 import PublicUserDTO from '../users/DTOs/publicUser.dto'
 
 export default class CreditsService {
@@ -8,39 +9,51 @@ export default class CreditsService {
 
   static async getById(id: string) {
     try {
+      const validId = CreditsValidation.validateCUID(id)
       return await this._client.wallet.findUniqueOrThrow({
-        where: { id },
+        where: { id: validId },
         include: {
           CreditAssign: true
         }
       })
     } catch (err) {
       PrismaErrors.parseError(err)
+      CreditsValidation.parseError(err)
     }
   }
 
-  static async addCredits(id: string, ammount: AddCreditsInput['ammount']) {
+  static async addCredits(
+    walletId: string,
+    ammount: AddCreditsInput['ammount']
+  ) {
     try {
+      const validated = CreditsValidation.validateAddInput(walletId, ammount)
       return await this._client.wallet.update({
-        where: { id },
+        where: { id: validated.walletId },
         data: {
           credits: {
-            increment: ammount
+            increment: validated.ammount
           }
         }
       })
     } catch (err) {
       PrismaErrors.parseError(err)
+      CreditsValidation.parseError(err)
     }
   }
 
   static async getCreditsAssignedToEmployee(walletId: string, userId: string) {
     try {
+      const validated = CreditsValidation.validateAssignedGetInput(
+        walletId,
+        userId
+      )
       return await this._client.creditAssign.findMany({
-        where: { walletId, userId }
+        where: { ...validated }
       })
     } catch (err) {
       PrismaErrors.parseError(err)
+      CreditsValidation.parseError(err)
     }
   }
 
@@ -50,12 +63,13 @@ export default class CreditsService {
     ammount: AddCreditsInput['ammount']
   ): Promise<CreditsAssignedResponse | undefined> {
     try {
+      const validated = CreditsValidation.validateAssignInput(
+        walletId,
+        userId,
+        ammount
+      )
       const assignation = await this._client.creditAssign.create({
-        data: {
-          ammount,
-          userId,
-          walletId
-        },
+        data: { ...validated },
         include: {
           User: true
         }
@@ -74,6 +88,7 @@ export default class CreditsService {
       }
     } catch (err) {
       PrismaErrors.parseError(err)
+      CreditsValidation.parseError(err)
     }
   }
 }
