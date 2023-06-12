@@ -5,7 +5,7 @@ import { UserGetRes } from '@/../../packages/types'
 import Axios from '@/common/utils/axios'
 import { Auth } from '@/modules/auth/types'
 import { getCredits } from '../endpoints'
-
+// TODO: Use type from BE
 export interface GetCreditsRes {
   CreditAssign: any
   credits: number

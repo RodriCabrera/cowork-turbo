@@ -23,5 +23,5 @@ export const addEmployees = async (
 
 export const getCredits = async (
   api: AxiosInstance,
-  companyId: string | undefined
-) => await api.get(`/credits/${companyId}`).then((res) => res.data)
+  walletId: string | undefined
+) => await api.get(`/credits/${walletId}`).then((res) => res.data)
