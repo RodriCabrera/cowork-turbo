@@ -1,6 +1,7 @@
 import Axios from '@/common/utils/axios'
 import { AxiosError } from 'axios'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 const STATUS = {
   loading: 'loading',
@@ -26,14 +27,16 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
       .post(endpoint, {
         email: enteredEmail
       })
-      .then((res) => {
+      .then(() => {
         setQueryStatus(STATUS.sent)
         setBtnMessage('Email sent, check your inbox')
+        toast.success('Email sent, check your inbox')
       })
       .catch((err: AxiosError) => {
         setQueryStatus(STATUS.error)
         if (err instanceof Error) {
           setBtnMessage('Could not send mail')
+          toast.error('Could not send mail, try again later')
         }
       })
       .finally(() => {
