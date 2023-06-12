@@ -18,10 +18,13 @@ export const middleware = async (req: NextRequest) => {
   // ADMIN PROTECTED ROUTES:
   if (
     (!user || user.role !== 'ADMIN') &&
-    (pathname.startsWith('/dashboard') || pathname.startsWith('/people'))
+    (pathname.startsWith('/dashboard') ||
+      pathname.startsWith('/people') ||
+      pathname.startsWith('/credits'))
   ) {
     return NextResponse.redirect(new URL('/', req.url))
   }
+
   // USER REDIRECTS:
   if (
     user &&

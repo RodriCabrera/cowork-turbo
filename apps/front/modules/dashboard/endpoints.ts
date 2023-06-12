@@ -20,3 +20,8 @@ export const addEmployees = async (
     `/companies/${companyId}/employees`,
     employees
   )
+
+export const getCredits = async (
+  api: AxiosInstance,
+  walletId: string | undefined
+) => await api.get(`/credits/${walletId}`).then((res) => res.data)

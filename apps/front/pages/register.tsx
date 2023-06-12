@@ -28,7 +28,7 @@ export const RegisterPage = ({
 
   return (
     <BaseLayout user={user}>
-      <div className="flex min-h-[calc(100vh-8rem)]   flex-col md:flex-row">
+      <div className="flex min-h-[calc(100vh-8rem)] flex-col md:flex-row">
         <RegisterBanner
           isCompany={isCompany}
           goToCompanyRegister={goToCompanyRegister}

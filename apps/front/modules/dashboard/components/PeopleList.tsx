@@ -47,7 +47,7 @@ export const PeopleList = ({
     tableInstance
 
   return (
-    <div>
+    <div className="max-w-5xl ">
       <div className="flex w-full justify-end">
         <Link
           href={'people/add'}
