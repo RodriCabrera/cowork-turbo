@@ -1,7 +1,7 @@
-import { z, ZodError } from 'zod'
-import CustomError, { ERROR_CODES } from '../errors/customError'
+import { z } from 'zod'
+import BasicValidator from '../utils/basicValidator'
 
-export default class CoworkValidate {
+export default class CoworkValidate extends BasicValidator {
   private static $statusEnumValues = ['ACTIVE', 'PAUSED', 'CLOSED'] as const
 
   private static $baseCoworkSchema = z.object({
@@ -62,12 +62,6 @@ export default class CoworkValidate {
 
   static getEditSchema() {
     return this.$editSchema
-  }
-
-  static parseError(error: unknown) {
-    if (error instanceof ZodError) {
-      throw new CustomError(error.message, 406, ERROR_CODES.ZodInvalidType)
-    }
   }
 
   static validateStatus(status: string) {

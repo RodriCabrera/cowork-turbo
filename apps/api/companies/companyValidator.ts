@@ -1,7 +1,7 @@
-import CustomError, { ERROR_CODES } from '../errors/customError'
-import { z, ZodError } from 'zod'
+import { z } from 'zod'
+import BasicValidator from '../utils/basicValidator'
 
-export default class CompanyValidator {
+export default class CompanyValidator extends BasicValidator {
   private static $companyEditSchema = z.object({
     name: z.string().optional(),
     email: z.string().optional()
@@ -13,11 +13,5 @@ export default class CompanyValidator {
 
   static validateEdit(data: any) {
     return this.$companyEditSchema.parse(data)
-  }
-
-  static parseError(error: unknown) {
-    if (error instanceof ZodError) {
-      throw new CustomError(error.message, 406, ERROR_CODES.ZodInvalidType)
-    }
   }
 }

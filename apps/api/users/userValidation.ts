@@ -1,7 +1,7 @@
-import { z, ZodError } from 'zod'
-import CustomError, { ERROR_CODES } from '../errors/customError'
+import { z } from 'zod'
+import BasicValidator from '../utils/basicValidator'
 
-export default class UserValidate {
+export default class UserValidate extends BasicValidator {
   //   private static $roleEnumValues = ['ADMIN', 'USER']
 
   private static $baseUserSchema = z.object({
@@ -23,11 +23,5 @@ export default class UserValidate {
 
   static getCreateAdminSchema() {
     return this.$createAdminSchema
-  }
-
-  static parseError(error: unknown) {
-    if (error instanceof ZodError) {
-      throw new CustomError(error.message, 406, ERROR_CODES.ZodInvalidType)
-    }
   }
 }

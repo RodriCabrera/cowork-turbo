@@ -11,7 +11,8 @@ export const ERROR_CODES = {
   Unauthorized: 'auth_error_unauthorized',
   Unauthorized_foreign_company: 'auth_error_not_own_company',
   QueryMissingValue: 'missing_query_value_error',
-  RecordNotFound: 'generic_record_not_found'
+  RecordNotFound: 'generic_record_not_found',
+  InsufficientCredits: 'insufficient_credits_wallet_error'
 } as const
 
 type ErrorCodeKeys = keyof typeof ERROR_CODES
