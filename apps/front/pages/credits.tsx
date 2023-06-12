@@ -23,7 +23,6 @@ export const AdminDashboardPage = ({
   )
 
   const credits = creditsData?.credits
-  console.log('credits', credits)
 
   const mutateCredits = useMutateCredits(
     Axios.getInstance(user?.access_token),
@@ -32,7 +31,7 @@ export const AdminDashboardPage = ({
 
   return (
     <DashboardLayout
-      nameInitial={user?.firstName ? user.firstName[0] : 'B'}
+      nameInitial={user?.firstName ? user.firstName[0] : ''}
       token={user?.access_token}
     >
       <Modal

@@ -9,6 +9,7 @@ import { PropsWithUser } from '../types'
 
 export function NavBar({ user }: PropsWithUser) {
   const isUserLogged = !!user && Object.keys(user).length !== 0
+  const isAdmin = isUserLogged && user.role === 'ADMIN'
 
   const notLoggedOptions = [
     { name: 'Log in', href: '/login', current: false },
@@ -43,9 +44,15 @@ export function NavBar({ user }: PropsWithUser) {
             </header>
           </div>
           <div className="flex items-center gap-4">
-            {isUserLogged && (
+            <Link
+              className="cursor-pointer rounded-md bg-lime-100 px-3 py-2 text-sm font-medium transition-all hover:bg-lime-200"
+              href="/coworks"
+            >
+              Coworks
+            </Link>
+            {isUserLogged && isAdmin && (
               <Link
-                className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
+                className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium transition-all hover:bg-gray-200"
                 href="/dashboard"
               >
                 Dashboard

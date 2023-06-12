@@ -13,7 +13,7 @@ export const AdminDashboardPage = ({
 
   return (
     <DashboardLayout
-      nameInitial={user?.firstName ? user.firstName[0] : 'B'}
+      nameInitial={user?.firstName ? user.firstName[0] : ''}
       token={user?.access_token}
     >
       <p className={`pt-6 text-3xl ${bungeeHairline.className}`}>People List</p>
