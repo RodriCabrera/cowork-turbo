@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 import { useMutation, useQueryClient } from 'react-query'
+import { toast } from 'sonner'
 
 export const useMutateCredits = (
   api: AxiosInstance,
@@ -41,10 +42,15 @@ export const useMutateCredits = (
     // use the context returned from onMutate to roll back
     onError: (error, _, context) => {
       console.log(error)
+      toast.error('Could not add credits, try again later')
       queryClient.setQueryData(
         ['credits', { id: walletId }],
         context?.previousCredits
       )
+    },
+
+    onSuccess: () => {
+      toast.success('Credits added successfully')
     },
     // Always refetch after error or success:
     onSettled: () => {
