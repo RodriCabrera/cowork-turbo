@@ -6,7 +6,10 @@ export const useInfiniteCoworks = () => {
   const api = Axios.getInstance()
 
   const fetchCoworks = ({ pageParam = '' }) =>
-    api('/coworks?count=1&cursor=' + pageParam).then(res => res.data) as Promise<CoworkFullGetRes>
+    // TODO: Define count number
+    api<CoworkFullGetRes>('/coworks?count=1&cursor=' + pageParam).then(
+      (res) => res.data
+    )
 
   const {
     data,
@@ -18,8 +21,18 @@ export const useInfiniteCoworks = () => {
     status
   } = useInfiniteQuery('coworks', fetchCoworks, {
     getNextPageParam: (lastPage, pages) => {
-      return lastPage.cursor || undefined
+      // TODO: We might need a 'lastPage.totalPages' field in order to know when to stop
+      return lastPage?.cursor
     }
   })
-  return { data, hasNextPage, fetchNextPage }
+
+  return {
+    data,
+    error,
+    hasNextPage,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status
+  }
 }
