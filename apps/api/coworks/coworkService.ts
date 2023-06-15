@@ -91,7 +91,7 @@ export default class CoworkService {
     queryOptions: Prisma.CoworkFindManyArgs,
     cursor?: string
   ) {
-    queryOptions.skip = 1
+    queryOptions.skip = cursor ? 1 : 0
     if (cursor) queryOptions.cursor = { id: cursor }
     const results = (await this._client.cowork.findMany(
       queryOptions

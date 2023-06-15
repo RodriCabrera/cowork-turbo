@@ -1,12 +1,12 @@
-import React from 'react'
 import { useInfiniteQuery } from 'react-query'
+import { CoworkFullGetRes } from 'types'
 import Axios from '@/common/utils/axios'
 
 export const useInfiniteCoworks = () => {
   const api = Axios.getInstance()
 
-  const fetchCoworks = ({ pageParam = 0 }: any) =>
-    api('/coworks?count=10&cursor=' + pageParam)
+  const fetchCoworks = ({ pageParam = '' }) =>
+    api('/coworks?count=1&cursor=' + pageParam).then(res => res.data) as Promise<CoworkFullGetRes>
 
   const {
     data,
@@ -17,11 +17,9 @@ export const useInfiniteCoworks = () => {
     isFetchingNextPage,
     status
   } = useInfiniteQuery('coworks', fetchCoworks, {
-    getNextPageParam: (lastPage: any, pages) => {
-      console.log('lastPage', lastPage, 'pages', pages)
-
-      return lastPage.data.cursor
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.cursor || undefined
     }
   })
-  return { data }
+  return { data, hasNextPage, fetchNextPage }
 }
