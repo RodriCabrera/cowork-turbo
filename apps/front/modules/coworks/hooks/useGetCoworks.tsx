@@ -6,8 +6,8 @@ import { CoworkFullGetRes } from '@/../../packages/types'
 import { getCoworks } from '../endpoints'
 
 interface useGetCoworksParams {
-  pageIndex?: string
-  pageSize?: string
+  pageIndex?: number
+  pageSize?: number
 }
 
 export const useGetCoworks = ({ pageIndex, pageSize }: useGetCoworksParams) => {
@@ -15,7 +15,7 @@ export const useGetCoworks = ({ pageIndex, pageSize }: useGetCoworksParams) => {
     AxiosResponse<CoworkFullGetRes>
   >({
     queryKey: ['coworks', { pageSize, pageIndex }],
-    queryFn: () => getCoworks({ pageIndex, pageSize }),
+    queryFn: () => getCoworks({ pageIndex: pageIndex?.toString(), pageSize: pageSize?.toString() }),
     keepPreviousData: true,
     refetchOnWindowFocus: true
   })
