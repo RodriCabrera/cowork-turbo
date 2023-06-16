@@ -9,6 +9,7 @@ export default class CoworkValidate extends BasicValidator {
     name: z.string(),
     phone: z.string(),
     description: z.string(),
+    image: z.string().optional(),
     status: z.enum(this.$statusEnumValues).optional()
   })
 

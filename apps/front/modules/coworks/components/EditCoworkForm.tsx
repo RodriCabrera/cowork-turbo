@@ -89,7 +89,11 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           <input className="p-2" {...register('phone')} type="tel" />
           <FormError error={errors.phone} />
         </label>
-
+        <label className="flex flex-col">
+          <p className="py-2">Image</p>
+          <input className="p-2" {...register('image')} />
+          <FormError error={errors.image} />
+        </label>
         <p className="border-b-2 text-lg font-semibold">Address Information</p>
 
         <div className="flex w-full flex-col gap-6 md:flex-row">

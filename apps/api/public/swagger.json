@@ -213,6 +213,9 @@
 					"phone": {
 						"type": "string"
 					},
+					"image": {
+						"type": "string"
+					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
@@ -240,6 +243,7 @@
 					"createdAt",
 					"rating",
 					"phone",
+					"image",
 					"status",
 					"description",
 					"email",
@@ -527,6 +531,9 @@
 						},
 						"type": "object"
 					},
+					"image": {
+						"type": "string"
+					},
 					"description": {
 						"type": "string"
 					},
@@ -581,6 +588,9 @@
 							}
 						},
 						"type": "object"
+					},
+					"image": {
+						"type": "string"
 					},
 					"description": {
 						"type": "string"
