@@ -10,7 +10,7 @@ export const CoworksGrid = () => {
 
   return (
     <>
-      <div className="flex w-2/3 flex-wrap gap-4">
+      <section className="flex w-2/3 flex-wrap gap-4">
         {data &&
           data?.pages.map((page, index) => (
             <React.Fragment key={index}>
@@ -24,18 +24,21 @@ export const CoworksGrid = () => {
             No more coworks
           </div>
         )}
-      </div>
-      <div className="h-12">
-        {(isFetchingNextPage || isFetching) && <LoaderThreeDots />}
-      </div>
-      <div className="mb-10 flex flex-col items-center justify-center gap-8">
-        <button
-          className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100  disabled:text-gray-800"
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage || isFetching}
-        >
-          Fetch more
-        </button>
+      </section>
+      <div className="mb-10 h-12">
+        {isFetchingNextPage || isFetching ? (
+          <LoaderThreeDots />
+        ) : (
+          <div className=" flex flex-col items-center justify-center gap-8">
+            <button
+              className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100  disabled:text-gray-800"
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage || isFetchingNextPage || isFetching}
+            >
+              {hasNextPage ? 'Fetch more' : "You've reached the end"}
+            </button>
+          </div>
+        )}
       </div>
     </>
   )
