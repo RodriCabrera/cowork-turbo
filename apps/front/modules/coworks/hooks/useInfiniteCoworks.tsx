@@ -23,7 +23,8 @@ export const useInfiniteCoworks = () => {
     getNextPageParam: (lastPage, pages) => {
       // TODO: We might need a 'lastPage.totalPages' field in order to know when to stop
       return lastPage?.cursor
-    }
+    },
+    refetchOnWindowFocus: false
   })
 
   return {
