@@ -39,7 +39,8 @@ userRoutes.post(
 userRoutes.post('/auth', async (req, res, next) => {
   try {
     const response = await UserController.auth(req.body.id, req.body.token)
-    return res.send(response)
+    if (response) return res.send(response)
+    res.sendStatus(401)
   } catch (err) {
     next(err)
   }

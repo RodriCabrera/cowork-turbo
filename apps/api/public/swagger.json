@@ -213,6 +213,9 @@
 					"phone": {
 						"type": "string"
 					},
+					"image": {
+						"type": "string"
+					},
 					"status": {
 						"$ref": "#/components/schemas/Status"
 					},
@@ -240,6 +243,7 @@
 					"createdAt",
 					"rating",
 					"phone",
+					"image",
 					"status",
 					"description",
 					"email",
