@@ -2,7 +2,7 @@ import Axios from '@/common/utils/axios'
 import { AxiosError } from 'axios'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 const STATUS = {
   loading: 'loading',
@@ -20,8 +20,7 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
 
   const api = Axios.getInstance()
 
-  const router = useRouter()
-  const { token_error } = router.query
+  const token_error = useSearchParams()?.get('token_error')
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

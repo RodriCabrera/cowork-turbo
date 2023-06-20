@@ -25,6 +25,7 @@ const mockCowork: CoworkFull = {
   amenities: null,
   amenitiesId: '',
   status: 'ACTIVE',
+  image: '',
   name: 'test cowork. com',
   email: 'test@test.com',
   description: 'shamalayan test',
