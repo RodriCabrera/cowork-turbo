@@ -29,9 +29,9 @@ export const CoworksGrid = () => {
         {isFetchingNextPage || isFetching ? (
           <LoaderThreeDots />
         ) : (
-          <div className=" flex flex-col items-center justify-center gap-8">
+          <div className="flex flex-col items-center justify-center gap-8">
             <button
-              className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100  disabled:text-gray-800"
+              className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100 disabled:text-gray-800"
               onClick={() => fetchNextPage()}
               disabled={!hasNextPage || isFetchingNextPage || isFetching}
             >
