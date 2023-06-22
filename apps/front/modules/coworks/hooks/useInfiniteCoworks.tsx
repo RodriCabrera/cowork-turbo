@@ -4,11 +4,12 @@ import Axios from '@/common/utils/axios'
 
 export const useInfiniteCoworks = () => {
   const api = Axios.getInstance()
+  const COWORKS_COUNT = 3
 
   const fetchCoworks = ({ pageParam = '' }) =>
-    api<CoworkFullGetRes>('/coworks?count=3&cursor=' + pageParam).then(
-      (res) => res.data
-    )
+    api<CoworkFullGetRes>(
+      `/coworks?count=${COWORKS_COUNT}&cursor=${pageParam}`
+    ).then((res) => res.data)
 
   const {
     data,
