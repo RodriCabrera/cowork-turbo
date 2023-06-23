@@ -4,9 +4,6 @@ import CoworkService from './coworkService'
 import { Address } from '@prisma/client'
 import { CoworkFull } from './coworkTypes'
 import CustomError from '../errors/customError'
-import { ErrorInterface } from '../errors/errorInterface'
-import Auth from '../middleware/auth.middleware'
-import { Request, Response, NextFunction } from 'express'
 
 const mockAddress: Address = {
   id: '',
@@ -25,6 +22,7 @@ const mockCowork: CoworkFull = {
   amenities: null,
   amenitiesId: '',
   status: 'ACTIVE',
+  image: 'google.com/image1.jpg',
   name: 'test cowork. com',
   email: 'test@test.com',
   description: 'shamalayan test',

@@ -115,6 +115,7 @@ model Cowork {
   email          String
   description    String
   status         Status           @default(ACTIVE)
+  image          String           @default("") @db.VarChar(1000)
   phone          String
   openSchedule   OpenSchedule?    @relation(fields: [openScheduleId], references: [id])
   amenities      CoworkAmenities? @relation(fields: [amenitiesId], references: [id])
