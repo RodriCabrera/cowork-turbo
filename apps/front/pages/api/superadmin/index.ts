@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode'
 
 import { withSessionRoute } from '@/modules/auth/utils/withSession'
 import { SuperAdminData } from 'types'
+import { TOKEN_IVALID } from '@/modules/auth/utils/errorMessages'
 
 export default withSessionRoute(login)
 
@@ -24,18 +25,17 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       }
     )
 
-    // TODO: Implement better error handling
-    // 1. Invalid token
-    // 2. Token already used
-
-    const isAuthOk = (await response.status) === 200
+    const isAuthOk = response.status === 200
 
     if (isAuthOk) {
-      req.session.superadmin = { ...superAdminData, access_token }
+      req.session.superadmin = {
+        ...superAdminData,
+        access_token
+      }
       await req.session.save()
       return res.redirect('/superadmin/coworks')
     }
-    return res.redirect('/superadmin')
+    return res.redirect(`/superadmin?token_error=${TOKEN_IVALID}`)
   } catch (err) {
     res.status(500).json(err)
   }
