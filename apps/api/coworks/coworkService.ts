@@ -26,6 +26,7 @@ export default class CoworkService {
           updatedBy: author,
           description: parsedData.description,
           status: parsedData.status,
+          image: parsedData.image,
           address: {
             create: {
               apartment: parsedData.address?.apartment,
@@ -91,7 +92,7 @@ export default class CoworkService {
     queryOptions: Prisma.CoworkFindManyArgs,
     cursor?: string
   ) {
-    queryOptions.skip = 1
+    queryOptions.skip = cursor ? 1 : 0
     if (cursor) queryOptions.cursor = { id: cursor }
     const results = (await this._client.cowork.findMany(
       queryOptions
@@ -181,6 +182,7 @@ export default class CoworkService {
           email: parsedData.email,
           name: parsedData.name,
           phone: parsedData.phone,
+          image: parsedData.image,
           address: {
             update: { ...parsedData.address }
           },

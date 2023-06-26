@@ -1,33 +1,24 @@
 import { AxiosResponse } from 'axios'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 
 import { CoworkFullGetRes } from '@/../../packages/types'
-import { useApi } from '@/common/context/apiContext'
 
-// TODO: Type params
-export const useGetCoworks = ({ pageIndex, pageSize }: any) => {
-  const queryClient = useQueryClient()
-  const api = useApi()
+import { getCoworks } from '../endpoints'
 
-  const getCoworks = async (page: number) =>
-    await api.get(`/coworks?count=${pageSize}&page=${page}`)
+interface useGetCoworksParams {
+  pageIndex?: number
+  pageSize?: number
+}
 
+export const useGetCoworks = ({ pageIndex, pageSize }: useGetCoworksParams) => {
   const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
     AxiosResponse<CoworkFullGetRes>
   >({
     queryKey: ['coworks', { pageSize, pageIndex }],
-    queryFn: () => getCoworks(pageIndex),
+    queryFn: () => getCoworks({ pageIndex: pageIndex?.toString(), pageSize: pageSize?.toString() }),
     keepPreviousData: true,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
-
-  if (data) {
-    queryClient.prefetchQuery({
-      queryKey: ['coworks', { pageSize, pageIndex: pageIndex + 1 }],
-      queryFn: () => getCoworks(pageIndex + 1),
-      staleTime: 20000
-    })
-  }
 
   return {
     coworks: data?.data.results,
