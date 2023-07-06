@@ -11,7 +11,7 @@ const CoworksPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <BaseLayout user={user}>
-      <div className="flex min-h-[calc(100vh-8.1rem)] w-screen flex-col items-center justify-center gap-2 md:gap-8">
+      <div className="flex min-h-[calc(100vh-8.1rem)] w-screen flex-col items-center gap-2 md:gap-8">
         <p className={`pt-6 text-3xl ${bungeeHairline.className}`}>Coworks</p>
         <ApiProvider token={user?.access_token}>
           <CoworksGrid />
