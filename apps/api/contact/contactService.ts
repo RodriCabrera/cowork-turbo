@@ -1,11 +1,11 @@
 import MailService from '../mail/mailService'
 import config from '../config/config'
-import { ContactData } from './contactController'
+import { BasicContactData } from './contactTypes'
 
 export default class ContactService {
-  static async sendContactEmail(data: ContactData) {
+  static async sendContactEmail(data: BasicContactData) {
     const mailService = MailService.getInstance()
-    await mailService.sendMail({
+    return await mailService.sendMail({
       from: data.from.email,
       to: config.gmail.user,
       subject: `Contact from ${data.from.name}`,

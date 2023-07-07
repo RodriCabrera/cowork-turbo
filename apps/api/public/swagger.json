@@ -740,25 +740,37 @@
 				],
 				"type": "object"
 			},
-			"ContactData": {
+			"SenderData": {
+				"properties": {
+					"phone": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"companyName": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email"
+				],
+				"type": "object"
+			},
+			"BasicContactData": {
 				"properties": {
 					"message": {
 						"type": "string"
 					},
 					"from": {
-						"properties": {
-							"name": {
-								"type": "string"
-							},
-							"email": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"name",
-							"email"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/SenderData"
 					}
 				},
 				"required": [
@@ -1712,8 +1724,15 @@
 			"post": {
 				"operationId": "SendContact",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -1727,7 +1746,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ContactData",
+								"$ref": "#/components/schemas/BasicContactData",
 								"description": "ContactData"
 							}
 						}
