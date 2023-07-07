@@ -739,6 +739,33 @@
 					"employee"
 				],
 				"type": "object"
+			},
+			"ContactData": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"from": {
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"email": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"name",
+							"email"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"message",
+					"from"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -1675,6 +1702,33 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/AddCreditsInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/contact": {
+			"post": {
+				"operationId": "SendContact",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contact"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "ContactData",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ContactData",
+								"description": "ContactData"
 							}
 						}
 					}
