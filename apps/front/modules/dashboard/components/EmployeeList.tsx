@@ -8,7 +8,7 @@ import { CellPlaceholder } from '@/common/components/CellPlaceholder'
 
 const { Cell, Body, Header, Row } = Table
 
-export const PeopleList = ({
+export const EmployeeList = ({
   employees,
   isLoading
 }: {
@@ -53,7 +53,7 @@ export const PeopleList = ({
           href={'people/add'}
           className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
         >
-          Add people
+          Add employees
         </Link>
       </div>
 
@@ -98,13 +98,11 @@ export const PeopleList = ({
                 {/* Apply the table body props */}
                 <Body {...getTableBodyProps()}>
                   {employees?.length === 0 && (
-                    <CellPlaceholder text="There is no people" />
+                    <CellPlaceholder text="No employees" />
                   )}
                   {isLoading ? (
                     <CellPlaceholder
-                      text={
-                        isLoading ? 'Loading people...' : 'There is no people'
-                      }
+                      text={isLoading ? 'Loading people...' : 'No employees'}
                     />
                   ) : (
                     // Loop over the table rows
