@@ -21,6 +21,7 @@ import {
   CompanyGetAll,
   CompanyEmployeeAdded
 } from '../../apps/api/companies/companyTypes'
+import { BasicContactData } from '../../apps/api/contact/contactTypes'
 import { ErrorInterface } from '../../apps/api/errors/errorInterface'
 
 export interface SuperAdminData {
@@ -87,6 +88,7 @@ export type CompanyGetRes = CompanyGetAll
 export type UserGetRes = PublicUser
 export type CompanyPostEmployeesRes = CompanyEmployeeAdded
 export type UserJWT = PublicUser & { token: string }
+export type ContactPostReq = BasicContactData
 
 // Returns type of elements of typed Array -> ie: ArrayType<CoworkFull[]> = CoworkFull
 export type ArrayElement<ArrayType extends readonly unknown[]> =

@@ -739,6 +739,45 @@
 					"employee"
 				],
 				"type": "object"
+			},
+			"SenderData": {
+				"properties": {
+					"phone": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"companyName": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email"
+				],
+				"type": "object"
+			},
+			"BasicContactData": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"from": {
+						"$ref": "#/components/schemas/SenderData"
+					}
+				},
+				"required": [
+					"message",
+					"from"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -1675,6 +1714,40 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/AddCreditsInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/contact": {
+			"post": {
+				"operationId": "SendContact",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Contact"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "ContactData",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BasicContactData",
+								"description": "ContactData"
 							}
 						}
 					}
