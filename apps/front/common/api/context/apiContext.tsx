@@ -11,10 +11,3 @@ export function ApiProvider({
 
   return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>
 }
-
-// export const useApi = () => {
-//   const api: AxiosInstance = useContext(ApiContext)
-//   // TODO: Check this error. It's to prevent getting undefined 'api'
-//   if (!api) throw new Error('useApi should be used within a ApiProvider child')
-//   return api
-// }
