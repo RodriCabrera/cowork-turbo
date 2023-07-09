@@ -2,10 +2,11 @@ import { useQuery } from 'react-query'
 
 import { UserGetRes } from '@/../../packages/types'
 
-import Axios from '@/common/utils/axios'
+import Axios from '@/common/api/axios'
 import { Auth } from '@/modules/auth/types'
-import { getCredits } from '../endpoints'
-// TODO: Use type from BE
+import { getCredits } from '../api/queryFunctions'
+
+// TODO: Use type from package
 export interface GetCreditsRes {
   CreditAssign: any
   credits: number

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { UserAdminCreateReq } from 'types'
 
 import { FormError } from '@/common/components/FormError'
-import Axios from '@/common/utils/axios'
+import Axios from '@/common/api/axios'
 import {
   RegisterFreelancerValidationSchema,
   registerFreelancerSchema

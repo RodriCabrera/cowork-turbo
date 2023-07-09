@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import { Sidebar } from './Sidebar'
 import { UserBubble } from './UserBubble'
-import { ApiProvider } from '@/common/context/apiContext'
+import { ApiProvider } from '@/common/api/context/apiContext'
 import { NavigationTabs } from '@/modules/dashboard/components/NavigationTabs'
 
 export const DashboardLayout = ({

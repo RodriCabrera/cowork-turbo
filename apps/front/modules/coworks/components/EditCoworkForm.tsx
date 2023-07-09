@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form'
 
 import { CoworkEditReq } from 'types'
 
-import { useApi } from '@/common/context/apiContext'
 import { CoworkFull } from '@/../api/coworks/coworkTypes'
 import { FormError } from '@/common/components/FormError'
+import { useApi } from '@/common/hooks/useApi'
+import { ROUTES } from '@/common/routes'
+import { COWORKS } from '../constants'
 
 interface CoworkFormProps {
   data: CoworkFull
@@ -16,6 +18,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   const router = useRouter()
   const api = useApi()
   const queryClient = useQueryClient()
+  const { COWORKS_PATH, SUPERADMIN_COWORKS_PATH } = ROUTES
 
   const {
     register,
@@ -37,15 +40,15 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   })
 
   const editCowork = useMutation({
-    mutationKey: 'coworks',
+    mutationKey: COWORKS,
     mutationFn: (coworkData: CoworkEditReq) => {
-      return api.put(`/coworks/${data.id}`, coworkData)
+      return api.put(`${COWORKS_PATH}/${data.id}`, coworkData)
     },
     onSuccess: () => {
       queryClient.prefetchQuery({
-        queryKey: ['coworks']
+        queryKey: [COWORKS]
       })
-      router.push('/superadmin/coworks')
+      router.push(`${SUPERADMIN_COWORKS_PATH}`)
     }
   })
 
@@ -59,7 +62,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
         className="flex w-full max-w-3xl flex-col gap-7"
       >
         <p className="border-b-2 text-lg font-semibold">Basic Information</p>
-
         <label className="flex flex-col">
           <p className="py-2">Name</p>
           <input className="p-2" {...register('name')} />
@@ -95,7 +97,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           <FormError error={errors.image} />
         </label>
         <p className="border-b-2 text-lg font-semibold">Address Information</p>
-
         <div className="flex w-full flex-col gap-6 md:flex-row">
           <label className="flex flex-col">
             <p className="py-2">Country</p>
@@ -135,9 +136,8 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
             <FormError error={errors.address?.postalCode} />
           </label>
         </div>
-
         <p className="border-b-2 text-lg font-semibold">Schedule</p>
-
+        {/* TODO: Could create a ScheduleInput component to shorten this part: */}
         <div className="flex w-full flex-col gap-6 sm:flex-row">
           <label className="flex flex-col">
             <p className="py-2">Monday</p>
@@ -170,7 +170,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
             <input className="p-2" {...register('openSchedule.sun')} />
           </label>
         </div>
-
         <p className="border-b-2 text-lg font-semibold">Amenities</p>
         <div className="flex w-full flex-col gap-6 sm:flex-row">
           <label className="flex flex-col">

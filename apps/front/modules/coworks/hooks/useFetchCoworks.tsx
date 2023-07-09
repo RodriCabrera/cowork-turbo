@@ -3,19 +3,27 @@ import { useQuery } from 'react-query'
 
 import { CoworkFullGetRes } from '@/../../packages/types'
 
-import { getCoworks } from '../endpoints'
+import { getCoworks } from '../api/queryFunctions'
+import { COWORKS } from '../constants'
 
-interface useGetCoworksParams {
+interface useFetchCoworksParams {
   pageIndex?: number
   pageSize?: number
 }
 
-export const useGetCoworks = ({ pageIndex, pageSize }: useGetCoworksParams) => {
+export const useFetchCoworks = ({
+  pageIndex,
+  pageSize
+}: useFetchCoworksParams) => {
   const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
     AxiosResponse<CoworkFullGetRes>
   >({
-    queryKey: ['coworks', { pageSize, pageIndex }],
-    queryFn: () => getCoworks({ pageIndex: pageIndex?.toString(), pageSize: pageSize?.toString() }),
+    queryKey: [COWORKS, { pageSize, pageIndex }],
+    queryFn: () =>
+      getCoworks({
+        pageIndex: pageIndex?.toString(),
+        pageSize: pageSize?.toString()
+      }),
     keepPreviousData: true,
     refetchOnWindowFocus: true
   })

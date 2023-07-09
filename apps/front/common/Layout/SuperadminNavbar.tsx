@@ -8,17 +8,21 @@ import { RiCloseLine } from 'react-icons/ri'
 import { bungeeOutline } from '@/common/styles/fonts'
 import { PropsWithSuperadmin } from '@/common/types'
 import { joinClassNames } from '../utils/joinClassNames'
+import { ROUTES } from '../routes'
+import { COWORKS } from '@/modules/coworks/constants'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
 
   const isCurrentPage = (page: string) => router.pathname.includes(page)
 
+  const { SUPERADMIN_COWORKS_PATH } = ROUTES
+
   const navigation = [
     {
       name: 'Coworks',
-      href: '/superadmin/coworks',
-      current: isCurrentPage('coworks')
+      href: SUPERADMIN_COWORKS_PATH,
+      current: isCurrentPage(COWORKS)
     },
     {
       name: 'User Management',
@@ -56,7 +60,7 @@ export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
-                  <Link href={'/superadmin/coworks'}>
+                  <Link href={SUPERADMIN_COWORKS_PATH}>
                     <header
                       className={`${bungeeOutline.className} w-1/3 text-2xl sm:text-3xl `}
                     >

@@ -5,7 +5,7 @@ import { Table } from 'ui'
 import { CoworkFullGetRes, ArrayElement } from 'types'
 
 import { CellPlaceholder } from '@/common/components/CellPlaceholder'
-import { useGetCoworks } from '@/modules/coworks/hooks/useGetCoworks'
+import { useFetchCoworks } from '@/modules/coworks/hooks/useFetchCoworks'
 import { Pagination } from '@/modules/coworks/components/CoworksTable/pagination'
 import { usePagination } from '@/modules/coworks/hooks/usePagination'
 import { COLORS_BY_STATUS } from './constants'
@@ -17,7 +17,7 @@ export const CoworksTable = () => {
   const { pageSize, pageIndex, nextPage, prevPage, handlePageSizeChange } =
     usePagination()
 
-  const { coworks, isLoading, isFetching, totalPages } = useGetCoworks({
+  const { coworks, isLoading, isFetching, totalPages } = useFetchCoworks({
     pageIndex,
     pageSize
   })
@@ -135,10 +135,9 @@ export const CoworksTable = () => {
                           // Loop over the rows cells
                           row.cells.map((cell, i) => {
                             // Apply the cell props
-
-                            const isActionsCell =
-                              cell.column.Header === 'actions'
-                            const isFirstCell = cell.column.Header === 'coworks'
+                            const { column } = cell
+                            const isActionsCell = column.Header === 'actions'
+                            const isFirstCell = column.Header === 'coworks'
                             return (
                               <Cell
                                 {...cell.getCellProps()}
