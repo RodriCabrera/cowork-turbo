@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
 import { CoworkCreateReq } from 'types'
 
@@ -34,6 +35,7 @@ export const NewCoworkForm = () => {
       queryClient.prefetchQuery({
         queryKey: [COWORKS]
       })
+      toast.success('Cowork created successfully')
       router.push(ROUTES.SUPERADMIN_COWORKS_PATH)
     }
   })

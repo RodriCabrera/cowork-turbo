@@ -22,7 +22,7 @@ export const CoworksGrid = () => {
 
   return (
     <>
-      <section className="flex w-2/3 flex-wrap gap-4">
+      <section className="flex max-w-5xl flex-wrap gap-4">
         {data &&
           data?.pages.map((page, index) => (
             <React.Fragment key={index}>
@@ -32,12 +32,12 @@ export const CoworksGrid = () => {
             </React.Fragment>
           ))}
         {showNoMoreCoworks && (
-          <div className=" h-80 w-80 cursor-pointer rounded-md bg-gray-50 p-2">
+          <div className=" flex h-80 w-80 items-center justify-center rounded-md bg-gray-50/50 p-2">
             No more coworks
           </div>
         )}
       </section>
-      <div className="mb-10 h-12">
+      <div className="mb-10 flex h-12 justify-center">
         {showLoader ? (
           <LoaderThreeDots />
         ) : (

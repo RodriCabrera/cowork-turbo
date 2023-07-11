@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { CoworkEditReq } from 'types'
 
@@ -48,6 +49,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
       queryClient.prefetchQuery({
         queryKey: [COWORKS]
       })
+      toast.success('Cowork edited successfully')
       router.push(`${SUPERADMIN_COWORKS_PATH}`)
     }
   })
@@ -173,22 +175,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
         <p className="border-b-2 text-lg font-semibold">Amenities</p>
         <div className="flex w-full flex-col gap-6 sm:flex-row">
           {/* // TODO: Implement this way to reduce code: */}
-          {/* {[
-            { name: 'Bathrooms', key: 'amenities.bathrooms' },
-            { name: 'Buffet', key: 'amenities.buffet' },
-            { name: 'Wifi', key: 'amenities.wifi' }
-          ].map((amenity) => {
-            return (
-              <label key={amenity.key} className="flex items-center gap-6">
-                <p className="py-2">{amenity.name}</p>
-                <input
-                  type="checkbox"
-                  className="p-2"
-                  {...register(amenity.key as any)}
-                />
-              </label>
-            )
-          })} */}
+
           <label className="flex flex-col">
             <p className="py-2">Bathrooms</p>
             <input
@@ -222,7 +209,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           disabled={editCowork.isLoading}
           className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
         >
-          {editCowork.isLoading ? 'Creating cowork...' : 'Submit'}
+          {editCowork.isLoading ? 'Editing cowork...' : 'Submit'}
         </button>
       </form>
     </div>
