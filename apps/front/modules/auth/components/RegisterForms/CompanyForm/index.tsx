@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 import { UserAdminCreateReq } from 'types'
 
 import { FormError } from '@/common/components/FormError'
-import Axios from '@/common/utils/axios'
+import Axios from '@/common/api/axios'
 import {
   RegisterAdminValidationSchema,
   registerAdminSchema
@@ -109,7 +109,7 @@ export const CompanyForm = () => {
               type="submit"
               className={`w-full rounded-lg  px-5 py-2.5 text-center text-base font-light text-black focus:outline-none focus:ring-4 ${
                 isValid
-                  ? 'bg-green-100/75 hover:bg-green-200/75'
+                  ? 'bg-emerald-100/75 hover:bg-emerald-200/75'
                   : 'bg-gray-100/75'
               }`}
             >

@@ -38,7 +38,7 @@ export const middleware = async (req: NextRequest) => {
   if (superadmin && pathname === '/superadmin') {
     return NextResponse.redirect(new URL('/superadmin/coworks', req.url))
   }
-  // if NO superadmin, protect /superadmin routes
+  // protect /superadmin routes
   if (!superadmin && pathname.startsWith('/superadmin/')) {
     return NextResponse.redirect(new URL('/superadmin', req.url))
   }

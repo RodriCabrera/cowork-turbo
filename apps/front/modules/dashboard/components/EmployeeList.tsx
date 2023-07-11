@@ -48,7 +48,7 @@ export const EmployeeList = ({
 
   return (
     <div className="max-w-5xl ">
-      <div className="flex w-full justify-end">
+      <div className="my-6 flex w-full">
         <Link
           href={'people/add'}
           className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
@@ -121,7 +121,11 @@ export const EmployeeList = ({
                             row.cells.map((cell, i) => {
                               // Apply the cell props
                               return (
-                                <Cell {...cell.getCellProps()} key={i}>
+                                <Cell
+                                  {...cell.getCellProps()}
+                                  key={i}
+                                  className="cursor-pointer"
+                                >
                                   {
                                     // Render the cell contents
                                     cell.render('Cell')

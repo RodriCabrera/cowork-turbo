@@ -5,20 +5,23 @@ import { Menu, Transition } from '@headlessui/react'
 import { joinClassNames } from '@/common/utils/joinClassNames'
 import { bungeeHairline } from '@/common/styles/fonts'
 
-interface UserBarProps {
-  className?: string
+interface DashboardNavbarProps {
+  containerClassName?: string
   nameInitial: string | undefined
 }
 
-export const UserBubble = ({ className, nameInitial }: UserBarProps) => (
-  <nav className={`flex w-full max-w-5xl justify-end ${className}`}>
+export const DashboardNavbar = ({
+  containerClassName,
+  nameInitial
+}: DashboardNavbarProps) => (
+  <nav className={`flex w-full max-w-5xl justify-end ${containerClassName}`}>
     <div className="absolute  right-0 flex items-center pr-2 sm:static sm:inset-auto">
       {/* Profile dropdown */}
       <Menu as="div" className="relative">
         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="sr-only">Open user menu</span>
           <div
-            className={`flex h-8 w-8 items-center justify-center rounded-full bg-green-300 text-2xl ${bungeeHairline.className}`}
+            className={`flex h-8 w-8 items-center justify-center rounded-full bg-emerald-300 text-2xl ${bungeeHairline.className}`}
           >
             {nameInitial}
           </div>

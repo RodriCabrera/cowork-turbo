@@ -8,8 +8,8 @@ import { EmployeeAddReq } from 'types'
 import { ROUTES } from '@/common/routes'
 import { bungee } from '@/common/styles/fonts'
 import { Modal } from '@/common/components/Modal'
-import { useApi } from '@/common/context/apiContext'
-import { addEmployees } from '../endpoints'
+import { useApi } from '@/common/hooks/useApi'
+import { addEmployees } from '../api/queryFunctions'
 
 interface AddEmployeesFormProps {
   employees: {
@@ -45,6 +45,7 @@ export const AddEmployeesForm = ({
     name: 'employees'
   })
 
+  // TODO: Add some status indicator when submitting
   const onSubmit = async ({
     employees
   }: {

@@ -9,8 +9,10 @@ import {
   CreateCoworkValidationSchema,
   createCoworkSchema
 } from '@/modules/coworks/components/NewCoworkForm/newCoworkValidation'
-import { useApi } from '@/common/context/apiContext'
 import { FormError } from '@/common/components/FormError'
+import { useApi } from '@/common/hooks/useApi'
+import { ROUTES } from '@/common/routes'
+import { COWORKS } from '../../constants'
 
 export const NewCoworkForm = () => {
   const router = useRouter()
@@ -27,13 +29,12 @@ export const NewCoworkForm = () => {
 
   const createCowork = useMutation({
     // mutationKey: 'coworks',
-    mutationFn: (coworkData: CoworkCreateReq) =>
-      api.post('coworks', coworkData),
+    mutationFn: (coworkData: CoworkCreateReq) => api.post(COWORKS, coworkData),
     onSuccess: () => {
       queryClient.prefetchQuery({
-        queryKey: ['coworks']
+        queryKey: [COWORKS]
       })
-      router.push('/superadmin/coworks')
+      router.push(ROUTES.SUPERADMIN_COWORKS_PATH)
     }
   })
 

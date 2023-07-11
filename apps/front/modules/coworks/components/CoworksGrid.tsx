@@ -8,6 +8,18 @@ export const CoworksGrid = () => {
   const { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } =
     useInfiniteCoworks()
 
+  const showLoader = isFetchingNextPage || isFetching
+  const showNoMoreCoworks = !isFetchingNextPage && !isFetching && !hasNextPage
+
+  const isFetchMoreButtonDisabled =
+    !hasNextPage || isFetchingNextPage || isFetching
+
+  const fetchMoreButtonText = hasNextPage
+    ? 'Fetch more'
+    : "You've reached the end"
+
+  const handleFetchMoreClick = () => fetchNextPage()
+
   return (
     <>
       <section className="flex w-2/3 flex-wrap gap-4">
@@ -19,23 +31,23 @@ export const CoworksGrid = () => {
               ))}
             </React.Fragment>
           ))}
-        {!isFetchingNextPage && !isFetching && !hasNextPage && (
+        {showNoMoreCoworks && (
           <div className=" h-80 w-80 cursor-pointer rounded-md bg-gray-50 p-2">
             No more coworks
           </div>
         )}
       </section>
       <div className="mb-10 h-12">
-        {isFetchingNextPage || isFetching ? (
+        {showLoader ? (
           <LoaderThreeDots />
         ) : (
           <div className="flex flex-col items-center justify-center gap-8">
             <button
               className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100 disabled:text-gray-800"
-              onClick={() => fetchNextPage()}
-              disabled={!hasNextPage || isFetchingNextPage || isFetching}
+              onClick={handleFetchMoreClick}
+              disabled={isFetchMoreButtonDisabled}
             >
-              {hasNextPage ? 'Fetch more' : "You've reached the end"}
+              {fetchMoreButtonText}
             </button>
           </div>
         )}
