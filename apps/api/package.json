@@ -19,7 +19,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "nodemailer": "^6.9.1",
-    "swagger-ui-express": "^4.6.2",
+    "swagger-ui-express": "^5.0.0",
     "tsoa": "^5.1.1",
     "uuid": "^9.0.0",
     "zod": "^3.21.4"
@@ -37,7 +37,7 @@
     "eslint-config-custom": "*",
     "jest": "^29.5.0",
     "jest-mock-extended": "^3.0.4",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "prisma": "^4.13.0",
     "supertest": "^6.3.3",
     "tailwind-config": "*",
