@@ -5552,10 +5552,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-sonner@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/sonner/-/sonner-0.5.0.tgz#48e4c1c8894c974fdb944ce4cd88ceb04ca7b8f8"
-  integrity sha512-V5L4918wScYxpe3x1H92MV0vSkUqRREu8dwFf7dDTQmRMQ58r1vzSKCsULZ5HCTqxNkfCdhQXHf7rRMaj/MukQ==
+sonner@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-0.6.1.tgz#34f1b73a44f72a2688793599b9246f7fc51c08c1"
+  integrity sha512-4LdrhmFQp+ytQCWc1sTAG4oVsA1c+iFuYsl9XOvZtMjQR5ytxIe1Rislq0sUHeHpC1oReX6j0/XfMDzZy1WysQ==
 
 source-map-js@^1.0.2:
   version "1.0.2"
