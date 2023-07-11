@@ -7,8 +7,8 @@ import { RiCloseLine } from 'react-icons/ri'
 
 import { bungeeOutline } from '@/common/styles/fonts'
 import { PropsWithSuperadmin } from '@/common/types'
-import { joinClassNames } from '../utils/joinClassNames'
-import { ROUTES } from '../routes'
+import { joinClassNames } from '../../utils/joinClassNames'
+import { ROUTES } from '../../routes'
 import { COWORKS } from '@/modules/coworks/constants'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
@@ -94,7 +94,7 @@ export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
                   <Menu as="div" className="relative ml-3">
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      <div className="h-8 w-8 rounded-full bg-green-300" />
+                      <div className="h-8 w-8 rounded-full bg-lime-300" />
                     </Menu.Button>
                     <Transition
                       as={Fragment}

@@ -85,7 +85,7 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
             </div>
             <button
               type="submit"
-              className={`w-full rounded-lg bg-green-100/75 px-5 py-2.5 text-center text-base font-light text-black hover:bg-green-200/75 focus:outline-none focus:ring-4 ${
+              className={`w-full rounded-lg bg-emerald-100/75 px-5 py-2.5 text-center text-base font-light text-black hover:bg-emerald-200/75 focus:outline-none focus:ring-4 ${
                 queryStatus === STATUS.error &&
                 'bg-red-100/75 hover:bg-red-200/75'
               }`}

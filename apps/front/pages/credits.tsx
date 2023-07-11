@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { InferGetServerSidePropsType } from 'next'
 
-import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
+import { DashboardLayout } from '@/common/Layout/DashboardLayout'
 import { getUserSession } from '@/common/utils/getAdminSession'
 import { useFetchCompany } from '@/modules/dashboard/hooks/useFetchCompany'
 import Axios from '@/common/api/axios'
@@ -66,7 +66,7 @@ export const AdminDashboardPage = ({
             />
           </label>
           <button
-            className="rounded-md bg-green-500 p-2 text-white"
+            className="rounded-md bg-emerald-300 p-2 text-white"
             onClick={() => setIsModalOpen((prev) => !prev)}
           >
             Confirm

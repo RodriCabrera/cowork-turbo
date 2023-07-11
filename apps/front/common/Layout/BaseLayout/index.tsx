@@ -1,10 +1,10 @@
 import { PropsWithChildren } from 'react'
 
 import { raleway } from '@/common/styles/fonts'
-import { ApiProvider } from '../api/context/apiContext'
-import { NavBar } from './NavBar'
+import { UserProp } from '@/common/types'
+import { BaseNavbar } from './BaseNavbar'
+import { ApiProvider } from '@/common/api/context/apiContext'
 import { Footer } from './Footer'
-import { UserProp } from '../types'
 
 export const BaseLayout = ({
   user,
@@ -15,7 +15,7 @@ export const BaseLayout = ({
       className={`${raleway.className} h-full min-h-screen pb-16`}
       id="layout"
     >
-      <NavBar user={user} />
+      <BaseNavbar user={user} />
       <ApiProvider token={user?.access_token}>{children}</ApiProvider>
       <Footer />
     </div>

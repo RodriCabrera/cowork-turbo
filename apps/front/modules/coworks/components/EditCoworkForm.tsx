@@ -172,6 +172,23 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
         </div>
         <p className="border-b-2 text-lg font-semibold">Amenities</p>
         <div className="flex w-full flex-col gap-6 sm:flex-row">
+          {/* // TODO: Implement this way to reduce code: */}
+          {/* {[
+            { name: 'Bathrooms', key: 'amenities.bathrooms' },
+            { name: 'Buffet', key: 'amenities.buffet' },
+            { name: 'Wifi', key: 'amenities.wifi' }
+          ].map((amenity) => {
+            return (
+              <label key={amenity.key} className="flex items-center gap-6">
+                <p className="py-2">{amenity.name}</p>
+                <input
+                  type="checkbox"
+                  className="p-2"
+                  {...register(amenity.key as any)}
+                />
+              </label>
+            )
+          })} */}
           <label className="flex flex-col">
             <p className="py-2">Bathrooms</p>
             <input
@@ -182,7 +199,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
               })}
             />
           </label>
-
           <label className="flex items-center gap-6">
             <p className="py-2">Buffet</p>
             <input

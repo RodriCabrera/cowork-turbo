@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 
 import { Sidebar } from './Sidebar'
-import { UserBubble } from './UserBubble'
+import { DashboardNavbar } from './DashboardNavbar'
 import { ApiProvider } from '@/common/api/context/apiContext'
 import { NavigationTabs } from '@/modules/dashboard/components/NavigationTabs'
 
@@ -15,10 +15,19 @@ export const DashboardLayout = ({
 }>) => (
   <div className="flex h-screen w-screen flex-col md:flex-row">
     <Sidebar>
-      <UserBubble className="flex md:hidden" nameInitial={nameInitial} />
+      <DashboardNavbar
+        containerClassName="flex md:hidden"
+        nameInitial={nameInitial}
+      />
     </Sidebar>
+
     <section className="p-8 md:w-[calc(100vw-136px)]">
-      <UserBubble className="hidden md:flex" nameInitial={nameInitial} />
+      <nav className={'flex w-full max-w-5xl justify-end'}>
+        <DashboardNavbar
+          containerClassName="hidden md:flex"
+          nameInitial={nameInitial}
+        />
+      </nav>
       <ApiProvider token={token}>
         <NavigationTabs />
         {children}

@@ -1,7 +1,7 @@
 import { InferGetServerSidePropsType } from 'next'
 
 import Axios from '@/common/api/axios'
-import { DashboardLayout } from '@/common/Layout/ua/DashboardLayout'
+import { DashboardLayout } from '@/common/Layout/DashboardLayout'
 import { withSessionSsr } from '@/modules/auth/utils/withSession'
 import { getCompany } from '@/modules/dashboard/api/queryFunctions'
 import { AddEmployeesForm } from '@/modules/dashboard/components/AddEmployeesForm'
