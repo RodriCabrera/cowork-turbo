@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
 import { CoworkCreateReq } from 'types'
 
@@ -9,8 +10,10 @@ import {
   CreateCoworkValidationSchema,
   createCoworkSchema
 } from '@/modules/coworks/components/NewCoworkForm/newCoworkValidation'
-import { useApi } from '@/common/context/apiContext'
 import { FormError } from '@/common/components/FormError'
+import { useApi } from '@/common/hooks/useApi'
+import { ROUTES } from '@/common/routes'
+import { COWORKS } from '../../constants'
 
 export const NewCoworkForm = () => {
   const router = useRouter()
@@ -27,13 +30,13 @@ export const NewCoworkForm = () => {
 
   const createCowork = useMutation({
     // mutationKey: 'coworks',
-    mutationFn: (coworkData: CoworkCreateReq) =>
-      api.post('coworks', coworkData),
+    mutationFn: (coworkData: CoworkCreateReq) => api.post(COWORKS, coworkData),
     onSuccess: () => {
       queryClient.prefetchQuery({
-        queryKey: ['coworks']
+        queryKey: [COWORKS]
       })
-      router.push('/superadmin/coworks')
+      toast.success('Cowork created successfully')
+      router.push(ROUTES.SUPERADMIN_COWORKS_PATH)
     }
   })
 

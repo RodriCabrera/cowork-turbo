@@ -1,7 +1,7 @@
+import { useRouter } from 'next/router'
 import { AiOutlineEye, AiOutlineEdit } from 'react-icons/ai'
 
 import { DeleteCowork } from './DeleteCowork'
-import { useRouter } from 'next/router'
 
 export const ActionsCell = ({ coworkId }: { coworkId: string }) => {
   const router = useRouter()

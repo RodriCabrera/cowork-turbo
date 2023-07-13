@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import { SuperadminNavbar } from './SuperadminNavbar'
 import { PropsWithSuperadmin } from '@/common/types'
-import { ApiProvider } from '@/common/context/apiContext'
+import { ApiProvider } from '@/common/api/context/apiContext'
 
 export const SuperadminLayout = ({
   children,

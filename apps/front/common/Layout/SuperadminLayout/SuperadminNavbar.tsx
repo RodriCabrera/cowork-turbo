@@ -4,21 +4,26 @@ import { useRouter } from 'next/router'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BiMenu } from 'react-icons/bi'
 import { RiCloseLine } from 'react-icons/ri'
+import { FiUser } from 'react-icons/fi'
 
 import { bungeeOutline } from '@/common/styles/fonts'
 import { PropsWithSuperadmin } from '@/common/types'
-import { joinClassNames } from '../utils/joinClassNames'
+import { joinClassNames } from '../../utils/joinClassNames'
+import { ROUTES } from '../../routes'
+import { COWORKS } from '@/modules/coworks/constants'
 
 export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
   const router = useRouter()
 
   const isCurrentPage = (page: string) => router.pathname.includes(page)
 
+  const { SUPERADMIN_COWORKS_PATH } = ROUTES
+
   const navigation = [
     {
       name: 'Coworks',
-      href: '/superadmin/coworks',
-      current: isCurrentPage('coworks')
+      href: SUPERADMIN_COWORKS_PATH,
+      current: isCurrentPage(COWORKS)
     },
     {
       name: 'User Management',
@@ -56,7 +61,7 @@ export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
-                  <Link href={'/superadmin/coworks'}>
+                  <Link href={SUPERADMIN_COWORKS_PATH}>
                     <header
                       className={`${bungeeOutline.className} w-1/3 text-2xl sm:text-3xl `}
                     >
@@ -88,9 +93,11 @@ export const SuperadminNavbar = ({ superadmin }: PropsWithSuperadmin) => {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      <div className="h-8 w-8 rounded-full bg-green-300" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-300">
+                        <FiUser className="h-6 w-6 text-emerald-400 " />
+                      </div>
                     </Menu.Button>
                     <Transition
                       as={Fragment}

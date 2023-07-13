@@ -1,13 +1,13 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import { FiMenu } from 'react-icons/fi'
+import { FiUser } from 'react-icons/fi'
 
 import { bungeeHairline } from '@/common/styles/fonts'
-import { joinClassNames } from '../utils/joinClassNames'
-import { PropsWithUser } from '../types'
+import { joinClassNames } from '../../utils/joinClassNames'
+import { PropsWithUser } from '../../types'
 
-export function NavBar({ user }: PropsWithUser) {
+export function BaseNavbar({ user }: PropsWithUser) {
   const isUserLogged = !!user && Object.keys(user).length !== 0
   const isAdmin = isUserLogged && user.role === 'ADMIN'
 
@@ -45,7 +45,7 @@ export function NavBar({ user }: PropsWithUser) {
           </div>
           <div className="flex items-center gap-4">
             <Link
-              className="cursor-pointer rounded-md bg-lime-100 px-3 py-2 text-sm font-medium transition-all hover:bg-lime-200"
+              className="cursor-pointer rounded-md bg-emerald-100 px-3 py-2 text-sm font-medium transition-all hover:bg-emerald-200"
               href="/coworks"
             >
               Coworks
@@ -60,10 +60,10 @@ export function NavBar({ user }: PropsWithUser) {
             )}
             {/* Profile dropdown */}
             <Menu as="div" className="px-1">
-              <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <Menu.Button className="flex rounded-full bg-gray-800 text-sm  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span className="sr-only">Open user menu</span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
-                  <FiMenu className="h-6 w-6 text-gray-400 " />
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 hover:bg-zinc-200">
+                  <FiUser className="h-6 w-6 text-gray-400 hover:text-zinc-300" />
                 </div>
               </Menu.Button>
               <Transition

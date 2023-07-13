@@ -1,15 +1,17 @@
 import { useInfiniteQuery } from 'react-query'
-import { CoworkFullGetRes } from 'types'
-import Axios from '@/common/utils/axios'
+
+import { COWORKS } from '../constants'
+import { fetchCoworks } from '../api/queryFunctions'
 
 export const useInfiniteCoworks = () => {
-  const api = Axios.getInstance()
-  const COWORKS_COUNT = 3
+  // TODO: TEST IF CAN BE REMOVED / and use the imported query fn
+  // const api = Axios.getInstance()
+  // const COWORKS_COUNT = 3
 
-  const fetchCoworks = ({ pageParam = '' }) =>
-    api<CoworkFullGetRes>(
-      `/coworks?count=${COWORKS_COUNT}&cursor=${pageParam}`
-    ).then((res) => res.data)
+  // const fetchCoworks = ({ pageParam = '' }) =>
+  //   api<CoworkFullGetRes>(
+  //     `/coworks?count=${COWORKS_COUNT}&cursor=${pageParam}`
+  //   ).then((res) => res.data)
 
   const {
     data,
@@ -19,7 +21,7 @@ export const useInfiniteCoworks = () => {
     isFetching,
     isFetchingNextPage,
     status
-  } = useInfiniteQuery('coworks', fetchCoworks, {
+  } = useInfiniteQuery(COWORKS, fetchCoworks, {
     getNextPageParam: (lastPage, pages) => {
       // TODO: We might need a 'lastPage.totalPages' field in order to know when to stop in advance
       return lastPage?.cursor

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
 
 import { Modal } from '@/common/components/Modal'
-import { useApi } from '@/common/context/apiContext'
+import { useApi } from '@/common/hooks/useApi'
 
 export const DeleteCowork = ({ coworkId }: { coworkId: string }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)

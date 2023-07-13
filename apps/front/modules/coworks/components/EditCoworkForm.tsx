@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { CoworkEditReq } from 'types'
 
-import { useApi } from '@/common/context/apiContext'
 import { CoworkFull } from '@/../api/coworks/coworkTypes'
 import { FormError } from '@/common/components/FormError'
+import { useApi } from '@/common/hooks/useApi'
+import { ROUTES } from '@/common/routes'
+import { COWORKS } from '../constants'
 
 interface CoworkFormProps {
   data: CoworkFull
@@ -16,6 +19,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   const router = useRouter()
   const api = useApi()
   const queryClient = useQueryClient()
+  const { COWORKS_PATH, SUPERADMIN_COWORKS_PATH } = ROUTES
 
   const {
     register,
@@ -37,15 +41,16 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   })
 
   const editCowork = useMutation({
-    mutationKey: 'coworks',
+    mutationKey: COWORKS,
     mutationFn: (coworkData: CoworkEditReq) => {
-      return api.put(`/coworks/${data.id}`, coworkData)
+      return api.put(`${COWORKS_PATH}/${data.id}`, coworkData)
     },
     onSuccess: () => {
       queryClient.prefetchQuery({
-        queryKey: ['coworks']
+        queryKey: [COWORKS]
       })
-      router.push('/superadmin/coworks')
+      toast.success('Cowork edited successfully')
+      router.push(`${SUPERADMIN_COWORKS_PATH}`)
     }
   })
 
@@ -59,7 +64,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
         className="flex w-full max-w-3xl flex-col gap-7"
       >
         <p className="border-b-2 text-lg font-semibold">Basic Information</p>
-
         <label className="flex flex-col">
           <p className="py-2">Name</p>
           <input className="p-2" {...register('name')} />
@@ -95,7 +99,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           <FormError error={errors.image} />
         </label>
         <p className="border-b-2 text-lg font-semibold">Address Information</p>
-
         <div className="flex w-full flex-col gap-6 md:flex-row">
           <label className="flex flex-col">
             <p className="py-2">Country</p>
@@ -135,9 +138,8 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
             <FormError error={errors.address?.postalCode} />
           </label>
         </div>
-
         <p className="border-b-2 text-lg font-semibold">Schedule</p>
-
+        {/* TODO: Could create a ScheduleInput component to shorten this part: */}
         <div className="flex w-full flex-col gap-6 sm:flex-row">
           <label className="flex flex-col">
             <p className="py-2">Monday</p>
@@ -170,9 +172,10 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
             <input className="p-2" {...register('openSchedule.sun')} />
           </label>
         </div>
-
         <p className="border-b-2 text-lg font-semibold">Amenities</p>
         <div className="flex w-full flex-col gap-6 sm:flex-row">
+          {/* // TODO: Implement this way to reduce code: */}
+
           <label className="flex flex-col">
             <p className="py-2">Bathrooms</p>
             <input
@@ -183,7 +186,6 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
               })}
             />
           </label>
-
           <label className="flex items-center gap-6">
             <p className="py-2">Buffet</p>
             <input
@@ -207,7 +209,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
           disabled={editCowork.isLoading}
           className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
         >
-          {editCowork.isLoading ? 'Creating cowork...' : 'Submit'}
+          {editCowork.isLoading ? 'Editing cowork...' : 'Submit'}
         </button>
       </form>
     </div>
