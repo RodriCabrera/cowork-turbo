@@ -99,7 +99,10 @@ export default class CoworkService {
     )) as CoworkFull[]
     return {
       results,
-      cursor: results[results.length - 1]?.id || undefined,
+      cursor:
+        results.length >= (queryOptions.take || 1)
+          ? results[results.length - 1]?.id
+          : undefined,
       page: undefined,
       totalPages: undefined
     }
