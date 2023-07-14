@@ -6,7 +6,9 @@ import { ContactBanner } from '@/modules/contact/ContactBanner'
 
 export const ContactPage = ({ user }: PropsWithUser) => (
   <BaseLayout user={user}>
-    <ContactBanner />
+    <div className="flex min-h-[calc(100vh-126px)] justify-center bg-gray-50 pb-20 md:p-0">
+      <ContactBanner />
+    </div>
   </BaseLayout>
 )
 
