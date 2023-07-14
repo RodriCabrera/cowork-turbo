@@ -22,10 +22,7 @@ export const useInfiniteCoworks = () => {
     isFetchingNextPage,
     status
   } = useInfiniteQuery(COWORKS, fetchCoworks, {
-    getNextPageParam: (lastPage, pages) => {
-      // TODO: We might need a 'lastPage.totalPages' field in order to know when to stop in advance
-      return lastPage?.cursor
-    },
+    getNextPageParam: (lastPage) => lastPage?.cursor,
     refetchOnWindowFocus: false
   })
 
