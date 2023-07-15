@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { FiDelete } from 'react-icons/fi'
 import { useRouter } from 'next/router'
 import { useFieldArray, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { AxiosError } from 'axios'
 
 import { EmployeeAddReq } from 'types'
 
@@ -62,9 +64,15 @@ export const AddEmployeesForm = ({
         const { isActive, ...rest } = employee
         return rest
       })
-    const res = await addEmployees(api, companyId, inactiveEmployees)
-    router.push(ROUTES.DASHBOARD_PATH)
-    return res
+    const addToast = toast('Adding employees...')
+    addEmployees(api, companyId, inactiveEmployees)
+      .then(() => {
+        toast.success('Employees added successfully', { id: addToast })
+        router.push(ROUTES.DASHBOARD_PATH)
+      })
+      .catch((error: AxiosError) => {
+        toast.error(`Error: ${error.code}`)
+      })
   }
 
   const handleAddField = () =>
@@ -97,18 +105,22 @@ export const AddEmployeesForm = ({
                 className="m-2 rounded-md border-2 p-2"
                 {...register(`employees.${index}.firstName`)}
                 disabled={field.isActive}
+                required
               />
               <input
                 placeholder="Last name"
                 className="m-2 rounded-md border-2 p-2"
                 {...register(`employees.${index}.lastName`)}
                 disabled={field.isActive}
+                required
               />
               <input
                 className="m-2 w-full rounded-md border-2 p-2"
                 placeholder="Email"
                 {...register(`employees.${index}.email`)}
                 disabled={field.isActive}
+                required
+                type="email"
               />
               {!field.isActive && (
                 <button
