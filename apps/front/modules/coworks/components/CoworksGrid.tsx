@@ -14,12 +14,6 @@ export const CoworksGrid = () => {
   const isFetchMoreButtonDisabled =
     !hasNextPage || isFetchingNextPage || isFetching
 
-  const fetchMoreButtonText = hasNextPage
-    ? 'Fetch more'
-    : "You've reached the end"
-
-  const handleFetchMoreClick = () => fetchNextPage()
-
   return (
     <>
       <section className="flex max-w-5xl flex-wrap gap-4">
@@ -42,13 +36,15 @@ export const CoworksGrid = () => {
           <LoaderThreeDots />
         ) : (
           <div className="flex flex-col items-center justify-center gap-8">
-            <button
-              className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100 disabled:text-gray-800"
-              onClick={handleFetchMoreClick}
-              disabled={isFetchMoreButtonDisabled}
-            >
-              {fetchMoreButtonText}
-            </button>
+            {hasNextPage && (
+              <button
+                className="rounded-md bg-yellow-100 p-3 disabled:bg-gray-100 disabled:text-gray-800"
+                onClick={() => fetchNextPage()}
+                disabled={isFetchMoreButtonDisabled}
+              >
+                Fetch more
+              </button>
+            )}
           </div>
         )}
       </div>
