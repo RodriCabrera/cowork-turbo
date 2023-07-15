@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { AxiosError } from 'axios'
 
 import { CoworkEditReq } from 'types'
 
@@ -39,12 +40,14 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   })
 
   const editCowork = useMutation({
-    // mutationKey: COWORKS,
     mutationFn: (coworkData: CoworkEditReq) =>
       api.put(`${COWORKS_PATH}/${data.id}`, coworkData),
     onSuccess: () => {
       toast.success('Cowork edited successfully')
       router.push(`${SUPERADMIN_COWORKS_PATH}`)
+    },
+    onError: (error: AxiosError) => {
+      toast.error(`Error: ${error.code}`)
     }
   })
 
