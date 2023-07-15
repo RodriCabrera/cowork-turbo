@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import { SingleCoworkFullGetRes } from 'types'
 
@@ -17,11 +18,12 @@ export const CoworkCard = ({ cowork }: { cowork: SingleCoworkFullGetRes }) => {
       onClick={() => handleCardClick(cowork.id)}
     >
       <div className="h-60 w-full rounded-md bg-sky-100">
-        {/* TODO: REFACTOR WITH NEXT IMAGE */}
-        <img
+        <Image
           className="h-full w-full object-cover"
           src={cowork.image || 'https:placehold.it/200x200'}
           alt={`${cowork.name} profile image`}
+          width={200}
+          height={200}
         />
       </div>
       <p>{cowork.name}</p>

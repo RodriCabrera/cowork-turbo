@@ -14,6 +14,18 @@ module.exports = {
         hostname: 'encrypted-tbn0.gstatic.com',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'lamaquinita.co',
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.it',
+        port: '',
+        pathname: '/**'
       }
     ]
   }
