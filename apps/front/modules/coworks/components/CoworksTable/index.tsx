@@ -111,7 +111,7 @@ export const CoworksTable = () => {
               {/* Apply the table body props */}
               <Body {...getTableBodyProps()}>
                 {isDataEmpty && <CellPlaceholder text="No coworks available" />}
-                {isLoading || isFetching ? (
+                {(isLoading || isFetching) && !coworks?.length ? (
                   <CellPlaceholder
                     text={
                       isLoading || isFetching

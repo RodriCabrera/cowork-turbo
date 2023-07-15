@@ -184,6 +184,7 @@ export default class CoworkService {
         data: {
           email: parsedData.email,
           name: parsedData.name,
+          description: parsedData.description,
           phone: parsedData.phone,
           image: parsedData.image,
           address: {
