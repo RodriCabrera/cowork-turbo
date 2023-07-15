@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -9,7 +9,6 @@ import { CoworkFull } from '@/../api/coworks/coworkTypes'
 import { FormError } from '@/common/components/FormError'
 import { useApi } from '@/common/hooks/useApi'
 import { ROUTES } from '@/common/routes'
-import { COWORKS } from '../constants'
 
 interface CoworkFormProps {
   data: CoworkFull
@@ -18,7 +17,6 @@ interface CoworkFormProps {
 export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   const router = useRouter()
   const api = useApi()
-  const queryClient = useQueryClient()
   const { COWORKS_PATH, SUPERADMIN_COWORKS_PATH } = ROUTES
 
   const {
@@ -41,14 +39,10 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
   })
 
   const editCowork = useMutation({
-    mutationKey: COWORKS,
-    mutationFn: (coworkData: CoworkEditReq) => {
-      return api.put(`${COWORKS_PATH}/${data.id}`, coworkData)
-    },
+    // mutationKey: COWORKS,
+    mutationFn: (coworkData: CoworkEditReq) =>
+      api.put(`${COWORKS_PATH}/${data.id}`, coworkData),
     onSuccess: () => {
-      queryClient.prefetchQuery({
-        queryKey: [COWORKS]
-      })
       toast.success('Cowork edited successfully')
       router.push(`${SUPERADMIN_COWORKS_PATH}`)
     }

@@ -25,7 +25,7 @@ export const useFetchCoworks = ({
         pageSize: pageSize?.toString()
       }),
     keepPreviousData: true,
-    refetchOnWindowFocus: true
+    refetchOnWindowFocus: false
   })
 
   return {
