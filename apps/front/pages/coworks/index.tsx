@@ -11,7 +11,7 @@ const CoworksPage = ({
     <BaseLayout user={user}>
       <div className="mt-8 flex min-h-[calc(100vh-8.1rem)] w-screen flex-col items-center gap-2 md:gap-8">
         <div className="flex flex-col gap-6 p-4">
-          <p className="text-center text-6xl font-bold">COWORKS</p>
+          <h1 className="text-center text-6xl font-bold">COWORKS</h1>
           <CoworksGrid />
         </div>
       </div>
