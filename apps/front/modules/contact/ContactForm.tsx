@@ -11,7 +11,6 @@ import { ROUTES } from '@/common/routes'
 
 import { ContactPostReq } from 'types'
 
-// TODO: Extract to different file?
 const inputSchema = z.object({
   message: z.string().min(1, { message: 'required' }),
   from: z.object({
