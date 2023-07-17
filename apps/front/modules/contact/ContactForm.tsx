@@ -15,7 +15,7 @@ import { ContactPostReq } from 'types'
 const inputSchema = z.object({
   message: z.string().min(1, { message: 'required' }),
   from: z.object({
-    email: z.string().email(),
+    email: z.string().email().min(4, { message: 'required' }),
     name: z.string().min(3, { message: 'required' }),
     companyName: z.string().optional(),
     phone: z.string().optional(),
