@@ -1,16 +1,21 @@
 import React, { FC } from 'react'
-import { ContactPostReq } from 'types'
 import { useForm } from 'react-hook-form'
-import { FormError } from '@/common/components/FormError'
+import { useMutation } from 'react-query'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
-// TODO: Extract to different file?
+import { useApi } from '@/common/hooks/useApi'
+import { FormError } from '@/common/components/FormError'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ROUTES } from '@/common/routes'
+
+import { ContactPostReq } from 'types'
+
 const inputSchema = z.object({
-  message: z.string(),
+  message: z.string().min(1, { message: 'required' }),
   from: z.object({
-    email: z.string().email(),
-    name: z.string().min(3),
+    email: z.string().email().min(4, { message: 'required' }),
+    name: z.string().min(3, { message: 'required' }),
     companyName: z.string().optional(),
     phone: z.string().optional(),
     country: z.string()
@@ -21,13 +26,29 @@ export const ContactForm: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid },
+    resetField
   } = useForm<ContactPostReq>({
     resolver: zodResolver(inputSchema)
   })
 
-  // TODO: implement
-  const onSubmit = () => null
+  const api = useApi()
+
+  const submitContact = useMutation({
+    mutationKey: 'contact',
+    mutationFn: (data: ContactPostReq) => api.post(ROUTES.CONTACT_PATH, data),
+    onSuccess: () => {
+      toast.success('Message sent')
+      resetField('message')
+    },
+    onError: () => {
+      toast.error('Message failed to send')
+    }
+  })
+
+  const onSubmit = (contactData: ContactPostReq) =>
+    submitContact.mutate(contactData)
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -87,13 +108,17 @@ export const ContactForm: FC = () => {
           <p className="py-2">Message</p>
           <textarea
             id="message"
-            {...register('message')}
+            {...register('message', { required: true })}
             className="h-[calc(100%-2.5rem)] w-full resize-none p-2"
           />
           <FormError error={errors.message} />
         </label>
       </div>
-      <button type="submit" className="my-1 w-full bg-green-300 py-2">
+      <button
+        type="submit"
+        className="my-2 w-full bg-green-300 py-2 disabled:bg-gray-300"
+        disabled={!isValid || submitContact.status === 'loading'}
+      >
         Send
       </button>
     </form>
