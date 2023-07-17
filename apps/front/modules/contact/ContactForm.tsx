@@ -35,13 +35,15 @@ export const ContactForm: FC = () => {
 
   const api = useApi()
 
-  // TODO: Handle errors
   const submitContact = useMutation({
     mutationKey: 'contact',
     mutationFn: (data: ContactPostReq) => api.post(ROUTES.CONTACT_PATH, data),
     onSuccess: () => {
       toast.success('Message sent')
       resetField('message')
+    },
+    onError: () => {
+      toast.error('Message failed to send')
     }
   })
 
