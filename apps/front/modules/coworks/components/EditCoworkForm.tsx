@@ -26,16 +26,7 @@ export const EditCoworkForm = ({ data }: CoworkFormProps) => {
     formState: { errors }
   } = useForm({
     defaultValues: {
-      ...data,
-      openSchedule: {
-        mon: '',
-        tue: '',
-        wed: '',
-        thu: '',
-        fri: '',
-        sat: '',
-        sun: ''
-      }
+      ...data
     }
   })
 
