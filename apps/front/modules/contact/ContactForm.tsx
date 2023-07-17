@@ -11,11 +11,10 @@ import { ROUTES } from '@/common/routes'
 
 import { ContactPostReq } from 'types'
 
-// TODO: Extract to different file?
 const inputSchema = z.object({
   message: z.string().min(1, { message: 'required' }),
   from: z.object({
-    email: z.string().email(),
+    email: z.string().email().min(4, { message: 'required' }),
     name: z.string().min(3, { message: 'required' }),
     companyName: z.string().optional(),
     phone: z.string().optional(),
@@ -35,13 +34,15 @@ export const ContactForm: FC = () => {
 
   const api = useApi()
 
-  // TODO: Handle errors
   const submitContact = useMutation({
     mutationKey: 'contact',
     mutationFn: (data: ContactPostReq) => api.post(ROUTES.CONTACT_PATH, data),
     onSuccess: () => {
       toast.success('Message sent')
       resetField('message')
+    },
+    onError: () => {
+      toast.error('Message failed to send')
     }
   })
 
