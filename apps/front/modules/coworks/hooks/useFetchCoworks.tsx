@@ -23,9 +23,7 @@ export const useFetchCoworks = ({
       getCoworks({
         pageIndex: pageIndex?.toString(),
         pageSize: pageSize?.toString()
-      }),
-    keepPreviousData: true,
-    refetchOnWindowFocus: true
+      })
   })
 
   return {
