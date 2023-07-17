@@ -31,40 +31,44 @@ export const ContactForm: FC = () => {
   const onSubmit = () => null
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="email">Email</label>
+      <label htmlFor="email">
+        <p>Email</p>
         <input
           id="email"
           type="email"
           {...register('from.email', { required: true })}
         />
         <FormError error={errors.from?.email} />
-      </div>
-      <div>
-        <label htmlFor="name">Name</label>
+      </label>
+      <label htmlFor="name">
+        <p>Name</p>
         <input id="name" {...register('from.name', { required: true })} />
         <FormError error={errors.from?.name} />
-      </div>
-      <div>
-        <label htmlFor="company">Company</label>
+      </label>
+
+      <label htmlFor="company">
+        <p>Company</p>
         <input id="company" {...register('from.companyName')} />
         <FormError error={errors.from?.companyName} />
-      </div>
-      <div>
-        <label htmlFor="phone">Phone</label>
+      </label>
+
+      <label htmlFor="phone">
+        <p>Phone</p>
         <input id="phone" type="tel" {...register('from.phone')} />
         <FormError error={errors.from?.phone} />
-      </div>
-      <div>
-        <label htmlFor="country">Country</label>
+      </label>
+
+      <label htmlFor="country">
+        <p>Country</p>
         <input id="country" {...register('from.country')} />
         <FormError error={errors.from?.country} />
-      </div>
-      <div>
-        <label htmlFor="message">Message</label>
+      </label>
+
+      <label htmlFor="message">
+        <p>Message</p>
         <textarea id="message" {...register('message')} />
         <FormError error={errors.message} />
-      </div>
+      </label>
     </form>
   )
 }
