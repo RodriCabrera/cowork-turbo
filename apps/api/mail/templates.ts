@@ -230,8 +230,12 @@ export const contactTemplate = (data: BasicContactData): string => `
                           <tr>
                               <td style="color:#5e5e5e;line-height:22px">
                               <p style="font-size:22px">
-                                ${data.from.name} (${data.from.email})
+                                ${data.from.name} (${data.from.email}) 
                               </p>
+                              ${
+                                !!data.from.phone &&
+                                `<p style="font-size:20px">📞  ${data.from.phone}</p>`
+                              }
                               <p style="font-size:18px">
                               ${
                                 data.from.companyName
@@ -239,7 +243,7 @@ export const contactTemplate = (data: BasicContactData): string => `
                                   : ''
                               }
                               ${
-                                data.from.country &&
+                                !!data.from.country &&
                                 '(' + data.from.country + ')'
                               }
                               </p>
