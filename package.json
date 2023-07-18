@@ -20,7 +20,7 @@
     "husky": "^8.0.3",
     "prettier": "latest",
     "prettier-config-custom": "*",
-    "turbo": "latest"
+    "turbo": "^1.9.3"
   },
   "engines": {
     "node": ">=14.0.0"
