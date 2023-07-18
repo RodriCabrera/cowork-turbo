@@ -109,7 +109,7 @@ export const ContactForm: FC = () => {
           <textarea
             id="message"
             {...register('message', { required: true })}
-            className="h-[calc(100%-2.5rem)] w-full resize-none p-2"
+            className="h-[calc(100%-2.5rem)] w-full resize-none whitespace-pre-wrap p-2"
           />
           <FormError error={errors.message} />
         </label>
