@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { useFetchCoworkDetails } from '../../hooks/useFetchCoworkDetails'
+import { COLORS_BY_STATUS } from '../CoworksTable/constants'
 
 export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
   // TODO: Handle status notifications
@@ -8,18 +9,33 @@ export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
   const { coworkDetails, isLoading } = useFetchCoworkDetails(coworkId)
 
   return (
-    <div className="m-8 flex min-h-[calc(100vh-8.1rem)] w-screen flex-col gap-2 md:gap-6">
+    <div className="m-8 flex flex-col items-center gap-2 md:gap-6">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <div>
-            <h1 className="text-center text-6xl font-bold">
-              {coworkDetails?.name}
-            </h1>
-            <p className="mt-4 text-center">{coworkDetails?.description}</p>
-            {/* Show status with color badge? */}
-            <p className="font-bold">Status: {coworkDetails?.status}</p>
+        <div className="md:w-3/4">
+          <header>
+            <div className="mb-2 flex items-center gap-4">
+              <h1 className=" text-4xl font-bold">{coworkDetails?.name}</h1>
+              {/* // TODO: MOVE STATUS BADGE TO COMMON COMPONENT */}
+              <span
+                className={`rounded-full  px-3 py-1 text-xs ${
+                  coworkDetails && COLORS_BY_STATUS[coworkDetails?.status]
+                }`}
+              >
+                {coworkDetails?.status}
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              <p>
+                {coworkDetails?.address.city}, {coworkDetails?.address.country}
+              </p>
+            </div>
+            <div className="mb-4 flex items-center gap-4">
+              <p>
+                {`${coworkDetails?.address.streetName} ${coworkDetails?.address.number}`}
+              </p>
+            </div>
             {coworkDetails?.image && (
               <Image
                 src={coworkDetails?.image}
@@ -28,19 +44,15 @@ export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
                 alt="Cowork image"
               />
             )}
-          </div>
-          <div className="my-4">
-            <p className="font-bold">Address</p>
-            <p>Country:{coworkDetails?.address.country}</p>
-            <p>City: {coworkDetails?.address.city}</p>
-
-            <p className="font-bold">Amenities</p>
-            <p>
-              {coworkDetails?.amenities?.bathrooms &&
-                `✅ has ${coworkDetails?.amenities?.bathrooms} bathrooms`}
-            </p>
+          </header>{' '}
+          <div className="flex gap-4">
+            <p>{coworkDetails?.amenities?.bathrooms && '🚻 Bathroom'}</p>
             <p>{coworkDetails?.amenities?.buffet && '✅ Buffet'}</p>
             <p>{coworkDetails?.amenities?.wifi ? '✅ Wifi' : 'No Wifi'}</p>
+          </div>
+          <p className="mt-4">{coworkDetails?.description}</p>
+          <div className="my-4">
+            <p className="font-bold">Amenities</p>
 
             <p className="font-bold">Open schedule</p>
             <p>Mon: {coworkDetails?.openSchedule?.mon}</p>
@@ -51,7 +63,7 @@ export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
             <p>Sat: {coworkDetails?.openSchedule?.sat}</p>
             <p>Sun: {coworkDetails?.openSchedule?.sun}</p>
           </div>
-        </>
+        </div>
       )}
     </div>
   )
