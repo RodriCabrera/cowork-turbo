@@ -11,7 +11,7 @@ const { COWORKS_PATH } = ROUTES
 // TODO: COMPARE fetchCoworks with getCoworks.
 // One uses cursos, the other does not.
 // Could we keep only 1 and use it in both cases?
-export const fetchCoworks = ({ pageParam = '', pageSize = 3 }) => {
+export const fetchCoworks = ({ pageParam = '', pageSize = 6 }) => {
   return api<CoworkFullGetRes>(
     `${COWORKS_PATH}?count=${pageSize}&cursor=${pageParam}`
   ).then((res) => res.data)
