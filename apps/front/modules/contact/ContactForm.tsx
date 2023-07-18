@@ -52,7 +52,7 @@ export const ContactForm: FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col justify-center sm:w-1/2"
+      className="flex w-full flex-col justify-center"
     >
       <div className="m-auto my-4 flex w-full justify-center gap-6">
         <div className="w-1/3">
