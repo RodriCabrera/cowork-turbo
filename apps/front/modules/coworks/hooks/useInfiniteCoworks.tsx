@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from 'react-query'
 
 import { COWORKS } from '../constants'
-import { fetchCoworks } from '../api/queryFunctions'
+import { getCoworks } from '../api/queryFunctions'
 
 export const useInfiniteCoworks = () => {
   // TODO: TEST IF CAN BE REMOVED / and use the imported query fn
@@ -21,7 +21,7 @@ export const useInfiniteCoworks = () => {
     isFetching,
     isFetchingNextPage,
     status
-  } = useInfiniteQuery(COWORKS, fetchCoworks, {
+  } = useInfiniteQuery(COWORKS, getCoworks, {
     getNextPageParam: (lastPage) => lastPage?.cursor,
     refetchOnWindowFocus: false
   })
