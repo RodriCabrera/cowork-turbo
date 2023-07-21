@@ -6,7 +6,7 @@ import { LoaderThreeDots } from '@/common/components/LoaderThreeDots'
 
 export const CoworksGrid = () => {
   const { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteCoworks()
+    useInfiniteCoworks(6)
 
   const showLoader = isFetchingNextPage || isFetching
   const showNoMoreCoworks = !isFetchingNextPage && !isFetching && !hasNextPage

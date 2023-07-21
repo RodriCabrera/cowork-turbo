@@ -3,7 +3,7 @@ import { useInfiniteQuery } from 'react-query'
 import { COWORKS } from '../constants'
 import { getCoworks } from '../api/queryFunctions'
 
-export const useInfiniteCoworks = () => {
+export const useInfiniteCoworks = (ammount: number = 3) => {
   // TODO: TEST IF CAN BE REMOVED / and use the imported query fn
   // const api = Axios.getInstance()
   // const COWORKS_COUNT = 3
@@ -21,10 +21,19 @@ export const useInfiniteCoworks = () => {
     isFetching,
     isFetchingNextPage,
     status
-  } = useInfiniteQuery(COWORKS, getCoworks, {
-    getNextPageParam: (lastPage) => lastPage?.cursor,
-    refetchOnWindowFocus: false
-  })
+  } = useInfiniteQuery(
+    COWORKS,
+    ({ pageParam }) =>
+      getCoworks({
+        pageIndex: undefined,
+        pageSize: ammount.toString(),
+        pageParam
+      }),
+    {
+      getNextPageParam: (lastPage) => lastPage?.cursor,
+      refetchOnWindowFocus: false
+    }
+  )
 
   return {
     data,
