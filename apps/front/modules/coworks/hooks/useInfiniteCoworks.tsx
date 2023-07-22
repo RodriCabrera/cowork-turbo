@@ -3,16 +3,7 @@ import { useInfiniteQuery } from 'react-query'
 import { COWORKS } from '../constants'
 import { getCoworks } from '../api/queryFunctions'
 
-export const useInfiniteCoworks = (ammount: number = 3) => {
-  // TODO: TEST IF CAN BE REMOVED / and use the imported query fn
-  // const api = Axios.getInstance()
-  // const COWORKS_COUNT = 3
-
-  // const fetchCoworks = ({ pageParam = '' }) =>
-  //   api<CoworkFullGetRes>(
-  //     `/coworks?count=${COWORKS_COUNT}&cursor=${pageParam}`
-  //   ).then((res) => res.data)
-
+export const useInfiniteCoworks = (amount: number = 3) => {
   const {
     data,
     error,
@@ -26,7 +17,7 @@ export const useInfiniteCoworks = (ammount: number = 3) => {
     ({ pageParam }) =>
       getCoworks({
         pageIndex: undefined,
-        pageSize: ammount.toString(),
+        pageSize: amount.toString(),
         pageParam
       }),
     {
