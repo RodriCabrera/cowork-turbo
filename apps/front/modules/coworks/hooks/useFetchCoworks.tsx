@@ -1,7 +1,4 @@
-import { AxiosResponse } from 'axios'
 import { useQuery } from 'react-query'
-
-import { CoworkFullGetRes } from '@/../../packages/types'
 
 import { getCoworks } from '../api/queryFunctions'
 import { COWORKS } from '../constants'
@@ -15,9 +12,7 @@ export const useFetchCoworks = ({
   pageIndex,
   pageSize
 }: useFetchCoworksParams) => {
-  const { isLoading, isError, data, isFetching, isPreviousData } = useQuery<
-    AxiosResponse<CoworkFullGetRes>
-  >({
+  const { isLoading, isError, data, isFetching, isPreviousData } = useQuery({
     queryKey: [COWORKS, { pageSize, pageIndex }],
     queryFn: () =>
       getCoworks({
@@ -27,11 +22,11 @@ export const useFetchCoworks = ({
   })
 
   return {
-    coworks: data?.data.results,
+    coworks: data?.results,
     isLoading,
     isFetching,
     isError,
     isPreviousData,
-    totalPages: Number(data?.data.totalPages || 1)
+    totalPages: Number(data?.totalPages || 1)
   }
 }

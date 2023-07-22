@@ -47,7 +47,6 @@ export const AddEmployeesForm = ({
     name: 'employees'
   })
 
-  // TODO: Add some status indicator when submitting
   const onSubmit = async ({
     employees
   }: {
