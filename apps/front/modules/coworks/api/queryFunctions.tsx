@@ -7,7 +7,6 @@ const api = Axios.getInstance()
 
 const { COWORKS_PATH } = ROUTES
 
-// TODO: Check if there's a way to pass pageSize from infinite query
 export const getCoworks = async ({
   pageIndex,
   pageSize = '3',
