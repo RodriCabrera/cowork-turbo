@@ -8,8 +8,8 @@ import { CellPlaceholder } from '@/common/components/CellPlaceholder'
 import { useFetchCoworks } from '@/modules/coworks/hooks/useFetchCoworks'
 import { Pagination } from '@/modules/coworks/components/CoworksTable/pagination'
 import { usePagination } from '@/modules/coworks/hooks/usePagination'
-import { COLORS_BY_STATUS } from './constants'
 import { ActionsCell } from './ActionsCell'
+import { StatusBadge } from '@/common/components/StatusBadge'
 
 const { Cell, Body, Header, Row } = Table
 
@@ -40,15 +40,7 @@ export const CoworksTable = () => {
       {
         Header: 'status',
         accessor: 'status',
-        Cell: ({ value }) => {
-          return (
-            <span
-              className={`rounded-full  px-3 py-1 text-xs ${COLORS_BY_STATUS[value]}`}
-            >
-              {value}
-            </span>
-          )
-        }
+        Cell: ({ value }) => <StatusBadge status={value} />
       },
       {
         Header: 'actions',

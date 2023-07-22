@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
 import { useFetchCoworkDetails } from '../../hooks/useFetchCoworkDetails'
-import { COLORS_BY_STATUS } from '../CoworksTable/constants'
 import { LoaderThreeDots } from '@/common/components/LoaderThreeDots'
+import { StatusBadge } from '@/common/components/StatusBadge'
 
 export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
   // TODO: Handle status notifications
@@ -11,21 +11,14 @@ export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
 
   return (
     <div className="m-8 flex flex-col items-center gap-2 md:gap-6">
-      {isLoading ? (
+      {isLoading || !coworkDetails ? (
         <LoaderThreeDots />
       ) : (
         <div className="md:w-3/4">
           <header>
             <div className="mb-2 flex items-center gap-4">
               <h1 className=" text-4xl font-bold">{coworkDetails?.name}</h1>
-              {/* // TODO: MOVE STATUS BADGE TO COMMON COMPONENT */}
-              <span
-                className={`rounded-full  px-3 py-1 text-xs ${
-                  coworkDetails && COLORS_BY_STATUS[coworkDetails?.status]
-                }`}
-              >
-                {coworkDetails?.status}
-              </span>
+              <StatusBadge status={coworkDetails?.status} />
             </div>
             <div className="flex items-center gap-4">
               <p>
