@@ -5,8 +5,6 @@ import { LoaderThreeDots } from '@/common/components/LoaderThreeDots'
 import { StatusBadge } from '@/common/components/StatusBadge'
 
 export const CoworkDetails = ({ coworkId }: { coworkId: string }) => {
-  // TODO: Handle status notifications
-  // TODO: Implement skeleton loader
   const { coworkDetails, isLoading } = useFetchCoworkDetails(coworkId)
 
   return (
