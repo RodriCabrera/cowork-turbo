@@ -6,36 +6,26 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Company": {
-				"properties": {
-					"walletId": {
-						"type": "string"
+			"GetResult_any.any.any_": {
+				"properties": {},
+				"type": "object"
+			},
+			"runtime.Types.DefaultSelection_CompanyPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
 					},
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
+					{
+						"properties": {},
+						"type": "object"
 					}
-				},
-				"required": [
-					"walletId",
-					"email",
-					"name",
-					"id"
-				],
-				"type": "object",
+				]
+			},
+			"Company": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CompanyPayload_",
 				"description": "Model Company"
 			},
 			"Role": {
-				"type": "string",
-				"enum": [
-					"EMPLEADO",
-					"ADMIN"
-				],
 				"description": "Enums"
 			},
 			"PublicUser": {
@@ -53,12 +43,10 @@
 						"type": "string"
 					},
 					"lastName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"firstName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"id": {
 						"type": "string"
@@ -75,21 +63,19 @@
 				],
 				"type": "object"
 			},
-			"Wallet": {
-				"properties": {
-					"credits": {
-						"type": "number",
-						"format": "double"
+			"runtime.Types.DefaultSelection_WalletPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
 					},
-					"id": {
-						"type": "string"
+					{
+						"properties": {},
+						"type": "object"
 					}
-				},
-				"required": [
-					"credits",
-					"id"
-				],
-				"type": "object",
+				]
+			},
+			"Wallet": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_WalletPayload_",
 				"description": "Model Wallet"
 			},
 			"CompanyGetById": {
@@ -177,199 +163,64 @@
 				],
 				"type": "object"
 			},
-			"Status": {
-				"type": "string",
-				"enum": [
-					"ACTIVE",
-					"PAUSED",
-					"CLOSED"
+			"runtime.Types.DefaultSelection_CoworkPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
 				]
 			},
 			"Cowork": {
-				"properties": {
-					"amenitiesId": {
-						"type": "string",
-						"nullable": true
-					},
-					"openScheduleId": {
-						"type": "string",
-						"nullable": true
-					},
-					"updatedBy": {
-						"type": "string"
-					},
-					"updatedAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"rating": {
-						"type": "number",
-						"format": "double"
-					},
-					"phone": {
-						"type": "string"
-					},
-					"image": {
-						"type": "string"
-					},
-					"status": {
-						"$ref": "#/components/schemas/Status"
-					},
-					"description": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					},
-					"addressId": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"amenitiesId",
-					"openScheduleId",
-					"updatedBy",
-					"updatedAt",
-					"createdAt",
-					"rating",
-					"phone",
-					"image",
-					"status",
-					"description",
-					"email",
-					"name",
-					"addressId",
-					"id"
-				],
-				"type": "object",
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CoworkPayload_",
 				"description": "Model Cowork"
 			},
-			"Address": {
-				"properties": {
-					"postalCode": {
-						"type": "string",
-						"nullable": true
+			"runtime.Types.DefaultSelection_AddressPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
 					},
-					"apartment": {
-						"type": "string",
-						"nullable": true
-					},
-					"floor": {
-						"type": "string",
-						"nullable": true
-					},
-					"number": {
-						"type": "string"
-					},
-					"streetName": {
-						"type": "string"
-					},
-					"city": {
-						"type": "string"
-					},
-					"country": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
+					{
+						"properties": {},
+						"type": "object"
 					}
-				},
-				"required": [
-					"postalCode",
-					"apartment",
-					"floor",
-					"number",
-					"streetName",
-					"city",
-					"country",
-					"id"
-				],
-				"type": "object",
+				]
+			},
+			"Address": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_AddressPayload_",
 				"description": "Model Address"
 			},
-			"CoworkAmenities": {
-				"properties": {
-					"buffet": {
-						"type": "boolean",
-						"nullable": true
+			"runtime.Types.DefaultSelection_CoworkAmenitiesPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
 					},
-					"bathrooms": {
-						"type": "number",
-						"format": "double",
-						"nullable": true
-					},
-					"wifi": {
-						"type": "boolean",
-						"nullable": true
-					},
-					"id": {
-						"type": "string"
+					{
+						"properties": {},
+						"type": "object"
 					}
-				},
-				"required": [
-					"buffet",
-					"bathrooms",
-					"wifi",
-					"id"
-				],
-				"type": "object",
+				]
+			},
+			"CoworkAmenities": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CoworkAmenitiesPayload_",
 				"description": "Model CoworkAmenities"
 			},
-			"OpenSchedule": {
-				"properties": {
-					"sun": {
-						"type": "string",
-						"nullable": true
+			"runtime.Types.DefaultSelection_OpenSchedulePayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
 					},
-					"sat": {
-						"type": "string",
-						"nullable": true
-					},
-					"fri": {
-						"type": "string",
-						"nullable": true
-					},
-					"thu": {
-						"type": "string",
-						"nullable": true
-					},
-					"wed": {
-						"type": "string",
-						"nullable": true
-					},
-					"tue": {
-						"type": "string",
-						"nullable": true
-					},
-					"mon": {
-						"type": "string",
-						"nullable": true
-					},
-					"id": {
-						"type": "string"
+					{
+						"properties": {},
+						"type": "object"
 					}
-				},
-				"required": [
-					"sun",
-					"sat",
-					"fri",
-					"thu",
-					"wed",
-					"tue",
-					"mon",
-					"id"
-				],
-				"type": "object",
+				]
+			},
+			"OpenSchedule": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_OpenSchedulePayload_",
 				"description": "Model OpenSchedule"
 			},
 			"CoworkFull": {
@@ -433,6 +284,14 @@
 			},
 			"PaginatedCoworks": {
 				"$ref": "#/components/schemas/PaginatedResponse_CoworkFull-Array_"
+			},
+			"Status": {
+				"type": "string",
+				"enum": [
+					"ACTIVE",
+					"PAUSED",
+					"CLOSED"
+				]
 			},
 			"CustomError": {
 				"properties": {
@@ -531,13 +390,13 @@
 						},
 						"type": "object"
 					},
+					"phone": {
+						"type": "string"
+					},
 					"image": {
 						"type": "string"
 					},
 					"description": {
-						"type": "string"
-					},
-					"phone": {
 						"type": "string"
 					},
 					"status": {
@@ -589,13 +448,13 @@
 						},
 						"type": "object"
 					},
+					"phone": {
+						"type": "string"
+					},
 					"image": {
 						"type": "string"
 					},
 					"description": {
-						"type": "string"
-					},
-					"phone": {
 						"type": "string"
 					},
 					"status": {
@@ -634,12 +493,10 @@
 						"type": "string"
 					},
 					"lastName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"firstName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"id": {
 						"type": "string"
@@ -685,31 +542,6 @@
 			},
 			"CreateAdminInput": {
 				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
-			},
-			"CreditAssign": {
-				"properties": {
-					"userId": {
-						"type": "string"
-					},
-					"walletId": {
-						"type": "string"
-					},
-					"ammount": {
-						"type": "number",
-						"format": "double"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"userId",
-					"walletId",
-					"ammount",
-					"id"
-				],
-				"type": "object",
-				"description": "Model CreditAssign"
 			},
 			"AddCreditsInput": {
 				"properties": {
@@ -804,7 +636,15 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Company"
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/GetResult_any.any.any_"
+											},
+											{
+												"properties": {},
+												"type": "object"
+											}
+										]
 									},
 									"type": "array"
 								}
@@ -867,7 +707,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Company"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
@@ -1047,7 +895,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Cowork"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
@@ -1554,13 +1410,18 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/Wallet"
-										},
-										{
 											"properties": {
 												"CreditAssign": {
 													"items": {
-														"$ref": "#/components/schemas/CreditAssign"
+														"allOf": [
+															{
+																"$ref": "#/components/schemas/GetResult_any.any.any_"
+															},
+															{
+																"properties": {},
+																"type": "object"
+															}
+														]
 													},
 													"type": "array"
 												}
@@ -1568,6 +1429,13 @@
 											"required": [
 												"CreditAssign"
 											],
+											"type": "object"
+										},
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
 											"type": "object"
 										}
 									]
@@ -1599,7 +1467,15 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Wallet"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
@@ -1641,7 +1517,15 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/CreditAssign"
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/GetResult_any.any.any_"
+											},
+											{
+												"properties": {},
+												"type": "object"
+											}
+										]
 									},
 									"type": "array"
 								}

@@ -1,6 +1,5 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
-
 import Axios from '@/common/api/axios'
+
 import { CoworkFullGetRes } from 'types'
 import { ROUTES } from '@/common/routes'
 
@@ -25,10 +24,5 @@ export const getCoworks = async ({
   return await api.get(url.href).then((res) => res.data)
 }
 
-// TODO: Do we need to pass the api as param or can we declare it in this file?
-export const getCoworkDetails = async (
-  api: AxiosInstance,
-  coworkId: string | undefined
-) => {
-  return await api.get(`${COWORKS_PATH}/${coworkId}`)
-}
+export const getCoworkDetails = async (coworkId: string | undefined) =>
+  await api.get(`${COWORKS_PATH}/${coworkId}`)
