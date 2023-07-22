@@ -3,7 +3,7 @@ import { useInfiniteQuery } from 'react-query'
 import { COWORKS } from '../constants'
 import { getCoworks } from '../api/queryFunctions'
 
-export const useInfiniteCoworks = (amount: number = 3) => {
+export const useInfiniteCoworks = (pageSize = '6') => {
   const {
     data,
     error,
@@ -17,7 +17,7 @@ export const useInfiniteCoworks = (amount: number = 3) => {
     ({ pageParam }) =>
       getCoworks({
         pageIndex: undefined,
-        pageSize: amount.toString(),
+        pageSize,
         pageParam
       }),
     {
