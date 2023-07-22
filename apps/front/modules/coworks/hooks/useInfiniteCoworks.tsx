@@ -16,7 +16,6 @@ export const useInfiniteCoworks = (pageSize = '6') => {
     COWORKS,
     ({ pageParam }) =>
       getCoworks({
-        pageIndex: undefined,
         pageSize,
         pageParam
       }),
