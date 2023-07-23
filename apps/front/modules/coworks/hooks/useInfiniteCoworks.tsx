@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from 'react-query'
+import { AxiosError } from 'axios'
 
+import { CoworkFullGetRes } from 'types'
 import { COWORKS } from '../constants'
 import { getCoworks } from '../api/queryFunctions'
 
@@ -12,7 +14,7 @@ export const useInfiniteCoworks = (pageSize = '6') => {
     isFetching,
     isFetchingNextPage,
     status
-  } = useInfiniteQuery(
+  } = useInfiniteQuery<CoworkFullGetRes, AxiosError>(
     COWORKS,
     ({ pageParam }) =>
       getCoworks({

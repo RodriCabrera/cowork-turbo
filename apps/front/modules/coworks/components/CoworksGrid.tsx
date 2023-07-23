@@ -5,11 +5,18 @@ import { useInfiniteCoworks } from '../hooks/useInfiniteCoworks'
 import { LoaderThreeDots } from '@/common/components/LoaderThreeDots'
 
 export const CoworksGrid = () => {
-  const { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteCoworks()
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    error
+  } = useInfiniteCoworks()
 
   const showLoader = isFetchingNextPage || isFetching
-  const showNoMoreCoworks = !isFetchingNextPage && !isFetching && !hasNextPage
+  const showNoMoreCoworks =
+    !isFetchingNextPage && !isFetching && !hasNextPage && !error
 
   const isFetchMoreButtonDisabled =
     !hasNextPage || isFetchingNextPage || isFetching
@@ -17,6 +24,7 @@ export const CoworksGrid = () => {
   return (
     <>
       <section className="flex max-w-5xl flex-wrap gap-4">
+        {error && <p>Error! Please try again</p>}
         {data &&
           data?.pages.map((page, index) => (
             <React.Fragment key={index}>
