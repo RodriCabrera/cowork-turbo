@@ -16,7 +16,7 @@ type StatusKeys = keyof typeof STATUS
 export const LoginForm = ({ endpoint }: { endpoint: string }) => {
   const [enteredEmail, setEnteredEmail] = useState<string>('')
   const [queryStatus, setQueryStatus] = useState<StatusKeys>(STATUS.waiting)
-  const [btnMessage, setBtnMessage] = useState<string>('Sign in')
+  const [btnMessage, setBtnMessage] = useState<string>('Log in')
 
   const api = Axios.getInstance()
 
@@ -45,7 +45,7 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
       .finally(() => {
         setTimeout(() => {
           setQueryStatus(STATUS.waiting)
-          setBtnMessage('Sign in')
+          setBtnMessage('Log in')
           setEnteredEmail('')
         }, 5000)
       })
@@ -55,8 +55,8 @@ export const LoginForm = ({ endpoint }: { endpoint: string }) => {
     setEnteredEmail(e.target.value)
 
   return (
-    <section className="mx-auto flex  w-full flex-col items-center justify-center px-6 py-8 lg:py-0">
-      <div className="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0">
+    <section className="mx-auto flex  w-full flex-col items-center justify-center px-6 md:py-8 lg:py-0">
+      <div className="w-full rounded-lg bg-white sm:max-w-md md:mt-0 md:shadow xl:p-0">
         {!!token_error && (
           <p className="pt-6 text-center font-bold text-red-400">
             {token_error}
