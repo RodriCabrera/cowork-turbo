@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: ['plugin:react/recommended', 'standard', 'next'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:tailwindcss/recommended',
+    'standard',
+    'next'
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -20,6 +25,9 @@ module.exports = {
     'space-before-function-paren': 'off',
     'dot-notation': 'off',
     'no-undef': 'off',
-    'multiline-ternary': 'off'
+    'multiline-ternary': 'off',
+    'no-console': 'warn',
+    'no-unused-vars': 'warn',
+    camelcase: 'off'
   }
 }

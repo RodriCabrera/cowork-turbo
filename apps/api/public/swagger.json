@@ -6,42 +6,47 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"GetResult_any.any.any_": {
+				"properties": {},
+				"type": "object"
+			},
+			"runtime.Types.DefaultSelection_CompanyPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"Company": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CompanyPayload_",
+				"description": "Model Company"
+			},
 			"Role": {
-				"type": "string",
-				"enum": [
-					"EMPLEADO",
-					"ADMIN"
-				],
 				"description": "Enums"
 			},
-			"User": {
+			"PublicUser": {
 				"properties": {
 					"isActive": {
-						"type": "boolean"
-					},
-					"isValidated": {
 						"type": "boolean"
 					},
 					"companyId": {
 						"type": "string"
 					},
-					"rol": {
+					"role": {
 						"$ref": "#/components/schemas/Role"
 					},
-					"password": {
-						"type": "string",
-						"nullable": true
-					},
-					"mail": {
+					"email": {
 						"type": "string"
 					},
 					"lastName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"firstName": {
-						"type": "string",
-						"nullable": true
+						"type": "string"
 					},
 					"id": {
 						"type": "string"
@@ -49,28 +54,448 @@
 				},
 				"required": [
 					"isActive",
-					"isValidated",
 					"companyId",
-					"rol",
-					"password",
-					"mail",
+					"role",
+					"email",
 					"lastName",
 					"firstName",
 					"id"
 				],
-				"type": "object",
-				"description": "Model User"
+				"type": "object"
 			},
-			"Company": {
+			"runtime.Types.DefaultSelection_WalletPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"Wallet": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_WalletPayload_",
+				"description": "Model Wallet"
+			},
+			"CompanyGetById": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Company"
+					},
+					{
+						"properties": {
+							"Wallet": {
+								"$ref": "#/components/schemas/Wallet"
+							},
+							"employees": {
+								"items": {
+									"$ref": "#/components/schemas/PublicUser"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"Wallet",
+							"employees"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"NotFoundError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
+			},
+			"ReturnType_typeofeditCompanySchema.parse_": {
 				"properties": {
 					"email": {
 						"type": "string"
 					},
-					"creditos": {
-						"type": "number",
-						"format": "double"
+					"name": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CompanyEditInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofeditCompanySchema.parse_"
+			},
+			"EmployeeInput": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email"
+				],
+				"type": "object"
+			},
+			"runtime.Types.DefaultSelection_CoworkPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"Cowork": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CoworkPayload_",
+				"description": "Model Cowork"
+			},
+			"runtime.Types.DefaultSelection_AddressPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"Address": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_AddressPayload_",
+				"description": "Model Address"
+			},
+			"runtime.Types.DefaultSelection_CoworkAmenitiesPayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"CoworkAmenities": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_CoworkAmenitiesPayload_",
+				"description": "Model CoworkAmenities"
+			},
+			"runtime.Types.DefaultSelection_OpenSchedulePayload_": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/GetResult_any.any.any_"
+					},
+					{
+						"properties": {},
+						"type": "object"
+					}
+				]
+			},
+			"OpenSchedule": {
+				"$ref": "#/components/schemas/runtime.Types.DefaultSelection_OpenSchedulePayload_",
+				"description": "Model OpenSchedule"
+			},
+			"CoworkFull": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/Cowork"
+					},
+					{
+						"properties": {
+							"openSchedule": {
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/OpenSchedule"
+									}
+								],
+								"nullable": true
+							},
+							"amenities": {
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/CoworkAmenities"
+									}
+								],
+								"nullable": true
+							},
+							"address": {
+								"$ref": "#/components/schemas/Address"
+							}
+						},
+						"required": [
+							"openSchedule",
+							"amenities",
+							"address"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"PaginatedResponse_CoworkFull-Array_": {
+				"properties": {
+					"totalPages": {
+						"type": "string"
+					},
+					"page": {
+						"type": "string"
+					},
+					"cursor": {
+						"type": "string"
+					},
+					"results": {
+						"items": {
+							"$ref": "#/components/schemas/CoworkFull"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"results"
+				],
+				"type": "object"
+			},
+			"PaginatedCoworks": {
+				"$ref": "#/components/schemas/PaginatedResponse_CoworkFull-Array_"
+			},
+			"Status": {
+				"type": "string",
+				"enum": [
+					"ACTIVE",
+					"PAUSED",
+					"CLOSED"
+				]
+			},
+			"CustomError": {
+				"properties": {
+					"error": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status",
+							"code",
+							"message"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object"
+			},
+			"ReturnType_typeofeditSchema.parse_": {
+				"properties": {
+					"address": {
+						"properties": {
+							"postalCode": {
+								"type": "string"
+							},
+							"apartment": {
+								"type": "string"
+							},
+							"floor": {
+								"type": "string"
+							},
+							"number": {
+								"type": "string"
+							},
+							"streetName": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"country": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"openSchedule": {
+						"properties": {
+							"sun": {
+								"type": "string"
+							},
+							"sat": {
+								"type": "string"
+							},
+							"fri": {
+								"type": "string"
+							},
+							"thu": {
+								"type": "string"
+							},
+							"wed": {
+								"type": "string"
+							},
+							"tue": {
+								"type": "string"
+							},
+							"mon": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"amenities": {
+						"properties": {
+							"buffet": {
+								"type": "boolean"
+							},
+							"bathrooms": {
+								"type": "number",
+								"format": "double"
+							},
+							"wifi": {
+								"type": "boolean"
+							}
+						},
+						"type": "object"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"image": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
+					},
+					"email": {
+						"type": "string"
 					},
 					"name": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"EditCoworkInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofeditSchema.parse_"
+			},
+			"ReturnType_typeofcreateSchema.parse_": {
+				"properties": {
+					"address": {
+						"properties": {
+							"postalCode": {
+								"type": "string"
+							},
+							"apartment": {
+								"type": "string"
+							},
+							"floor": {
+								"type": "string"
+							},
+							"number": {
+								"type": "string"
+							},
+							"streetName": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"country": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"image": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"PAUSED",
+							"CLOSED"
+						]
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CreateCoworkInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofcreateSchema.parse_"
+			},
+			"PublicUserDTO": {
+				"properties": {
+					"isActive": {
+						"type": "boolean"
+					},
+					"companyId": {
+						"type": "string"
+					},
+					"role": {
+						"$ref": "#/components/schemas/Role"
+					},
+					"email": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"firstName": {
 						"type": "string"
 					},
 					"id": {
@@ -78,19 +503,119 @@
 					}
 				},
 				"required": [
+					"isActive",
+					"companyId",
+					"role",
 					"email",
-					"creditos",
-					"name",
+					"lastName",
+					"firstName",
 					"id"
 				],
 				"type": "object",
-				"description": "Model Company"
+				"additionalProperties": false
+			},
+			"ReturnType_typeofcreateAdminSchema.parse_": {
+				"properties": {
+					"company": {
+						"properties": {
+							"email": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Obtain the return type of a function type"
+			},
+			"CreateAdminInput": {
+				"$ref": "#/components/schemas/ReturnType_typeofcreateAdminSchema.parse_"
+			},
+			"AddCreditsInput": {
+				"properties": {
+					"ammount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"ammount"
+				],
+				"type": "object"
+			},
+			"CreditsAssignedResponse": {
+				"properties": {
+					"credits": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"employee": {
+						"$ref": "#/components/schemas/PublicUser"
+					}
+				},
+				"required": [
+					"credits",
+					"employee"
+				],
+				"type": "object"
+			},
+			"SenderData": {
+				"properties": {
+					"phone": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"companyName": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email"
+				],
+				"type": "object"
+			},
+			"BasicContactData": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"from": {
+						"$ref": "#/components/schemas/SenderData"
+					}
+				},
+				"required": [
+					"message",
+					"from"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "api",
+		"title": "Cowork API",
 		"version": "1.0.0",
 		"license": {
 			"name": "MIT"
@@ -101,63 +626,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/user": {
-			"get": {
-				"operationId": "GetUsers",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/User"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"users"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/user/{id}": {
-			"get": {
-				"operationId": "GetUser",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/User"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"users"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/company": {
+		"/companies": {
 			"get": {
 				"operationId": "GetCompanies",
 				"responses": {
@@ -167,7 +636,15 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Company"
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/GetResult_any.any.any_"
+											},
+											{
+												"properties": {},
+												"type": "object"
+											}
+										]
 									},
 									"type": "array"
 								}
@@ -176,47 +653,39 @@
 					}
 				},
 				"tags": [
-					"companies"
+					"Companies"
 				],
 				"security": [],
 				"parameters": []
 			}
 		},
-		"/company/{id}": {
+		"/companies/{id}": {
 			"get": {
 				"operationId": "GetCompany",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Company with employees",
+						"content": {
+							"CompanyGetById": {
+								"schema": {
+									"$ref": "#/components/schemas/CompanyGetById"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Company not found",
 						"content": {
 							"application/json": {
 								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Company"
-										},
-										{
-											"properties": {
-												"employees": {
-													"items": {
-														"$ref": "#/components/schemas/User"
-													},
-													"type": "array"
-												}
-											},
-											"required": [
-												"employees"
-											],
-											"type": "object"
-										}
-									]
+									"$ref": "#/components/schemas/NotFoundError"
 								}
 							}
 						}
 					}
 				},
 				"tags": [
-					"companies"
+					"Companies"
 				],
 				"security": [],
 				"parameters": [
@@ -229,6 +698,944 @@
 						}
 					}
 				]
+			},
+			"put": {
+				"operationId": "EditCompany",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Companies"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CompanyEditInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/companies/{id}/employees": {
+			"post": {
+				"operationId": "AddEmployees",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"properties": {
+											"sent": {
+												"type": "boolean"
+											},
+											"email": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"sent",
+											"email"
+										],
+										"type": "object"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Companies"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"items": {
+									"$ref": "#/components/schemas/EmployeeInput"
+								},
+								"type": "array"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/coworks": {
+			"get": {
+				"operationId": "GetCoworks",
+				"responses": {
+					"200": {
+						"description": "PaginatedCoworks",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginatedCoworks"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/Status"
+						}
+					},
+					{
+						"in": "query",
+						"name": "city",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "country",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "field name to sort response by ( could be of either cowork or address ) <br /> Add '-' before to sort in reverse (ie: -country)",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "count",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "cursor",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"200": {
+						"description": "Cowork",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [
+					{
+						"": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "CreateCoworkInput",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCoworkInput",
+								"description": "CreateCoworkInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/coworks/{id}": {
+			"get": {
+				"operationId": "GetOne",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CoworkFull"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "Edit",
+				"responses": {
+					"200": {
+						"description": "Cowork",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CoworkFull"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundError"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [
+					{
+						"": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "EditCoworkInput",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EditCoworkInput",
+								"description": "EditCoworkInput"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CustomError"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cowork not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundError"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Coworks"
+				],
+				"security": [
+					{
+						"": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/superadmins/auth": {
+			"post": {
+				"operationId": "Auth",
+				"responses": {
+					"200": {
+						"description": "Authorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Receives superadmin ID & token and checks if those match the database.",
+				"tags": [
+					"Super admin auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"token": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id",
+									"token"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/superadmins/login": {
+			"post": {
+				"operationId": "RequestAuth",
+				"responses": {
+					"200": {
+						"description": "Email sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Send login email to the address given if the superadmin user exists",
+				"tags": [
+					"Super admin auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/PublicUserDTO"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PublicUserDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/login": {
+			"post": {
+				"operationId": "RequestAuth",
+				"responses": {
+					"200": {
+						"description": "Email sent",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Send login email to the address given if the user exists",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/auth": {
+			"post": {
+				"operationId": "Auth",
+				"responses": {
+					"200": {
+						"description": "Authorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Receives user's ID & token and checks if those match the database.",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"token": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id",
+									"token"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/register/admin": {
+			"post": {
+				"operationId": "RegisterAdmin",
+				"responses": {
+					"200": {
+						"description": "true",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Input data not valid"
+					}
+				},
+				"description": "Creates a new user with admin role and a company linked to they\r\nif successful sends mail to login to the new account",
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "CreateAdminInput",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateAdminInput",
+								"description": "CreateAdminInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/credits/{id}": {
+			"get": {
+				"operationId": "GetWalletById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"properties": {
+												"CreditAssign": {
+													"items": {
+														"allOf": [
+															{
+																"$ref": "#/components/schemas/GetResult_any.any.any_"
+															},
+															{
+																"properties": {},
+																"type": "object"
+															}
+														]
+													},
+													"type": "array"
+												}
+											},
+											"required": [
+												"CreditAssign"
+											],
+											"type": "object"
+										},
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "AddCredits",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetResult_any.any.any_"
+										},
+										{
+											"properties": {},
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddCreditsInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/credits/{id}/{employeeId}": {
+			"get": {
+				"operationId": "GetAssignedToEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/GetResult_any.any.any_"
+											},
+											{
+												"properties": {},
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "employeeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "AssignToEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreditsAssignedResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Credits"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "employeeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddCreditsInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/contact": {
+			"post": {
+				"operationId": "SendContact",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Contact"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "ContactData",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BasicContactData",
+								"description": "ContactData"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

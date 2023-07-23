@@ -1,20 +1,19 @@
 {
   "name": "types",
   "version": "1.0.0",
-  "description": "The types to be used across packages and apps",
+  "description": "The common types to be reused across packages and apps",
   "main": "index.ts",
   "types": ".index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "eslint": "^7.32.0",
     "eslint-config-custom": "*",
     "tsconfig": "*",
-    "typescript": "^4.5.2"
+    "typescript": "^5.0.4"
   }
 }

@@ -1,6 +1,25 @@
 import type { AppProps } from 'next/app'
-import '../styles/globals.css'
+import Head from 'next/head'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { Toaster } from 'sonner'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import '../common/styles/globals.css'
+
+const queryClient = new QueryClient()
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Head>
+        <title>BASEBLOOM</title>
+        <meta name="description" content="BASEBLOOM" />
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <Toaster richColors />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </>
+  )
 }
