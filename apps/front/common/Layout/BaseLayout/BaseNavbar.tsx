@@ -31,9 +31,9 @@ export function BaseNavbar({ user }: PropsWithUser) {
 
   return (
     <nav className="border-b-2 bg-white">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-2 md:px-4">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="mr-2 flex items-center justify-center sm:items-stretch sm:justify-start">
             <header>
               <Link
                 href="/"
@@ -45,14 +45,14 @@ export function BaseNavbar({ user }: PropsWithUser) {
           </div>
           <div className="flex items-center gap-4">
             <Link
-              className="cursor-pointer rounded-md bg-emerald-100 px-3 py-2 text-sm font-medium transition-all hover:bg-emerald-200"
+              className="cursor-pointer rounded-md bg-emerald-100 px-1 py-2 text-sm font-medium transition-all hover:bg-emerald-200 md:px-3"
               href="/coworks"
             >
               Coworks
             </Link>
             {isUserLogged && isAdmin && (
               <Link
-                className="cursor-pointer rounded-md border-2 bg-gray-100 px-3 py-2 text-sm font-medium transition-all hover:bg-gray-200"
+                className="cursor-pointer rounded-md bg-gray-100 px-1 py-2 text-sm font-medium transition-all hover:bg-gray-200 md:px-3"
                 href="/dashboard"
               >
                 Dashboard
