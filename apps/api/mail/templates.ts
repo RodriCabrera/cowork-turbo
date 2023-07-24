@@ -1,10 +1,8 @@
 import { Role } from '@prisma/client'
 import { BasicContactData } from '../contact/contactTypes'
 
-const env = process.env.NODE_ENV
-
 const BASE_URL =
-  env === 'development'
+  process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : process.env.NEXT_PUBLIC_FRONT_URL
 
