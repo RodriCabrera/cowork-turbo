@@ -1,4 +1,12 @@
 export const AboutBanner = () => {
+  const BASE_URL =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : process.env.NEXT_PUBLIC_FRONT_URL
+  console.log('ENV & BASE_URL', process.env.NODE_ENV, BASE_URL)
+
+  console.log('ENV & BASE_URL', process.env.NODE_ENV)
+
   return (
     <section className="max-w-7xl px-4 pt-6 sm:w-auto md:pt-10">
       <header className="m-1 text-6xl text-gray-900 sm:text-7xl lg:text-8xl">
