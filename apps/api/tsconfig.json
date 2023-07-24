@@ -1,6 +1,21 @@
 {
   "extends": "tsconfig/express.json",
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "build"],
   "files": ["./config/custom.d.ts"],
+  "ts-node": {
+    "transpileOnly": true
+  },
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "build",
+    "lib": ["ESNext"],
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": false,
+    "typeRoots": [
+      "./node_modules/.prisma",
+      "./node_modules/@types",
+      "../../node_modules/@types"
+    ]
+  }
 }
