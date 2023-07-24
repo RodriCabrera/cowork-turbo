@@ -9,7 +9,8 @@ const BASE_URL =
 export const loginTemplate = (
   name: string,
   jwt: string,
-  role: Role | 'superadmin'
+  role: Role | 'superadmin',
+  BASE_URL: string
 ) => `
 <head>
   <style>
