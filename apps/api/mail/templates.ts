@@ -4,7 +4,7 @@ import { BasicContactData } from '../contact/contactTypes'
 const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : process.env.NEXT_PUBLIC_FRONT_URL
+    : 'https://cowork-turbo-front.vercel.app'
 
 export const loginTemplate = (
   name: string,
