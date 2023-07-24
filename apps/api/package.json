@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
+    "start": "node build/index.js",
     "test": "jest --runInBand --detectOpenHandles",
     "dev": "yarn swagger && nodemon --ignore ./public index.ts",
     "swagger": "tsoa spec",
@@ -26,9 +27,12 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/chai": "^4.3.5",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
     "@types/jsonwebtoken": "^9.0.1",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^20.1.1",
     "@types/nodemailer": "^6.4.7",
     "@types/supertest": "^2.0.12",
