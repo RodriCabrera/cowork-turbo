@@ -1,17 +1,16 @@
 import { Role } from '@prisma/client'
 import { BasicContactData } from '../contact/contactTypes'
 
-const env = process.env.NODE_ENV
-
 const BASE_URL =
-  env === 'development'
+  process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : process.env.NEXT_PUBLIC_FRONT_URL
+    : 'https://cowork-turbo-front.vercel.app'
 
 export const loginTemplate = (
   name: string,
   jwt: string,
-  role: Role | 'superadmin'
+  role: Role | 'superadmin',
+  BASE_URL: string
 ) => `
 <head>
   <style>
