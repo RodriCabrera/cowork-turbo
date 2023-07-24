@@ -1,0 +1,20 @@
+# fly.toml app configuration file generated for cowork-bloom-api on 2023-07-23T20:24:19-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "cowork-bloom-api"
+primary_region = "scl"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0

@@ -2,8 +2,11 @@
     "entryFile": "index.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
     "spec": {
-      "outputDirectory": "public",
+      "outputDirectory": "build/public",
       "specVersion": 3,
       "name": "Cowork API"
+    },
+    "routes": {
+      "routesDir": "build"
     }
 }
