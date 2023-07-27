@@ -35,6 +35,8 @@ const mockCowork: CoworkFull = {
   openScheduleId: ''
 }
 
+// TODO: Change implementations for Prisma mock
+
 describe('coworks', () => {
   let app: App
   beforeAll(() => {

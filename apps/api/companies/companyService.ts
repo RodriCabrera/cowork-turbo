@@ -1,4 +1,5 @@
 import { PrismaClient, User } from '@prisma/client'
+import prisma from '../prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import { CompanyEditInput, CompanyGetById, EmployeeInput } from './companyTypes'
 import CompanyValidator from './companyValidator'
@@ -9,7 +10,7 @@ import { invitationTemplate } from '../mail/templates'
 import AuthUtils from '../utils/auth.utils'
 
 export default class CompanyService {
-  private static _client = new PrismaClient()
+  private static _client = prisma
   static async fetchAll() {
     try {
       const response = await this._client.company.findMany()
@@ -21,7 +22,7 @@ export default class CompanyService {
 
   static async fetchById(id: string): Promise<CompanyGetById | undefined> {
     try {
-      const response = await this._client.company.findUnique({
+      const response = await this._client.company.findUniqueOrThrow({
         where: {
           id
         },
