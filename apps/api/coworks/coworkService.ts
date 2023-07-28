@@ -1,4 +1,5 @@
 import { PrismaClient, Cowork, Prisma } from '@prisma/client'
+import prisma from '../prisma/client'
 import PrismaErrors from '../errors/prismaErrors'
 import {
   EditCoworkInput,
@@ -10,7 +11,7 @@ import {
 import CoworkValidate from './coworkValidation'
 
 export default class CoworkService {
-  private static _client = new PrismaClient()
+  private static _client = prisma
 
   static async createCowork(
     data: CreateCoworkInput,
