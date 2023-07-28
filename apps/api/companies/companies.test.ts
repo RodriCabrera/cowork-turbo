@@ -54,8 +54,11 @@ describe('Companies', () => {
           prismaMock.company.findUniqueOrThrow.mockRejectedValueOnce(
             NOT_FOUND_ERROR
           )
-          const response = await supertest(app.app).get('/companies/fakeId')
+          const response = await await supertest(app.app).get(
+            '/companies/fakeId'
+          )
           expect(response.statusCode).toBe(404)
+          expect(prismaMock.company.findUniqueOrThrow).toHaveBeenCalled()
         })
       })
     })

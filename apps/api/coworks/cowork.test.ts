@@ -64,9 +64,7 @@ describe('Coworks', () => {
       })
       describe('given it exists', () => {
         it('should return 200 and a cowork', async () => {
-          const getCoworkServiceMock = jest
-            .spyOn(CoworkService, 'fetchById')
-            .mockReturnValueOnce(new Promise((resolve) => resolve(mockCowork)))
+          prismaMock.cowork.findUniqueOrThrow.mockResolvedValueOnce(mockCowork)
           const { statusCode, body } = await supertest(app.app).get(
             `/coworks/${mockCowork.id}`
           )
@@ -76,33 +74,27 @@ describe('Coworks', () => {
             updatedAt: mockCowork.updatedAt.toISOString(),
             createdAt: mockCowork.createdAt.toISOString()
           })
-          expect(getCoworkServiceMock).toHaveBeenCalled()
+          expect(prismaMock.cowork.findUniqueOrThrow).toHaveBeenCalled()
         })
       })
     })
     describe('Get all', () => {
       describe('given no params', () => {
-        it('Should return 200 and a cowork list', async () => {
-          const getCoworkServiceMock = jest
-            .spyOn(CoworkService, 'fetchAll')
-            .mockReturnValueOnce(
-              new Promise((resolve) =>
-                resolve({ results: [mockCowork], cursor: '' })
-              )
-            )
-          const { statusCode, body } = await supertest(app.app).get('/coworks')
+        it('Should return 200 and a cowork list and a cursor', async () => {
+          prismaMock.cowork.findMany.mockResolvedValueOnce([mockCowork])
+          const { statusCode, body } = await supertest(app.app)
+            .get('/coworks?count=1')
+            .accept('application/json')
           expect(statusCode).toBe(200)
-          expect(body).toEqual({
-            results: [
-              {
-                ...mockCowork,
-                updatedAt: mockCowork.updatedAt.toISOString(),
-                createdAt: mockCowork.createdAt.toISOString()
-              }
-            ],
-            cursor: ''
+          expect(body).toHaveProperty('results')
+          expect(body.results).toBeInstanceOf(Array)
+          expect(body.results[0]).toMatchObject({
+            ...mockCowork,
+            updatedAt: mockCowork.updatedAt.toISOString(),
+            createdAt: mockCowork.createdAt.toISOString()
           })
-          expect(getCoworkServiceMock).toHaveBeenCalled()
+          expect(prismaMock.cowork.findMany).toHaveBeenCalled()
+          expect(body).toHaveProperty('cursor')
         })
       })
     })
