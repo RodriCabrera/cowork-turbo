@@ -34,7 +34,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       await req.session.save()
       return res.redirect('/dashboard')
     } else {
-      return res.redirect(`/login?token_error=${TOKEN_IVALID}`) // TODO: Replace with some route with error notification
+      return res.redirect(`/login?token_error=${response.status}`) // TODO: Replace with some route with error notification
     }
   } catch (err) {
     res.status(500).json(err)
