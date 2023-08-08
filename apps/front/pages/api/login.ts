@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 import { UserJWT } from 'types'
 
 import { withSessionRoute } from '@/modules/auth/utils/withSession'
-import { TOKEN_IVALID } from '@/modules/auth/utils/errorMessages'
+import { TOKEN_INVALID } from '@/modules/auth/utils/errorMessages'
 
 export default withSessionRoute(login)
 
