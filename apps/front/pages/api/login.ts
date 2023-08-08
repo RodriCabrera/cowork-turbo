@@ -25,7 +25,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       }
     )
 
-    const isAuthOk = response.status === 200 || response.status === 307
+    const isAuthOk = response.ok
     if (isAuthOk) {
       req.session.user = {
         ...userData,
