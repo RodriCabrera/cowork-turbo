@@ -1,6 +1,7 @@
 import MailService from '../mail/mailService'
 import config from '../config/config'
 import { BasicContactData } from './contactTypes'
+import { contactTemplate } from '../mail/templates'
 
 export default class ContactService {
   static async sendContactEmail(data: BasicContactData) {
@@ -9,7 +10,7 @@ export default class ContactService {
       from: data.from.email,
       to: config.gmail.user,
       subject: `Contact from ${data.from.name}`,
-      text: data.message
+      html: contactTemplate(data)
     })
   }
 }

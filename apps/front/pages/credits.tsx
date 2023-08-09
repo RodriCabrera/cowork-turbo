@@ -43,7 +43,7 @@ export const AdminDashboardPage = ({
         }}
         title="Add Credits"
         description={`Are you sure you want to add ${ammount} credits?`}
-        body="If you are sure, click on the Confirm button, and we'll add the credits to your account, and get in touch with you."
+        body="After the confirmation we'll add the credits to your account and get in touch with you to coordinate the payment."
         confirmButton="Confirm"
       />
       <div className="flex flex-col gap-6">
