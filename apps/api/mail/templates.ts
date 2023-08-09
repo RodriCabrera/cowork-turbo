@@ -1,6 +1,11 @@
 import { Role } from '@prisma/client'
 import { BasicContactData } from '../contact/contactTypes'
 
+const BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://cowork-turbo-front.vercel.app'
+
 export const loginTemplate = (
   name: string,
   jwt: string,
@@ -63,11 +68,9 @@ export const loginTemplate = (
                                             <tr>
                                                 <td align="center"
                                                     style="height:39px;padding-top:24px;padding-bottom:8px">
-                                                    <a href="http://localhost:3000/api/${
-                                                      role === 'superadmin'
-                                                        ? 'superadmin'
-                                                        : 'login'
-                                                    }?access_token=${jwt}"
+                                                    <a href="${BASE_URL}/api/${
+  role === 'superadmin' ? 'superadmin' : 'login'
+}?access_token=${jwt}"
                                                         style="text-decoration:none" target="_blank">
                                                         <span
                                                             style="display:block;padding:9px 32px 7px 31px;border:1px solid;text-align:center;color:#000;border-radius:3px;background-color:#FFF;border-color:#c5c5c5">Login
@@ -156,7 +159,7 @@ export const invitationTemplate = (
                                               <tr>
                                                   <td align="center"
                                                       style="height:39px;padding-top:24px;padding-bottom:8px">
-                                                      <a href="http://localhost:3000/api/login?access_token=${jwt}"
+                                                      <a href="${BASE_URL}/api/login?access_token=${jwt}"
                                                           style="text-decoration:none" target="_blank">
                                                           <span
                                                               style="display:block;padding:9px 32px 7px 31px;border:1px solid;text-align:center;color:#000;border-radius:3px;background-color:#FFF;border-color:#c5c5c5">Login

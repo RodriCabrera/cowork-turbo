@@ -28,7 +28,6 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 &nbsp;
 
-
 ### Branching and commiting naming conventions
 
 Both the branches and the commits will include the type of the task being worked on. The following is a list of the proposed types:
