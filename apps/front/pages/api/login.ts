@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 import { UserJWT } from 'types'
 
 import { withSessionRoute } from '@/modules/auth/utils/withSession'
-import { TOKEN_IVALID } from '@/modules/auth/utils/errorMessages'
+import { TOKEN_INVALID } from '@/modules/auth/utils/errorMessages'
 
 export default withSessionRoute(login)
 
@@ -25,7 +25,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       }
     )
 
-    const isAuthOk = response.status === 200
+    const isAuthOk = response.ok
     if (isAuthOk) {
       req.session.user = {
         ...userData,
@@ -34,7 +34,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       await req.session.save()
       return res.redirect('/dashboard')
     } else {
-      return res.redirect(`/login?token_error=${TOKEN_IVALID}`) // TODO: Replace with some route with error notification
+      return res.redirect(`/login?token_error=${response.status}`) // TODO: Replace with some route with error notification
     }
   } catch (err) {
     res.status(500).json(err)

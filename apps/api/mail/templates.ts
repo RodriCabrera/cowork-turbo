@@ -1,10 +1,8 @@
 import { Role } from '@prisma/client'
 import { BasicContactData } from '../contact/contactTypes'
+import config from '../config/config'
 
-const BASE_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000'
-    : 'https://cowork-turbo-front.vercel.app'
+const BASE_URL = config.clientUrl
 
 export const loginTemplate = (
   name: string,
