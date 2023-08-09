@@ -30,5 +30,5 @@ module.exports = {
     'no-unused-vars': 'warn',
     camelcase: 'off'
   },
-  ignorePatterns: ['node_modules', '.next', 'build']
+  ignorePatterns: ['**/node_modules/*', '**/build/*', '**/coverage/*']
 }
