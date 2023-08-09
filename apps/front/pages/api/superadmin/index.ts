@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode'
 
 import { withSessionRoute } from '@/modules/auth/utils/withSession'
 import { SuperAdminData } from 'types'
-import { TOKEN_IVALID } from '@/modules/auth/utils/errorMessages'
+import { TOKEN_INVALID } from '@/modules/auth/utils/errorMessages'
 
 export default withSessionRoute(login)
 
@@ -35,7 +35,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
       await req.session.save()
       return res.redirect('/superadmin/coworks')
     }
-    return res.redirect(`/superadmin?token_error=${TOKEN_IVALID}`)
+    return res.redirect(`/superadmin?token_error=${TOKEN_INVALID}`)
   } catch (err) {
     res.status(500).json(err)
   }
