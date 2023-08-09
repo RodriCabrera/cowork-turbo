@@ -29,5 +29,6 @@ module.exports = {
     'no-console': 'warn',
     'no-unused-vars': 'warn',
     camelcase: 'off'
-  }
+  },
+  ignorePatterns: ['node_modules', '.next', 'build']
 }
