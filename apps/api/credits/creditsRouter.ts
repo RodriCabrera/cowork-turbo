@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import CreditsController from './creditsController'
 // TODO: add auth middlewares
-import Auth from '../middleware/auth.middleware'
+// import Auth from '../middleware/auth.middleware'
 
 const creditsRouter = Router()
 
