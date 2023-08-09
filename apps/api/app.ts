@@ -1,5 +1,5 @@
 import express from 'express'
-import cors from 'cors'
+import corsMiddleware from './middleware/cors.middleware'
 import MailService from './mail/mailService'
 import errorHandler from './errors/errorHandler'
 import notAllowedHandler from './errors/405handler'
@@ -34,7 +34,7 @@ export class App {
   private _initMiddleware() {
     this.app.use(express.json())
     this.app.use(express.static('public'))
-    this.app.use(cors())
+    this.app.use(corsMiddleware)
     this.app.use(
       '/docs',
       swaggerUi.serve,
