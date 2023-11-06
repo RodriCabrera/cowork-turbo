@@ -26,7 +26,7 @@
     "react-icons": "^4.8.0",
     "react-query": "^3.39.3",
     "react-table": "^7.8.0",
-    "sonner": "^0.6.1",
+    "sonner": "^1.2.0",
     "ui": "*",
     "zod": "^3.21.4"
   },
