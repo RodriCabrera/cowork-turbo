@@ -18,12 +18,6 @@ This project was built using [TurboRepo](https://turbo.build/repo)
 - `front`: a [Next.js](https://nextjs.org/) app
 - `api`: Express api, that uses Prisma.
 
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-- `tailwind-config`: with the objective of having a unified design across the UIs.
-- `types`: in order to avoid repeated declarations of the same type, we created this package with some interfaces to be reused throughout the project.
-
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 &nbsp;
